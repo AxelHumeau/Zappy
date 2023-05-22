@@ -12,14 +12,14 @@ EXE_NAME = $(SCRIPT_SRC:%.py=%)
 NAME = ../zappy_ai
 
 all:
-	pyinstaller $(SCRIPT_SRC)
-	mv dist/$(EXE)/$(EXE) $(NAME)
+	pyinstaller -F $(SCRIPT_SRC)
+	mv dist/$(EXE_NAME) $(NAME)
 
 clean:
-	rm -r dist/$(EXE)
+	rm -rf dist
 
 fclean: clean
-	rm -r build
+	rm -rf build
 
 re: fclean all
 
