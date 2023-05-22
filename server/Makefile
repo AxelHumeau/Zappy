@@ -1,0 +1,45 @@
+##
+## EPITECH PROJECT, 2023
+## NanoTekSpice
+## File description:
+## Makefile
+##
+
+SRC =	main.c
+
+OBJ = 	$(SRC:%.c=obj/%.o)
+
+CC =	gcc
+
+CFLAGS =	-Wall -Wextra
+
+CPPFLAGS =	-iquote include
+
+LDFLAGS =
+
+LDLIBS =
+
+NAME = 	../zappy_server
+
+all:	$(NAME)
+
+obj/%.o:	src/%.c
+	mkdir -p $(@D)
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+$(NAME): $(OBJ)
+	$(CC) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
+
+clean:
+	find . -name "*.gcno" -delete
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+debug: CPPFLAGS += -ggdb
+debug: fclean $(NAME)
+
+.PHONY: fclean all re clean debug
