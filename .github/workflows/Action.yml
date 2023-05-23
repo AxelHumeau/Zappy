@@ -1,0 +1,77 @@
+name: Actions
+
+on:
+  repository_dispatch:
+  push:
+    branches:
+    - 'main'
+  pull_request:
+    branches:
+    - 'main'
+
+env:
+  MIRROR_URL: git@github.com:EpitechPromo2026/B-YEP-400-PAR-4-1-zappy-axel.humeau.git
+  EXECUTABLES: zappy_ai,zappy_gui,zappy_server
+jobs:
+  check_program_compilation:
+    if: success()
+    needs: [check_repository_cleanliness]
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    name: check_program_compilation
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: timeout 2m make
+      - run: make clean
+      - run: |
+          IFS=','
+          read -ra ADDR <<< "${{ env.EXECUTABLES }}"
+          for file in "${ADDR[@]}"
+          do
+            if [[ ! -f "${file}" || ! -x "${file}" ]]; then
+              exit 1
+            fi
+          done
+  run_tests:
+    if: success()
+    needs: [check_repository_cleanliness, check_program_compilation]
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+    name: run_tests
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: timeout 2m make tests_run
+  push_to_mirror:
+    if: success() && ${{ github.event_name == 'push' }}
+    needs: [check_repository_cleanliness, check_program_compilation, run_tests]
+    runs-on: ubuntu-latest
+    name: push_to_mirror
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+  make_deploy_doxygen:
+    if: success() && ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v2
+      - name: Install doxygen
+        run: sudo apt-get update; sudo apt-get install -y doxygen
+      - name: Create the doxygen
+        run: doxygen Doxyfile
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html

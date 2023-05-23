@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-all clear fclear re:
+all clear fclear re tests_run:
 	$(MAKE) -C ai $@
 	$(MAKE) -C server $@
 	$(MAKE) -C gui $@

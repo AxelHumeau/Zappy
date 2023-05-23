@@ -47,4 +47,6 @@ re: fclean all
 debug: CXXFLAGS += -ggdb
 debug: fclean $(NAME)
 
-.PHONY: fclean all re clean debug
+tests_run:
+
+.PHONY: fclean all re clean debug tests_run
