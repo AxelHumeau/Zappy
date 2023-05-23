@@ -15,7 +15,6 @@ env:
 jobs:
   check_program_compilation:
     if: success()
-    needs: [check_repository_cleanliness]
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
     name: check_program_compilation
@@ -36,7 +35,7 @@ jobs:
           done
   run_tests:
     if: success()
-    needs: [check_repository_cleanliness, check_program_compilation]
+    needs: [check_program_compilation]
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker
     name: run_tests
@@ -47,7 +46,7 @@ jobs:
       - run: timeout 2m make tests_run
   push_to_mirror:
     if: success() && ${{ github.event_name == 'push' }}
-    needs: [check_repository_cleanliness, check_program_compilation, run_tests]
+    needs: [run_tests]
     runs-on: ubuntu-latest
     name: push_to_mirror
     steps:
@@ -62,6 +61,7 @@ jobs:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
   make_deploy_doxygen:
     if: success() && ${{ github.event_name == 'push' }}
+    needs: [push_to_mirror]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current branch
