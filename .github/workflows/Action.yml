@@ -11,18 +11,19 @@ on:
 
 env:
   MIRROR_URL: git@github.com:EpitechPromo2026/B-YEP-400-PAR-4-1-zappy-axel.humeau.git
-  EXECUTABLES: zappy_ai,zappy_gui,zappy_server
+  EXECUTABLES: zappy_ai,zappy_server
 jobs:
   check_program_compilation:
     if: success()
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker
+    container: biozzzzz/zappy_docker
     name: check_program_compilation
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: timeout 2m make
+      - run: timeout 2m make zappy_server
+      - run: timeout 2m make zappy_ai
       - run: make clean
       - run: |
           IFS=','
@@ -37,7 +38,7 @@ jobs:
     if: success()
     needs: [check_program_compilation]
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker
+    container: biozzzzz/zappy_docker
     name: run_tests
     steps:
       - uses: actions/checkout@v3
