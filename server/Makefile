@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-SRC =	main.c
+SRC =	main.c	\
+		initialization/get_params.c	\
+		initialization/init_server.c	\
 
 OBJ = 	$(SRC:%.c=obj/%.o)
 
@@ -13,7 +15,7 @@ CC =	gcc
 
 CFLAGS =	-Wall -Wextra
 
-CPPFLAGS =	-iquote include
+CPPFLAGS =	-iquote include -D_GNU_SOURCE
 
 LDFLAGS =
 
