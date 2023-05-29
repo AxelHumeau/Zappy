@@ -6,8 +6,9 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "params.h"
-#include "server_struct.h"
+#include "server.h"
 
 int get_port(char **params, int *start, int nb_params)
 {
@@ -46,7 +47,7 @@ char **get_team_names(char **params, int *start, int nb_params)
         return NULL;
     }
     for (; *start < nb_params && params[*start][0] != '-'; (*start)++) {
-        names = realloc(names, count + 1);
+        names = realloc(names, sizeof(char *[count + 1]));
         names[count - 1] = params[*start];
         names[count++] = NULL;
     }

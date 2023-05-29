@@ -8,7 +8,7 @@
 #pragma once
 
 #define MAX_PORT_NUMBER 65535
-#include "server_struct.h"
+#include "server.h"
 
 int get_port(char **params, int *start, int nb_params);
 int get_pos_int(char **params, int *start, int nb_params);
