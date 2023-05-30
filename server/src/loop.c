@@ -12,13 +12,13 @@
 #include <sys/param.h>
 #include <unistd.h>
 
-static void have_to_stop(struct server *server)
+static bool have_to_stop(struct server *server)
 {
     struct signalfd_siginfo siginfo;
 
     if (read(server->sig_fd, &siginfo, sizeof(siginfo)) != sizeof(siginfo))
-        return;
-    server->stopped = siginfo.ssi_signo == SIGINT;
+        return false;
+    return siginfo.ssi_signo == SIGINT;
 }
 
 static int set_fds(struct server *server, fd_set *read_fds)
@@ -57,8 +57,8 @@ int loop(struct server *server)
 
     while (!server->stopped && select(set_fds(server, &readfds),
         &readfds, NULL, NULL, NULL) >= 0) {
-        if (FD_ISSET(server->sig_fd, &readfds))
-            have_to_stop(server);
+        if (FD_ISSET(server->sig_fd, &readfds) && have_to_stop(server))
+            break;
         if (FD_ISSET(server->listening_fd, &readfds))
             accept_client(server);
         loop_through_clients(server, &readfds);

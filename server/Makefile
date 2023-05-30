@@ -9,6 +9,7 @@ SRC =	main.c	\
 		client_handling.c	\
 		loop.c	\
 		destroy_server.c	\
+		buffer.c	\
 		initialization/get_params.c	\
 		initialization/init_server.c	\
 		initialization/setup_server.c	\

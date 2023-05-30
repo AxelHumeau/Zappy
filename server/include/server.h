@@ -8,13 +8,17 @@
 #pragma once
 
 #include <sys/queue.h>
+#include <sys/select.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "buffering.h"
 
 /// @brief Node of a client linked list
 struct client_entry {
     int id;
     int fd;
+    buffer_t buf_to_send;
+    buffer_t buf_to_recv;
     bool is_gui;
     SLIST_ENTRY(client_entry) next;
 };
