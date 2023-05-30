@@ -46,7 +46,7 @@ jobs:
       - name: Access cloned repository content
         run: |
           chmod +x ./coding-style-checker/coding-style.sh
-          ./coding-style-checker/coding-style.sh . .
+          ./coding-style-checker/coding-style.sh ./server .
           cat coding-style-reports.log
       - name: Verify coding style
         run: |

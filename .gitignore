@@ -40,3 +40,7 @@ __pycache__
 log
 build
 dist
+
+
+# Coding style report
+coding-style-reports.log
