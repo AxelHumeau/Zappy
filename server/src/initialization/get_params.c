@@ -16,7 +16,7 @@ int get_port(char **params, int *start, int nb_params)
 
     if (++(*start) >= nb_params)
         return -1;
-    port  = atoi(params[*start]);
+    port = atoi(params[*start]);
     (*start)++;
     if (port <= 0 || port >= MAX_PORT_NUMBER)
         return -1;
@@ -29,7 +29,7 @@ int get_pos_int(char **params, int *start, int nb_params)
 
     if (++(*start) >= nb_params)
         return -1;
-    dimension  = atoi(params[*start]);
+    dimension = atoi(params[*start]);
     (*start)++;
     if (dimension <= 0)
         return -1;
