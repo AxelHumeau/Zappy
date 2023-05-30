@@ -34,6 +34,37 @@ jobs:
               exit 1
             fi
           done
+  check_coding_style:
+    needs: [check_program_compilation]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Clone Epitech Github checking Coding style
+        run: git clone https://github.com/Epitech/coding-style-checker.git
+      - name: Access cloned repository content
+        run: |
+          chmod +x ./coding-style-checker/coding-style.sh
+          ./coding-style-checker/coding-style.sh . .
+          cat coding-style-reports.log
+      - name: Verify coding style
+        run: |
+            error=false
+            while IFS= read -r line; do
+                if [[ $line =~ (MAJOR|MINOR|INFO) ]]; then
+                        IFS=': '
+                        read -r -a array <<< "$line"
+                        echo "::error title=Coding style error:: file:${array[0]}, line:${array[1]}, coding-style:${array[2]}-${array[3]}"
+                        error=true
+                fi
+                done < coding-style-reports.log
+            if [ $error = true ]
+            then
+                exit 1
+            else
+                exit 0
+            fi
   run_tests:
     if: success()
     needs: [check_program_compilation]
