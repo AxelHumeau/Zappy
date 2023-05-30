@@ -1,0 +1,3 @@
+/home/aldric/Epitech/Tek2/Zappy/CMakeFiles/zappy_gui.dir
+/home/aldric/Epitech/Tek2/Zappy/CMakeFiles/edit_cache.dir
+/home/aldric/Epitech/Tek2/Zappy/CMakeFiles/rebuild_cache.dir
