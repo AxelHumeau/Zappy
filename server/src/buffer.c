@@ -5,9 +5,10 @@
 ** buffer
 */
 
-#include "buffering.h"
 #include <unistd.h>
 #include <string.h>
+#include "buffering.h"
+#include "macro.h"
 
 void add_to_buffer(buffer_t *buffer, char *str, size_t len)
 {
@@ -24,16 +25,16 @@ void add_to_buffer(buffer_t *buffer, char *str, size_t len)
 int write_buffer(buffer_t *buffer, int fd)
 {
     if (write(fd, buffer->buffer, buffer->buffer_size) == -1)
-        return -1;
+        return EXIT_FAIL;
     buffer->buffer_size = 0;
     return 0;
 }
 
 void init_buffer(buffer_t *buffer)
 {
-    buffer->buffer = malloc(sizeof(char[256]));
+    buffer->buffer = malloc(sizeof(char[MAX_SIZE_BUFFER]));
     buffer->buffer_size = 0;
-    buffer->max_buffer_size = 256;
+    buffer->max_buffer_size = MAX_SIZE_BUFFER;
 }
 
 void destroy_buffer(buffer_t *buffer)

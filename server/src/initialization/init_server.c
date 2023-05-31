@@ -10,6 +10,7 @@
 #include <string.h>
 #include "params.h"
 #include "server.h"
+#include "macro.h"
 
 static void set_teams(struct server *server, char **teams)
 {
@@ -65,7 +66,7 @@ int get_dimensions_freq_nb_client(char **params, int nb_params,
         return get_port_and_team_name(params, nb_params, server, index);
     }
     dprintf(2, "%s: Unknown option.\n", params[*index]);
-    return -1;
+    return EXIT_FAIL;
 }
 
 int get_server_params(char **params, int nb_params, struct server *server)
@@ -79,10 +80,10 @@ int get_server_params(char **params, int nb_params, struct server *server)
     server->max_players_per_team = -1;
     server->freq = -1;
     if (get_port_and_team_name(params, nb_params, server, &i))
-        return -1;
+        return EXIT_FAIL;
     if (server->height == -1 || server->width == -1 ||
         server->teams == NULL || server->nb_teams <= 0 ||
         server->max_players_per_team == -1 || server->freq == -1)
-        return -1;
-    return 0;
+        return EXIT_FAIL;
+    return EXIT_SUCCESS;
 }

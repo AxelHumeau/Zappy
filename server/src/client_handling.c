@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "server.h"
+#include "macro.h"
 
 void accept_client(struct server *server)
 {
@@ -45,12 +46,12 @@ static void handle_lines(struct client_entry *client, struct server *server)
 int handle_client(struct client_entry *client,
     struct server *server, fd_set *read_fds)
 {
-    char buffer[256];
+    char buffer[MAX_SIZE_BUFFER];
     int read_char = 0;
 
     if (!FD_ISSET(client->fd, read_fds))
         return 0;
-    read_char = read(client->fd, buffer, 256);
+    read_char = read(client->fd, buffer, MAX_SIZE_BUFFER);
     if (read_char <= 0)
         return 1;
     add_to_buffer(&client->buf_to_recv, buffer, read_char);

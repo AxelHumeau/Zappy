@@ -57,3 +57,6 @@ int handle_client(struct client_entry *client,
     struct server *server, fd_set *read_fds);
 void destroy_client(struct client_entry *client);
 void destroy_clients(struct server *server);
+
+// Utils.c
+int display_help(void);

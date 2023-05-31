@@ -13,6 +13,7 @@
 #include <netinet/in.h>
 #include <fcntl.h>
 #include "server.h"
+#include "macro.h"
 
 int setup_server(struct server *server)
 {
@@ -31,6 +32,6 @@ int setup_server(struct server *server)
     if (server->listening_fd < 0 ||
         bind(server->listening_fd, (struct sockaddr *) &ad, sizeof(ad)) != 0 ||
         listen(server->listening_fd, FD_SETSIZE - 1) != 0)
-        return 1;
-    return 0;
+        return EXIT_FAIL;
+    return EXIT_SUCCESS;
 }

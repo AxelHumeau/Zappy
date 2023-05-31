@@ -13,6 +13,7 @@ SRC =	main.c	\
 		initialization/get_params.c	\
 		initialization/init_server.c	\
 		initialization/setup_server.c	\
+		utils.c
 
 OBJ = 	$(SRC:%.c=obj/%.o)
 

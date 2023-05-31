@@ -9,17 +9,18 @@
 #include <string.h>
 #include "params.h"
 #include "server.h"
+#include "macro.h"
 
 int get_port(char **params, int *start, int nb_params)
 {
     int port = 0;
 
     if (++(*start) >= nb_params)
-        return -1;
+        return EXIT_FAIL;
     port = atoi(params[*start]);
     (*start)++;
     if (port <= 0 || port >= MAX_PORT_NUMBER)
-        return -1;
+        return EXIT_FAIL;
     return port;
 }
 
@@ -28,11 +29,11 @@ int get_pos_int(char **params, int *start, int nb_params)
     int dimension = 0;
 
     if (++(*start) >= nb_params)
-        return -1;
+        return EXIT_FAIL;
     dimension = atoi(params[*start]);
     (*start)++;
     if (dimension <= 0)
-        return -1;
+        return EXIT_FAIL;
     return dimension;
 }
 
