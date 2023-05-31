@@ -8,6 +8,8 @@
 #include <OGRE/Ogre.h>
 #include <OGRE/Bites/OgreApplicationContext.h>
 
+#include "GameObject.hpp"
+
 class KeyHandler : public OgreBites::InputListener
 {
     bool keyPressed(const OgreBites::KeyboardEvent& evt) override
