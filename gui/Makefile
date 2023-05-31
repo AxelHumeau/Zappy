@@ -18,13 +18,11 @@ $(NAME):
 	mv $(BUILD)/$(NAME) ../$(NAME)
 
 clean:
-	make -C $(BUILD) clean
+	if [ -d "$(BUILD)" ]; then make -C $(BUILD) clean; fi
 
 fclean: clean
 	rm -f ../$(NAME)
-	if [ -d "$(BUILD)" ]; then \
-		rm -rf $(BUILD); \
-	fi \
+	if [ -d "$(BUILD)" ]; then rm -rf $(BUILD); fi
 
 re: fclean all
 
