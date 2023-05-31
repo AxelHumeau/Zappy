@@ -84,6 +84,5 @@ int get_server_params(char **params, int nb_params, struct server *server)
         server->teams == NULL || server->nb_teams <= 0 ||
         server->max_players_per_team == -1 || server->freq == -1)
         return -1;
-    server->stopped = false;
     return 0;
 }

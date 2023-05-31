@@ -27,7 +27,6 @@ SLIST_HEAD(clients, client_entry);
 
 /// @brief Server struct
 struct server {
-    bool stopped;
     int listening_fd;
     int sig_fd;
     int width;
