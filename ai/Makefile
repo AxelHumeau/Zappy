@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SCRIPT_SRC = zappy_ai.py
+SCRIPT_SRC =	zappy_ai.py
 
 EXE_NAME = $(SCRIPT_SRC:%.py=%)
 
