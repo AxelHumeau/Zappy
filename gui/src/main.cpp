@@ -5,7 +5,6 @@
 ** main
 */
 
-#include <ois/OIS.h>
 #include "Renderer.hpp"
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {

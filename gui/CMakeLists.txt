@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26.4)
+cmake_minimum_required(VERSION 3.20.5)
 
 set(SRCS src/main.cpp src/Renderer.cpp src/GameObject.cpp)
 set(INCLUDES include)
