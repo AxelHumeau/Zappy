@@ -7,6 +7,8 @@
 
 #include "Renderer.hpp"
 #include "GameObject.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -60,15 +62,12 @@ void createScene(ZappyGui::Renderer &renderer)
 
 
     // without light we would just get a black screen
-    Ogre::Light* light = renderer.getSceneManager()->createLight("SpotLight");
-    light->setDiffuseColour(1, 1, 1);
-    light->setSpecularColour(1, 1, 1);
-    light->setType(Ogre::Light::LT_SPOTLIGHT);
-    Ogre::SceneNode* lightNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-    lightNode->attachObject(light);
-    lightNode->setPosition(0, 0, 15);
-    lightNode->setDirection(0, 0, -1);
+    ZappyGui::Light light2(renderer.getSceneManager(), "light2", Ogre::Light::LT_SPOTLIGHT);
+    light2.setDiffuseColour(1, 1, 1);
+    light2.setSpecularColour(1, 1, 1);
+    light2.setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+    light2.setPosition(0, 0, 15);
+    light2.setDirection(0, 0, -1);
 
     // also need to tell where we are
 

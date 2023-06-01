@@ -61,18 +61,6 @@ namespace ZappyGui {
         private:
             std::shared_ptr<Ogre::Entity> _entity;
     };
-
-    class Camera : public AGameObject {
-        public:
-            Camera(std::shared_ptr<Ogre::SceneManager> sceneManager, const Ogre::String &name);
-            ~Camera() {};
-
-            std::shared_ptr<Ogre::Camera> getCamera() const { return _camera; }
-            void setNearClipDistance(Ogre::Real nearDist) { _camera->setNearClipDistance(nearDist); }
-            void setAutoAspectRatio(bool autoratio) { _camera->setAspectRatio(autoratio); }
-        private:
-            std::shared_ptr<Ogre::Camera> _camera;
-    };
 }
 
 #endif /* !GAMEOBJECT_HPP_ */
