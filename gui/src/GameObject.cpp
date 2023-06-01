@@ -13,10 +13,4 @@ namespace ZappyGui {
         _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::nop{});
         _node->attachObject(_entity.get());
     }
-
-    Camera::Camera(std::shared_ptr<Ogre::SceneManager> sceneManager, const Ogre::String &name) {
-        _camera = std::shared_ptr<Ogre::Camera>(sceneManager->createCamera("myCam"), ZappyGui::nop{});
-        _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::nop{});
-        _node->attachObject(_camera.get());
-    }
 }
