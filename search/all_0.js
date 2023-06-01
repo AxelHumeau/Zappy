@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffer_0',['buffer',['../structbuffer.html',1,'']]]
+  ['ai_0',['ai',['../classzappy__ai_1_1ai.html',1,'zappy_ai']]]
 ];

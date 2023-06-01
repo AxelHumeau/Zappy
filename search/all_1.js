@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['client_5fentry_1',['client_entry',['../structclient__entry.html',1,'']]]
+  ['buffer_1',['buffer',['../structbuffer.html',1,'']]]
 ];
