@@ -8,6 +8,8 @@
 #include <OGRE/Ogre.h>
 #include <OGRE/Bites/OgreApplicationContext.h>
 
+#include "GameObject.hpp"
+
 class KeyHandler : public OgreBites::InputListener
 {
     bool keyPressed(const OgreBites::KeyboardEvent& evt) override
@@ -68,6 +70,9 @@ int main(void) {
     Ogre::RTShader::ShaderGenerator* shadergen = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
     shadergen->addSceneManager(scnMgr);
 
+    std::shared_ptr<Ogre::SceneManager> sceneManager(scnMgr);
+    Zappy::GameObject ogre = Zappy::GameObject(sceneManager, "Sinbad.mesh");
+
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
     // directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
@@ -117,12 +122,12 @@ int main(void) {
     // myMat->getTechnique(0)->getPass(0)->setAmbient(0,0,0);
     // myMat->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,0);
 
-    Ogre::SceneNode* node2 = scnMgr->getRootSceneNode()->createChildSceneNode();
-    node2->setPosition(0,0,8);
-    node2->roll(Ogre::Radian(0.785398f));
-    node2->pitch(Ogre::Radian(0.349066f));
-    node2->yaw(Ogre::Radian(0.785398f));
-    node2->attachObject(createCubeMesh("Cube", "myMat"));
+    // Ogre::SceneNode* node2 = scnMgr->getRootSceneNode()->createChildSceneNode();
+    // node2->setPosition(0,0,8);
+    // node2->roll(Ogre::Radian(0.785398f));
+    // node2->pitch(Ogre::Radian(0.349066f));
+    // node2->yaw(Ogre::Radian(0.785398f));
+    // node2->attachObject(createCubeMesh("Cube", "myMat"));
 
     KeyHandler keyHandler;
     ctx.addInputListener(&keyHandler);

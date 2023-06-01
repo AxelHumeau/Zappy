@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26.4)
 
-set(SRCS src/main.cpp)
+set(SRCS src/main.cpp src/GameObject.cpp)
 set(INCLUDES include)
 
 project(zappy_gui)
