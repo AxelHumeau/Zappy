@@ -40,3 +40,6 @@ __pycache__
 log
 build
 dist
+
+#.vscode
+.vscode/
