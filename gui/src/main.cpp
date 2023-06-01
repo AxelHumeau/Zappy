@@ -5,22 +5,8 @@
 ** main
 */
 
-#include <OGRE/Ogre.h>
-#include <OGRE/Bites/OgreApplicationContext.h>
-
-#include "GameObject.hpp"
-
-class KeyHandler : public OgreBites::InputListener
-{
-    bool keyPressed(const OgreBites::KeyboardEvent& evt) override
-    {
-        if (evt.keysym.sym == OgreBites::SDLK_ESCAPE)
-        {
-            Ogre::Root::getSingleton().queueEndRendering();
-        }
-        return true;
-    }
-};
+#include <ois/OIS.h>
+#include "Renderer.hpp"
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -60,19 +46,8 @@ Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
 }
 
-int main(void) {
-    OgreBites::ApplicationContext ctx("Zappy");
-    ctx.initApp();
-    Ogre::Root* root = ctx.getRoot();
-    Ogre::SceneManager* scnMgr = root->createSceneManager();
-
-    // register our scene with the RTSS
-    Ogre::RTShader::ShaderGenerator* shadergen = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
-    shadergen->addSceneManager(scnMgr);
-
-    std::shared_ptr<Ogre::SceneManager> sceneManager(scnMgr);
-    Zappy::GameObject ogre = Zappy::GameObject(sceneManager, "Sinbad.mesh");
-
+void createScene(Zappy::Renderer &renderer)
+{
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
     // directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
@@ -85,34 +60,34 @@ int main(void) {
 
 
     // without light we would just get a black screen
-    Ogre::Light* light = scnMgr->createLight("SpotLight");
-    light->setDiffuseColour(0, 0, 1);
+    Ogre::Light* light = renderer.getSceneManager()->createLight("SpotLight");
+    light->setDiffuseColour(1, 1, 1);
     light->setSpecularColour(1, 1, 1);
     light->setType(Ogre::Light::LT_SPOTLIGHT);
-    Ogre::SceneNode* lightNode = scnMgr->getRootSceneNode()->createChildSceneNode();
+    Ogre::SceneNode* lightNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
     light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
     lightNode->attachObject(light);
     lightNode->setPosition(0, 0, 15);
     lightNode->setDirection(0, 0, -1);
 
     // also need to tell where we are
-    Ogre::SceneNode* camNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-    camNode->setPosition(0, 0, 15);
+    Ogre::SceneNode* camNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
+    camNode->setPosition(0, 0, 6);
     camNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // create the camera
-    Ogre::Camera* cam = scnMgr->createCamera("myCam");
+    std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), Zappy::nop{});
     cam->setNearClipDistance(5); // specific to this sample
     cam->setAutoAspectRatio(true);
-    camNode->attachObject(cam);
+    camNode->attachObject(cam.get());
 
     // and tell it to render into the main window
-    ctx.getRenderWindow()->addViewport(cam);
+    renderer.registerCamera(cam);
 
     // finally something to render
-    Ogre::Entity* ent = scnMgr->createEntity("Sinbad.mesh");
-    Ogre::SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
-    node->lookAt(Ogre::Vector3(1, 0, 1), Ogre::Node::TS_PARENT);
+    Ogre::Entity* ent = renderer.getSceneManager()->createEntity("Sinbad.mesh");
+    Ogre::SceneNode* node = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
+    node->lookAt(Ogre::Vector3(0, 0, 1), Ogre::Node::TS_PARENT);
     node->attachObject(ent);
 
     Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
@@ -122,16 +97,17 @@ int main(void) {
     // myMat->getTechnique(0)->getPass(0)->setAmbient(0,0,0);
     // myMat->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,0);
 
-    // Ogre::SceneNode* node2 = scnMgr->getRootSceneNode()->createChildSceneNode();
-    // node2->setPosition(0,0,8);
-    // node2->roll(Ogre::Radian(0.785398f));
-    // node2->pitch(Ogre::Radian(0.349066f));
-    // node2->yaw(Ogre::Radian(0.785398f));
-    // node2->attachObject(createCubeMesh("Cube", "myMat"));
+    Ogre::SceneNode* node2 = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
+    node2->setPosition(0,0,8);
+    node2->roll(Ogre::Radian(0.785398f));
+    node2->pitch(Ogre::Radian(0.349066f));
+    node2->yaw(Ogre::Radian(0.785398f));
+    node2->attachObject(createCubeMesh("Cube", "myMat"));
+    renderer.render();
+}
 
-    KeyHandler keyHandler;
-    ctx.addInputListener(&keyHandler);
-    ctx.getRoot()->startRendering();
-    ctx.closeApp();
+int main(void) {
+    Zappy::Renderer renderer(std::string("Zappy"));
+    createScene(renderer);
     return 0;
 }
