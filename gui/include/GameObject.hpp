@@ -10,13 +10,9 @@
     #include <OGRE/Ogre.h>
     #include <string>
     #include <memory>
+    #include "Utils.hpp"
 
-namespace Zappy {
-
-    struct nop {
-        template <typename T>
-        void operator() (T const &) const noexcept { }
-    };
+namespace ZappyGui {
 
     class IGameObject {
         public:

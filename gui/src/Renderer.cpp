@@ -19,17 +19,17 @@ class KeyHandler : public OgreBites::InputListener
     }
 };
 
-Zappy::Renderer::Renderer(std::string name)
+ZappyGui::Renderer::Renderer(std::string name)
 {
     _context.reset(new OgreBites::ApplicationContext(name));
     _context->initApp();
     _root.reset(_context->getRoot());
-    _sceneManager.reset(_root->createSceneManager(), Zappy::nop());
+    _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
     _shaderGenerator.reset(Ogre::RTShader::ShaderGenerator::getSingletonPtr());
     _shaderGenerator->addSceneManager(_sceneManager.get());
 }
 
-Zappy::Renderer::~Renderer()
+ZappyGui::Renderer::~Renderer()
 {
     _root.release();
     _sceneManager.reset();
@@ -37,17 +37,17 @@ Zappy::Renderer::~Renderer()
     _context->closeApp();
 }
 
-std::shared_ptr<Ogre::SceneManager> Zappy::Renderer::getSceneManager()
+std::shared_ptr<Ogre::SceneManager> ZappyGui::Renderer::getSceneManager()
 {
     return _sceneManager;
 }
 
-void Zappy::Renderer::registerCamera(std::shared_ptr<Ogre::Camera> camera)
+void ZappyGui::Renderer::registerCamera(std::shared_ptr<Ogre::Camera> camera)
 {
     _context->getRenderWindow()->addViewport(camera.get());
 }
 
-void Zappy::Renderer::render()
+void ZappyGui::Renderer::render()
 {
     KeyHandler keyHandler;
     _context->addInputListener(&keyHandler);

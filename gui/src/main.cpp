@@ -7,6 +7,7 @@
 
 #include <ois/OIS.h>
 #include "Renderer.hpp"
+#include "GameObject.hpp"
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -46,7 +47,7 @@ Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
 }
 
-void createScene(Zappy::Renderer &renderer)
+void createScene(ZappyGui::Renderer &renderer)
 {
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
@@ -72,11 +73,11 @@ void createScene(Zappy::Renderer &renderer)
 
     // also need to tell where we are
     Ogre::SceneNode* camNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    camNode->setPosition(0, 0, 6);
+    camNode->setPosition(0, 0, 7);
     camNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // create the camera
-    std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), Zappy::nop{});
+    std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), ZappyGui::nop{});
     cam->setNearClipDistance(5); // specific to this sample
     cam->setAutoAspectRatio(true);
     camNode->attachObject(cam.get());
@@ -85,10 +86,7 @@ void createScene(Zappy::Renderer &renderer)
     renderer.registerCamera(cam);
 
     // finally something to render
-    Ogre::Entity* ent = renderer.getSceneManager()->createEntity("Sinbad.mesh");
-    Ogre::SceneNode* node = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    node->lookAt(Ogre::Vector3(0, 0, 1), Ogre::Node::TS_PARENT);
-    node->attachObject(ent);
+    ZappyGui::GameObject jerome(renderer.getSceneManager(), "Sinbad.mesh");
 
     Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
     myMat->setReceiveShadows(false);
@@ -107,7 +105,7 @@ void createScene(Zappy::Renderer &renderer)
 }
 
 int main(void) {
-    Zappy::Renderer renderer(std::string("Zappy"));
+    ZappyGui::Renderer renderer(std::string("Zappy"));
     createScene(renderer);
     return 0;
 }

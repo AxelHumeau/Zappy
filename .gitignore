@@ -41,5 +41,5 @@ log
 build
 dist
 
-#.vscode
+#dir
 .vscode/

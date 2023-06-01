@@ -11,14 +11,9 @@
     #include <memory>
     #include <OGRE/Ogre.h>
     #include <OGRE/Bites/OgreApplicationContext.h>
+    #include "Utils.hpp"
 
-namespace Zappy {
-
-    struct nop
-    {
-        template <typename T>
-        void operator() (T const &) const noexcept { }
-    };
+namespace ZappyGui {
 
     class Renderer {
         public:
@@ -34,8 +29,9 @@ namespace Zappy {
             std::unique_ptr<OgreBites::ApplicationContext> _context;
             std::unique_ptr<Ogre::Root> _root;
             std::shared_ptr<Ogre::SceneManager> _sceneManager;
-            std::unique_ptr<Ogre::RTShader::ShaderGenerator, nop> _shaderGenerator;
+            std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::nop> _shaderGenerator;
     };
+
 }
 
 #endif /* !RENDERER_HPP_ */
