@@ -41,5 +41,8 @@ log
 build
 dist
 
-#dir
-.vscode/
+#Other files
+.vscode
+
+# Coding style report
+coding-style-reports.log

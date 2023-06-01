@@ -5,7 +5,6 @@
 ** main
 */
 
-#include <ois/OIS.h>
 #include "Renderer.hpp"
 #include "GameObject.hpp"
 
