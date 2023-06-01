@@ -69,7 +69,7 @@ namespace ZappyGui {
 
             std::shared_ptr<Ogre::Camera> getCamera() const { return _camera; }
             void setNearClipDistance(Ogre::Real nearDist) { _camera->setNearClipDistance(nearDist); }
-            void setAutoAspectRatio(bool autoratio) { _camera->setAutoAspectRatio(autoratio); }
+            void setAutoAspectRatio(bool autoratio) { _camera->setAspectRatio(autoratio); }
         private:
             std::shared_ptr<Ogre::Camera> _camera;
     };

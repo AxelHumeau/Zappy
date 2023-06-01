@@ -71,21 +71,24 @@ void createScene(ZappyGui::Renderer &renderer)
     lightNode->setDirection(0, 0, -1);
 
     // also need to tell where we are
-    Ogre::SceneNode* camNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    camNode->setPosition(0, 0, 7);
-    camNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // create the camera
-    std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), ZappyGui::nop{});
-    cam->setNearClipDistance(5); // specific to this sample
-    cam->setAutoAspectRatio(true);
-    camNode->attachObject(cam.get());
+    ZappyGui::Camera cam(renderer.getSceneManager(), "myCam");
+    cam.setNearClipDistance(0.05); // specific to this sample
+    cam.setAutoAspectRatio(true);
+    cam.setPosition(0, -2, 0);
+    cam.lookAt(Ogre::Vector3(0, -2, -1), Ogre::Node::TS_PARENT);
+    // std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), ZappyGui::nop{});
+    // cam->setNearClipDistance(5); // specific to this sample
+    // cam->setAutoAspectRatio(true);
+    // camNode->attachObject(cam.get());
 
     // and tell it to render into the main window
-    renderer.registerCamera(cam);
+    renderer.registerCamera(cam.getCamera());
 
     // finally something to render
     ZappyGui::GameObject jerome(renderer.getSceneManager(), "Sinbad.mesh");
+    jerome.setPosition(0, 0, -2);
 
     Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
     myMat->setReceiveShadows(false);
