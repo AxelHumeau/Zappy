@@ -46,7 +46,7 @@ class ai:
         def run(self):
             self.socket.send("Run\n").encode()
 
-def loop_client(port, adress):
+def loop_client(port, message: str):
     s = connexion_server(port)
     while True:
         read, write, error = select.select([sys.stdin, s], [], [])
@@ -59,8 +59,13 @@ def loop_client(port, adress):
                 break
             cmd += '\n'
             s.send(cmd.encode())
-        else:
-            print("recv: ", s.recv(1024).decode());
+        elif read[0] is s:
+            message += s.recv(1024).decode()
+        pos = message.find('\n')
+        while (pos != -1):
+            print(message[:pos])
+            message = message[pos + 1:]
+            pos = message.find('\n')
 
 def connexion_server(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -76,7 +81,7 @@ if __name__ == "__main__":
         sys.exit(84)
     error_handling.error_handler(sys.argv[1:], dict_argument)
     try:
-        loop_client(dict_argument["port"], "kofeko")
+        loop_client(dict_argument["port"], "")
     except Exception as error:
         print(error, file=sys.stderr)
         sys.exit(84)

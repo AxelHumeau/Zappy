@@ -23,7 +23,6 @@ void accept_client(struct server *server)
     if (fd < 0)
         return;
     entry = malloc(sizeof(struct client_entry));
-    printf("FD ENTRANT : %d\n", fd);
     entry->fd = fd;
     entry->id = count++;
     entry->is_gui = false;
