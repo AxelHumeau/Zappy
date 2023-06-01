@@ -4,43 +4,47 @@ import select
 import sys
 import socket
 
-import socket
-
 class ai:
     lifeUnite = 10
-    TimeUnite = 1260
-    def __init__(self, reciprocal, socket):
-        if reciprocal:
-            self.reciprocal = reciprocal;
-        else:
-            self.reciprocal = 100;
+    inventory = {
+        "linemate" : 0,
+        "deraumere" : 0,
+        "sibur" : 0,
+        "mendiane": 0,
+        "phiras": 0,
+        "thystame" : 0
+    }
+    lvl = 1
+    vision = []
+    q_command = []
+    def __init__(self, socket):
         self.socket = socket;
         def Forward(self):
-            self.socket.send("Forward\n")
+            self.socket.send("Forward\n").encode()
         def Right(self):
-            self.socket.send("Right\n")
+            self.socket.send("Right\n").encode()
         def Left(self):
-            self.socket.send("Left\n")
+            self.socket.send("Left\n").encode()
         def Look(self):
-            self.socket.send("Look\n")
+            self.socket.send("Look\n").encode()
         def Inventory(self):
-            self.socket.send("Inventory\n")
+            self.socket.send("Inventory\n").encode()
         def Broadcast(self, message):
-            self.socket.send("Broadcast\n")
+            self.socket.send("Broadcast" + message + '\n').encode()
         def Connect_nbr(self):
-            self.socket.send("Connect_nbr\n")
+            self.socket.send("Connect_nbr\n").encode()
         def Fork(self):
-            self.socket.send("Fork\n")
+            self.socket.send("Fork\n").encode()
         def Eject(self):
-            self.socket.send("Eject\n")
-        def Death(self):
-            self.socket.send("Death\n")
+            self.socket.send("Eject\n").encode()
         def Take(self):
-            self.socket.send("Take\n")
+            self.socket.send("Take\n").encode()
         def Set(self):
-            self.socket.send("Set\n")
+            self.socket.send("Set\n").encode()
         def Incantation(self):
-            self.socket.send("Incantation\n")
+            self.socket.send("Incantation\n").encode()
+        def run(self):
+            self.socket.send("Run\n").encode()
 
 def loop_client(port, adress):
     s = connexion_server(port)
