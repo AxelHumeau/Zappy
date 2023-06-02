@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ai_0',['ai',['../classai_1_1ai.html',1,'ai.ai'],['../classzappy__ai_1_1ai.html',1,'zappy_ai.ai']]]
+  ['_5f_5finit_5f_5f_0',['__init__',['../classai_1_1AI.html#acd9728bd16757d98b9420eabee235ef8',1,'ai::AI']]]
 ];

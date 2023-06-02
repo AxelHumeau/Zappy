@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffer_8',['buffer',['../structbuffer.html',1,'']]]
+  ['buffer_13',['buffer',['../structbuffer.html',1,'']]]
 ];
