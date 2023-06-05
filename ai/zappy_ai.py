@@ -40,7 +40,6 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         sys.exit(84)
     error_handling.error_handler(sys.argv[1:], dict_argument)
-    loop_client(dict_argument["port"], "")
     try:
         loop_client(dict_argument["port"], "")
     except Exception as error:
