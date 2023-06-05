@@ -86,20 +86,15 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <tr class="memdesc:a1444cbfadda62239d5da48f0ee49ee0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">communication def Forward(self): self.socket.send("Forward\n").encode() def Right(self): self.socket.send("Right\n").encode() def Left(self): self.socket.send("Left\n").encode() def Look(self): self.socket.send("Look\n").encode() def Inventory(self): self.socket.send("Inventory\n").encode() def Broadcast(self, message): self.socket.send("Broadcast" + message + '<br  />
 ').encode() def Connect_nbr(self): self.socket.send("Connect_nbr\n").encode() def Fork(self): self.socket.send("Fork\n").encode() def Eject(self): self.socket.send("Eject\n").encode() def Take(self): self.socket.send("Take\n").encode() def Set(self): self.socket.send("Set\n").encode() def Incantation(self): self.socket.send("Incantation\n").encode() with the vision provide by look and his own inventory get the tile to go <br /></td></tr>
 <tr class="separator:a1444cbfadda62239d5da48f0ee49ee0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac31ea0e0efd9b6d785367e87951bb96b"><td class="memItemLeft" align="right" valign="top"><a id="ac31ea0e0efd9b6d785367e87951bb96b"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classai_1_1AI.html#ac31ea0e0efd9b6d785367e87951bb96b">look_aroud</a> (self)</td></tr>
-<tr class="memdesc:ac31ea0e0efd9b6d785367e87951bb96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">look for tiles with the item he need <br /></td></tr>
-<tr class="separator:ac31ea0e0efd9b6d785367e87951bb96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5323d76240682dd60a17ae1a5c02b81"><td class="memItemLeft" align="right" valign="top"><a id="ab5323d76240682dd60a17ae1a5c02b81"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classai_1_1AI.html#ab5323d76240682dd60a17ae1a5c02b81">run</a> (self)</td></tr>
-<tr class="memdesc:ab5323d76240682dd60a17ae1a5c02b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">run the <a class="el" href="classai_1_1AI.html">AI</a> <br /></td></tr>
-<tr class="separator:ab5323d76240682dd60a17ae1a5c02b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a738dd694cd5fab3b960c1619dfb130b3"><td class="memItemLeft" align="right" valign="top"><a id="a738dd694cd5fab3b960c1619dfb130b3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>socket</b></td></tr>
 <tr class="separator:a738dd694cd5fab3b960c1619dfb130b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb808ee96acd6822a7ebc191beb36fea"><td class="memItemLeft" align="right" valign="top"><a id="afb808ee96acd6822a7ebc191beb36fea"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>target</b></td></tr>
+<tr class="separator:afb808ee96acd6822a7ebc191beb36fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -157,12 +152,12 @@ list&#160;</td><td class="memItemRight" valign="bottom"><b>q_command</b> = []</t
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=  {</div>
-<div class="line">        <span class="stringliteral">&quot;linemate&quot;</span> : 0,</div>
-<div class="line">        <span class="stringliteral">&quot;deraumere&quot;</span> : 0,</div>
-<div class="line">        <span class="stringliteral">&quot;sibur&quot;</span> : 0,</div>
+<div class="line">        <span class="stringliteral">&quot;linemate&quot;</span>: 0,</div>
+<div class="line">        <span class="stringliteral">&quot;deraumere&quot;</span>: 0,</div>
+<div class="line">        <span class="stringliteral">&quot;sibur&quot;</span>: 0,</div>
 <div class="line">        <span class="stringliteral">&quot;mendiane&quot;</span>: 0,</div>
 <div class="line">        <span class="stringliteral">&quot;phiras&quot;</span>: 0,</div>
-<div class="line">        <span class="stringliteral">&quot;thystame&quot;</span> : 0</div>
+<div class="line">        <span class="stringliteral">&quot;thystame&quot;</span>: 0</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 </div>

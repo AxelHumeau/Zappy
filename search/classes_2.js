@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['client_5fentry_14',['client_entry',['../structclient__entry.html',1,'']]]
+  ['client_5fentry_12',['client_entry',['../structclient__entry.html',1,'']]]
 ];
