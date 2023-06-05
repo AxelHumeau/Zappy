@@ -3,6 +3,8 @@ from queue import Queue
 
 
 class Communication:
+    """ Class representing Communication information between ai and server """
+
     communication = {
         "": ["WELCOME"],
         "Forward": ["ok"],
@@ -20,13 +22,12 @@ class Communication:
         self.inventory = []
         self.message = []
 
-    def push_request(self, elem):
-        self.request.push(elem)
-
-    def push_response(self, elem):
-        self.response.push(elem)
-
     def parse_information_look(self):
+        """_summary_
+
+        Returns:
+            _type_: true
+        """
         self.look_info.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
         for square in info.split(","):

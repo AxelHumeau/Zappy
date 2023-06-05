@@ -3,6 +3,15 @@ import sys
 
 
 def error_handler(av, dict):
+    """ error handling of arguments
+
+    Args:
+        av ([str]): list of arguments entered by the user
+        dict (dict): dict that will stock every value by the corresponding key
+
+    Raises:
+        Exception: Error on argument
+    """
     if len(av) == 0:
         raise Exception("Invalid number of argument")
     if (len(av) == 1 and av[0] == "-help"):

@@ -6,6 +6,14 @@ from communication import Communication
 
 
 def split_information(message):
+    """_summary_
+
+    Args:
+        message (str): message that need to be split
+
+    Returns:
+        _type_: a list of element in message
+    """
     pos = message.find('\n')
     result = []
     while (pos != -1):
@@ -15,7 +23,17 @@ def split_information(message):
     return result
 
 
-def connexion_team(socket, dict_args, communication):
+def connexion_team(socket, dict_args):
+    """_summary_
+
+    Args:
+        socket (socket.socket): initiliaze socket server
+        dict_args (dict): dictionnary of informations entered by users
+
+    Raises:
+        Exception: Error on connexion team
+    """
+
     print(socket.recv(1024).decode(), end="")
     socket.send((dict_args["name"] + "\n").encode())
     result = socket.recv(1024).decode()
@@ -27,10 +45,15 @@ def connexion_team(socket, dict_args, communication):
 
 
 def loop_client(dict_args):
+    """_summary_
+
+    Args:
+        dict_args (dict): dictionnary of informations entered by users
+    """
     message = ""
     communication = Communication()
     s = connexion_server(dict_args["port"], dict_args["machine"])
-    connexion_team(s, dict_args, communication)
+    connexion_team(s, dict_args)
     while True:
         read, write, error = select.select([sys.stdin, s], [], [])
         if not read:
@@ -78,6 +101,19 @@ def loop_client(dict_args):
 
 
 def connexion_server(port, machine):
+    """_summary_
+
+    Args:
+        port (int): port value for the connexion
+        machine (str): name of the machine
+
+    Raises:
+        Exception: Error connexion on server
+
+    Returns:
+        _type_: creation of a new socket (server)
+    """
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         s.connect((machine, port))
