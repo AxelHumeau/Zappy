@@ -15,6 +15,18 @@
 
 namespace ZappyGui {
 
+    class KeyHandler : public OgreBites::InputListener
+    {
+        bool keyPressed(const OgreBites::KeyboardEvent& evt) override
+        {
+            if (evt.keysym.sym == OgreBites::SDLK_ESCAPE)
+            {
+                Ogre::Root::getSingleton().queueEndRendering();
+            }
+            return true;
+        }
+    };
+
     class Renderer {
         public:
             Renderer(std::string name);
@@ -23,6 +35,8 @@ namespace ZappyGui {
             std::shared_ptr<Ogre::SceneManager> getSceneManager();
             void registerCamera(std::shared_ptr<Ogre::Camera> camera);
             void render();
+            bool renderOneFrame();
+            void setKeyHandler();
 
         protected:
         private:
@@ -30,6 +44,7 @@ namespace ZappyGui {
             std::unique_ptr<Ogre::Root> _root;
             std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::nop> _shaderGenerator;
+            std::unique_ptr<KeyHandler> _keyHandler;
     };
 
 }

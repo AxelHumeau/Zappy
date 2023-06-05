@@ -43,6 +43,7 @@ dist
 
 #Other files
 .vscode
+vgcore*
 
 # Coding style report
 coding-style-reports.log

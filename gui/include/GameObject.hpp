@@ -52,6 +52,11 @@ namespace ZappyGui {
                 Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_PARENT,
                 const Ogre::Vector3 &localDirectionVector = Ogre::VectorBase<3, Ogre::Real>::NEGATIVE_UNIT_Z
             ) { _node->setDirection(x, y, z, relativeTo, localDirectionVector); }
+            void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) {
+                _node->roll(roll);
+                _node->pitch(pitch);
+                _node->yaw(yaw);
+            }
     };
 
     class GameObject : public AGameObject {

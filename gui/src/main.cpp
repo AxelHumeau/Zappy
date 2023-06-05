@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <OgreWindowEventUtilities.h>
 #include "Renderer.hpp"
 #include "GameObject.hpp"
 #include "Camera.hpp"
@@ -75,8 +76,8 @@ void createScene(ZappyGui::Renderer &renderer)
     ZappyGui::Camera cam(renderer.getSceneManager(), "myCam");
     cam.setNearClipDistance(0.05); // specific to this sample
     cam.setAutoAspectRatio(true);
-    cam.setPosition(0, -2, 0);
-    cam.lookAt(Ogre::Vector3(0, -2, -1), Ogre::Node::TS_PARENT);
+    cam.setPosition(0, 0, 0);
+    cam.lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
     // std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), ZappyGui::nop{});
     // cam->setNearClipDistance(5); // specific to this sample
     // cam->setAutoAspectRatio(true);
@@ -86,8 +87,9 @@ void createScene(ZappyGui::Renderer &renderer)
     renderer.registerCamera(cam.getCamera());
 
     // finally something to render
-    ZappyGui::GameObject jerome(renderer.getSceneManager(), "Sinbad.mesh");
-    jerome.setPosition(0, 0, -2);
+    ZappyGui::GameObject jerome(renderer.getSceneManager(), "hamster.mesh");
+    jerome.setPosition(0, 0, -10);
+    jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
 
     Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
     myMat->setReceiveShadows(false);
@@ -102,7 +104,15 @@ void createScene(ZappyGui::Renderer &renderer)
     node2->pitch(Ogre::Radian(0.349066f));
     node2->yaw(Ogre::Radian(0.785398f));
     node2->attachObject(createCubeMesh("Cube", "myMat"));
-    renderer.render();
+    renderer.setKeyHandler();
+    // renderer.render();
+    while (true)
+    {
+      OgreBites::WindowEventUtilities::messagePump();
+      jerome.setRotation(Ogre::Radian(0.02f), Ogre::Radian(0.07f), Ogre::Radian(0.05f));
+      if (!renderer.renderOneFrame())
+        return;
+    }
 }
 
 int main(void) {

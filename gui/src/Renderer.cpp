@@ -7,24 +7,14 @@
 
 #include "Renderer.hpp"
 
-class KeyHandler : public OgreBites::InputListener
-{
-    bool keyPressed(const OgreBites::KeyboardEvent& evt) override
-    {
-        if (evt.keysym.sym == OgreBites::SDLK_ESCAPE)
-        {
-            Ogre::Root::getSingleton().queueEndRendering();
-        }
-        return true;
-    }
-};
-
 ZappyGui::Renderer::Renderer(std::string name)
 {
     _context.reset(new OgreBites::ApplicationContext(name));
     _context->initApp();
     _root.reset(_context->getRoot());
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation("/home/aldric/Documents/hamster.zip", "Zip", "Assets");
+    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     _shaderGenerator.reset(Ogre::RTShader::ShaderGenerator::getSingletonPtr());
     _shaderGenerator->addSceneManager(_sceneManager.get());
 }
@@ -49,7 +39,16 @@ void ZappyGui::Renderer::registerCamera(std::shared_ptr<Ogre::Camera> camera)
 
 void ZappyGui::Renderer::render()
 {
-    KeyHandler keyHandler;
-    _context->addInputListener(&keyHandler);
     _root->startRendering();
+}
+
+bool ZappyGui::Renderer::renderOneFrame()
+{
+    return _root->renderOneFrame();
+}
+
+void ZappyGui::Renderer::setKeyHandler()
+{
+    _keyHandler.reset(new KeyHandler());
+    _context->addInputListener(_keyHandler.get());
 }
