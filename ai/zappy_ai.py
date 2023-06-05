@@ -16,12 +16,12 @@ def split_information(message):
 
 
 def connexion_team(socket, dict_args, communication):
-    socket.recv(1024).decode()
+    print(socket.recv(1024).decode(), end="")
     socket.send((dict_args["name"] + "\n").encode())
     result = socket.recv(1024).decode()
     if (result == "ko\n"):
         raise Exception("Error connexion to team")
-    team_info = print(split_information(result))
+    # team_info = print(split_information(result))
     # ai = Ai(socket, communication, int(team_info[0]), int(team_info[1]))
     # ai
 
@@ -29,7 +29,7 @@ def connexion_team(socket, dict_args, communication):
 def loop_client(dict_args):
     message = ""
     communication = Communication()
-    s = connexion_server(dict_args["port"])
+    s = connexion_server(dict_args["port"], dict_args["machine"])
     connexion_team(s, dict_args, communication)
     while True:
         read, write, error = select.select([sys.stdin, s], [], [])
@@ -40,43 +40,47 @@ def loop_client(dict_args):
             if cmd == "quit":
                 s.close()
                 break
-            cmd += "\n"
+            cmd += '\n'
             cmd = cmd.replace("\\n", "\n")
             pos = cmd.find('\n')
+            # s.send(cmd.encode())
             while (pos != -1):
                 s.send(cmd[:pos + 1].encode())
                 if (cmd != "\n"):
-                    communication.request.push(cmd[:pos])
+                    communication.request.push(cmd[:pos].split(" "))
                 cmd = cmd[pos + 1:]
                 pos = cmd.find('\n')
         elif read[0] is s:
             message += s.recv(1024).decode()
         pos = message.find('\n')
         tmp = []
-        i = 0
+        # print("MEsagge : " + message)
         while (pos != -1):
             tmp.append(message[:pos])
             message = message[pos + 1:]
             pos = message.find('\n')
+        # print("----------TMP----------")
+        # print(tmp)
+        # print("----------TMP----------")
         if (len(tmp) != 0):
-            communication.response.push(tmp)
-            if (len(communication.response) == len(communication.request)):
-                while (communication.clean_information()):
-                    continue
-        print("----------")
+            for elem in tmp:
+                communication.response.push(elem)
+        while (communication.clean_information()):
+            continue
+        print("\n----------")
         print(communication.request)
         print(communication.response)
         print("Look info : ")
         print(communication.look_info)
         print("Inventory info : ")
         print(communication.inventory)
-        print("----------")
+        print("-----------\n")
 
 
-def connexion_server(port):
+def connexion_server(port, machine):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        s.connect(('127.0.0.1', port))
+        s.connect((machine, port))
         return s
     except socket.error:
         raise Exception("Error connexion server")
@@ -84,11 +88,8 @@ def connexion_server(port):
 
 if __name__ == "__main__":
     dict_argument = {}
-    if len(sys.argv) == 1:
-        sys.exit(84)
-    error_handling.error_handler(sys.argv[1:], dict_argument)
     try:
-        print(len([]))
+        error_handling.error_handler(sys.argv[1:], dict_argument)
         loop_client(dict_argument)
     except Exception as error:
         print(error, file=sys.stderr)

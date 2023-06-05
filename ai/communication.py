@@ -8,11 +8,9 @@ class Communication:
         "Forward": ["ok"],
         "Right": ["ok"],
         "Left": ["ok"],
-        # "Look": [...,],
         "Broadcast text": ["ok"],
         "Fork": ["ok"],
         "Eject": ["ok", "ko"],
-        "Take": ["ok", "ko"]
     }
 
     def __init__(self):
@@ -20,6 +18,7 @@ class Communication:
         self.response = Queue()
         self.look_info = []
         self.inventory = []
+        self.message = []
 
     def push_request(self, elem):
         self.request.push(elem)
@@ -27,12 +26,9 @@ class Communication:
     def push_response(self, elem):
         self.response.push(elem)
 
-    def parse_information_look(self, list):
-        print("~~~~~~~~~~~~~~~~~~")
-        print(self.response.front()[0])
-        info = self.response.front()[0].translate({ord(i): None for i in '[]'})
-        print(info)
-        print("~~~~~~~~~~~~~~~~~~")
+    def parse_information_look(self):
+        self.look_info.clear()
+        info = self.response.front().translate({ord(i): None for i in '[]'})
         for square in info.split(","):
             dict_info = {}
             for elem in square.strip().split(" "):
@@ -43,47 +39,67 @@ class Communication:
                         dict_info[elem] = 1
                 else:
                     dict_info[None] = 0
-            list.append(dict_info)
+            self.look_info.append(dict_info)
         self.request.pop()
         self.response.pop()
         return True
 
-    def parse_information_inventory(self, list):
-        print(self.response.front()[0])
-        info = self.response.front()[0].translate({ord(i): None for i in '[]'})
-        for square in info:
+    def parse_information_inventory(self):
+        self.inventory.clear()
+        info = self.response.front().translate({ord(i): None for i in '[]'})
+        for square in info.split(","):
             dict_info = {}
             elem = square.strip().split(" ")
             dict_info[elem[0]] = int(elem[1])
-            list.append(dict_info)
+            self.inventory.append(dict_info)
+        return self.pop_information()
+
+    def pop_response(self):
+        response = self.response.front()
+        if (response in Communication.communication[self.request.front()[0]]):
+            return self.pop_information()
+        return False
+
+    def interaction_object(self):
+        if (self.response.front()[0] == "ko"):
+            # Algo to retake a object
+            print("Failed take object")
+        return self.pop_information()
+
+    def pop_information(self):
         self.request.pop()
         self.response.pop()
         return True
 
-    def pop_response(self):
-        response = self.response.front()[0]
-        if (response in Communication.communication[self.request.front()]):
-            self.request.pop()
-            self.response.pop()
-            return True
-        return False
+    def get_message(self):
+        info = self.response.front()[0].split(",")
+        message_info = {int(info[0].split()(" ")[1]): info[1].strip()}
+        self.message.append(message_info)
+        self.response.pop()
+
+    dict_function = {
+        "Take": interaction_object,
+        "Set": interaction_object,
+        "Broadcast": pop_information,
+        "ko": pop_information,
+        "Look": parse_information_look,
+        "Inventory": parse_information_inventory
+    }
 
     def clean_information(self):
-        if (len(self.request) == 0):
+        # print("CLEAN INFORMATION")
+        # print("\n\n-----------RESPONSE POKIMMMOON------------")
+        # print(self.request)
+        # print(self.response)
+        # print("-----------RESPONSE POKIMMMOON------------\n")
+        if (len(self.response) != 0):
+            if (self.response.front().find("message") != -1):
+                self.get_message()
+        if (len(self.request) == 0 or len(self.response) == 0):
             return False
-        if (self.request.front() in Communication.communication):
+        if (self.request.front()[0] in Communication.communication):
             return self.pop_response()
         else:
-            if (self.response.front()[0] == "ko"):
-                self.request.pop()
-                self.response.pop()
-                return True
-            if (self.request.front() == "Look"):
-                if (len(self.look_info) != 0):
-                    self.look_info.clear()
-                return self.parse_information_look(self.look_info)
-            if (self.request.front() == "Inventory"):
-                if (len(self.inventory) != 0):
-                    self.inventory.clear()
-                return self.parse_information_inventory(self.inventory)
-        return False
+            if (self.response.front() == "ko"):
+                return self.pop_information()
+            return self.dict_function[self.request.front()[0]](self)
