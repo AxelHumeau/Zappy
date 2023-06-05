@@ -11,7 +11,9 @@ EXE_NAME = $(SCRIPT_SRC:%.py=%)
 
 NAME = ../zappy_ai
 
-all:
+all: $(NAME)
+
+$(NAME):
 	pyinstaller -F $(SCRIPT_SRC)
 	mv dist/$(EXE_NAME) $(NAME)
 

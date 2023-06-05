@@ -6,6 +6,8 @@
 */
 
 #include "Renderer.hpp"
+#include "Socket.hpp"
+#include <iostream>
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -105,8 +107,25 @@ void createScene(Zappy::Renderer &renderer)
     renderer.render();
 }
 
-int main(void) {
-    Zappy::Renderer renderer(std::string("Zappy"));
-    createScene(renderer);
+int main(int argc, char* argv[]) {
+    // Zappy::Renderer renderer(std::string("Zappy"));
+    // createScene(renderer);
+    int i = 0;
+    try {
+        Network::Socket socket("127.0.0.1", 1500);
+        while (true) { //TODO: change with window closing condition
+            if (i % 10 != 0)
+                socket.addToBuffer("a", false);
+            else
+                socket.addToBuffer("\n", false);
+            socket.select();
+            if (socket.isWriteSet())
+                socket.send();
+            i++;
+        }
+    } catch (Network::Socket::ConnectionException const &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    }
     return 0;
 }
