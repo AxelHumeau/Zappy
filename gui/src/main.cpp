@@ -8,6 +8,7 @@
 #include "Renderer.hpp"
 #include "Socket.hpp"
 #include <iostream>
+#include <cstdlib>
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -107,12 +108,41 @@ void createScene(Zappy::Renderer &renderer)
     renderer.render();
 }
 
-int main(int argc, char* argv[]) {
+static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
+{
+    if (nb_args <= 0)
+        return 0;
+    std::string str(*args);
+    if (str == "-p") {
+        if (++args == NULL)
+            return -1;
+        port = atoi(*args);
+        if (port <= 0 || port >= MAX_PORT_NUMBER)
+            return -1;
+        return getOptions(nb_args - 2, args + 1, port, ip);
+    }
+    if (str == "-h") {
+        if (++args == NULL)
+            return -1;
+        ip = *args;
+        if (ip == "localhost")
+            ip = "127.0.0.1";
+        return getOptions(nb_args - 2, args + 1, port, ip);
+    }
+    std::cerr << "Unknown option: " << str << std::endl;
+    return -1;
+}
+
+int main(int argc, char *argv[]) {
     // Zappy::Renderer renderer(std::string("Zappy"));
     // createScene(renderer);
     int i = 0;
+    int port = 0;
+    std::string ip("");
+    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+        return 84;
     try {
-        Network::Socket socket("127.0.0.1", 1500);
+        Network::Socket socket(ip, port);
         while (true) { //TODO: change with window closing condition
             if (i % 10 != 0)
                 socket.addToBuffer("a", false);

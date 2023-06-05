@@ -15,6 +15,7 @@
 #include <arpa/inet.h>
 
 #define GET_NTH_BYTE(number, n) (number >> (8 * n)) & 0xff
+#define MAX_PORT_NUMBER 65535
 
 namespace Network {
     class Socket {
