@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['addtobuffer_42',['addToBuffer',['../classNetwork_1_1Socket.html#a0f0803ea4bb3e7007cc1d709bae42d4e',1,'Network::Socket']]]
+  ['empty_27',['empty',['../classqueue_1_1Queue.html#a97246dddf8973a174ebcc3ceb1fc85f3',1,'queue::Queue']]]
 ];

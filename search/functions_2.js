@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connectionexception_43',['ConnectionException',['../classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef',1,'Network::Socket::ConnectionException']]]
+  ['front_28',['front',['../classqueue_1_1Queue.html#a5515e7c5a8540c54795cef09da9e1aef',1,'queue::Queue']]]
 ];
