@@ -14,6 +14,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#define GET_NTH_BYTE(number, n) (number >> (8 * n)) & 0xff
+
 namespace Network {
     class Socket {
     public:

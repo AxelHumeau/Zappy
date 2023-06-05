@@ -8,6 +8,7 @@
 #include "Socket.hpp"
 
 #include <unistd.h>
+#include <iostream>
 
 Network::Socket::Socket(std::string const &ip, uint16_t port):
     _ip(inet_addr(ip.c_str())), _port(port)
@@ -80,11 +81,11 @@ void Network::Socket::send()
 Network::Socket::ConnectionException::ConnectionException(uint16_t port, uint32_t ip):
     _port(port), _ip(ip)
 {
-    std::string base = "Couldn't connect to ";
+    base = "Couldn't connect to ";
 
-    base += std::to_string(_ip >> 3) + ".";
-    base += std::to_string((_ip | 0b0100) >> 2) + ".";
-    base += std::to_string((_ip | 0b0010) >> 1) + ".";
-    base += std::to_string(_ip | 0b0001) + ":";
+    base += std::to_string(GET_NTH_BYTE(_ip, 0)) + ".";
+    base += std::to_string(GET_NTH_BYTE(_ip, 1)) + ".";
+    base += std::to_string(GET_NTH_BYTE(_ip, 2)) + ".";
+    base += std::to_string(GET_NTH_BYTE(_ip, 3)) + ":";
     base += std::to_string(_port);
 }
