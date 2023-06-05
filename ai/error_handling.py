@@ -1,10 +1,12 @@
 import sys
 
+
 def help():
     print('''USAGE: ./zappy_ai -p port -n name -h machine
         port is the port number
         name is the name of the team
         machine is the name of the machine; localhost by default''')
+
 
 def error_handler(av, dict):
     if (av[0] == "-help" and len(av) == 1):
@@ -20,7 +22,7 @@ def error_handler(av, dict):
                 sys.exit(84)
             dict["port"] = int(av[i + 1])
         if (av[i] == "-n"):
-            dict["name"] =  av[i + 1]
+            dict["name"] = av[i + 1]
         if (av[i] == "-h"):
             dict["machine"] = av[i + 1]
     if "port" not in dict or "name" not in dict or "machine" not in dict:
