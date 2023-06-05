@@ -2,10 +2,8 @@ import socket
 import error_handling
 import select
 import sys
-import socket
-
-import socket
 from communication import Communication
+
 
 def split_information(message):
     pos = message.find('\n')
@@ -74,6 +72,7 @@ def loop_client(dict_args):
         print(communication.inventory)
         print("----------")
 
+
 def connexion_server(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
@@ -81,6 +80,7 @@ def connexion_server(port):
         return s
     except socket.error:
         raise Exception("Error connexion server")
+
 
 if __name__ == "__main__":
     dict_argument = {}

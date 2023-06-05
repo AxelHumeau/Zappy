@@ -12,7 +12,7 @@ class Communication:
         "Broadcast text": ["ok"],
         "Fork": ["ok"],
         "Eject": ["ok", "ko"],
-        # "Take"
+        "Take": ["ok", "ko"]
     }
 
     def __init__(self):
@@ -27,9 +27,13 @@ class Communication:
     def push_response(self, elem):
         self.response.push(elem)
 
-    def parse_information(self, list):
-        list_information = self.response.front()[0].replace("[", "").replace("]", "").split(",")
-        for square in list_information:
+    def parse_information_look(self, list):
+        print("~~~~~~~~~~~~~~~~~~")
+        print(self.response.front()[0])
+        info = self.response.front()[0].translate({ord(i): None for i in '[]'})
+        print(info)
+        print("~~~~~~~~~~~~~~~~~~")
+        for square in info.split(","):
             dict_info = {}
             for elem in square.strip().split(" "):
                 if elem != "":
@@ -42,36 +46,44 @@ class Communication:
             list.append(dict_info)
         self.request.pop()
         self.response.pop()
+        return True
+
+    def parse_information_inventory(self, list):
+        print(self.response.front()[0])
+        info = self.response.front()[0].translate({ord(i): None for i in '[]'})
+        for square in info:
+            dict_info = {}
+            elem = square.strip().split(" ")
+            dict_info[elem[0]] = int(elem[1])
+            list.append(dict_info)
+        self.request.pop()
+        self.response.pop()
+        return True
+
+    def pop_response(self):
+        response = self.response.front()[0]
+        if (response in Communication.communication[self.request.front()]):
+            self.request.pop()
+            self.response.pop()
+            return True
+        return False
 
     def clean_information(self):
-        if (len(self.request) != 0 and self.request.front() in Communication.communication):
-            print()
-            if (self.response.front()[0] in Communication.communication[self.request.front()]):
-                self.request.pop()
-                self.response.pop()
-                return True
-            else:
-                return False
+        if (len(self.request) == 0):
+            return False
+        if (self.request.front() in Communication.communication):
+            return self.pop_response()
         else:
-            if (len(self.request) != 0 and self.response.front()[0] == "ko"):
+            if (self.response.front()[0] == "ko"):
                 self.request.pop()
                 self.response.pop()
                 return True
-            if (len(self.request) != 0 and self.request.front() == "Look"):
+            if (self.request.front() == "Look"):
                 if (len(self.look_info) != 0):
                     self.look_info.clear()
-                self.parse_information(self.look_info)
-                return True
-            if (len(self.request) != 0 and self.request.front() == "Inventory"):
+                return self.parse_information_look(self.look_info)
+            if (self.request.front() == "Inventory"):
                 if (len(self.inventory) != 0):
                     self.inventory.clear()
-                look_info = self.response.front()[0].replace("[", "").replace("]", "").split(",")
-                for square in look_info:
-                    dict_info = {}
-                    elem = square.strip().split(" ")
-                    dict_info[elem[0]] = int(elem[1])
-                    self.inventory.append(dict_info)
-                self.request.pop()
-                self.response.pop()
-                return True
+                return self.parse_information_inventory(self.inventory)
         return False
