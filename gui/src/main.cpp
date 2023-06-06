@@ -12,6 +12,8 @@
 #include "Light.hpp"
 #include "Tilemap.hpp"
 #include <iostream>
+#include "Socket.hpp"
+#include <cstdlib>
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 

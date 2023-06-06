@@ -33,6 +33,7 @@
 zappy_server
 zappy_gui
 zappy_ai
+!ai/zappy_ai
 
 # Python files
 __pycache__
