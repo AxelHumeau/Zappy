@@ -20,6 +20,7 @@ clean:
 	rm -rf __pycache__
 
 fclean: clean
+	rm -rf $(NAME)
 
 re: fclean all
 
