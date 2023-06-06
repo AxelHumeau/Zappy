@@ -5,48 +5,32 @@
 ## Makefile
 ##
 
-SRC =	src/main.cpp
+NAME =	zappy_gui
 
-OBJ =	 $(SRC:src/%.cpp=obj/%.o)
+BUILD = build
 
-MAIN_OBJ =	$(MAIN_SRC:src/%.cpp=obj/%.o)
-
-CXX =	g++
-
-CXXFLAGS =	-std=c++20 -Wall -Wextra
-
-CPPFLAGS =	-iquote include
-
-LDFLAGS =
-
-LDLIBS =
-
-NAME =	../zappy_gui
-
-TESTS =
+DEBUG =
 
 all:	$(NAME)
 
-obj/%.o:	src/%.cpp
-	mkdir -p $(@D)
-	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
-
-$(NAME): $(OBJ)
-	$(CXX) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+$(NAME):
+	mkdir -p $(BUILD)
+	cmake -S . $(DEBUG) -B $(BUILD)
+	make -C $(BUILD)
+	cp $(BUILD)/$(NAME) ../$(NAME)
 
 clean:
-	rm -f $(OBJ)
-	find . -name *.gcno -delete
-	find . -name *.gcda -delete
+	if [ -d "$(BUILD)" ]; then make -C $(BUILD) clean; fi
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f ../$(NAME)
+	if [ -d "$(BUILD)" ]; then rm -rf $(BUILD); fi
 
 re: fclean all
 
-debug: CXXFLAGS += -ggdb
-debug: fclean $(NAME)
-
 tests_run:
 
-.PHONY: fclean all re clean debug tests_run
+debug: DEBUG += -DCMAKE_BUILD_TYPE=Debug
+debug: re
+
+.PHONY: fclean all re clean tests_run
