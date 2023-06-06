@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SCRIPT_SRC =	zappy_ai.py
+SCRIPT_SRC =	zappy_ai
 
 EXE_NAME = $(SCRIPT_SRC:%.py=%)
 
@@ -14,15 +14,12 @@ NAME = ../zappy_ai
 all: $(NAME)
 
 $(NAME):
-	pyinstaller -F $(SCRIPT_SRC)
-	mv dist/$(EXE_NAME) $(NAME)
+	cd ..; ln -s ai/$(SCRIPT_SRC) $(SCRIPT_SRC)
 
 clean:
-	rm -rf dist
+	rm -rf __pycache__
 
 fclean: clean
-	rm -rf build
-	rm -f $(NAME)
 
 re: fclean all
 
