@@ -23,10 +23,10 @@ class Communication:
         self.message = []
 
     def parse_information_look(self):
-        """_summary_
+        """ parse all information of the command 'Look'
 
         Returns:
-            _type_: true
+            boolean: True
         """
         self.look_info.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
@@ -46,6 +46,11 @@ class Communication:
         return True
 
     def parse_information_inventory(self):
+        """ parse all information of the command 'Inventory'
+
+        Returns:
+            boolean: True
+        """
         self.inventory.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
         for square in info.split(","):
@@ -56,23 +61,39 @@ class Communication:
         return self.pop_information()
 
     def pop_response(self):
+        """ Pop response with its corresponding request
+
+        Returns:
+            boolean: False
+        """
         response = self.response.front()
         if (response in Communication.communication[self.request.front()[0]]):
             return self.pop_information()
         return False
 
     def interaction_object(self):
+        """ Interaction with object on the map (Take, Set)
+
+        Returns:
+            boolean: pop_information()
+        """
         if (self.response.front()[0] == "ko"):
             # Algo to retake a object
             print("Failed take object")
         return self.pop_information()
 
     def pop_information(self):
+        """ Pop response and request
+
+        Returns:
+            boolean: True
+        """
         self.request.pop()
         self.response.pop()
         return True
 
     def get_message(self):
+        """ Get a message (from the command Broadcast 'Message') """
         info = self.response.front()[0].split(",")
         message_info = {int(info[0].split()(" ")[1]): info[1].strip()}
         self.message.append(message_info)
@@ -88,11 +109,11 @@ class Communication:
     }
 
     def clean_information(self):
-        # print("CLEAN INFORMATION")
-        # print("\n\n-----------RESPONSE POKIMMMOON------------")
-        # print(self.request)
-        # print(self.response)
-        # print("-----------RESPONSE POKIMMMOON------------\n")
+        """ Pop queue of response/request
+
+        Returns:
+            boolean: True/False
+        """
         if (len(self.response) != 0):
             if (self.response.front().find("message") != -1):
                 self.get_message()

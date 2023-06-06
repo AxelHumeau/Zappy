@@ -6,13 +6,13 @@ from communication import Communication
 
 
 def split_information(message):
-    """_summary_
+    """ split information
 
     Args:
         message (str): message that need to be split
 
     Returns:
-        _type_: a list of element in message
+        list: a list of element in message
     """
     pos = message.find('\n')
     result = []
@@ -24,7 +24,7 @@ def split_information(message):
 
 
 def connexion_team(socket, dict_args):
-    """_summary_
+    """Connexion to the team
 
     Args:
         socket (socket.socket): initiliaze socket server
@@ -45,7 +45,7 @@ def connexion_team(socket, dict_args):
 
 
 def loop_client(dict_args):
-    """_summary_
+    """ Loop client
 
     Args:
         dict_args (dict): dictionnary of informations entered by users
@@ -77,14 +77,10 @@ def loop_client(dict_args):
             message += s.recv(1024).decode()
         pos = message.find('\n')
         tmp = []
-        # print("MEsagge : " + message)
         while (pos != -1):
             tmp.append(message[:pos])
             message = message[pos + 1:]
             pos = message.find('\n')
-        # print("----------TMP----------")
-        # print(tmp)
-        # print("----------TMP----------")
         if (len(tmp) != 0):
             for elem in tmp:
                 communication.response.push(elem)
@@ -101,7 +97,7 @@ def loop_client(dict_args):
 
 
 def connexion_server(port, machine):
-    """_summary_
+    """ Connexion to the server
 
     Args:
         port (int): port value for the connexion
@@ -111,7 +107,7 @@ def connexion_server(port, machine):
         Exception: Error connexion on server
 
     Returns:
-        _type_: creation of a new socket (server)
+        socket.socket: creation of a new socket (server)
     """
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

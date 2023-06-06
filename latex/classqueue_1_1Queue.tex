@@ -1,0 +1,106 @@
+\hypertarget{classqueue_1_1Queue}{}\doxysection{queue.\+Queue Class Reference}
+\label{classqueue_1_1Queue}\index{queue.Queue@{queue.Queue}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_a53aeccfc2c93d03ba79e5136091f8978}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_a86db7d5812c47b47fc2432aebe35426b}{\+\_\+\+\_\+len\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\Hypertarget{classqueue_1_1Queue_a23294e34e9039178b0e2b6706c62fa2e}\label{classqueue_1_1Queue_a23294e34e9039178b0e2b6706c62fa2e}} 
+def {\bfseries \+\_\+\+\_\+repr\+\_\+\+\_\+} (self)
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_a0366b9ef5b5c6ca90592ea50e6b31359}{push}} (self, elem)
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_aeb6c06b061494c07f62c85c872eb776b}{pop}} (self)
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_a97246dddf8973a174ebcc3ceb1fc85f3}{empty}} (self)
+\item 
+def \mbox{\hyperlink{classqueue_1_1Queue_a5515e7c5a8540c54795cef09da9e1aef}{front}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classqueue_1_1Queue_a8fb0ee3e994ca06aeb19bda86fd748b3}\label{classqueue_1_1Queue_a8fb0ee3e994ca06aeb19bda86fd748b3}} 
+{\bfseries queue}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb} Class that represent a Queue (FIFO) \end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classqueue_1_1Queue_a53aeccfc2c93d03ba79e5136091f8978}\label{classqueue_1_1Queue_a53aeccfc2c93d03ba79e5136091f8978}} 
+\index{queue.Queue@{queue.Queue}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Initialization of a queue \end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classqueue_1_1Queue_a86db7d5812c47b47fc2432aebe35426b}\label{classqueue_1_1Queue_a86db7d5812c47b47fc2432aebe35426b}} 
+\index{queue.Queue@{queue.Queue}!\_\_len\_\_@{\_\_len\_\_}}
+\index{\_\_len\_\_@{\_\_len\_\_}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{\_\_len\_\_()}{\_\_len\_\_()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+\_\+\+\_\+len\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} length of the queue
+
+Returns:
+    int: size of the queue
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classqueue_1_1Queue_a97246dddf8973a174ebcc3ceb1fc85f3}\label{classqueue_1_1Queue_a97246dddf8973a174ebcc3ceb1fc85f3}} 
+\index{queue.Queue@{queue.Queue}!empty@{empty}}
+\index{empty@{empty}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+empty (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} check if queue is empty
+
+Returns:
+    boolean: if queue is empty or not
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classqueue_1_1Queue_a5515e7c5a8540c54795cef09da9e1aef}\label{classqueue_1_1Queue_a5515e7c5a8540c54795cef09da9e1aef}} 
+\index{queue.Queue@{queue.Queue}!front@{front}}
+\index{front@{front}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{front()}{front()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+front (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} return the first element in the queue
+
+Raises:
+    IndexError: empty queue
+
+Returns:
+    any: first element in the queue
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classqueue_1_1Queue_aeb6c06b061494c07f62c85c872eb776b}\label{classqueue_1_1Queue_aeb6c06b061494c07f62c85c872eb776b}} 
+\index{queue.Queue@{queue.Queue}!pop@{pop}}
+\index{pop@{pop}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+pop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} pop the first element in the queue
+
+Raises:
+    IndexError: list empty
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classqueue_1_1Queue_a0366b9ef5b5c6ca90592ea50e6b31359}\label{classqueue_1_1Queue_a0366b9ef5b5c6ca90592ea50e6b31359}} 
+\index{queue.Queue@{queue.Queue}!push@{push}}
+\index{push@{push}!queue.Queue@{queue.Queue}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily def queue.\+Queue.\+push (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{elem }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} push element
+
+Args:
+    elem (any): elem that need to be push in last position in the queue
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ai/queue.\+py\end{DoxyCompactItemize}
