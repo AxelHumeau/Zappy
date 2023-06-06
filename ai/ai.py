@@ -74,7 +74,7 @@ class AI:
     q_command = []
     ## init
     def __init__(self, socket):
-        self.socket = socket
+        self.socket = socket;
     ## communication
     # def Forward(self):
     #     self.socket.send("Forward\n").encode()
@@ -101,7 +101,6 @@ class AI:
     # def Incantation(self):
     #     self.socket.send("Incantation\n").encode()
     ## with the vision provide by look and his own inventory get the tile to go
-
     def get_target(self, vision):
         itemtoget = []
         pos = []
@@ -124,8 +123,10 @@ class AI:
                     if (obj == objects[0]):
                         pos.append((objects[0], nbr, i))
         print(pos)
+        return pos
+    # def go_totarget(self):
+    #     ecart = 0
     ## look for tiles with the item he need
-
     # def look_aroud(self):
     #     rotation = 0
     #     while (self.target != -1):
