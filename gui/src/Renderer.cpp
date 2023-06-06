@@ -13,7 +13,7 @@ ZappyGui::Renderer::Renderer(std::string name)
     _context->initApp();
     _root.reset(_context->getRoot());
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
-    Ogre::ResourceGroupManager::getSingleton().addResourceLocation("/home/aldric/Documents/hamster.zip", "Zip", "Assets");
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./gui/assets/hamster.zip", "Zip", "Assets");
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     _shaderGenerator.reset(Ogre::RTShader::ShaderGenerator::getSingletonPtr());
     _shaderGenerator->addSceneManager(_sceneManager.get());
