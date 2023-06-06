@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['isreadset_46',['isReadSet',['../classNetwork_1_1Socket.html#a7169722a458a41afe8d8fc3ad73cbb6f',1,'Network::Socket']]],
-  ['iswriteset_47',['isWriteSet',['../classNetwork_1_1Socket.html#a62edc2e708aafbfec801ef78039837b1',1,'Network::Socket']]]
+  ['front_62',['front',['../classqueue_1_1Queue.html#a5515e7c5a8540c54795cef09da9e1aef',1,'queue::Queue']]]
 ];
