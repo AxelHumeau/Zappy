@@ -5,11 +5,13 @@
 ** main
 */
 
-#include <OgreWindowEventUtilities.h>
+#include <OGRE/Bites/OgreWindowEventUtilities.h>
 #include "Renderer.hpp"
 #include "GameObject.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
+#include "Tilemap.hpp"
+#include <iostream>
 
 Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
 
@@ -98,6 +100,16 @@ void createScene(ZappyGui::Renderer &renderer)
     // myMat->getTechnique(0)->getPass(0)->setAmbient(0,0,0);
     // myMat->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,0);
 
+    ZappyGui::Tilemap t(renderer.getSceneManager(), 1, 1);
+    ZappyGui::Vector2i size = t.getSize();
+    for (int y = 0; y < size.data[1]; y++) {
+        for (int x = 0; x < size.data[0]; x++) {
+            ZappyGui::GameObject g(renderer.getSceneManager(), "hamster.mesh");
+            t[y][x].setGameObject(g);
+        }
+    }
+    t.setTileSize(1.0f, 1.0f);
+
     Ogre::SceneNode* node2 = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
     node2->setPosition(0,0,8);
     node2->roll(Ogre::Radian(0.785398f));
@@ -105,14 +117,14 @@ void createScene(ZappyGui::Renderer &renderer)
     node2->yaw(Ogre::Radian(0.785398f));
     node2->attachObject(createCubeMesh("Cube", "myMat"));
     renderer.setKeyHandler();
-    // renderer.render();
-    while (true)
-    {
-      OgreBites::WindowEventUtilities::messagePump();
-      jerome.setRotation(Ogre::Radian(0.02f), Ogre::Radian(0.07f), Ogre::Radian(0.05f));
-      if (!renderer.renderOneFrame())
-        return;
-    }
+    renderer.render();
+    // while (true)
+    // {
+    //   OgreBites::WindowEventUtilities::messagePump();
+    //   jerome.setRotation(Ogre::Radian(0.02f), Ogre::Radian(0.07f), Ogre::Radian(0.05f));
+    //   if (!renderer.renderOneFrame())
+    //     return;
+    // }
 }
 
 int main(void) {
