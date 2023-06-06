@@ -72,10 +72,11 @@ class AI:
     lvl = 1
     vision = []
     q_command = []
-    ## init
+    # init
+
     def __init__(self, socket):
         self.socket = socket
-    ## communication
+    # communication
     # def Forward(self):
     #     self.socket.send("Forward\n").encode()
     # def Right(self):
@@ -100,7 +101,7 @@ class AI:
     #     self.socket.send("Set\n").encode()
     # def Incantation(self):
     #     self.socket.send("Incantation\n").encode()
-    ## with the vision provide by look and his own inventory get the tile to go
+    # with the vision provide by look and his own inventory get the tile to go
 
     def get_target(self, vision):
         itemtoget = []
@@ -124,7 +125,7 @@ class AI:
                     if (obj == objects[0]):
                         pos.append((objects[0], nbr, i))
         print(pos)
-    ## look for tiles with the item he need
+    # look for tiles with the item he need
 
     # def look_aroud(self):
     #     rotation = 0
@@ -136,7 +137,7 @@ class AI:
     #             Forward()
     #             rotation = 0
     #         rotation += 1
-    ## run the AI
+    # run the AI
     # def run(self):
     #     if (self.prio == priority.RESSOURCES and self.food < 5):
     #         prio = priority.FOOD
