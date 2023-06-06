@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fplayers_8',['max_players',['../structteam.html#a7651c1b3ac1cb0364bf1e284710a42a5',1,'team']]]
+  ['get_5fmessage_9',['get_message',['../classcommunication_1_1Communication.html#aca5d8bf3c6feb45ce83302ef9295f08c',1,'communication::Communication']]]
 ];

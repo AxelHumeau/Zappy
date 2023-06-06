@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['empty_27',['empty',['../classqueue_1_1Queue.html#a97246dddf8973a174ebcc3ceb1fc85f3',1,'queue::Queue']]]
+  ['clean_5finformation_33',['clean_information',['../classcommunication_1_1Communication.html#ae76aea320cdfb356a833ae2ba37def4c',1,'communication::Communication']]]
 ];
