@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue_19',['Queue',['../classqueue_1_1Queue.html',1,'queue']]]
+  ['renderer_18',['Renderer',['../classZappy_1_1Renderer.html',1,'Zappy']]]
 ];

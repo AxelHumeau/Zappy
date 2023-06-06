@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['get_5fmessage_36',['get_message',['../classcommunication_1_1Communication.html#aca5d8bf3c6feb45ce83302ef9295f08c',1,'communication::Communication']]]
+  ['isreadset_46',['isReadSet',['../classNetwork_1_1Socket.html#a7169722a458a41afe8d8fc3ad73cbb6f',1,'Network::Socket']]],
+  ['iswriteset_47',['isWriteSet',['../classNetwork_1_1Socket.html#a62edc2e708aafbfec801ef78039837b1',1,'Network::Socket']]]
 ];
