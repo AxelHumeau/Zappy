@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include "buffering.h"
 
+struct player;
+
 /// @brief Node of a client linked list
 struct client_entry {
     int id;
@@ -20,6 +22,7 @@ struct client_entry {
     buffer_t buf_to_send;
     buffer_t buf_to_recv;
     bool is_gui;
+    struct player player;
     SLIST_ENTRY(client_entry) next;
 };
 
