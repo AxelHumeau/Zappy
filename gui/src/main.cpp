@@ -55,13 +55,13 @@ void createScene(ZappyGui::Renderer &renderer)
     while (!renderer.isDone())
     {
         renderer.event();
-        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.001f), Ogre::Radian(0.05f));
+        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
         renderer.renderOneFrame();
     }
 }
 
 int main(void) {
-    ZappyGui::Renderer renderer(std::string("Zappy"), 800*1.5, 600*1.5);
+    ZappyGui::Renderer renderer(std::string("Zappy"), 1200, 900, "./gui/config/resources");
     createScene(renderer);
     return 0;
 }

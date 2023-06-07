@@ -20,7 +20,7 @@ namespace ZappyGui {
 
     class Renderer {
         public:
-            Renderer(std::string name, int width, int height);
+            Renderer(std::string name, int width, int height, std::string resourceFile);
             ~Renderer();
 
             std::shared_ptr<Ogre::SceneManager> getSceneManager();
@@ -31,6 +31,8 @@ namespace ZappyGui {
             bool isDone();
         protected:
         private:
+            void _loadResources(std::string resourceFile);
+
             std::unique_ptr<SDL_Window, ZappyGui::nop> _sdlWindow;
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::nop> _window;
             std::unique_ptr<Ogre::Root> _root;

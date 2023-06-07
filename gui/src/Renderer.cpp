@@ -5,10 +5,12 @@
 ** Renderer
 */
 
+#include <iostream>
 #include <OGRE/OgreColourValue.h>
+#include "ResourceLoader.hpp"
 #include "Renderer.hpp"
 
-ZappyGui::Renderer::Renderer(std::string name, int width, int height)
+ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile)
 {
     _done = false;
 
@@ -32,8 +34,7 @@ ZappyGui::Renderer::Renderer(std::string name, int width, int height)
     _window.reset(_root->createRenderWindow(name, width, height, false, &params));
     _window->setVisible(true);
 
-    Ogre::ResourceGroupManager::getSingleton().addResourceLocation("./gui/assets/hamster.zip", "Zip", "Assets");
-    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+    _loadResources(resourceFile);
 
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
 }
@@ -100,4 +101,10 @@ void ZappyGui::Renderer::event()
 bool ZappyGui::Renderer::isDone()
 {
     return _done;
+}
+
+void ZappyGui::Renderer::_loadResources(std::string resourceFile)
+{
+    ZappyGui::ResourceLoader::load(resourceFile);
+    ZappyGui::ResourceLoader::initAll();
 }
