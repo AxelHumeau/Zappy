@@ -10,18 +10,48 @@
     #include "GameObject.hpp"
 
 namespace ZappyGui {
+
+    /**
+     * @brief
+     * TileNoGameobjectBoundError Class Error
+     * Error thrown when trying to get a Tile Gameobject that is not bind.
+     */
+    class TileNoGameobjectBoundError : public std::exception {
+        public:
+            TileNoGameobjectBoundError();
+            ~TileNoGameobjectBoundError() = default;
+            const char *what() const noexcept override;
+        private:
+            std::string message;
+    };
+    /**
+     * @brief
+     * TileUndifinedResourceTypeError Class Error
+     * Error thrown when trying to get a Tile Gameobject that is not bind.
+     */
+    class TileUndifinedResourceTypeError : public std::exception {
+        public:
+            TileUndifinedResourceTypeError(std::string resourceType);
+            ~TileUndifinedResourceTypeError() = default;
+            const char *what() const noexcept override;
+        private:
+            std::string message;
+    };
+
     class Tile {
         public:
-            Tile(int x, int y): _x{x}, _y{y} {};
+            Tile(int x, int y);
             ~Tile() {};
             std::pair<int, int> getPosition() const { return std::pair<int, int>(_x, _y); }
-            void setGameObject(ZappyGui::GameObject &gameObject) { _gameobject.reset(&gameObject, ZappyGui::nop{}); }
-            std::shared_ptr<ZappyGui::GameObject> getGameobject() { return _gameobject; };
+            void bindGameObject(std::shared_ptr<ZappyGui::GameObject> gameObject) { _gameobject = gameObject; }
+            ZappyGui::GameObject const &getGameobject();
+            std::size_t getResourceAmount(const std::string &resourceType);
 
         private:
             int _x;
             int _y;
             std::shared_ptr<ZappyGui::GameObject> _gameobject = nullptr;
+            std::unordered_map<std::string, std::size_t> _resources;
     };
 }
 

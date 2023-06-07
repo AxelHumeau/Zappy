@@ -27,10 +27,12 @@ namespace ZappyGui {
         for (int y = 0; y < _height; y++) {
             for (int x = 0; x < _width; x++) {
                 position = ZappyGui::Vector3(origin.x + _tileWidth * x, origin.y, origin.z + _tileHeight * y);
-                std::cout << _tilemap[y][x].getPosition().first << std::endl;
-                std::shared_ptr<ZappyGui::GameObject> popo = _tilemap[y][x].getGameobject();
-                if (popo != nullptr)
-                    popo->lookAt(ZappyGui::Vector3(position.x, position.y, position.z), Ogre::Node::TS_PARENT);
+                try {
+                    ZappyGui::GameObject obj = _tilemap[y][x].getGameobject();
+                    obj.setPosition(position.x, position.y, position.z);
+                } catch (const ZappyGui::TileNoGameobjectBoundError& e) {
+                    std::cerr << e.what() << std::endl;
+                }
             }
         }
     }

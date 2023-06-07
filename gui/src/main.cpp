@@ -80,8 +80,8 @@ void createScene(ZappyGui::Renderer &renderer)
     ZappyGui::Camera cam(renderer.getSceneManager(), "myCam");
     cam.setNearClipDistance(0.05); // specific to this sample
     cam.setAutoAspectRatio(true);
-    cam.setPosition(0, 0, 0);
-    cam.lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+    cam.setPosition(0, -1, 0);
+    cam.lookAt(Ogre::Vector3(0, -0.5, -1), Ogre::Node::TS_WORLD);
     // std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), ZappyGui::nop{});
     // cam->setNearClipDistance(5); // specific to this sample
     // cam->setAutoAspectRatio(true);
@@ -102,15 +102,17 @@ void createScene(ZappyGui::Renderer &renderer)
     // myMat->getTechnique(0)->getPass(0)->setAmbient(0,0,0);
     // myMat->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,0);
 
-    ZappyGui::Tilemap t(renderer.getSceneManager(), 1, 1);
+    ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
+    t.setPosition(0.0f, 0.0f, -10.0f);
     ZappyGui::Vector2i size = t.getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
-            ZappyGui::GameObject g(renderer.getSceneManager(), "hamster.mesh");
-            t[y][x].setGameObject(g);
+            ZappyGui::GameObject obj(renderer.getSceneManager(), "hamster.mesh");
+            std::shared_ptr<ZappyGui::GameObject> g = std::make_shared<ZappyGui::GameObject>(obj);
+            t[y][x].bindGameObject(g);
         }
     }
-    t.setTileSize(1.0f, 1.0f);
+    t.setTileSize(2.0f, 2.0f);
 
     Ogre::SceneNode* node2 = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
     node2->setPosition(0,0,8);
