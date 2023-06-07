@@ -35,17 +35,23 @@ void createScene(ZappyGui::Renderer &renderer)
     light2.setPosition(0, 0, 15);
     light2.setDirection(0, 0, -1);
 
+    ZappyGui::Light light(renderer.getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
+    light.setDiffuseColour(1, 1, 1);
+    light.setSpecularColour(1, 1, 1);
+    light.setDirection(0, -1, -1);
+
     // also need to tell where we are
 
     // create the camera
-    ZappyGui::Camera cam(renderer.getSceneManager(), "myCam");
-    cam.setNearClipDistance(0.05); // specific to this sample
-    cam.setAutoAspectRatio(true);
-    cam.setPosition(0, 0, 0);
-    cam.lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+    ZappyGui::Camera camera(renderer.getSceneManager(), "myCam");
+    std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
+    cam->setNearClipDistance(0.05); // specific to this sample
+    cam->setAutoAspectRatio(true);
+    cam->setPosition(0, 0, 0);
+    cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // and tell it to render into the main window
-    renderer.registerCamera(cam.getCamera());
+    renderer.registerCamera(cam);
 
     // finally something to render
     ZappyGui::GameObject jerome(renderer.getSceneManager(), "hamster.mesh");
@@ -71,6 +77,7 @@ void createScene(ZappyGui::Renderer &renderer)
     while (!renderer.isDone())
     {
         renderer.event();
+        renderer.processInputs();
         jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
         renderer.renderOneFrame();
     }
