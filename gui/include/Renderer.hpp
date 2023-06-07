@@ -11,40 +11,34 @@
     #include <memory>
     #include <OGRE/Ogre.h>
     #include <OGRE/Bites/OgreApplicationContext.h>
+    #include <SDL2/SDL.h>
+    #include <SDL2/SDL_image.h>
+    #include <SDL2/SDL_syswm.h>
     #include "Utils.hpp"
 
 namespace ZappyGui {
 
-    class KeyHandler : public OgreBites::InputListener
-    {
-        bool keyPressed(const OgreBites::KeyboardEvent& evt) override
-        {
-            if (evt.keysym.sym == OgreBites::SDLK_ESCAPE)
-            {
-                Ogre::Root::getSingleton().queueEndRendering();
-            }
-            return true;
-        }
-    };
-
     class Renderer {
         public:
-            Renderer(std::string name);
+            Renderer(std::string name, int width, int height, std::string resourceFile);
             ~Renderer();
 
             std::shared_ptr<Ogre::SceneManager> getSceneManager();
             void registerCamera(std::shared_ptr<Ogre::Camera> camera);
             void render();
             bool renderOneFrame();
-            void setKeyHandler();
-
+            void event();
+            bool isDone();
         protected:
         private:
-            std::unique_ptr<OgreBites::ApplicationContext> _context;
+            void _loadResources(std::string resourceFile);
+
+            std::unique_ptr<SDL_Window, ZappyGui::nop> _sdlWindow;
+            std::unique_ptr<Ogre::RenderWindow, ZappyGui::nop> _window;
             std::unique_ptr<Ogre::Root> _root;
             std::shared_ptr<Ogre::SceneManager> _sceneManager;
-            std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::nop> _shaderGenerator;
-            std::unique_ptr<KeyHandler> _keyHandler;
+            std::unique_ptr<Ogre::Viewport, ZappyGui::nop> _viewport;
+            bool _done;
     };
 
 }

@@ -45,6 +45,7 @@ dist
 #Other files
 .vscode
 vgcore*
+gui/config/ogre.log
 
 # Coding style report
 coding-style-reports.log
