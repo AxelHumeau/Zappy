@@ -5,11 +5,15 @@
 ** main
 */
 
-#include <OgreWindowEventUtilities.h>
+#include <OGRE/Bites/OgreWindowEventUtilities.h>
 #include "Renderer.hpp"
 #include "GameObject.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
+#include "Tilemap.hpp"
+#include <iostream>
+#include "Socket.hpp"
+#include <cstdlib>
 
 void createScene(ZappyGui::Renderer &renderer)
 {
@@ -51,6 +55,18 @@ void createScene(ZappyGui::Renderer &renderer)
     Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
     myMat->setReceiveShadows(false);
     myMat->getTechnique(0)->setLightingEnabled(true);
+
+    ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
+    t.setPosition(0.0f, 0.0f, -10.0f);
+    ZappyGui::Vector2i size = t.getSize();
+    for (int y = 0; y < size.data[1]; y++) {
+        for (int x = 0; x < size.data[0]; x++) {
+            ZappyGui::GameObject obj(renderer.getSceneManager(), "hamster.mesh");
+            std::shared_ptr<ZappyGui::GameObject> g = std::make_shared<ZappyGui::GameObject>(obj);
+            t[y][x].bindGameObject(g);
+        }
+    }
+    t.setTileSize(2.0f, 2.0f);
 
     while (!renderer.isDone())
     {

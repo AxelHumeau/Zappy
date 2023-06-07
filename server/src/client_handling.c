@@ -61,6 +61,7 @@ int handle_client(struct client_entry *client,
 
 void destroy_client(struct client_entry *client)
 {
+    printf("[client %d] disconnected !\n", client->id);
     close(client->fd);
     destroy_buffer(&client->buf_to_send);
     destroy_buffer(&client->buf_to_recv);

@@ -13,24 +13,23 @@
     #include "Utils.hpp"
 
 namespace ZappyGui {
-
     class IGameObject {
         public:
-            virtual ~IGameObject() {}
-
-            virtual void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z) = 0;
+            virtual ~IGameObject() = default;
+            virtual void setPosition(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z) = 0;
             virtual void lookAt(
-                const Ogre::Vector3 &targetPoint,
+                const ZappyGui::Vector3 &targetPoint,
                 Ogre::Node::TransformSpace relativeTo,
-                const Ogre::Vector3 &localDirectionVector = Ogre::VectorBase<3, Ogre::Real>::NEGATIVE_UNIT_Z
+                const ZappyGui::Vector3 &localDirectionVector = Ogre::VectorBase<3, ZappyGui::Real>::NEGATIVE_UNIT_Z
             ) = 0;
             virtual void setDirection(
-                Ogre::Real x,
-                Ogre::Real y,
-                Ogre::Real z,
+                ZappyGui::Real x,
+                ZappyGui::Real y,
+                ZappyGui::Real z,
                 Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_PARENT,
-                const Ogre::Vector3 &localDirectionVector = Ogre::VectorBase<3, Ogre::Real>::NEGATIVE_UNIT_Z
+                const ZappyGui::Vector3 &localDirectionVector = Ogre::VectorBase<3, ZappyGui::Real>::NEGATIVE_UNIT_Z
             ) = 0;
+            virtual void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) = 0;
         protected:
             std::shared_ptr<Ogre::SceneNode> _node;
     };
@@ -39,20 +38,20 @@ namespace ZappyGui {
         public:
             ~AGameObject() = default;
 
-            void setPosition(Ogre::Real x, Ogre::Real y, Ogre ::Real z) { _node->setPosition(x, y, z); }
+            void setPosition(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z) override { _node->setPosition(x, y, z); }
             void lookAt(
-                const Ogre::Vector3 &targetPoint,
+                const ZappyGui::Vector3 &targetPoint,
                 Ogre::Node::TransformSpace relativeTo,
-                const Ogre::Vector3 &localDirectionVector = Ogre::VectorBase<3, Ogre::Real>::NEGATIVE_UNIT_Z
-            ) { _node->lookAt(targetPoint, relativeTo, localDirectionVector); }
+                const ZappyGui::Vector3 &localDirectionVector = Ogre::VectorBase<3, ZappyGui::Real>::NEGATIVE_UNIT_Z
+            ) override { _node->lookAt(targetPoint, relativeTo, localDirectionVector); }
             void setDirection(
-                Ogre::Real x,
-                Ogre::Real y,
-                Ogre::Real z,
+                ZappyGui::Real x,
+                ZappyGui::Real y,
+                ZappyGui::Real z,
                 Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_PARENT,
-                const Ogre::Vector3 &localDirectionVector = Ogre::VectorBase<3, Ogre::Real>::NEGATIVE_UNIT_Z
-            ) { _node->setDirection(x, y, z, relativeTo, localDirectionVector); }
-            void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) {
+                const ZappyGui::Vector3 &localDirectionVector = Ogre::VectorBase<3, ZappyGui::Real>::NEGATIVE_UNIT_Z
+            ) override { _node->setDirection(x, y, z, relativeTo, localDirectionVector); }
+            void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) override {
                 _node->roll(roll);
                 _node->pitch(pitch);
                 _node->yaw(yaw);
@@ -68,4 +67,4 @@ namespace ZappyGui {
     };
 }
 
-#endif /* !GAMEOBJECT_HPP_ */
+#endif
