@@ -36,6 +36,14 @@ static void place_resource(struct server *server, size_t *resource, int index)
     resource[index]--;
 }
 
+static void check_stock_resources(size_t *resource)
+{
+    for (int i = 0; i < NB_RESOURCES; i++) {
+        if (resource[i] == 0)
+            resource[i]++;
+    }
+}
+
 void set_resource_map(struct server *server)
 {
     size_t resource[NB_RESOURCES] = {
@@ -47,8 +55,10 @@ void set_resource_map(struct server *server)
         DENSITY[PHIRAS] * server->width * server->height,
         DENSITY[THYSMANE] * server->width * server->height,
     };
-    int select_resource = resources_left(resource);
+    int select_resource = 0;
 
+    check_stock_resources(resource);
+    select_resource = resources_left(resource);
     while (select_resource != -1) {
         place_resource(server, resource, select_resource);
         select_resource = resources_left(resource);

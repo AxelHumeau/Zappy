@@ -63,6 +63,7 @@ void destroy_clients(struct server *server);
 
 // Utils.c
 int display_help(void);
+void display_map(struct server server);
 
 // Init_game.c
 int init_game(struct server *server);
