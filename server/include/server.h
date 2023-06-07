@@ -12,8 +12,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "buffering.h"
-
-struct player;
+#include "game.h"
 
 /// @brief Node of a client linked list
 struct client_entry {
@@ -22,7 +21,7 @@ struct client_entry {
     buffer_t buf_to_send;
     buffer_t buf_to_recv;
     bool is_gui;
-    struct player player;
+    player_t player;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -38,6 +37,7 @@ struct server {
     int freq;
     struct team *teams;
     size_t nb_teams;
+    struct tile **maps;
     int max_players_per_team;
     struct clients clients;
 };
@@ -63,3 +63,9 @@ void destroy_clients(struct server *server);
 
 // Utils.c
 int display_help(void);
+
+// Init_game.c
+int init_game(struct server *server);
+
+// Init_resource.c
+void set_resource_map(struct server *server);
