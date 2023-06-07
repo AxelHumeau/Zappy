@@ -29,8 +29,8 @@ static int resources_left(size_t resource[])
 
 static void place_resource(struct server *server, size_t *resource, int index)
 {
-    int pos_x = rand() % server->height;
-    int pos_y = rand() % server->width;
+    int pos_y = rand() % server->height;
+    int pos_x = rand() % server->width;
     int nb = server->maps[pos_y][pos_x].nb_ressources;
 
     server->maps[pos_y][pos_x].resources =
