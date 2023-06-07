@@ -48,7 +48,7 @@ namespace Network {
         /// @param str String to add to the buffer
         /// @param isRead true to put string in the read buffer, false to put it in write buffer. true by default
         void addToBuffer(std::string const &str, bool isRead = true);
-        /// @brief Send write buffer content to the socket
+        /// @brief Send write buffer content to the socket and empty the buffer
         void send();
 
         /// @brief Exception to handle a connection error

@@ -44,9 +44,8 @@ def loop_client(dict_args):
             tmp.append(message[:pos])
             message = message[pos + 1:]
             pos = message.find('\n')
-        if (len(tmp) != 0):
-            for elem in tmp:
-                communication.response.push(elem)
+        for elem in tmp:
+            communication.response.push(elem)
         while (communication.clean_information()):
             continue
         print("\n----------")

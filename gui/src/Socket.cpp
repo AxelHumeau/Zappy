@@ -73,9 +73,8 @@ void Network::Socket::addToBuffer(std::string const &str, bool isRead)
 
 void Network::Socket::send()
 {
-    auto str = getString(false);
-    if (str.has_value())
-        write(fd, str.value().c_str(), str.value().size());
+    write(fd, s_buffer.c_str(), s_buffer.size());
+    s_buffer = "";
 }
 
 Network::Socket::ConnectionException::ConnectionException(uint16_t port, uint32_t ip):
