@@ -17,6 +17,7 @@ namespace ZappyGui {
         public:
             virtual ~IGameObject() = default;
             virtual void setPosition(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z) = 0;
+            virtual const ZappyGui::Vector3 &getPosition() = 0;
             virtual void lookAt(
                 const ZappyGui::Vector3 &targetPoint,
                 Ogre::Node::TransformSpace relativeTo,
@@ -39,6 +40,7 @@ namespace ZappyGui {
             ~AGameObject() = default;
 
             void setPosition(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z) override { _node->setPosition(x, y, z); }
+            const ZappyGui::Vector3 &getPosition() override { return _node->getPosition(); }
             void lookAt(
                 const ZappyGui::Vector3 &targetPoint,
                 Ogre::Node::TransformSpace relativeTo,

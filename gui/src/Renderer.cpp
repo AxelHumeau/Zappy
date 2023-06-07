@@ -37,6 +37,7 @@ ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::strin
     _loadResources(resourceFile);
 
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
+    _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -52,10 +53,11 @@ std::shared_ptr<Ogre::SceneManager> ZappyGui::Renderer::getSceneManager()
     return _sceneManager;
 }
 
-void ZappyGui::Renderer::registerCamera(std::shared_ptr<Ogre::Camera> camera)
+void ZappyGui::Renderer::registerCamera(std::shared_ptr<ZappyGui::Camera> camera)
 {
-    _viewport.reset(_window->addViewport(camera.get()));
+    _viewport.reset(_window->addViewport(camera->getCamera().get()));
     _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 0.0));
+    _camera = camera;
 }
 
 void ZappyGui::Renderer::render()
@@ -84,8 +86,10 @@ void ZappyGui::Renderer::event()
         switch(event.type)
         {
             case SDL_KEYDOWN:
-                // Handle any key presses here.
+                _checkKeydown(event);
                 break;
+            case SDL_KEYUP:
+                _checkKeyup(event);
             case SDL_MOUSEBUTTONDOWN:
                 // Handle mouse clicks here.
                 break;
@@ -96,6 +100,101 @@ void ZappyGui::Renderer::event()
                 break;
         }
     }
+}
+
+void ZappyGui::Renderer::_checkKeydown(SDL_Event &event)
+{
+    switch(event.key.keysym.sym)
+    {
+        case SDLK_z:
+            _inputs[SDLK_z] = true;
+            break;
+        case SDLK_s:
+            _inputs[SDLK_s] = true;
+            break;
+        case SDLK_q:
+            _inputs[SDLK_q] = true;
+            break;
+        case SDLK_d:
+            _inputs[SDLK_d] = true;
+            break;
+        case SDLK_SPACE:
+            _inputs[SDLK_SPACE] = true;
+            break;
+        case SDLK_LCTRL:
+            _inputs[SDLK_LCTRL] = true;
+            break;
+        default:
+            break;
+    }
+}
+
+void ZappyGui::Renderer::_checkKeyup(SDL_Event &event)
+{
+    switch(event.key.keysym.sym)
+    {
+        case SDLK_z:
+            _inputs[SDLK_z] = false;
+            break;
+        case SDLK_s:
+            _inputs[SDLK_s] = false;
+            break;
+        case SDLK_q:
+            _inputs[SDLK_q] = false;
+            break;
+        case SDLK_d:
+            _inputs[SDLK_d] = false;
+            break;
+        case SDLK_SPACE:
+            _inputs[SDLK_SPACE] = false;
+            break;
+        case SDLK_LCTRL:
+            _inputs[SDLK_LCTRL] = false;
+            break;
+        default:
+            break;
+    }
+}
+
+void ZappyGui::Renderer::processInputs()
+{
+    if (_inputs[SDLK_z] && !_inputs[SDLK_s])
+        _moveCamera(0.0, 0.0, -0.15);
+    if (_inputs[SDLK_s] && !_inputs[SDLK_z])
+        _moveCamera(0.0, 0.0, 0.15);
+
+    if (_inputs[SDLK_q] && !_inputs[SDLK_d])
+        _moveCamera(-0.15, 0.0, 0.0);
+    if (_inputs[SDLK_d] && !_inputs[SDLK_q])
+        _moveCamera(0.15, 0.0, 0.0);
+
+    if (_inputs[SDLK_SPACE] && !_inputs[SDLK_LCTRL])
+        _moveCamera(0.0, 0.15, 0.0);
+    if (_inputs[SDLK_LCTRL] && !_inputs[SDLK_SPACE])
+        _moveCamera(0.0, -0.15, 0.0);
+}
+
+void ZappyGui::Renderer::_initInputs()
+{
+    _inputs[SDLK_z] = false;
+    _inputs[SDLK_s] = false;
+    _inputs[SDLK_q] = false;
+    _inputs[SDLK_d] = false;
+    _inputs[SDLK_SPACE] = false;
+    _inputs[SDLK_LCTRL] = false;
+}
+
+void ZappyGui::Renderer::_moveCamera(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z)
+{
+    if (_camera == nullptr)
+        return;
+
+    ZappyGui::Vector3 pos = _camera->getPosition();
+
+    pos.x += x;
+    pos.y += y;
+    pos.z += z;
+    _camera->setPosition(pos.x, pos.y, pos.z);
 }
 
 bool ZappyGui::Renderer::isDone()
