@@ -31,13 +31,8 @@ static void place_resource(struct server *server, size_t *resource, int index)
 {
     int pos_y = rand() % server->height;
     int pos_x = rand() % server->width;
-    int nb = server->maps[pos_y][pos_x].nb_ressources;
 
-    server->maps[pos_y][pos_x].resources =
-                                realloc(server->maps[pos_y][pos_x].resources,
-                                                sizeof(enum resource[nb + 1]));
-    server->maps[pos_y][pos_x].resources[nb] = index;
-    server->maps[pos_y][pos_x].nb_ressources++;
+    server->maps[pos_y][pos_x].resources[index]++;
     resource[index]--;
 }
 

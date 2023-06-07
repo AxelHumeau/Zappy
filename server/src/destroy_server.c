@@ -10,11 +10,8 @@
 
 void destroy_game(struct server *server)
 {
-    for (int y = 0; y < server->height; y++) {
-        for (int x = 0; x < server->width; x++)
-            free(server->maps[y][x].resources);
+    for (int y = 0; y < server->height; y++)
         free(server->maps[y]);
-    }
     free(server->maps);
 }
 

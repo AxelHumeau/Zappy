@@ -34,8 +34,7 @@ typedef struct player {
 } player_t;
 
 struct tile {
-    size_t nb_ressources;
-    enum resource *resources;
+    size_t resources[NB_RESOURCES];
     int x;
     int y;
 };

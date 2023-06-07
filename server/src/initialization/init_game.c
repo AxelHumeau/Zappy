@@ -13,8 +13,8 @@ static int init_map(struct server *server)
 {
     for (int y = 0; y < server->height; y++) {
         for (int x = 0; x < server->width; x++) {
-            server->maps[y][x].resources = NULL;
-            server->maps[y][x].nb_ressources = 0;
+            memset(server->maps[y][x].resources, 0,
+                sizeof(server->maps[y][x].resources));
             server->maps[y][x].y = y;
             server->maps[y][x].x = x;
         }
