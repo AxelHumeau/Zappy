@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['priority_50',['priority',['../classai_1_1priority.html',1,'ai']]]
+  ['player_52',['player',['../structplayer.html',1,'']]],
+  ['priority_53',['priority',['../classai_1_1priority.html',1,'ai']]]
 ];
