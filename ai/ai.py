@@ -127,8 +127,19 @@ class AI:
         print(pos)
         return pos
 
-    def go_totarget(self):
-        ecart = 0
+
+    # path finding functions
+
+    #exemple path to target:
+    #0-2-6-12-11-10-9
+    #result expected = ["Forward", "Forward", "Forward", "Left", "Forward", "Forward", "Forward"]
+
+    # quand path obtenue ->
+    # tant que la list n'est pas vide
+    # si le chiffre d'avant fait partie de la suite n**2+n et que l'actuel non alors
+        # si l'actuel < au précedent alors "LEFT" sinon "RIGTH"
+    # sinon "Forward"
+
     ## look for tiles with the item he need
     # def look_aroud(self):
     #     rotation = 0
@@ -150,3 +161,28 @@ class AI:
         # if the elevation is possible elevation
         # if there is target go to it
         # printf("running")
+
+#0-2-6-12-11-10-9
+
+def generate_instructions(path):
+    instructions = []
+    for i in range(1, len(path)):
+        current = path[i - 1]
+        next_num = path[i]
+        if not is_part_of_sequence(next_num) and is_part_of_sequence(current):
+            if next_num < current:
+                instructions.append("Left")
+                instructions.append("Forward")
+            else:
+                instructions.append("Right")
+                instructions.append("Forward")
+        else:
+            instructions.append("Forward")
+    return instructions
+
+def is_part_of_sequence(number):
+    for n in range(1, number + 1):
+        term = n**2 + n
+        if term == number:
+            return True
+    return False

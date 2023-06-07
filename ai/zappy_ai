@@ -3,6 +3,7 @@
 import error_handling
 import select
 import sys
+import ai
 from communication import Communication
 from utils import connexion_server, connexion_team
 
