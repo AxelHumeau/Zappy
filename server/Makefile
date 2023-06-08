@@ -5,29 +5,31 @@
 ## Makefile
 ##
 
-SRC =	main.c	\
-		client_handling.c	\
-		loop.c	\
-		destroy_server.c	\
-		buffer.c	\
-		initialization/get_params.c	\
-		initialization/init_server.c	\
-		initialization/setup_server.c	\
-		utils.c
+SRC =			main.c							\
+				client_handling.c				\
+				loop.c							\
+				destroy_server.c				\
+				buffer.c						\
+				initialization/get_params.c		\
+				initialization/init_server.c	\
+				initialization/setup_server.c	\
+				initialization/init_game.c		\
+				initialization/init_resource.c	\
+				utils.c							\
 
-OBJ = 	$(SRC:%.c=obj/%.o)
+OBJ 		= 			$(SRC:%.c=obj/%.o)
 
-CC =	gcc
+CC			 =			gcc
 
-CFLAGS =	-Wall -Wextra
+CFLAGS 		=		-Wall -Wextra
 
-CPPFLAGS =	-iquote include -D_GNU_SOURCE
+CPPFLAGS 	=		-iquote include -D_GNU_SOURCE
 
-LDFLAGS =
+LDFLAGS 	=
 
-LDLIBS =
+LDLIBS 		=
 
-NAME = 	../zappy_server
+NAME 		= 		../zappy_server
 
 all:	$(NAME)
 
