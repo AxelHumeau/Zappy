@@ -7,7 +7,7 @@ class priority(Enum):
 
 
 class AI:
-    prio = priority.RESSOURCES
+    prio = priority.FOOD
     slot = 0
     goto = 0
     mapsize = (1, 1)
@@ -76,32 +76,6 @@ class AI:
 
     def __init__(self, socket):
         self.socket = socket
-    # communication
-    # def Forward(self):
-    #     self.socket.send("Forward\n").encode()
-    # def Right(self):
-    #     self.socket.send("Right\n").encode()
-    # def Left(self):
-    #     self.socket.send("Left\n").encode()
-    # def Look(self):
-    #     self.socket.send("Look\n").encode()
-    # def Inventory(self):
-    #     self.socket.send("Inventory\n").encode()
-    # def Broadcast(self, message):
-    #     self.socket.send("Broadcast" + message + '\n').encode()
-    # def Connect_nbr(self):
-    #     self.socket.send("Connect_nbr\n").encode()
-    # def Fork(self):
-    #     self.socket.send("Fork\n").encode()
-    # def Eject(self):
-    #     self.socket.send("Eject\n").encode()
-    # def Take(self):
-    #     self.socket.send("Take\n").encode()
-    # def Set(self):
-    #     self.socket.send("Set\n").encode()
-    # def Incantation(self):
-    #     self.socket.send("Incantation\n").encode()
-    # with the vision provide by look and his own inventory get the tile to go
 
     def get_target(self, vision):
         itemtoget = []
@@ -117,35 +91,33 @@ class AI:
         else:
             self.target = -1
         for i in range(len(vision)):
-            print("case", i)
             for obj, nbr in vision[i].items():
-                print("in", obj, "nbr", nbr)
                 for objects in itemtoget:
-                    print("my object :", objects[0])
                     if (obj == objects[0]):
                         pos.append((objects[0], nbr, i))
-        print(pos)
         return pos
 
     def get_best_path(self, objs):
         paths = []
+        pathscores = []
+        bestscore = 0
+        indexbest = 0
+        if len(objs) == 0:
+            return []
         for obj in objs:
             paths.append(generate_instructions(get_path(obj[2], self.lvl)))
-
-        # for i in range(len(obj)):
-        #     (1 - nb_type_possédé / nb_type_requis) * actions
-
-    # path finding functions
-
-    #exemple path to target:
-    #0-2-6-12-11-10-9
-    #result expected = ["Forward", "Forward", "Forward", "Left", "Forward", "Forward", "Forward"]
-
-    # quand path obtenue ->
-    # tant que la list n'est pas vide
-    # si le chiffre d'avant fait partie de la suite n**2+n et que l'actuel non alors
-        # si l'actuel < au précedent alors "LEFT" sinon "RIGTH"
-    # sinon "Forward"
+        if self.prio == priority.RESSOURCES:
+            for i in range(len(paths)):
+                pathscores.append((1 - self.inventory[objs[i][0]] / self.elevation[self.lvl][objs[i][0]]) * len(paths[i]))
+        else:
+            for i in range(len(paths)):
+                pathscores.append(len(paths[i]))
+        bestscore = pathscores[0]
+        for i in range(len(pathscores) - 1):
+            if pathscores[i] < bestscore:
+                indexbest = i
+                bestscore = pathscores[i]
+        return paths[indexbest]
 
     ## look for tiles with the item he need
     # def look_aroud(self):
@@ -168,8 +140,6 @@ class AI:
         # if the elevation is possible elevation
         # if there is target go to it
         # printf("running")
-
-#0-2-6-12-11-10-9
 
 def generate_instructions(path):
     instructions = []
