@@ -47,3 +47,6 @@ dist
 
 # Coding style report
 coding-style-reports.log
+
+# Valgrind
+vgcore*
