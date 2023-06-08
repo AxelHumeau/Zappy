@@ -83,8 +83,28 @@ void createScene(ZappyGui::Renderer &renderer)
     }
 }
 
-int main(void) {
-    ZappyGui::Renderer renderer(std::string("Zappy"), 1200, 900, "./gui/config/resources");
-    createScene(renderer);
+int main(int argc, char *argv[]) {
+    // Zappy::Renderer renderer(std::string("Zappy"));
+    // createScene(renderer);
+    int i = 0;
+    int port = 0;
+    std::string ip("");
+    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+        return 84;
+    try {
+        Network::Socket socket(ip, port);
+        while (true) { //TODO: change with window closing condition
+            if (i % 10 != 0)
+                socket.addToBuffer("a", false);
+            else
+                socket.addToBuffer("\n", false);
+            socket.select();
+            socket.send();
+            i++;
+        }
+    } catch (Network::Socket::ConnectionException const &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    }
     return 0;
 }
