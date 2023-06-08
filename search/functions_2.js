@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['clean_5finformation_62',['clean_information',['../classcommunication_1_1Communication.html#ae76aea320cdfb356a833ae2ba37def4c',1,'communication::Communication']]],
-  ['connectionexception_63',['ConnectionException',['../classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef',1,'Network::Socket::ConnectionException']]]
+  ['bindgameobject_104',['bindGameObject',['../classZappyGui_1_1Tile.html#a197c654989696721d6a5771ce591f6f5',1,'ZappyGui::Tile']]]
 ];
