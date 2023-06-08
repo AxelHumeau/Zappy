@@ -67,6 +67,9 @@ namespace ZappyGui {
             /// @param axis Vector3 representing the axis
             /// @param angle to rotate expressed in radians
             virtual void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) = 0;
+            /// @brief Moves the node along the Cartesian axes
+            /// @param d Vector representing the translation.
+            /// @param relativeTo The space which this transform is relative to.
             virtual void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) = 0;
     };
 
@@ -132,6 +135,10 @@ namespace ZappyGui {
             /// @param axis Vector3 representing the axis
             /// @param angle to rotate expressed in radians
             void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) { _node->rotate(axis, angle); };
+            /// @brief Moves the node along the Cartesian axes
+            /// @param d Vector representing the translation.
+            /// @param relativeTo The space which this transform is relative to.
+            void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) override { _node->translate(d, relativeTo); };
         protected:
             std::shared_ptr<Ogre::SceneNode> _node;
     };
