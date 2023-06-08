@@ -7,6 +7,7 @@
 
 SRC =			main.c							\
 				client_handling.c				\
+				player_handling.c				\
 				loop.c							\
 				destroy_server.c				\
 				buffer.c						\
