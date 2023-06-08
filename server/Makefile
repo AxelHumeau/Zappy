@@ -11,12 +11,13 @@ SRC =			main.c							\
 				loop.c							\
 				destroy_server.c				\
 				buffer.c						\
+				utils.c							\
 				initialization/get_params.c		\
 				initialization/init_server.c	\
 				initialization/setup_server.c	\
 				initialization/init_game.c		\
 				initialization/init_resource.c	\
-				utils.c							\
+				gui/handle_gui_client.c			\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

@@ -72,3 +72,6 @@ void set_resource_map(struct server *server);
 
 // player_handling.c
 int put_client_team(struct server *server, struct client_entry *entry);
+
+// handle_gui_client.c
+int handle_gui(struct client_entry *client, struct server *server, char *line);

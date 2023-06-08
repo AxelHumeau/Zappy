@@ -41,7 +41,10 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("[client %d]: %s\n", client->id, line);
+        if (client->is_gui)
+            handle_gui(client, server, line);
+        else
+            printf("[client %d]: %s\n", client->id, line);
         free(line);
         line = get_line_in_buffer(&client->buf_to_recv);
     }
