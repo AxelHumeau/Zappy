@@ -11,3 +11,4 @@
 
 typedef int (gui_command_t)(char **, struct server *, struct client_entry *);
 
+gui_command_t map_size;

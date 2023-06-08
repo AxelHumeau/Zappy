@@ -18,6 +18,7 @@ SRC =			main.c							\
 				initialization/init_game.c		\
 				initialization/init_resource.c	\
 				gui/handle_gui_client.c			\
+				gui/commands/map_size.c			\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

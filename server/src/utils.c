@@ -9,6 +9,15 @@
 #include <stdio.h>
 #include "macro.h"
 
+int find_power_of_base(int nb, int base)
+{
+    int power = 0;
+
+    while (nb != 0)
+        nb /= base;
+    return power;
+}
+
 int display_help(void)
 {
     printf("USAGE: ./zappy_server -p port -x width -y height -n name1 name2 ");

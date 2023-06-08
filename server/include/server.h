@@ -75,3 +75,5 @@ int put_client_team(struct server *server, struct client_entry *entry);
 
 // handle_gui_client.c
 int handle_gui(struct client_entry *client, struct server *server, char *line);
+
+int find_power_of_base(int nb, int base);
