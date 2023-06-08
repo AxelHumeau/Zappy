@@ -149,8 +149,7 @@ int main(int argc, char *argv[]) {
             else
                 socket.addToBuffer("\n", false);
             socket.select();
-            if (socket.isWriteSet())
-                socket.send();
+            socket.send();
             i++;
         }
     } catch (Network::Socket::ConnectionException const &e) {

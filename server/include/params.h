@@ -7,7 +7,6 @@
 
 #pragma once
 
-#define MAX_PORT_NUMBER 65535
 #include "server.h"
 
 int get_port(char **params, int *start, int nb_params);

@@ -10,8 +10,8 @@
 #include <unistd.h>
 #include <iostream>
 
-Network::Socket::Socket(std::string const &ip, uint16_t port):
-    _ip(inet_addr(ip.c_str())), _port(port)
+Network::Socket::Socket(std::string const &ip, uint16_t port, std::size_t bufferSize):
+    _ip(inet_addr(ip.c_str())), _port(port), _bufferSize(bufferSize)
 {
     int size_addr = sizeof(struct sockaddr_in);
     fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -24,8 +24,8 @@ Network::Socket::Socket(std::string const &ip, uint16_t port):
         throw ConnectionException(_port, _ip);
 }
 
-Network::Socket::Socket(uint32_t ip, uint16_t port):
-    _ip(ip), _port(port)
+Network::Socket::Socket(uint32_t ip, uint16_t port, std::size_t bufferSize):
+    _ip(ip), _port(port), _bufferSize(bufferSize)
 {
     int size_addr = sizeof(struct sockaddr_in);
     fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -71,10 +71,30 @@ void Network::Socket::addToBuffer(std::string const &str, bool isRead)
     base += str;
 }
 
-void Network::Socket::send()
+int Network::Socket::send()
 {
-    write(fd, s_buffer.c_str(), s_buffer.size());
+    if (!isWriteSet())
+        return 1;
+    if (write(fd, s_buffer.c_str(), s_buffer.size()) == -1)
+        return -1;
     s_buffer = "";
+    return 0;
+}
+
+int Network::Socket::receive()
+{
+    char buffer[_bufferSize];
+    int read_char = 0;
+
+    if (!isReadSet())
+        return 1;
+    do {
+        read_char = read(fd, buffer, _bufferSize);
+        if (read_char == -1)
+            return -1;
+        addToBuffer(buffer, read_char);
+    } while (read_char > 0);
+    return 0;
 }
 
 Network::Socket::ConnectionException::ConnectionException(uint16_t port, uint32_t ip):
