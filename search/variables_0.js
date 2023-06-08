@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fplayers_80',['max_players',['../structteam.html#a7651c1b3ac1cb0364bf1e284710a42a5',1,'team']]]
+  ['nb_5fslots_5fleft_80',['nb_slots_left',['../structteam.html#acd91b1458e1cc6307d96c1b7ba53830f',1,'team']]]
 ];
