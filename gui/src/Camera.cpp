@@ -12,5 +12,6 @@ namespace ZappyGui {
         _camera = std::shared_ptr<Ogre::Camera>(sceneManager->createCamera(name), ZappyGui::nop{});
         _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::nop{});
         _node->attachObject(_camera.get());
+        _node->setFixedYawAxis(true, Ogre::Vector3(0.0f, 1.0f, 0.0f));
     }
 }

@@ -124,6 +124,18 @@ void ZappyGui::Renderer::_checkKeydown(SDL_Event &event)
         case SDLK_LCTRL:
             _inputs[SDLK_LCTRL] = true;
             break;
+        case SDLK_UP:
+            _inputs[SDLK_UP] = true;
+            break;
+        case SDLK_DOWN:
+            _inputs[SDLK_DOWN] = true;
+            break;
+        case SDLK_LEFT:
+            _inputs[SDLK_LEFT] = true;
+            break;
+        case SDLK_RIGHT:
+            _inputs[SDLK_RIGHT] = true;
+            break;
         default:
             break;
     }
@@ -151,6 +163,18 @@ void ZappyGui::Renderer::_checkKeyup(SDL_Event &event)
         case SDLK_LCTRL:
             _inputs[SDLK_LCTRL] = false;
             break;
+        case SDLK_UP:
+            _inputs[SDLK_UP] = false;
+            break;
+        case SDLK_DOWN:
+            _inputs[SDLK_DOWN] = false;
+            break;
+        case SDLK_LEFT:
+            _inputs[SDLK_LEFT] = false;
+            break;
+        case SDLK_RIGHT:
+            _inputs[SDLK_RIGHT] = false;
+            break;
         default:
             break;
     }
@@ -159,19 +183,71 @@ void ZappyGui::Renderer::_checkKeyup(SDL_Event &event)
 void ZappyGui::Renderer::processInputs()
 {
     if (_inputs[SDLK_z] && !_inputs[SDLK_s])
-        _moveCamera(0.0, 0.0, -0.15);
+    {
+        ZappyGui::Vector3 dir = _camera->getDirection();
+        dir.normalise();
+        dir *= 0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
     if (_inputs[SDLK_s] && !_inputs[SDLK_z])
-        _moveCamera(0.0, 0.0, 0.15);
+    {
+        ZappyGui::Vector3 dir = _camera->getDirection();
+        dir.normalise();
+        dir *= -0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
 
     if (_inputs[SDLK_q] && !_inputs[SDLK_d])
-        _moveCamera(-0.15, 0.0, 0.0);
+    {
+        ZappyGui::Vector3 tmp = _camera->getDirection();
+        ZappyGui::Vector3 dir = tmp.crossProduct(tmp.perpendicular());
+        dir.normalise();
+        dir *= -0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
     if (_inputs[SDLK_d] && !_inputs[SDLK_q])
-        _moveCamera(0.15, 0.0, 0.0);
+    {
+        ZappyGui::Vector3 tmp = _camera->getDirection();
+        ZappyGui::Vector3 dir = tmp.crossProduct(tmp.perpendicular());
+        dir.normalise();
+        dir *= 0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
 
     if (_inputs[SDLK_SPACE] && !_inputs[SDLK_LCTRL])
-        _moveCamera(0.0, 0.15, 0.0);
+    {
+        ZappyGui::Vector3 tmp = _camera->getDirection();
+        ZappyGui::Vector3 dir = tmp.perpendicular();
+        dir.normalise();
+        dir *= 0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
     if (_inputs[SDLK_LCTRL] && !_inputs[SDLK_SPACE])
-        _moveCamera(0.0, -0.15, 0.0);
+    {
+        ZappyGui::Vector3 tmp = _camera->getDirection();
+        ZappyGui::Vector3 dir = tmp.perpendicular();
+        dir.normalise();
+        dir *= -0.15;
+        _moveCamera(dir.x, dir.y, dir.z);
+    }
+
+    if (_inputs[SDLK_UP] && !_inputs[SDLK_DOWN])
+        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0174533), Ogre::Radian(0.0));
+    if (_inputs[SDLK_DOWN] && !_inputs[SDLK_UP])
+        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(-0.0174533), Ogre::Radian(0.0));
+
+    if (_inputs[SDLK_LEFT] && !_inputs[SDLK_RIGHT])
+    {
+        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0), Ogre::Radian(0.0174533));
+        // Ogre::Radian roll = _camera->getOrientation().getRoll();
+        // _camera->setRotation(-roll, Ogre::Radian(0.0), Ogre::Radian(0.0));
+    }
+    if (_inputs[SDLK_RIGHT] && !_inputs[SDLK_LEFT])
+    {
+        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0), Ogre::Radian(-0.0174533));
+        // Ogre::Radian roll = _camera->getOrientation().getRoll();
+        // _camera->setRotation(-roll, Ogre::Radian(0.0), Ogre::Radian(0.0));
+    }
 }
 
 void ZappyGui::Renderer::_initInputs()
@@ -182,6 +258,10 @@ void ZappyGui::Renderer::_initInputs()
     _inputs[SDLK_d] = false;
     _inputs[SDLK_SPACE] = false;
     _inputs[SDLK_LCTRL] = false;
+    _inputs[SDLK_UP] = false;
+    _inputs[SDLK_DOWN] = false;
+    _inputs[SDLK_LEFT] = false;
+    _inputs[SDLK_RIGHT] = false;
 }
 
 void ZappyGui::Renderer::_moveCamera(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z)

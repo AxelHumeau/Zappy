@@ -26,7 +26,7 @@ namespace ZappyGui {
 
         for (int y = 0; y < _height; y++) {
             for (int x = 0; x < _width; x++) {
-                position = ZappyGui::Vector3(origin.x + _tileWidth * x, origin.y, origin.z + _tileHeight * y);
+                position = ZappyGui::Vector3(origin.x + _tileWidth * x, origin.y, origin.z - _tileHeight * y);
                 try {
                     ZappyGui::GameObject obj = _tilemap[y][x].getGameobject();
                     obj.setPosition(position.x, position.y, position.z);
