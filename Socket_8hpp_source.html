@@ -80,59 +80,62 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;exception&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define GET_NTH_BYTE(number, n) (number &gt;&gt; (8 * n)) &amp; 0xff</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define MAX_PORT_NUMBER 65535</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>Network {</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket.html">   22</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classNetwork_1_1Socket.html">Socket</a> {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a0140d36c5222a08eafe13d4b3e6bf3de">Socket</a>(std::string <span class="keyword">const</span> &amp;ip, uint16_t port);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a0140d36c5222a08eafe13d4b3e6bf3de">Socket</a>(uint32_t ip, uint16_t port);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a0140d36c5222a08eafe13d4b3e6bf3de">Socket</a>(<a class="code" href="classNetwork_1_1Socket.html">Socket</a> <span class="keyword">const</span> &amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9">~Socket</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Socket.html#a5d0ad6a4139e7dd5672aa2935185a909">select</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket.html#a7169722a458a41afe8d8fc3ad73cbb6f">   39</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classNetwork_1_1Socket.html#a7169722a458a41afe8d8fc3ad73cbb6f">isReadSet</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> FD_ISSET(fd, &amp;readfds); }</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket.html#a62edc2e708aafbfec801ef78039837b1">   42</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classNetwork_1_1Socket.html#a62edc2e708aafbfec801ef78039837b1">isWriteSet</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> FD_ISSET(fd, &amp;writefds); }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        std::optional&lt;std::string&gt; <a class="code" href="classNetwork_1_1Socket.html#a78b46aebfd0288d1ce230b2802c373b4">getString</a>(<span class="keywordtype">bool</span> isRead = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Socket.html#a0f0803ea4bb3e7007cc1d709bae42d4e">addToBuffer</a>(std::string <span class="keyword">const</span> &amp;str, <span class="keywordtype">bool</span> isRead = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Socket.html#aa154e979125770a6d9eac65e4cfa6923">send</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket_1_1ConnectionException.html">   55</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classNetwork_1_1Socket_1_1ConnectionException.html">ConnectionException</a> : <span class="keyword">public</span> std::exception {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <a class="code" href="classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef">ConnectionException</a>(uint16_t port, uint32_t ip);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *what() <span class="keyword">const</span> noexcept <span class="keyword">override</span> { <span class="keywordflow">return</span> base.c_str(); }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            uint16_t _port;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            uint32_t _ip;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            std::string base;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        };</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        uint16_t _port;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        uint32_t _ip;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">int</span> fd;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        fd_set readfds;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        fd_set writefds;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::string r_buffer;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::string s_buffer;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="ttc" id="aclassNetwork_1_1Socket_1_1ConnectionException_html"><div class="ttname"><a href="classNetwork_1_1Socket_1_1ConnectionException.html">Network::Socket::ConnectionException</a></div><div class="ttdoc">Exception to handle a connection error.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:55</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_1_1ConnectionException_html_a4f025c90839764d55e37b389a809e1ef"><div class="ttname"><a href="classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef">Network::Socket::ConnectionException::ConnectionException</a></div><div class="ttdeci">ConnectionException(uint16_t port, uint32_t ip)</div><div class="ttdoc">Constructor of the exception.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:81</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_html"><div class="ttname"><a href="classNetwork_1_1Socket.html">Network::Socket</a></div><div class="ttdoc">Class for Socket.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:22</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_html_a0140d36c5222a08eafe13d4b3e6bf3de"><div class="ttname"><a href="classNetwork_1_1Socket.html#a0140d36c5222a08eafe13d4b3e6bf3de">Network::Socket::Socket</a></div><div class="ttdeci">Socket(std::string const &amp;ip, uint16_t port)</div><div class="ttdoc">Constructor of the socket.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:13</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define GET_NTH_BYTE(number, n) (number &gt;&gt; (8 * n)) &amp; 0xff</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define MAX_PORT_NUMBER 65535</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>Network {</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket.html">   23</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classNetwork_1_1Socket.html">Socket</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b">Socket</a>(std::string <span class="keyword">const</span> &amp;ip, uint16_t port, std::size_t bufferSize = 256);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b">Socket</a>(uint32_t ip, uint16_t port, std::size_t bufferSize = 256);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b">Socket</a>(<a class="code" href="classNetwork_1_1Socket.html">Socket</a> <span class="keyword">const</span> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9">~Socket</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Socket.html#a5d0ad6a4139e7dd5672aa2935185a909">select</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::optional&lt;std::string&gt; <a class="code" href="classNetwork_1_1Socket.html#a78b46aebfd0288d1ce230b2802c373b4">getString</a>(<span class="keywordtype">bool</span> isRead = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Socket.html#a0f0803ea4bb3e7007cc1d709bae42d4e">addToBuffer</a>(std::string <span class="keyword">const</span> &amp;str, <span class="keywordtype">bool</span> isRead = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classNetwork_1_1Socket.html#a6727e8f981a1e6cd5d27faca0b39d14b">send</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classNetwork_1_1Socket.html#a416c393e1d0a9661044c6412551c128b">receive</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classNetwork_1_1Socket_1_1ConnectionException.html">   56</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classNetwork_1_1Socket_1_1ConnectionException.html">ConnectionException</a> : <span class="keyword">public</span> std::exception {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef">ConnectionException</a>(uint16_t port, uint32_t ip);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *what() <span class="keyword">const</span> noexcept <span class="keyword">override</span> { <span class="keywordflow">return</span> base.c_str(); }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            uint16_t _port;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            uint32_t _ip;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            std::string base;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        };</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">bool</span> isReadSet()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> FD_ISSET(fd, &amp;readfds); }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">bool</span> isWriteSet()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> FD_ISSET(fd, &amp;writefds); }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        uint16_t _port;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        uint32_t _ip;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">int</span> fd;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        fd_set readfds;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        fd_set writefds;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        std::string r_buffer;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        std::string s_buffer;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        std::size_t _bufferSize;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    };</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="ttc" id="aclassNetwork_1_1Socket_1_1ConnectionException_html"><div class="ttname"><a href="classNetwork_1_1Socket_1_1ConnectionException.html">Network::Socket::ConnectionException</a></div><div class="ttdoc">Exception to handle a connection error.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:56</div></div>
+<div class="ttc" id="aclassNetwork_1_1Socket_1_1ConnectionException_html_a4f025c90839764d55e37b389a809e1ef"><div class="ttname"><a href="classNetwork_1_1Socket_1_1ConnectionException.html#a4f025c90839764d55e37b389a809e1ef">Network::Socket::ConnectionException::ConnectionException</a></div><div class="ttdeci">ConnectionException(uint16_t port, uint32_t ip)</div><div class="ttdoc">Constructor of the exception.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:100</div></div>
+<div class="ttc" id="aclassNetwork_1_1Socket_html"><div class="ttname"><a href="classNetwork_1_1Socket.html">Network::Socket</a></div><div class="ttdoc">Class for Socket.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:23</div></div>
 <div class="ttc" id="aclassNetwork_1_1Socket_html_a0f0803ea4bb3e7007cc1d709bae42d4e"><div class="ttname"><a href="classNetwork_1_1Socket.html#a0f0803ea4bb3e7007cc1d709bae42d4e">Network::Socket::addToBuffer</a></div><div class="ttdeci">void addToBuffer(std::string const &amp;str, bool isRead=true)</div><div class="ttdoc">Add string to the buffer.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:67</div></div>
+<div class="ttc" id="aclassNetwork_1_1Socket_html_a416c393e1d0a9661044c6412551c128b"><div class="ttname"><a href="classNetwork_1_1Socket.html#a416c393e1d0a9661044c6412551c128b">Network::Socket::receive</a></div><div class="ttdeci">int receive()</div><div class="ttdoc">Read informations received through the socket and put it in the read buffer.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:84</div></div>
 <div class="ttc" id="aclassNetwork_1_1Socket_html_a5d0ad6a4139e7dd5672aa2935185a909"><div class="ttname"><a href="classNetwork_1_1Socket.html#a5d0ad6a4139e7dd5672aa2935185a909">Network::Socket::select</a></div><div class="ttdeci">void select()</div><div class="ttdoc">Do a select the read and write fd of the socket.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:46</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_html_a62edc2e708aafbfec801ef78039837b1"><div class="ttname"><a href="classNetwork_1_1Socket.html#a62edc2e708aafbfec801ef78039837b1">Network::Socket::isWriteSet</a></div><div class="ttdeci">bool isWriteSet() const</div><div class="ttdoc">Check if the socket is ready to be write, must be called after select.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:42</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_html_a7169722a458a41afe8d8fc3ad73cbb6f"><div class="ttname"><a href="classNetwork_1_1Socket.html#a7169722a458a41afe8d8fc3ad73cbb6f">Network::Socket::isReadSet</a></div><div class="ttdeci">bool isReadSet() const</div><div class="ttdoc">Check if the socket is ready to be read, must be called after select.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:39</div></div>
+<div class="ttc" id="aclassNetwork_1_1Socket_html_a6727e8f981a1e6cd5d27faca0b39d14b"><div class="ttname"><a href="classNetwork_1_1Socket.html#a6727e8f981a1e6cd5d27faca0b39d14b">Network::Socket::send</a></div><div class="ttdeci">int send()</div><div class="ttdoc">Send write buffer content to the socket.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:74</div></div>
 <div class="ttc" id="aclassNetwork_1_1Socket_html_a78b46aebfd0288d1ce230b2802c373b4"><div class="ttname"><a href="classNetwork_1_1Socket.html#a78b46aebfd0288d1ce230b2802c373b4">Network::Socket::getString</a></div><div class="ttdeci">std::optional&lt; std::string &gt; getString(bool isRead=true)</div><div class="ttdoc">Get a string from the buffer.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:55</div></div>
-<div class="ttc" id="aclassNetwork_1_1Socket_html_aa154e979125770a6d9eac65e4cfa6923"><div class="ttname"><a href="classNetwork_1_1Socket.html#aa154e979125770a6d9eac65e4cfa6923">Network::Socket::send</a></div><div class="ttdeci">void send()</div><div class="ttdoc">Send write buffer content to the socket.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:74</div></div>
+<div class="ttc" id="aclassNetwork_1_1Socket_html_a7c9dd2ae8b6226689dbc2ba6f176057b"><div class="ttname"><a href="classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b">Network::Socket::Socket</a></div><div class="ttdeci">Socket(std::string const &amp;ip, uint16_t port, std::size_t bufferSize=256)</div><div class="ttdoc">Constructor of the socket.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:13</div></div>
 <div class="ttc" id="aclassNetwork_1_1Socket_html_af1fb35802f22c2883c0d1f22a099a1a9"><div class="ttname"><a href="classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9">Network::Socket::~Socket</a></div><div class="ttdeci">~Socket()</div><div class="ttdoc">Destructor of the socket, close the socket file descriptor.</div><div class="ttdef"><b>Definition:</b> Socket.cpp:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

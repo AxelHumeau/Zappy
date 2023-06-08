@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyhandler_20',['KeyHandler',['../classKeyHandler.html',1,'']]]
+  ['keyhandler_18',['KeyHandler',['../classKeyHandler.html',1,'']]]
 ];
