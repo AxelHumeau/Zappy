@@ -69,7 +69,7 @@ class AI:
         "phiras": 0,
         "thystame": 0
     }
-    lvl = 1
+    lvl = 3
     vision = []
     q_command = []
     # init
@@ -127,6 +127,13 @@ class AI:
         print(pos)
         return pos
 
+    def get_best_path(self, objs):
+        paths = []
+        for obj in objs:
+            paths.append(generate_instructions(get_path(obj[2], self.lvl)))
+
+        # for i in range(len(obj)):
+        #     (1 - nb_type_possédé / nb_type_requis) * actions
 
     # path finding functions
 
@@ -186,3 +193,33 @@ def is_part_of_sequence(number):
         if term == number:
             return True
     return False
+
+def get_path(posobj, lvl):
+    line, sens = get_objline(posobj, lvl)
+    path = []
+    while posobj != line:
+        path.append(posobj)
+        posobj -= sens
+    path += add_sequence_terms_to_list(posobj)
+    return path[::-1]
+
+def add_sequence_terms_to_list(number):
+    sequence_list = [0]
+    for n in range(1, number + 1):
+        term = n**2 + n
+        sequence_list.append(term)
+        if number == term:
+            break
+    return sequence_list[::-1]
+
+def get_objline(posobj, lvl):
+    n = 0
+    while n <= lvl:
+        term = n**2 + n
+        if term == posobj:
+            return term, 0
+        if (posobj <= term) and posobj >= term - n:
+            return term, -1
+        if (posobj >= term) and (posobj <= term + n):
+            return term, 1
+        n += 1
