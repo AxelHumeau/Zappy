@@ -58,10 +58,6 @@ void createScene(ZappyGui::Renderer &renderer)
     jerome.setPosition(0, 0, -5);
     jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
 
-    Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
-    myMat->setReceiveShadows(false);
-    myMat->getTechnique(0)->setLightingEnabled(true);
-
     ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
     t.setPosition(0.0f, 0.0f, -10.0f);
     ZappyGui::Vector2i size = t.getSize();
@@ -131,7 +127,7 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
 // }
 
 int main(void) {
-    ZappyGui::Renderer renderer(std::string("Zappy"), 1200, 900, "./gui/config/resources");
+    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
     createScene(renderer);
     return 0;
 }

@@ -6,12 +6,13 @@
 */
 
 #include <iostream>
+#include <algorithm>
 #include <OGRE/OgreColourValue.h>
 #include "ResourceLoader.hpp"
 #include "Renderer.hpp"
 
 ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile):
-_camRotationSpeed(0.0174533), _camMovementSpeed(0.15)
+_camRotationSpeed(0.0174533), _camMovementSpeed(0.15), _width(width), _height(height)
 {
     _done = false;
 
@@ -37,8 +38,9 @@ _camRotationSpeed(0.0174533), _camMovementSpeed(0.15)
 
     _loadResources(resourceFile);
 
-    _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
+    _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+    _sceneManager->setSkyBox(true, "MaterialHamsterSky");
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -59,6 +61,7 @@ void ZappyGui::Renderer::registerCamera(std::shared_ptr<ZappyGui::Camera> camera
     _viewport.reset(_window->addViewport(camera->getCamera().get()));
     _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 0.0));
     _camera = camera;
+    _camera->getCamera()->setAspectRatio( static_cast<float>(_width) / static_cast<float>(_height) );
 }
 
 void ZappyGui::Renderer::render()

@@ -42,15 +42,17 @@ namespace ZappyGui {
             void _processInputsCamRotation();
 
             std::map<SDL_KeyCode, bool> _inputs;
-            std::unique_ptr<SDL_Window, ZappyGui::nop> _sdlWindow;
-            std::unique_ptr<Ogre::RenderWindow, ZappyGui::nop> _window;
+            std::unique_ptr<SDL_Window, ZappyGui::Nop> _sdlWindow;
+            std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;
             std::unique_ptr<Ogre::Root> _root;
             std::shared_ptr<Ogre::SceneManager> _sceneManager;
-            std::unique_ptr<Ogre::Viewport, ZappyGui::nop> _viewport;
+            std::unique_ptr<Ogre::Viewport, ZappyGui::Nop> _viewport;
             std::shared_ptr<ZappyGui::Camera> _camera;
             bool _done;
             float _camRotationSpeed;
             float _camMovementSpeed;
+            int _width;
+            int _height;
     };
 
 }
