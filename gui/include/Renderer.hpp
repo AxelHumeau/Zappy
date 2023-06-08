@@ -19,6 +19,8 @@
 
 namespace ZappyGui {
 
+    static const float ONE_RADIAN_IN_DEGREE = 57.2958;
+
     class Renderer {
         public:
             Renderer(std::string name, int width, int height, std::string resourceFile);
@@ -38,6 +40,7 @@ namespace ZappyGui {
             void _checkKeydown(SDL_Event &event);
             void _checkKeyup(SDL_Event &event);
             void _initInputs();
+            void _processInputsCamRotation();
 
             std::map<SDL_KeyCode, bool> _inputs;
             std::unique_ptr<SDL_Window, ZappyGui::nop> _sdlWindow;
@@ -47,6 +50,7 @@ namespace ZappyGui {
             std::unique_ptr<Ogre::Viewport, ZappyGui::nop> _viewport;
             std::shared_ptr<ZappyGui::Camera> _camera;
             bool _done;
+            float _camSpeed;
     };
 
 }

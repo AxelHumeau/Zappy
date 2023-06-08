@@ -10,7 +10,8 @@
 #include "ResourceLoader.hpp"
 #include "Renderer.hpp"
 
-ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile)
+ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile):
+_camSpeed(0.0174533)
 {
     _done = false;
 
@@ -230,24 +231,25 @@ void ZappyGui::Renderer::processInputs()
         dir *= -0.15;
         _moveCamera(dir.x, dir.y, dir.z);
     }
+    _processInputsCamRotation();
+}
 
-    if (_inputs[SDLK_UP] && !_inputs[SDLK_DOWN])
-        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0174533), Ogre::Radian(0.0));
+void ZappyGui::Renderer::_processInputsCamRotation()
+{
+    ZappyGui::Vector3 rotation(0.0, 0.0, 0.0);
+
+    if (_inputs[SDLK_UP])
+        rotation.y += _camSpeed;
     if (_inputs[SDLK_DOWN] && !_inputs[SDLK_UP])
-        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(-0.0174533), Ogre::Radian(0.0));
+        rotation.y -= _camSpeed;
 
     if (_inputs[SDLK_LEFT] && !_inputs[SDLK_RIGHT])
-    {
-        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0), Ogre::Radian(0.0174533));
-        // Ogre::Radian roll = _camera->getOrientation().getRoll();
-        // _camera->setRotation(-roll, Ogre::Radian(0.0), Ogre::Radian(0.0));
-    }
+        rotation.z += _camSpeed;
     if (_inputs[SDLK_RIGHT] && !_inputs[SDLK_LEFT])
-    {
-        _camera->setRotation(Ogre::Radian(0.0), Ogre::Radian(0.0), Ogre::Radian(-0.0174533));
-        // Ogre::Radian roll = _camera->getOrientation().getRoll();
-        // _camera->setRotation(-roll, Ogre::Radian(0.0), Ogre::Radian(0.0));
-    }
+        rotation.z -= _camSpeed;
+    rotation.normalise();
+    rotation /= ONE_RADIAN_IN_DEGREE;
+    _camera->setRotationWorldYaw(Ogre::Radian(0.0), Ogre::Radian(rotation.y), Ogre::Radian(rotation.z));
 }
 
 void ZappyGui::Renderer::_initInputs()

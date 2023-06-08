@@ -31,6 +31,7 @@ namespace ZappyGui {
                 const ZappyGui::Vector3 &localDirectionVector = Ogre::VectorBase<3, ZappyGui::Real>::NEGATIVE_UNIT_Z
             ) = 0;
             virtual void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) = 0;
+            virtual void setRotationWorldYaw(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) = 0;
             virtual void setOrientation(const Ogre::Quaternion &q) = 0;
             virtual const Ogre::Quaternion &getOrientation() const = 0;
             virtual void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) = 0;
@@ -60,6 +61,11 @@ namespace ZappyGui {
                 _node->roll(roll);
                 _node->pitch(pitch);
                 _node->yaw(yaw);
+            }
+            void setRotationWorldYaw(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) override {
+                _node->roll(roll);
+                _node->pitch(pitch);
+                _node->yaw(yaw, Ogre::Node::TS_WORLD);
             }
             void setOrientation(const Ogre::Quaternion &q) { _node->setOrientation(q); }
             const Ogre::Quaternion &getOrientation() const { return _node->getOrientation(); }
