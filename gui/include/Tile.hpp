@@ -42,9 +42,18 @@ namespace ZappyGui {
         public:
             Tile(int x, int y);
             ~Tile() {};
-            std::pair<int, int> getPosition() const { return std::pair<int, int>(_x, _y); }
+            /// @brief get the position of the tile in the tilemap
+            /// @return Vector2i containing the position of the tile in the tilemap
+            ZappyGui::Vector2i getPosition() const { return ZappyGui::Vector2i(_x, _y); }
+            /// @brief bind the given gameobject to the tile
+            /// @param gameObject to bind to the tile
             void bindGameObject(std::shared_ptr<ZappyGui::GameObject> gameObject) { _gameobject = gameObject; }
+            /// @brief return the gameobject bound to the tile
+            /// @return the gameobject bound or throw an TileNoGameobjectBoundError if no gameobject is bound
             ZappyGui::GameObject const &getGameobject();
+            /// @brief get the amount of the given resourceType
+            /// @param resourceType to get the amount
+            /// @return the amount of the given resourceType or throw an TileUndifinedResourceTypeError
             std::size_t getResourceAmount(const std::string &resourceType);
 
         private:
