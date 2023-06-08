@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['light_20',['Light',['../classZappyGui_1_1Light.html',1,'ZappyGui']]]
+  ['keyhandler_18',['KeyHandler',['../classKeyHandler.html',1,'']]]
 ];
