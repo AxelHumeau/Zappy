@@ -67,6 +67,7 @@ namespace ZappyGui {
             /// @param axis Vector3 representing the axis
             /// @param angle to rotate expressed in radians
             virtual void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) = 0;
+            virtual void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) = 0;
     };
 
     /// @brief Abstract class representing a generic object in the world
