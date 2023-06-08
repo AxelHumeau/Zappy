@@ -9,6 +9,9 @@
     #define MACRO_H_
 
     #include "server.h"
+    #define KO "ko\n"
+    #define WELCOME "WELCOME\n"
+    #define GRAPHIC "GRAPHIC"
 
 enum resource;
 
@@ -16,7 +19,7 @@ static const int EXIT_FAIL = -1;
 static const int EXIT_ERROR = 84;
 static const size_t MAX_SIZE_BUFFER = 256;
 static const int MAX_PORT_NUMBER = 65535;
-static const double DENSITY[] = {
+static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,
     [DERAUMERE] = 0.15,
@@ -25,7 +28,7 @@ static const double DENSITY[] = {
     [PHIRAS] = 0.08,
     [THYSMANE] = 0.05,
 };
-static const char * const RESSOURCE_STR[] = {
+static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [FOOD] = "food",
     [LINEMATE] = "linemate",
     [DERAUMERE] = "deraumere",

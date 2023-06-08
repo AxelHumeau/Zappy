@@ -9,14 +9,15 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdio.h>
 #include "server.h"
 #include "macro.h"
 
 void accept_client(struct server *server)
 {
-    int fd;
-    struct client_entry *entry;
+    int fd = 0;
+    struct client_entry *entry = NULL;
     static int count = 0;
 
     fd = accept(server->listening_fd, NULL, NULL);
@@ -28,7 +29,10 @@ void accept_client(struct server *server)
     entry->is_gui = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
-    SLIST_INSERT_HEAD(&server->clients, entry, next);
+    if (put_client_team(server, entry) != EXIT_SUCCESS)
+        destroy_client(entry);
+    else
+        SLIST_INSERT_HEAD(&server->clients, entry, next);
 }
 
 static void handle_lines(struct client_entry *client, struct server *server)
@@ -61,7 +65,6 @@ int handle_client(struct client_entry *client,
 
 void destroy_client(struct client_entry *client)
 {
-    printf("[client %d] disconnected !\n", client->id);
     close(client->fd);
     destroy_buffer(&client->buf_to_send);
     destroy_buffer(&client->buf_to_recv);

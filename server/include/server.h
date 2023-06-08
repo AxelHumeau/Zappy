@@ -45,8 +45,7 @@ struct server {
 struct team {
     char *name;
     /// @brief pointer to the max number of players in the server struct
-    int *max_players;
-    size_t num_players;
+    int nb_slots_left;
     struct clients players;
 };
 
@@ -70,3 +69,6 @@ int init_game(struct server *server);
 
 // Init_resource.c
 void set_resource_map(struct server *server);
+
+// player_handling.c
+int put_client_team(struct server *server, struct client_entry *entry);
