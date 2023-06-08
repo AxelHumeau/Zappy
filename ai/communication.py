@@ -21,6 +21,7 @@ class Communication:
         self.look_info = []
         self.inventory = []
         self.message = []
+        self.current_level = 1
 
     def parse_information_look(self):
         """ parse all information of the command 'Look'
@@ -99,6 +100,23 @@ class Communication:
         self.message.append(message_info)
         self.response.pop()
 
+    def get_elevation_response(self):
+        """Get the elevation response from the command Incantation
+
+        Returns:
+            boolean: True if the elevation is successful, False otherwise
+        """
+        resp = self.response.pop()
+        if resp[0] == "ko":
+            self.current_level = -1
+            return False
+        try:
+            self.current_level = int(resp[4])
+            return True
+        except Exception:
+            self.current_level = -1
+            return False
+
     dict_function = {
         "Take": interaction_object,
         "Set": interaction_object,
@@ -114,14 +132,13 @@ class Communication:
         Returns:
             boolean: True/False
         """
-        if (len(self.response) != 0):
-            if (self.response.front().find("message") != -1):
-                self.get_message()
         if (len(self.request) == 0 or len(self.response) == 0):
             return False
+        if (len(self.response) != 0 and
+                self.response.front().find("message") != -1):
+            self.get_message()
         if (self.request.front()[0] in Communication.communication):
             return self.pop_response()
-        else:
-            if (self.response.front() == "ko"):
-                return self.pop_information()
-            return self.dict_function[self.request.front()[0]](self)
+        elif (self.response.front() == "ko"):
+            return self.pop_information()
+        return self.dict_function[self.request.front()[0]](self)

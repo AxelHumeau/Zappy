@@ -13,29 +13,43 @@ class AI:
     mapsize = (1, 1)
     food = 10
     target = -1
+    nb_players_at_same_level = 0
     elevation = {
         1: {
                 "nb_players": 1,
-                "linemate": 1
+                "linemate": 1,
+                "deraumere": 0,
+                "sibur": 0,
+                "mendiane": 0,
+                "phiras": 0,
+                "thystame": 0
             },
         2: {
                 "nb_players": 2,
                 "linemate": 1,
                 "deraumere": 1,
-                "sibur": 1
+                "sibur": 1,
+                "mendiane": 0,
+                "phiras": 0,
+                "thystame": 0
             },
         3: {
                 "nb_players": 2,
                 "linemate": 2,
                 "phiras": 2,
-                "sibur": 1
+                "sibur": 1,
+                "mendiane": 0,
+                "deraumere": 0,
+                "thystame": 0
             },
         4: {
                 "nb_players": 4,
                 "linemate": 1,
                 "deraumere": 1,
                 "sibur": 2,
-                "phiras": 1
+                "phiras": 1,
+                "mandiane": 0,
+                "thystame": 0
             },
         5: {
                 "nb_players": 4,
@@ -43,13 +57,17 @@ class AI:
                 "deraumere": 2,
                 "sibur": 1,
                 "mendiane": 3,
+                "phiras": 0,
+                "thystame": 0
             },
         6: {
                 "nb_players": 6,
                 "linemate": 1,
                 "deraumere": 2,
                 "sibur": 3,
-                "phiras": 1
+                "phiras": 1,
+                "mendiane": 0,
+                "thystame": 0
             },
         7: {
                 "nb_players": 6,

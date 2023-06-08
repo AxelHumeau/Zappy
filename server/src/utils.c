@@ -22,3 +22,22 @@ int display_help(void)
     printf("\n");
     return EXIT_SUCCESS;
 }
+
+static void display_elem_map(struct server server, int x, int y)
+{
+    for (int i = 0; i < NB_RESOURCES; i++) {
+        for (size_t size = 0; size < server.maps[y][x].resources[i]; size++)
+            printf("%s, ", RESSOURCE_STR[i]);
+    }
+}
+
+void display_map(struct server server)
+{
+    for (int y = 0; y < server.height; y++) {
+        for (int x = 0; x < server.width; x++) {
+            printf("[");
+            display_elem_map(server, x, y);
+            printf("]\n");
+        }
+    }
+}
