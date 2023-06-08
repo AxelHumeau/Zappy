@@ -35,6 +35,7 @@ namespace ZappyGui {
             virtual void setOrientation(const Ogre::Quaternion &q) = 0;
             virtual const Ogre::Quaternion &getOrientation() const = 0;
             virtual void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) = 0;
+            virtual void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) = 0;
         protected:
             std::shared_ptr<Ogre::SceneNode> _node;
     };
@@ -70,6 +71,7 @@ namespace ZappyGui {
             void setOrientation(const Ogre::Quaternion &q) { _node->setOrientation(q); }
             const Ogre::Quaternion &getOrientation() const { return _node->getOrientation(); }
             void rotate(const ZappyGui::Vector3 &axis, const Ogre::Radian &angle) { _node->rotate(axis, angle); };
+            void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) { _node->translate(d, relativeTo); };
     };
 
     class GameObject : public AGameObject {
