@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['nb_5fslots_5fleft_19',['nb_slots_left',['../structteam.html#acd91b1458e1cc6307d96c1b7ba53830f',1,'team']]],
-  ['nop_20',['nop',['../structZappy_1_1nop.html',1,'Zappy']]]
+  ['max_5fplayers_21',['max_players',['../structteam.html#a7651c1b3ac1cb0364bf1e284710a42a5',1,'team']]]
 ];
