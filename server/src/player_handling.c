@@ -45,13 +45,25 @@ static int accept_player_connexion(struct client_entry *entry)
     return EXIT_SUCCESS;
 }
 
-int put_player_team(struct server *server, struct client_entry *entry)
+int is_graphic_client(struct client_entry *entry, char *line)
+{
+    if (!strcmp(line, GRAPHIC)) {
+        entry->is_gui = true;
+        free(line);
+        return EXIT_SUCCESS;
+    }
+    return EXIT_FAIL;
+}
+
+int put_client_team(struct server *server, struct client_entry *entry)
 {
     char *line = NULL;
 
     if (accept_player_connexion(entry) != EXIT_SUCCESS)
         return EXIT_FAIL;
     line = get_line_in_buffer(&entry->buf_to_recv);
+    if (is_graphic_client(entry, line) == EXIT_SUCCESS)
+        return EXIT_SUCCESS;
     for (size_t i = 0; i < server->nb_teams; i++) {
         if (accept_player_team(server, entry, line, i) == EXIT_SUCCESS)
             return EXIT_SUCCESS;

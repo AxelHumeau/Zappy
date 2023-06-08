@@ -29,7 +29,7 @@ void accept_client(struct server *server)
     entry->is_gui = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
-    if (put_player_team(server, entry) != EXIT_SUCCESS)
+    if (put_client_team(server, entry) != EXIT_SUCCESS)
         destroy_client(entry);
     else
         SLIST_INSERT_HEAD(&server->clients, entry, next);

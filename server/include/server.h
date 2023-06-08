@@ -71,4 +71,4 @@ int init_game(struct server *server);
 void set_resource_map(struct server *server);
 
 // player_handling.c
-int put_player_team(struct server *server, struct client_entry *entry);
+int put_client_team(struct server *server, struct client_entry *entry);

@@ -11,6 +11,7 @@
     #include "server.h"
     #define KO "ko\n"
     #define WELCOME "WELCOME\n"
+    #define GRAPHIC "GRAPHIC"
 
 enum resource;
 
