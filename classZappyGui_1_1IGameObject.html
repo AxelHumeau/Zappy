@@ -120,8 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7940289007fa54a0b61f69a8bb50c81"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1IGameObject.html#ac7940289007fa54a0b61f69a8bb50c81">rotate</a> (const ZappyGui::Vector3 &amp;axis, const Ogre::Radian &amp;angle)=0</td></tr>
 <tr class="memdesc:ac7940289007fa54a0b61f69a8bb50c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">rotate the object around the given axis by the given angle  <a href="classZappyGui_1_1IGameObject.html#ac7940289007fa54a0b61f69a8bb50c81">More...</a><br /></td></tr>
 <tr class="separator:ac7940289007fa54a0b61f69a8bb50c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc1db1afc885b2db31241d04fca9ab9"><td class="memItemLeft" align="right" valign="top"><a id="aecc1db1afc885b2db31241d04fca9ab9"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>translate</b> (const ZappyGui::Vector3 &amp;d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT)=0</td></tr>
+<tr class="memitem:aecc1db1afc885b2db31241d04fca9ab9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1IGameObject.html#aecc1db1afc885b2db31241d04fca9ab9">translate</a> (const ZappyGui::Vector3 &amp;d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT)=0</td></tr>
+<tr class="memdesc:aecc1db1afc885b2db31241d04fca9ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the node along the Cartesian axes.  <a href="classZappyGui_1_1IGameObject.html#aecc1db1afc885b2db31241d04fca9ab9">More...</a><br /></td></tr>
 <tr class="separator:aecc1db1afc885b2db31241d04fca9ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -551,6 +551,53 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>translate</b>
 </dl>
 
 <p>Implemented in <a class="el" href="classZappyGui_1_1AGameObject.html#a540551f6907160bd33f1f617776c7765">ZappyGui::AGameObject</a>.</p>
+
+</div>
+</div>
+<a id="aecc1db1afc885b2db31241d04fca9ab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc1db1afc885b2db31241d04fca9ab9">&#9670;&nbsp;</a></span>translate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ZappyGui::IGameObject::translate </td>
+          <td>(</td>
+          <td class="paramtype">const ZappyGui::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::Node::TransformSpace&#160;</td>
+          <td class="paramname"><em>relativeTo</em> = <code>Ogre::Node::TS_PARENT</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Moves the node along the Cartesian axes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>Vector representing the translation. </td></tr>
+    <tr><td class="paramname">relativeTo</td><td>The space which this transform is relative to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classZappyGui_1_1AGameObject.html#ad052541d5d2cf0ee49103d3026a7e5a8">ZappyGui::AGameObject</a>.</p>
 
 </div>
 </div>
