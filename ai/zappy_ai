@@ -1,9 +1,8 @@
 #!/bin/python
 
 import error_handling
-import select
 import sys
-import ai
+from ai import AI
 from communication import Communication
 from utils import connexion_server, connexion_team
 
@@ -18,53 +17,16 @@ def loop_client(dict_args):
     communication = Communication()
     s = connexion_server(dict_args["port"], dict_args["machine"])
     connexion_team(s, dict_args)
-    while True:
-        read, write, error = select.select([sys.stdin, s], [], [])
-        if not read:
-            continue
-        if read[0] is sys.stdin:
-            cmd = input()
-            if cmd == "quit":
-                s.close()
-                break
-            cmd += '\n'
-            cmd = cmd.replace("\\n", "\n")
-            pos = cmd.find('\n')
-            # s.send(cmd.encode())
-            while (pos != -1):
-                s.send(cmd[:pos + 1].encode())
-                if (cmd != "\n"):
-                    communication.request.push(cmd[:pos].split(" "))
-                cmd = cmd[pos + 1:]
-                pos = cmd.find('\n')
-        elif read[0] is s:
-            message += s.recv(1024).decode()
-        tmp = []
-        pos = message.find('\n')
-        while (pos != -1):
-            tmp.append(message[:pos])
-            message = message[pos + 1:]
-            pos = message.find('\n')
-        for elem in tmp:
-            communication.response.push(elem)
-        while (communication.clean_information()):
-            continue
-        print("\n----------")
-        print(communication.request)
-        print(communication.response)
-        print("Look info : ")
-        print(communication.look_info)
-        print("Inventory info : ")
-        print(communication.inventory)
-        print("-----------\n")
+    bot = AI(s, communication)
+    bot.run()
 
 
 if __name__ == "__main__":
     dict_argument = {}
-    try:
-        error_handling.error_handler(sys.argv[1:], dict_argument)
-        loop_client(dict_argument)
-    except Exception as error:
-        print(error, file=sys.stderr)
-        sys.exit(84)
+    error_handling.error_handler(sys.argv[1:], dict_argument)
+    loop_client(dict_argument)
+    # try:
+    # except Exception as error:
+        # print(error, file=sys.stderr)
+        # sys.exit(84)
     sys.exit(0)

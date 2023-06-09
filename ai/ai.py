@@ -1,5 +1,6 @@
 from enum import Enum
-
+import select
+import sys
 
 class priority(Enum):
     FOOD = 1
@@ -92,8 +93,9 @@ class AI:
     q_command = []
     # init
 
-    def __init__(self, socket):
-        self.socket = socket
+    def __init__(self, socket, communication):
+        self.s = socket
+        self.communication = communication
 
     def get_target(self, vision):
         itemtoget = []
@@ -137,27 +139,63 @@ class AI:
                 bestscore = pathscores[i]
         return paths[indexbest]
 
-    ## look for tiles with the item he need
-    # def look_aroud(self):
-    #     rotation = 0
-    #     while (self.target != -1):
-    #         look()
-    #         get_target(self.vision)
-    #         Right()
-    #         if (rotation == 4):
-    #             Forward()
-    #             rotation = 0
-    #         rotation += 1
+    def bot_engine(self):
+        print("SENDING")
+        self.s.send(("Inventory\n").encode())
+        self.communication.request.push(["Inventory"])
     # run the AI
-    # def run(self):
-    #     if (self.prio == priority.RESSOURCES and self.food < 5):
-    #         prio = priority.FOOD
-    #     else :
-    #         priority = priority.RESSOURCES
-        # look around to find a target (eat or ressources)
-        # if the elevation is possible elevation
-        # if there is target go to it
-        # printf("running")
+    def run(self):
+        i = 0
+        message = ""
+        while True:
+            read, write, error = select.select([sys.stdin, self.s], [], [])
+            if not read:
+                continue
+            if read[0] is sys.stdin:
+                cmd = input()
+                # if cmd == "quit":
+                #     self.s.close()
+                #     break
+                # cmd += '\n'
+                # cmd = cmd.replace("\\n", "\n")
+                # pos = cmd.find('\n')
+                if i == 0:
+                    self.bot_engine()
+                i += 1
+                # self.s.send(cmd.encode())
+                # while (pos != -1):
+                #     self.s.send(cmd[:pos + 1].encode())
+                #     if (cmd != "\n"):
+                #         self.communication.request.push(cmd[:pos].split(" "))
+                #     cmd = cmd[pos + 1:]
+                #     pos = cmd.find('\n')
+            elif read[0] is self.s:
+                message += self.s.recv(1024).decode()
+
+            tmp = []
+            pos = message.find('\n')
+            while (pos != -1):
+                tmp.append(message[:pos])
+                message = message[pos + 1:]
+                pos = message.find('\n')
+            for elem in tmp:
+                self.communication.response.push(elem)
+            # print(tmp)
+            # print("response:", self.communication.response)
+            if (len(self.communication.response) != 0 and self.communication.response.front() == 'dead'):
+                break
+            while (self.communication.clean_information()):
+                continue
+            # print("\n----------")
+            # print(self.communication.request)
+            # print(self.communication.response)
+            # print("Look info : ")
+            if (len(self.communication.inventory) != 0):
+                print(self.communication.inventory)
+            # print("Inventory info : ")
+            # print(self.communication.inventory)
+            # print("-----------\n")
+        self.s.close()
 
 def generate_instructions(path):
     instructions = []
