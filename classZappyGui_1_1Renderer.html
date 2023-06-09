@@ -72,34 +72,108 @@ $(function() {
 <div class="title">ZappyGui::Renderer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs.  
+ <a href="classZappyGui_1_1Renderer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Renderer_8hpp_source.html">Renderer.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aef5ce3bd6918feb4d5700698197d8f57"><td class="memItemLeft" align="right" valign="top"><a id="aef5ce3bd6918feb4d5700698197d8f57"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Renderer</b> (std::string name, int width, int height, std::string resourceFile)</td></tr>
 <tr class="separator:aef5ce3bd6918feb4d5700698197d8f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95bdb88b0015ca0b702edea96e7d2554"><td class="memItemLeft" align="right" valign="top"><a id="a95bdb88b0015ca0b702edea96e7d2554"></a>
-std::shared_ptr&lt; Ogre::SceneManager &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSceneManager</b> ()</td></tr>
+<tr class="memitem:a95bdb88b0015ca0b702edea96e7d2554"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Ogre::SceneManager &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#a95bdb88b0015ca0b702edea96e7d2554">getSceneManager</a> ()</td></tr>
+<tr class="memdesc:a95bdb88b0015ca0b702edea96e7d2554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a shared pointer to the scene manager.  <a href="classZappyGui_1_1Renderer.html#a95bdb88b0015ca0b702edea96e7d2554">More...</a><br /></td></tr>
 <tr class="separator:a95bdb88b0015ca0b702edea96e7d2554"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d7edbd0a9b682907bd756eed19cbf42"><td class="memItemLeft" align="right" valign="top"><a id="a3d7edbd0a9b682907bd756eed19cbf42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>registerCamera</b> (std::shared_ptr&lt; <a class="el" href="classZappyGui_1_1Camera.html">ZappyGui::Camera</a> &gt; camera)</td></tr>
+<tr class="memitem:a3d7edbd0a9b682907bd756eed19cbf42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#a3d7edbd0a9b682907bd756eed19cbf42">registerCamera</a> (std::shared_ptr&lt; <a class="el" href="classZappyGui_1_1Camera.html">ZappyGui::Camera</a> &gt; camera)</td></tr>
+<tr class="memdesc:a3d7edbd0a9b682907bd756eed19cbf42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new camera in the window viewpoint.  <a href="classZappyGui_1_1Renderer.html#a3d7edbd0a9b682907bd756eed19cbf42">More...</a><br /></td></tr>
 <tr class="separator:a3d7edbd0a9b682907bd756eed19cbf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d1164a086b935c7d1e7b0cd2e783789"><td class="memItemLeft" align="right" valign="top"><a id="a3d1164a086b935c7d1e7b0cd2e783789"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> ()</td></tr>
-<tr class="separator:a3d1164a086b935c7d1e7b0cd2e783789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13bf36043a4ac7b8c78a56b267109ecd"><td class="memItemLeft" align="right" valign="top"><a id="a13bf36043a4ac7b8c78a56b267109ecd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>renderOneFrame</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#a13bf36043a4ac7b8c78a56b267109ecd">renderOneFrame</a> ()</td></tr>
+<tr class="memdesc:a13bf36043a4ac7b8c78a56b267109ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render a single frame of the scene. First update the ogre scene and then render the sdl2 window. <br /></td></tr>
 <tr class="separator:a13bf36043a4ac7b8c78a56b267109ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade1c4dd5053507d30f9a01a0ce3609c4"><td class="memItemLeft" align="right" valign="top"><a id="ade1c4dd5053507d30f9a01a0ce3609c4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>event</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a> ()</td></tr>
+<tr class="memdesc:ade1c4dd5053507d30f9a01a0ce3609c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the window events and inputs. <br /></td></tr>
 <tr class="separator:ade1c4dd5053507d30f9a01a0ce3609c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe0f7aff3dbdf250e5a227971caca27d"><td class="memItemLeft" align="right" valign="top"><a id="afe0f7aff3dbdf250e5a227971caca27d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDone</b> ()</td></tr>
+<tr class="memitem:afe0f7aff3dbdf250e5a227971caca27d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">isDone</a> ()</td></tr>
+<tr class="memdesc:afe0f7aff3dbdf250e5a227971caca27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current state of the window, false if it is running, true if it's over.  <a href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">More...</a><br /></td></tr>
 <tr class="separator:afe0f7aff3dbdf250e5a227971caca27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab89509595c635b45d65386d2fcb2df3f"><td class="memItemLeft" align="right" valign="top"><a id="ab89509595c635b45d65386d2fcb2df3f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processInputs</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Renderer.html#ab89509595c635b45d65386d2fcb2df3f">processInputs</a> ()</td></tr>
+<tr class="memdesc:ab89509595c635b45d65386d2fcb2df3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the inputs of the user. <br /></td></tr>
 <tr class="separator:ab89509595c635b45d65386d2fcb2df3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a95bdb88b0015ca0b702edea96e7d2554"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95bdb88b0015ca0b702edea96e7d2554">&#9670;&nbsp;</a></span>getSceneManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; Ogre::SceneManager &gt; ZappyGui::Renderer::getSceneManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a shared pointer to the scene manager. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the scene manager </dd></dl>
+
+</div>
+</div>
+<a id="afe0f7aff3dbdf250e5a227971caca27d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe0f7aff3dbdf250e5a227971caca27d">&#9670;&nbsp;</a></span>isDone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ZappyGui::Renderer::isDone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the current state of the window, false if it is running, true if it's over. </p>
+<dl class="section return"><dt>Returns</dt><dd>Boolean of the state of the window </dd></dl>
+
+</div>
+</div>
+<a id="a3d7edbd0a9b682907bd756eed19cbf42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d7edbd0a9b682907bd756eed19cbf42">&#9670;&nbsp;</a></span>registerCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZappyGui::Renderer::registerCamera </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classZappyGui_1_1Camera.html">ZappyGui::Camera</a> &gt;&#160;</td>
+          <td class="paramname"><em>camera</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registers a new camera in the window viewpoint. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">camera</td><td>Shared pointer to the camera </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>gui/include/<a class="el" href="Renderer_8hpp_source.html">Renderer.hpp</a></li>
 <li>gui/src/Renderer.cpp</li>
