@@ -20,6 +20,7 @@ struct client_entry {
     int fd;
     buffer_t buf_to_send;
     buffer_t buf_to_recv;
+    bool is_role_defined;
     bool is_gui;
     player_t player;
     SLIST_ENTRY(client_entry) next;
