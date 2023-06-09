@@ -9,7 +9,7 @@
 #include <string.h>
 #include "server.h"
 
-int tile_content(char **args, struct server *server,
+int send_tile_content(char **args, struct server *server,
     struct client_entry *client)
 {
     int x = 0;

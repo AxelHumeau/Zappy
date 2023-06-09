@@ -9,7 +9,7 @@
 #include <string.h>
 #include "gui/commands.h"
 
-int map_content(char **, struct server *server, struct client_entry *client)
+int send_map_content(char **, struct server *server, struct client_entry *client)
 {
     char *x;
     char *y;
@@ -18,7 +18,7 @@ int map_content(char **, struct server *server, struct client_entry *client)
         for (int j = 0; j < server->width; j++) {
             asprintf(&x, "%d", j);
             asprintf(&y, "%d", i);
-            tile_content((char *[]) {"bct", x, y}, server, client);
+            send_tile_content((char *[]) {"bct", x, y}, server, client);
             free(x);
             free(y);
         }

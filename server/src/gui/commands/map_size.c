@@ -9,7 +9,7 @@
 #include <string.h>
 #include "server.h"
 
-int map_size(char **, struct server *server, struct client_entry *client)
+int send_map_size(char **, struct server *server, struct client_entry *client)
 {
     char *x;
     char *y;

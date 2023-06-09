@@ -21,6 +21,7 @@ SRC =			main.c							\
 				gui/commands/map_size.c			\
 				gui/commands/tile_content.c		\
 				gui/commands/map_content.c		\
+				gui/commands/team_names.c		\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

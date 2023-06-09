@@ -17,7 +17,8 @@ typedef struct gui_command_pair {
 } gui_command_pair_t;
 
 static const gui_command_pair_t GUI_COMMANDS[] = {
-    {"msz", &map_size},
-    {"bct", &tile_content},
-    {"mct", &map_content},
+    {"msz", &send_map_size},
+    {"bct", &send_tile_content},
+    {"mct", &send_map_content},
+    {"tna", &send_team_names},
 };
