@@ -148,30 +148,11 @@ class AI:
         i = 0
         message = ""
         while True:
-            read, write, error = select.select([sys.stdin, self.s], [], [])
-            if not read:
-                continue
-            if read[0] is sys.stdin:
-                cmd = input()
-                # if cmd == "quit":
-                #     self.s.close()
-                #     break
-                # cmd += '\n'
-                # cmd = cmd.replace("\\n", "\n")
-                # pos = cmd.find('\n')
-                if i == 0:
-                    self.bot_engine()
-                i += 1
-                # self.s.send(cmd.encode())
-                # while (pos != -1):
-                #     self.s.send(cmd[:pos + 1].encode())
-                #     if (cmd != "\n"):
-                #         self.communication.request.push(cmd[:pos].split(" "))
-                #     cmd = cmd[pos + 1:]
-                #     pos = cmd.find('\n')
-            elif read[0] is self.s:
+            read, write, error = select.select([self.s], [self.s], [])
+            if write:
+                self.bot_engine()
+            if read:
                 message += self.s.recv(1024).decode()
-
             tmp = []
             pos = message.find('\n')
             while (pos != -1):
@@ -180,8 +161,6 @@ class AI:
                 pos = message.find('\n')
             for elem in tmp:
                 self.communication.response.push(elem)
-            # print(tmp)
-            # print("response:", self.communication.response)
             if (len(self.communication.response) != 0 and self.communication.response.front() == 'dead'):
                 break
             while (self.communication.clean_information()):
@@ -190,12 +169,16 @@ class AI:
             # print(self.communication.request)
             # print(self.communication.response)
             # print("Look info : ")
-            if (len(self.communication.inventory) != 0):
-                print(self.communication.inventory)
+            # if (len(self.communication.inventory) != 0):
+            #     print(self.communication.inventory)
             # print("Inventory info : ")
             # print(self.communication.inventory)
             # print("-----------\n")
         self.s.close()
+
+    # def fill_inventory(self, inventory):
+    #     for obj in inventory:
+    #         if
 
 def generate_instructions(path):
     instructions = []
