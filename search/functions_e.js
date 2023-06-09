@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7esocket_163',['~Socket',['../classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9',1,'Network::Socket']]]
+  ['updatedeltatime_166',['updateDeltaTime',['../classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7',1,'ZappyGui::Renderer']]]
 ];
