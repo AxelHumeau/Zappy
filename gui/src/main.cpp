@@ -92,41 +92,45 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
             return -1;
         return getOptions(nb_args - 2, args + 1, port, ip);
     }
-    t.setTileSize(2.0f, 2.0f);
+    if (str == "-h") {
+        if (++args == NULL)
+            return -1;
+        ip = *args;
+        if (ip == "localhost")
+            ip = "127.0.0.1";
+        return getOptions(nb_args - 2, args + 1, port, ip);
+    }
+    std::cerr << "Unknown option: " << str << std::endl;
+    return -1;
+}
 
-    while (!renderer.isDone())
-    {
-        renderer.event();
-        renderer.processInputs();
-        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
-        renderer.renderOneFrame();
+int main(int argc, char *argv[]) {
+    // Zappy::Renderer renderer(std::string("Zappy"));
+    // createScene(renderer);
+    int i = 0;
+    int port = 0;
+    std::string ip("");
+    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+        return 84;
+    try {
+        Network::Socket socket(ip, port);
+        while (true) { //TODO: change with window closing condition
+            if (i % 10 != 0)
+                socket.addToBuffer("a", false);
+            else
+                socket.addToBuffer("\n", false);
+            socket.select();
+            socket.send();
+            i++;
+        }
+    } catch (Network::Socket::ConnectionException const &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
     }
 }
 
-// int main(int argc, char *argv[]) {
-//     // Zappy::Renderer renderer(std::string("Zappy"));
-//     // createScene(renderer);
-//     int i = 0;
-//     int port = 0;
-//     std::string ip("");
-//     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
-//         return 84;
-//     try {
-//         Network::Socket socket(ip, port);
-//         while (true) { //TODO: change with window closing condition
-//             if (i % 10 != 0)
-//                 socket.addToBuffer("a", false);
-//             else
-//                 socket.addToBuffer("\n", false);
-//             socket.select();
-//             socket.send();
-//             i++;
-//         }
-//     }
+// int main(void) {
+//     ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+//     createScene(renderer);
+//     return 0;
 // }
-
-int main(void) {
-    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
-    createScene(renderer);
-    return 0;
-}
