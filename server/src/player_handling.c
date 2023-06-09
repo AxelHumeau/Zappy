@@ -32,21 +32,20 @@ static int accept_player_team(struct server *server,
     int slot_left = server->teams[i].nb_slots_left;
     struct client_entry *copy = NULL;
 
-    if (!strcmp(server->teams[i].name, line) && slot_left != 0) {
-        server->teams[i].nb_slots_left--;
-        asprintf(&info, "%d\n%d %d\n", server->teams[i].nb_slots_left,
-            server->width, server->height);
-        add_to_buffer(&entry->buf_to_send, info, strlen(info));
-        set_info_player(entry, server, &server->teams[i]);
-        copy = malloc(sizeof(struct client_entry));
-        memcpy(copy, entry, sizeof(struct client_entry));
-        SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
-        free(info);
-        free(line);
-        entry->is_role_defined = true;
-        return EXIT_SUCCESS;
-    }
-    return EXIT_FAIL;
+    if (strcmp(server->teams[i].name, line) || slot_left == 0)
+        return EXIT_FAIL;
+    server->teams[i].nb_slots_left--;
+    asprintf(&info, "%d\n%d %d\n", server->teams[i].nb_slots_left,
+        server->width, server->height);
+    add_to_buffer(&entry->buf_to_send, info, strlen(info));
+    set_info_player(entry, server, &server->teams[i]);
+    copy = malloc(sizeof(struct client_entry));
+    memcpy(copy, entry, sizeof(struct client_entry));
+    SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
+    free(info);
+    free(line);
+    entry->is_role_defined = true;
+    return EXIT_SUCCESS;
 }
 
 int is_graphic_client(struct client_entry *entry, char *line)
