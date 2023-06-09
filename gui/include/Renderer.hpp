@@ -14,6 +14,7 @@
     #include <SDL2/SDL.h>
     #include <SDL2/SDL_image.h>
     #include <SDL2/SDL_syswm.h>
+    #include <chrono>
     #include "Utils.hpp"
     #include "Camera.hpp"
 
@@ -45,6 +46,13 @@ namespace ZappyGui {
 
             /// @brief Processes the inputs of the user
             void processInputs();
+
+            /// @brief Updates the delta time since the last update. Should be called at the beginning of the loop
+            void updateDeltaTime();
+
+            /// @brief Getter for the current delta time in second
+            /// @return Float of the delta time
+            const float &getDeltaTime() const;
 
         private:
             /// @brief Loads all resources in the file in parameter in ogre
@@ -82,6 +90,8 @@ namespace ZappyGui {
             float _camMovementSpeed;
             int _width;
             int _height;
+            float _deltaTime;
+            std::chrono::steady_clock::time_point _lastTime;
     };
 
 }
