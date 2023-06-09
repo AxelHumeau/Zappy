@@ -54,7 +54,7 @@ void createScene(ZappyGui::Renderer &renderer)
     renderer.registerCamera(cam);
 
     // finally something to render
-    ZappyGui::GameObject jerome(renderer.getSceneManager(), "hamster.mesh");
+    ZappyGui::GameObject jerome(renderer.getSceneManager(), "Mathias.mesh");
     jerome.setPosition(0, 0, -5);
     jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
 
