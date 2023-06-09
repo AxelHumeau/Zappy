@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zappy_82',['Zappy',['../md_README.html',1,'']]]
+  ['_7esocket_82',['~Socket',['../classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9',1,'Network::Socket']]]
 ];
