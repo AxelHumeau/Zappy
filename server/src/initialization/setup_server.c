@@ -34,6 +34,7 @@ int setup_server(struct server *server)
         bind(server->listening_fd, (struct sockaddr *) &ad, sizeof(ad)) != 0 ||
         listen(server->listening_fd, FD_SETSIZE - 1) != 0) {
         dprintf(2, "Non valid port.\n");
+        free(server->teams);
         return EXIT_FAIL;
     }
     return EXIT_SUCCESS;

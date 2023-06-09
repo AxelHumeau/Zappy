@@ -10,8 +10,11 @@
 
     #include "server.h"
     #define KO "ko\n"
+    #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
+    #define NB_DIRECTIONS 4
+    #define MAX_COMMAND_PLAYER 12
 
 enum resource;
 
@@ -36,6 +39,19 @@ static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [MENDIANE] = "mendiane",
     [PHIRAS] = "phiras",
     [THYSMANE] = "thysmane",
+};
+static const int DIRECTION[4][2] = {
+    [UP] = {0, -1},
+    [RIGHT] = {1, 0},
+    [DOWN] = {0, 1},
+    [LEFT] = {-1, 0},
+};
+
+static const char * const DIRECTION_STR[NB_DIRECTIONS] = {
+    [UP] = "up",
+    [RIGHT] = "right",
+    [DOWN] = "down",
+    [LEFT] = "left",
 };
 
 #endif /* !MACRO_H_ */

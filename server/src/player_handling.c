@@ -10,6 +10,21 @@
 #include <string.h>
 #include "macro.h"
 
+static void set_info_player(struct client_entry *entry, struct server *server,
+    struct team *team)
+{
+    entry->player_info.x = rand() % server->width;
+    entry->player_info.y = rand() % server->height;
+    memset(entry->player_info.inventory, 0,
+        sizeof(entry->player_info.inventory));
+    entry->player_info.inventory[0] = 10;
+    entry->player_info.level = 1;
+    entry->player_info.time_units_left = 10;
+    entry->player_info.team = team;
+    entry->player_info.last_action = 0;
+    entry->player_info.direction = rand() % NB_DIRECTIONS;
+}
+
 static int accept_player_team(struct server *server,
     struct client_entry *entry, char *line, int i)
 {
@@ -22,6 +37,7 @@ static int accept_player_team(struct server *server,
             server->width, server->height);
         add_to_buffer(&entry->buf_to_send, info, strlen(info));
         write_buffer(&entry->buf_to_send, entry->fd);
+        set_info_player(entry, server, &server->teams[i]);
         SLIST_INSERT_HEAD(&server->teams[i].players, entry, next);
         free(info);
         free(line);
@@ -48,7 +64,6 @@ static int accept_player_connexion(struct client_entry *entry)
 int is_graphic_client(struct client_entry *entry, char *line)
 {
     if (!strcmp(line, GRAPHIC)) {
-        entry->is_gui = true;
         free(line);
         return EXIT_SUCCESS;
     }

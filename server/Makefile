@@ -16,7 +16,21 @@ SRC =			main.c							\
 				initialization/setup_server.c	\
 				initialization/init_game.c		\
 				initialization/init_resource.c	\
-				utils.c							\
+				utils/utils.c					\
+				utils/str_to_array.c			\
+				command/player/player_command.c	\
+				command/player/forward.c		\
+				command/player/right.c			\
+				command/player/left.c			\
+				command/player/look.c			\
+				command/player/inventory.c		\
+				command/player/broadcast.c		\
+				command/player/connect_nbr.c	\
+				command/player/fork.c			\
+				command/player/eject.c			\
+				command/player/take.c			\
+				command/player/set.c			\
+				command/player/incantation.c	\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

@@ -41,7 +41,13 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("[client %d]: %s\n", client->id, line);
+        // if (client->is_gui)
+            // exec_graphical_command(client, server, line);
+        // else
+        exec_player_command(client, server, line);
+        printf("%s\n", DIRECTION_STR[client->player_info.direction]);
+        printf("%d - %d\n", client->player_info.x, client->player_info.y);
+        // printf("[client %d]: %s\n", client->id, line);
         free(line);
         line = get_line_in_buffer(&client->buf_to_recv);
     }
