@@ -75,6 +75,8 @@ namespace ZappyGui {
             std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::Viewport, ZappyGui::Nop> _viewport;
             std::shared_ptr<ZappyGui::Camera> _camera;
+            std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::Nop> _shaderGenerator;
+            std::unique_ptr<OgreBites::SGTechniqueResolverListener, ZappyGui::Nop> _resolverListener;
             bool _done;
             float _camRotationSpeed;
             float _camMovementSpeed;
