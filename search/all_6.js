@@ -11,6 +11,5 @@ var searchData=
   ['getscenemanager_23',['getSceneManager',['../classZappyGui_1_1Renderer.html#a95bdb88b0015ca0b702edea96e7d2554',1,'ZappyGui::Renderer']]],
   ['getsize_24',['getSize',['../classZappyGui_1_1Tilemap.html#ab47abcfb71c5b3ae691b688910cdcf90',1,'ZappyGui::Tilemap']]],
   ['getstring_25',['getString',['../classNetwork_1_1Socket.html#a78b46aebfd0288d1ce230b2802c373b4',1,'Network::Socket']]],
-  ['gettilesize_26',['getTileSize',['../classZappyGui_1_1Tilemap.html#a6a6fd5471f1d8730d8ac5153f4aef874',1,'ZappyGui::Tilemap']]],
-  ['gui_5fcommand_5fpair_27',['gui_command_pair',['../structgui__command__pair.html',1,'']]]
+  ['gettilesize_26',['getTileSize',['../classZappyGui_1_1Tilemap.html#a6a6fd5471f1d8730d8ac5153f4aef874',1,'ZappyGui::Tilemap']]]
 ];
