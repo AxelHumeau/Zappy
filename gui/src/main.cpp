@@ -5,50 +5,17 @@
 ** main
 */
 
+#include <OGRE/Bites/OgreWindowEventUtilities.h>
 #include "Renderer.hpp"
-#include "Socket.hpp"
+#include "GameObject.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
+#include "Tilemap.hpp"
 #include <iostream>
+#include "Socket.hpp"
 #include <cstdlib>
 
-Ogre::ManualObject* createCubeMesh(Ogre::String name, Ogre::String matName) {
-
-	Ogre::ManualObject* cube = new Ogre::ManualObject(name);
-	cube->begin(matName);
-
-	cube->position(0.5,-0.5,1.0);cube->normal(0.408248,-0.816497,0.408248);cube->textureCoord(1,0);
-	cube->position(-0.5,-0.5,0.0);cube->normal(-0.408248,-0.816497,-0.408248);cube->textureCoord(0,1);
-	cube->position(0.5,-0.5,0.0);cube->normal(0.666667,-0.333333,-0.666667);cube->textureCoord(1,1);
-	cube->position(-0.5,-0.5,1.0);cube->normal(-0.666667,-0.333333,0.666667);cube->textureCoord(0,0);
-	cube->position(0.5,0.5,1.0);cube->normal(0.666667,0.333333,0.666667);cube->textureCoord(1,0);
-	cube->position(-0.5,-0.5,1.0);cube->normal(-0.666667,-0.333333,0.666667);cube->textureCoord(0,1);
-	cube->position(0.5,-0.5,1.0);cube->normal(0.408248,-0.816497,0.408248);cube->textureCoord(1,1);
-	cube->position(-0.5,0.5,1.0);cube->normal(-0.408248,0.816497,0.408248);cube->textureCoord(0,0);
-	cube->position(-0.5,0.5,0.0);cube->normal(-0.666667,0.333333,-0.666667);cube->textureCoord(0,1);
-	cube->position(-0.5,-0.5,0.0);cube->normal(-0.408248,-0.816497,-0.408248);cube->textureCoord(1,1);
-	cube->position(-0.5,-0.5,1.0);cube->normal(-0.666667,-0.333333,0.666667);cube->textureCoord(1,0);
-	cube->position(0.5,-0.5,0.0);cube->normal(0.666667,-0.333333,-0.666667);cube->textureCoord(0,1);
-	cube->position(0.5,0.5,0.0);cube->normal(0.408248,0.816497,-0.408248);cube->textureCoord(1,1);
-	cube->position(0.5,-0.5,1.0);cube->normal(0.408248,-0.816497,0.408248);cube->textureCoord(0,0);
-	cube->position(0.5,-0.5,0.0);cube->normal(0.666667,-0.333333,-0.666667);cube->textureCoord(1,0);
-	cube->position(-0.5,-0.5,0.0);cube->normal(-0.408248,-0.816497,-0.408248);cube->textureCoord(0,0);
-	cube->position(-0.5,0.5,1.0);cube->normal(-0.408248,0.816497,0.408248);cube->textureCoord(1,0);
-	cube->position(0.5,0.5,0.0);cube->normal(0.408248,0.816497,-0.408248);cube->textureCoord(0,1);
-	cube->position(-0.5,0.5,0.0);cube->normal(-0.666667,0.333333,-0.666667);cube->textureCoord(1,1);
-	cube->position(0.5,0.5,1.0);cube->normal(0.666667,0.333333,0.666667);cube->textureCoord(0,0);
-
-	cube->triangle(0,1,2);		cube->triangle(3,1,0);
-	cube->triangle(4,5,6);		cube->triangle(4,7,5);
-	cube->triangle(8,9,10);		cube->triangle(10,7,8);
-	cube->triangle(4,11,12);	cube->triangle(4,13,11);
-	cube->triangle(14,8,12);	cube->triangle(14,15,8);
-	cube->triangle(16,17,18);	cube->triangle(16,19,17);
-	cube->end();
-
-	return cube;
-
-}
-
-void createScene(Zappy::Renderer &renderer)
+void createScene(ZappyGui::Renderer &renderer)
 {
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
@@ -60,52 +27,56 @@ void createScene(Zappy::Renderer &renderer)
     // directionalLightNode->setPosition(0, 0, 15);
     // directionalLightNode->setDirection(Ogre::Vector3(0, 0, -1));
 
-
     // without light we would just get a black screen
-    Ogre::Light* light = renderer.getSceneManager()->createLight("SpotLight");
-    light->setDiffuseColour(1, 1, 1);
-    light->setSpecularColour(1, 1, 1);
-    light->setType(Ogre::Light::LT_SPOTLIGHT);
-    Ogre::SceneNode* lightNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-    lightNode->attachObject(light);
-    lightNode->setPosition(0, 0, 15);
-    lightNode->setDirection(0, 0, -1);
+    ZappyGui::Light light2(renderer.getSceneManager(), "light2", Ogre::Light::LT_SPOTLIGHT);
+    light2.setDiffuseColour(1, 1, 1);
+    light2.setSpecularColour(1, 1, 1);
+    light2.setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+    light2.setPosition(0, 0, 15);
+    light2.setDirection(0, 0, -1);
+
+    ZappyGui::Light light(renderer.getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
+    light.setDiffuseColour(1, 1, 1);
+    light.setSpecularColour(1, 1, 1);
+    light.setDirection(0, -1, -1);
 
     // also need to tell where we are
-    Ogre::SceneNode* camNode = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    camNode->setPosition(0, 0, 6);
-    camNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // create the camera
-    std::shared_ptr<Ogre::Camera> cam(renderer.getSceneManager()->createCamera("myCam"), Zappy::nop{});
-    cam->setNearClipDistance(5); // specific to this sample
+    ZappyGui::Camera camera(renderer.getSceneManager(), "myCam");
+    std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
+    cam->setNearClipDistance(0.05); // specific to this sample
     cam->setAutoAspectRatio(true);
-    camNode->attachObject(cam.get());
+    cam->setPosition(0, 0, 0);
+    cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
     // and tell it to render into the main window
     renderer.registerCamera(cam);
 
     // finally something to render
-    Ogre::Entity* ent = renderer.getSceneManager()->createEntity("Sinbad.mesh");
-    Ogre::SceneNode* node = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    node->lookAt(Ogre::Vector3(0, 0, 1), Ogre::Node::TS_PARENT);
-    node->attachObject(ent);
+    ZappyGui::GameObject jerome(renderer.getSceneManager(), "Mathias.mesh");
+    jerome.setPosition(0, 0, -5);
+    jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
 
-    Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
-    myMat->setReceiveShadows(false);
-    myMat->getTechnique(0)->setLightingEnabled(true);
-    // myMat->getTechnique(0)->getPass(0)->setDiffuse(1,1,1,1);
-    // myMat->getTechnique(0)->getPass(0)->setAmbient(0,0,0);
-    // myMat->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,0);
+    ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
+    t.setPosition(0.0f, 0.0f, -10.0f);
+    ZappyGui::Vector2i size = t.getSize();
+    for (int y = 0; y < size.data[1]; y++) {
+        for (int x = 0; x < size.data[0]; x++) {
+            ZappyGui::GameObject obj(renderer.getSceneManager(), "hamster.mesh");
+            std::shared_ptr<ZappyGui::GameObject> g = std::make_shared<ZappyGui::GameObject>(obj);
+            t[y][x].bindGameObject(g);
+        }
+    }
+    t.setTileSize(2.0f, 2.0f);
 
-    Ogre::SceneNode* node2 = renderer.getSceneManager()->getRootSceneNode()->createChildSceneNode();
-    node2->setPosition(0,0,8);
-    node2->roll(Ogre::Radian(0.785398f));
-    node2->pitch(Ogre::Radian(0.349066f));
-    node2->yaw(Ogre::Radian(0.785398f));
-    node2->attachObject(createCubeMesh("Cube", "myMat"));
-    renderer.render();
+    while (!renderer.isDone())
+    {
+        renderer.event();
+        renderer.processInputs();
+        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
+        renderer.renderOneFrame();
+    }
 }
 
 static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
@@ -133,28 +104,30 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
-int main(int argc, char *argv[]) {
-    // Zappy::Renderer renderer(std::string("Zappy"));
-    // createScene(renderer);
-    int i = 0;
-    int port = 0;
-    std::string ip("");
-    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
-        return 84;
-    try {
-        Network::Socket socket(ip, port);
-        while (true) { //TODO: change with window closing condition
-            if (i % 10 != 0)
-                socket.addToBuffer("a", false);
-            else
-                socket.addToBuffer("\n", false);
-            socket.select();
-            socket.send();
-            i++;
-        }
-    } catch (Network::Socket::ConnectionException const &e) {
-        std::cerr << e.what() << std::endl;
-        return 84;
-    }
+// int main(int argc, char *argv[]) {
+//     // Zappy::Renderer renderer(std::string("Zappy"));
+//     // createScene(renderer);
+//     int i = 0;
+//     int port = 0;
+//     std::string ip("");
+//     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+//         return 84;
+//     try {
+//         Network::Socket socket(ip, port);
+//         while (true) { //TODO: change with window closing condition
+//             if (i % 10 != 0)
+//                 socket.addToBuffer("a", false);
+//             else
+//                 socket.addToBuffer("\n", false);
+//             socket.select();
+//             socket.send();
+//             i++;
+//         }
+//     }
+// }
+
+int main(void) {
+    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+    createScene(renderer);
     return 0;
 }
