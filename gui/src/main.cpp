@@ -70,11 +70,15 @@ void createScene(ZappyGui::Renderer &renderer)
     }
     t.setTileSize(2.0f, 2.0f);
 
+    float deltaTime = renderer.getDeltaTime();
+
     while (!renderer.isDone())
     {
+        renderer.updateDeltaTime();
+        deltaTime = renderer.getDeltaTime();
         renderer.event();
         renderer.processInputs();
-        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
+        jerome.setRotation(Ogre::Radian(1.0f * deltaTime), Ogre::Radian(-1.0f * deltaTime), Ogre::Radian(5.0f * deltaTime));
         renderer.renderOneFrame();
     }
 }
