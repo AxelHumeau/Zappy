@@ -31,6 +31,8 @@ SRC =			main.c							\
 				command/player/take.c			\
 				command/player/set.c			\
 				command/player/incantation.c	\
+				gui/handle_gui_client.c			\
+				gui/commands/map_size.c			\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

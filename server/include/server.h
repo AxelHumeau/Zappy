@@ -20,6 +20,7 @@ struct client_entry {
     int fd;
     buffer_t buf_to_send;
     buffer_t buf_to_recv;
+    bool is_role_defined;
     bool is_gui;
     player_t player_info;
     SLIST_ENTRY(client_entry) next;
@@ -84,3 +85,7 @@ int exec_command(struct client_entry *client,
 // Player/player_command.c
 void exec_player_command(struct client_entry *client,
     struct server *server, char *line);
+
+// handle_gui_client.c
+int handle_gui(struct client_entry *client, struct server *server, char *line);
+int find_power_of_base(int nb, int base);
