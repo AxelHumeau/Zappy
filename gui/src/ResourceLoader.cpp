@@ -15,7 +15,7 @@ void ZappyGui::ResourceLoader::load(std::string resourceFile)
     std::vector<std::string> delims = { " " };
     std::vector<std::string> tmp;
 
-	configFile.open(resourceFile, std::ios::in);
+    configFile.open(resourceFile, std::ios::in);
     if (!configFile.is_open() || !configFile.good())
         throw ZappyGui::ResourceFileNotFoundError();
 

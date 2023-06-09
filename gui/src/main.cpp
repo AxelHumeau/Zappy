@@ -54,13 +54,9 @@ void createScene(ZappyGui::Renderer &renderer)
     renderer.registerCamera(cam);
 
     // finally something to render
-    ZappyGui::GameObject jerome(renderer.getSceneManager(), "hamster.mesh");
+    ZappyGui::GameObject jerome(renderer.getSceneManager(), "Mathias.mesh");
     jerome.setPosition(0, 0, -5);
     jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
-
-    Ogre::MaterialPtr myMat = Ogre::MaterialManager::getSingleton().create("myMat", "General");
-    myMat->setReceiveShadows(false);
-    myMat->getTechnique(0)->setLightingEnabled(true);
 
     ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
     t.setPosition(0.0f, 0.0f, -10.0f);
@@ -83,28 +79,54 @@ void createScene(ZappyGui::Renderer &renderer)
     }
 }
 
-int main(int argc, char *argv[]) {
-    // Zappy::Renderer renderer(std::string("Zappy"));
-    // createScene(renderer);
-    int i = 0;
-    int port = 0;
-    std::string ip("");
-    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
-        return 84;
-    try {
-        Network::Socket socket(ip, port);
-        while (true) { //TODO: change with window closing condition
-            if (i % 10 != 0)
-                socket.addToBuffer("a", false);
-            else
-                socket.addToBuffer("\n", false);
-            socket.select();
-            socket.send();
-            i++;
-        }
-    } catch (Network::Socket::ConnectionException const &e) {
-        std::cerr << e.what() << std::endl;
-        return 84;
+static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
+{
+    if (nb_args <= 0)
+        return 0;
+    std::string str(*args);
+    if (str == "-p") {
+        if (++args == NULL)
+            return -1;
+        port = atoi(*args);
+        if (port <= 0 || port >= MAX_PORT_NUMBER)
+            return -1;
+        return getOptions(nb_args - 2, args + 1, port, ip);
     }
+    t.setTileSize(2.0f, 2.0f);
+
+    while (!renderer.isDone())
+    {
+        renderer.event();
+        renderer.processInputs();
+        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
+        renderer.renderOneFrame();
+    }
+}
+
+// int main(int argc, char *argv[]) {
+//     // Zappy::Renderer renderer(std::string("Zappy"));
+//     // createScene(renderer);
+//     int i = 0;
+//     int port = 0;
+//     std::string ip("");
+//     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+//         return 84;
+//     try {
+//         Network::Socket socket(ip, port);
+//         while (true) { //TODO: change with window closing condition
+//             if (i % 10 != 0)
+//                 socket.addToBuffer("a", false);
+//             else
+//                 socket.addToBuffer("\n", false);
+//             socket.select();
+//             socket.send();
+//             i++;
+//         }
+//     }
+// }
+
+int main(void) {
+    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+    createScene(renderer);
     return 0;
 }

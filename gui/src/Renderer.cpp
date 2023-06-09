@@ -6,12 +6,13 @@
 */
 
 #include <iostream>
+#include <algorithm>
 #include <OGRE/OgreColourValue.h>
 #include "ResourceLoader.hpp"
 #include "Renderer.hpp"
 
 ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile):
-_camSpeed(0.0174533)
+_camRotationSpeed(0.0174533), _camMovementSpeed(0.15), _width(width), _height(height)
 {
     _done = false;
 
@@ -37,8 +38,9 @@ _camSpeed(0.0174533)
 
     _loadResources(resourceFile);
 
-    _sceneManager.reset(_root->createSceneManager(), ZappyGui::nop());
+    _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+    _sceneManager->setSkyBox(true, "MaterialHamsterSky");
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -59,15 +61,7 @@ void ZappyGui::Renderer::registerCamera(std::shared_ptr<ZappyGui::Camera> camera
     _viewport.reset(_window->addViewport(camera->getCamera().get()));
     _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 0.0));
     _camera = camera;
-}
-
-void ZappyGui::Renderer::render()
-{
-    while (true)
-    {
-        _root->renderOneFrame();
-        SDL_GL_SwapWindow(_sdlWindow.get());
-    }
+    _camera->getCamera()->setAspectRatio( static_cast<float>(_width) / static_cast<float>(_height) );
 }
 
 bool ZappyGui::Renderer::renderOneFrame()
@@ -183,55 +177,32 @@ void ZappyGui::Renderer::_checkKeyup(SDL_Event &event)
 
 void ZappyGui::Renderer::processInputs()
 {
-    if (_inputs[SDLK_z] && !_inputs[SDLK_s])
-    {
-        ZappyGui::Vector3 dir = _camera->getDirection();
-        dir.normalise();
-        dir *= 0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
+    _processInputsCamMovement();
+    _processInputsCamRotation();
+}
+
+void ZappyGui::Renderer::_processInputsCamMovement()
+{
+    ZappyGui::Vector3 move(0.0, 0.0, 0.0);
+
+    if (_inputs[SDLK_z])
+        move.z -= 1.0;
     if (_inputs[SDLK_s] && !_inputs[SDLK_z])
-    {
-        ZappyGui::Vector3 dir = _camera->getDirection();
-        dir.normalise();
-        dir *= -0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
+        move.z += 1.0;
 
     if (_inputs[SDLK_q] && !_inputs[SDLK_d])
-    {
-        ZappyGui::Vector3 tmp = _camera->getDirection();
-        ZappyGui::Vector3 dir = tmp.crossProduct(tmp.perpendicular());
-        dir.normalise();
-        dir *= -0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
+        move.x -= 1.0;
     if (_inputs[SDLK_d] && !_inputs[SDLK_q])
-    {
-        ZappyGui::Vector3 tmp = _camera->getDirection();
-        ZappyGui::Vector3 dir = tmp.crossProduct(tmp.perpendicular());
-        dir.normalise();
-        dir *= 0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
+        move.x += 1.0;
 
     if (_inputs[SDLK_SPACE] && !_inputs[SDLK_LCTRL])
-    {
-        ZappyGui::Vector3 tmp = _camera->getDirection();
-        ZappyGui::Vector3 dir = tmp.perpendicular();
-        dir.normalise();
-        dir *= 0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
+        move.y += 1.0;
     if (_inputs[SDLK_LCTRL] && !_inputs[SDLK_SPACE])
-    {
-        ZappyGui::Vector3 tmp = _camera->getDirection();
-        ZappyGui::Vector3 dir = tmp.perpendicular();
-        dir.normalise();
-        dir *= -0.15;
-        _moveCamera(dir.x, dir.y, dir.z);
-    }
-    _processInputsCamRotation();
+        move.y -= 1.0;
+
+    move.normalise();
+    move *= _camMovementSpeed;
+    _camera->translate(move, Ogre::Node::TS_LOCAL);
 }
 
 void ZappyGui::Renderer::_processInputsCamRotation()
@@ -239,16 +210,16 @@ void ZappyGui::Renderer::_processInputsCamRotation()
     ZappyGui::Vector3 rotation(0.0, 0.0, 0.0);
 
     if (_inputs[SDLK_UP])
-        rotation.y += _camSpeed;
+        rotation.y += 1.0;
     if (_inputs[SDLK_DOWN] && !_inputs[SDLK_UP])
-        rotation.y -= _camSpeed;
+        rotation.y -= 1.0;
 
     if (_inputs[SDLK_LEFT] && !_inputs[SDLK_RIGHT])
-        rotation.z += _camSpeed;
+        rotation.z += 1.0;
     if (_inputs[SDLK_RIGHT] && !_inputs[SDLK_LEFT])
-        rotation.z -= _camSpeed;
+        rotation.z -= 1.0;
     rotation.normalise();
-    rotation /= ONE_RADIAN_IN_DEGREE;
+    rotation *= _camRotationSpeed;
     _camera->setRotationWorldYaw(Ogre::Radian(0.0), Ogre::Radian(rotation.y), Ogre::Radian(rotation.z));
 }
 
@@ -264,19 +235,6 @@ void ZappyGui::Renderer::_initInputs()
     _inputs[SDLK_DOWN] = false;
     _inputs[SDLK_LEFT] = false;
     _inputs[SDLK_RIGHT] = false;
-}
-
-void ZappyGui::Renderer::_moveCamera(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z)
-{
-    if (_camera == nullptr)
-        return;
-
-    ZappyGui::Vector3 pos = _camera->getPosition();
-
-    pos.x += x;
-    pos.y += y;
-    pos.z += z;
-    _camera->setPosition(pos.x, pos.y, pos.z);
 }
 
 bool ZappyGui::Renderer::isDone()

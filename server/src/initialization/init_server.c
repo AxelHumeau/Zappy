@@ -22,8 +22,6 @@ static void set_teams(struct server *server, char **teams)
     server->teams = malloc(sizeof(struct team[len]));
     for (size_t i = 0; i < len; i++) {
         server->teams[i].name = teams[i];
-        server->teams[i].max_players = &server->max_players_per_team;
-        server->teams[i].num_players = 0;
         SLIST_INIT(&server->teams[i].players);
     }
     server->nb_teams = len;
@@ -79,11 +77,13 @@ int get_server_params(char **params, int nb_params, struct server *server)
     server->nb_teams = -1;
     server->max_players_per_team = -1;
     server->freq = -1;
-    if (get_port_and_team_name(params, nb_params, server, &i))
+    if (get_port_and_team_name(params, nb_params, server, &i) != EXIT_SUCCESS)
         return EXIT_FAIL;
     if (server->height == -1 || server->width == -1 ||
         server->teams == NULL || server->nb_teams <= 0 ||
         server->max_players_per_team == -1 || server->freq == -1)
         return EXIT_FAIL;
+    for (size_t i = 0; i < server->nb_teams; i++)
+        server->teams[i].nb_slots_left = server->max_players_per_team;
     return EXIT_SUCCESS;
 }

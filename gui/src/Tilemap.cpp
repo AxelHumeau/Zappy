@@ -10,7 +10,7 @@
 
 namespace ZappyGui {
     Tilemap::Tilemap(std::shared_ptr<Ogre::SceneManager> sceneManager, int width, int height): _width{width}, _height{height} {
-        _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::nop{});
+        _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::Nop{});
         for (int y = 0; y < _height; y++) {
             _tilemap.push_back(std::vector<Tile>());
             for (int x = 0; x < _width; x++)

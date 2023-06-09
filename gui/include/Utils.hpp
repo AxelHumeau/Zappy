@@ -16,7 +16,7 @@ namespace ZappyGui {
     typedef Ogre::Vector2 Vector2;
     typedef Ogre::Vector2i Vector2i;
 
-    struct nop
+    struct Nop
     {
         template <typename T>
         void operator() (T const &) const noexcept { }
