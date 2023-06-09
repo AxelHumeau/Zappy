@@ -19,26 +19,53 @@
 
 namespace ZappyGui {
 
+    /// @brief Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs
     class Renderer {
         public:
             Renderer(std::string name, int width, int height, std::string resourceFile);
             ~Renderer();
 
+            /// @brief Returns a shared pointer to the scene manager
+            /// @return Shared pointer to the scene manager
             std::shared_ptr<Ogre::SceneManager> getSceneManager();
+
+            /// @brief Registers a new camera in the window viewpoint
+            /// @param camera Shared pointer to the camera
             void registerCamera(std::shared_ptr<ZappyGui::Camera> camera);
-            void render();
+
+            /// @brief Render a single frame of the scene. First update the ogre scene and then render the sdl2 window
             bool renderOneFrame();
+
+            /// @brief Handles the window events and inputs
             void event();
+
+            /// @brief Returns the current state of the window, false if it is running, true if it's over
+            /// @return Boolean of the state of the window
             bool isDone();
+
+            /// @brief Processes the inputs of the user
             void processInputs();
-        protected:
+
         private:
-            void _moveCamera(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z);
+            /// @brief Loads all resources in the file in parameter in ogre
+            /// @param resourceFile File containing the resources to load
             void _loadResources(std::string resourceFile);
+
+            /// @brief Updates the state of the key that are pressed
+            /// @param event Reference to the current event
             void _checkKeydown(SDL_Event &event);
+
+            /// @brief Updates the state of the key that are unpressed
+            /// @param event Reference to the current event
             void _checkKeyup(SDL_Event &event);
+
+            /// @brief Initialize the input list
             void _initInputs();
+
+            /// @brief Handles the camera movement based on the inputs
             void _processInputsCamMovement();
+
+            /// @brief Handles the camera rotation based on the inputs
             void _processInputsCamRotation();
 
             std::map<SDL_KeyCode, bool> _inputs;

@@ -64,15 +64,6 @@ void ZappyGui::Renderer::registerCamera(std::shared_ptr<ZappyGui::Camera> camera
     _camera->getCamera()->setAspectRatio( static_cast<float>(_width) / static_cast<float>(_height) );
 }
 
-void ZappyGui::Renderer::render()
-{
-    while (true)
-    {
-        _root->renderOneFrame();
-        SDL_GL_SwapWindow(_sdlWindow.get());
-    }
-}
-
 bool ZappyGui::Renderer::renderOneFrame()
 {
     bool ret = _root->renderOneFrame();
@@ -244,19 +235,6 @@ void ZappyGui::Renderer::_initInputs()
     _inputs[SDLK_DOWN] = false;
     _inputs[SDLK_LEFT] = false;
     _inputs[SDLK_RIGHT] = false;
-}
-
-void ZappyGui::Renderer::_moveCamera(ZappyGui::Real x, ZappyGui::Real y, ZappyGui::Real z)
-{
-    if (_camera == nullptr)
-        return;
-
-    ZappyGui::Vector3 pos = _camera->getPosition();
-
-    pos.x += x;
-    pos.y += y;
-    pos.z += z;
-    _camera->setPosition(pos.x, pos.y, pos.z);
 }
 
 bool ZappyGui::Renderer::isDone()
