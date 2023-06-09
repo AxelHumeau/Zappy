@@ -21,4 +21,7 @@ static const gui_command_pair_t GUI_COMMANDS[] = {
     {"bct", &send_tile_content},
     {"mct", &send_map_content},
     {"tna", &send_team_names},
+    {"ppo", &send_player_pos},
+    {"plv", &send_player_level},
+    {"pin", &send_player_inventory},
 };

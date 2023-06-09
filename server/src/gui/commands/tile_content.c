@@ -23,10 +23,13 @@ int send_tile_content(char **args, struct server *server,
     if (x < 0 || y < 0 || x >= server->width || y >= server->height)
         return EXIT_FAILURE;
     asprintf(&result, "bct %d %d %ld %ld %ld %ld %ld %ld %ld\n", x, y,
-        server->maps[y][x].resources[0], server->maps[y][x].resources[1],
-        server->maps[y][x].resources[2], server->maps[y][x].resources[3],
-        server->maps[y][x].resources[4], server->maps[y][x].resources[5],
-        server->maps[y][x].resources[6]);
+        server->maps[y][x].resources[FOOD],
+        server->maps[y][x].resources[LINEMATE],
+        server->maps[y][x].resources[DERAUMERE],
+        server->maps[y][x].resources[SIBUR],
+        server->maps[y][x].resources[MENDIANE],
+        server->maps[y][x].resources[PHIRAS],
+        server->maps[y][x].resources[THYSMANE]);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     return EXIT_SUCCESS;
 }

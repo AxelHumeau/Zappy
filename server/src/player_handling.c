@@ -26,6 +26,7 @@ static int accept_player_team(struct server *server,
         memcpy(copy, entry, sizeof(struct client_entry));
         SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
         entry->player.team = &server->teams[i];
+        entry->player.orientation = rand() % 4 + 1;
         free(info);
         free(line);
         entry->is_role_defined = true;

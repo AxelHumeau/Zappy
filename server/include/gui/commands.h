@@ -15,3 +15,6 @@ gui_command_t send_map_size;
 gui_command_t send_tile_content;
 gui_command_t send_map_content;
 gui_command_t send_team_names;
+gui_command_t send_player_pos;
+gui_command_t send_player_level;
+gui_command_t send_player_inventory;
