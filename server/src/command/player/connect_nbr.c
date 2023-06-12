@@ -9,7 +9,7 @@
 #include "macro.h"
 
 void connect_nbr(char **cmd, struct client_entry *client,
-    struct server *server)
+    struct server *)
 {
     if (cmd[1] == NULL) {
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));

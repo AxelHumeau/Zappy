@@ -46,12 +46,17 @@ static const int DIRECTION[4][2] = {
     [DOWN] = {0, 1},
     [LEFT] = {-1, 0},
 };
-
 static const char * const DIRECTION_STR[NB_DIRECTIONS] = {
     [UP] = "up",
     [RIGHT] = "right",
     [DOWN] = "down",
     [LEFT] = "left",
+};
+static const int POS_LOOK[4] = {
+    [UP] = -1,
+    [RIGHT] = -1,
+    [DOWN] = 1,
+    [LEFT] = 1
 };
 
 #endif /* !MACRO_H_ */

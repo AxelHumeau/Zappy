@@ -35,7 +35,7 @@ typedef struct player {
     int y;
     enum direction direction;
     size_t inventory[NB_RESOURCES];
-    size_t level;
+    int level;
     size_t time_units_left;
     time_t last_action;
     struct team *team;
