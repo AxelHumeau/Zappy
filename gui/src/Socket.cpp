@@ -57,9 +57,9 @@ std::optional<std::string> Network::Socket::getString(bool isRead)
     std::string &base = isRead ? r_buffer : s_buffer;
     auto pos = base.find('\n');
 
-    std::string result = base.substr(0, pos + 1);
-    if (result == base)
+    if (pos == std::string::npos)
         return std::nullopt;
+    std::string result = base.substr(0, pos + 1);
     base = base.substr(pos + 1);
     return result;
 }
@@ -83,17 +83,16 @@ int Network::Socket::send()
 
 int Network::Socket::receive()
 {
-    char buffer[_bufferSize];
+    char buffer[_bufferSize + 1];
     int read_char = 0;
 
     if (!isReadSet())
         return 1;
-    do {
-        read_char = read(fd, buffer, _bufferSize);
-        if (read_char == -1)
-            return -1;
-        addToBuffer(buffer, read_char);
-    } while (read_char > 0);
+    read_char = read(fd, buffer, _bufferSize);
+    if (read_char <= 0)
+        return -1;
+    buffer[read_char] = '\0';
+    addToBuffer(buffer);
     return 0;
 }
 

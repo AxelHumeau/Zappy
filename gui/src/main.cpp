@@ -12,7 +12,7 @@
 #include "Light.hpp"
 #include "Tilemap.hpp"
 #include <iostream>
-#include "Socket.hpp"
+#include "Client.hpp"
 #include <cstdlib>
 #include <thread>
 #include "SafeQueue.hpp"
@@ -115,34 +115,9 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
-void server(int port, std::string ip, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+void server(Network::Client &client, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
-    receive.push("Connected");
-    while (1)
-    {
-        mutex.lock();
-        if (isClosed)
-            break;
-        mutex.unlock();
-    }
-
-    // int i = 0;
-
-    // try {
-    //     Network::Socket socket(ip, port);
-    //     while (true) { //TODO: change with window closing condition
-    //         if (i % 10 != 0)
-    //             socket.addToBuffer("a", false);
-    //         else
-    //             socket.addToBuffer("\n", false);
-    //         socket.select();
-    //         socket.send();
-    //         i++;
-    //     }
-    // } catch (Network::Socket::ConnectionException const &e) {
-    //     std::cerr << e.what() << std::endl;
-    //     return 84;
-    // }
+    client.run(isClosed, mutex, receive, requests);
 }
 
 int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
@@ -163,15 +138,20 @@ int main(int argc, char *argv[])
 
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
+    try {
+        Network::Client client(ip, port);
+        std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(mutex), std::ref(receive), std::ref(requests));
+        std::thread guiThread(gui, std::ref(receive), std::ref(requests));
+        guiThread.join();
 
-    std::thread serverThread(server, port, ip, std::ref(isClosed), std::ref(mutex), std::ref(receive), std::ref(requests));
-
-    std::thread guiThread(gui, std::ref(receive), std::ref(requests));
-    guiThread.join();
-
-    mutex.lock();
-    isClosed = true;
-    mutex.unlock();
-    serverThread.join();
+        mutex.lock();
+        isClosed = true;
+        mutex.unlock();
+        serverThread.join();
+        return 0;
+    } catch (Network::Socket::ConnectionException const &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    }
     return 0;
 }
