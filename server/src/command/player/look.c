@@ -85,7 +85,7 @@ static char *get_ressources_look
             look_info = get_tile_resources(client, server, pos, look_info);
         }
     }
-    look_info = concat_info_string(look_info, "]", true);
+    look_info = concat_info_string(look_info, "]\n", true);
     return look_info;
 }
 
@@ -95,6 +95,7 @@ void look(char **cmd, struct client_entry *client, struct server * server)
 
     if (cmd[1] == NULL) {
         look_info = get_ressources_look(client, server);
+        printf("%s\n", look_info);
         add_to_buffer(&client->buf_to_send, look_info, strlen(look_info));
         write_buffer(&client->buf_to_send, client->fd);
         free(look_info);
