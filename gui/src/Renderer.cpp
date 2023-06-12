@@ -12,7 +12,7 @@
 #include "Renderer.hpp"
 
 ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::string resourceFile):
-_camRotationSpeed(0.0174533), _camMovementSpeed(0.15), _width(width), _height(height)
+_camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
 {
     _done = false;
 
@@ -36,11 +36,23 @@ _camRotationSpeed(0.0174533), _camMovementSpeed(0.15), _width(width), _height(he
     _window.reset(_root->createRenderWindow(name, width, height, false, &params));
     _window->setVisible(true);
 
-    _loadResources(resourceFile);
 
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+    if (Ogre::RTShader::ShaderGenerator::initialize())
+    {
+        _shaderGenerator.reset(Ogre::RTShader::ShaderGenerator::getSingletonPtr());
+        _shaderGenerator->addSceneManager(_sceneManager.get());
+
+        _resolverListener.reset(new OgreBites::SGTechniqueResolverListener(_shaderGenerator.get()));
+        Ogre::MaterialManager::getSingleton().addListener(_resolverListener.get());
+    }
+    _loadResources(resourceFile);
     _sceneManager->setSkyBox(true, "MaterialHamsterSky");
+
+    _lastTime = std::chrono::steady_clock::now();
+    _deltaTime = 0.0;
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -201,7 +213,7 @@ void ZappyGui::Renderer::_processInputsCamMovement()
         move.y -= 1.0;
 
     move.normalise();
-    move *= _camMovementSpeed;
+    move *= _camMovementSpeed * _deltaTime;
     _camera->translate(move, Ogre::Node::TS_LOCAL);
 }
 
@@ -219,7 +231,7 @@ void ZappyGui::Renderer::_processInputsCamRotation()
     if (_inputs[SDLK_RIGHT] && !_inputs[SDLK_LEFT])
         rotation.z -= 1.0;
     rotation.normalise();
-    rotation *= _camRotationSpeed;
+    rotation *= _camRotationSpeed * _deltaTime;
     _camera->setRotationWorldYaw(Ogre::Radian(0.0), Ogre::Radian(rotation.y), Ogre::Radian(rotation.z));
 }
 
@@ -246,4 +258,18 @@ void ZappyGui::Renderer::_loadResources(std::string resourceFile)
 {
     ZappyGui::ResourceLoader::load(resourceFile);
     ZappyGui::ResourceLoader::initAll();
+}
+
+void ZappyGui::Renderer::updateDeltaTime()
+{
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    std::chrono::duration<float> tmp = std::chrono::duration_cast<std::chrono::duration<float>>(now - _lastTime);
+
+    _deltaTime = tmp.count();
+    _lastTime = now;
+}
+
+const float &ZappyGui::Renderer::getDeltaTime() const
+{
+    return _deltaTime;
 }

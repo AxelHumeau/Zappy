@@ -7,22 +7,28 @@
 
 #ifndef CLIENT_HPP_
     #define CLIENT_HPP_
-    #include "Socket.hpp"
     #include <iostream>
     #include <unordered_map>
     #include <functional>
+    #include <mutex>
+    #include "Socket.hpp"
+    #include "SafeQueue.hpp"
 
 namespace Network {
-
-    // static const std::unordered_map<std::string, std::function<void>> commands = {
-    //     {"read", }
-    // }
-
     class Client {
         public:
+            /// @brief Create a new client, open a new socket and try to connect to the given ip and port
+            /// @param ip to connect
+            /// @param port to connect
+            /// @return The new client instance or ConnectionException if an error occurs
             Client(std::string ip, uint16_t port);
             ~Client() {};
-            void run();
+            /// @brief run the client main loop. the loop will process the incoming response and send the pending requests
+            /// @param isClosed condition to end the loop
+            /// @param mutex used to ckeck the isClosed condition safely
+            /// @param receive a SafeQueue that store the received response
+            /// @param requests a SafeQueue that store the pending requests
+            void run(bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests);
 
         private:
             Network::Socket _socket;

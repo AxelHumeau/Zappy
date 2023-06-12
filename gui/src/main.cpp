@@ -14,8 +14,10 @@
 #include <iostream>
 #include "Client.hpp"
 #include <cstdlib>
+#include <thread>
+#include "SafeQueue.hpp"
 
-void createScene(ZappyGui::Renderer &renderer)
+void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
@@ -70,11 +72,20 @@ void createScene(ZappyGui::Renderer &renderer)
     }
     t.setTileSize(2.0f, 2.0f);
 
+    float deltaTime = renderer.getDeltaTime();
+    std::string rec;
+
     while (!renderer.isDone())
     {
+        renderer.updateDeltaTime();
+        deltaTime = renderer.getDeltaTime();
+
+        while (receive.tryPop(rec))
+            std::cout << rec << std::endl;
+
         renderer.event();
         renderer.processInputs();
-        jerome.setRotation(Ogre::Radian(0.01f), Ogre::Radian(-0.01f), Ogre::Radian(0.05f));
+        jerome.setRotation(Ogre::Radian(1.0f * deltaTime), Ogre::Radian(-1.0f * deltaTime), Ogre::Radian(5.0f * deltaTime));
         renderer.renderOneFrame();
     }
 }
@@ -104,20 +115,39 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
-int commandLoop(Network::Socket &socket) {
-
+void server(Network::Client &client, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+{
+    client.run(isClosed, mutex, receive, requests);
 }
 
-int main(int argc, char *argv[]) {
-    // Zappy::Renderer renderer(std::string("Zappy"));
-    // createScene(renderer);
+int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+{
+    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+    createScene(renderer, receive, requests);
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
     int port = 0;
     std::string ip("");
+    bool isClosed = false;
+    SafeQueue<std::string> receive;
+    SafeQueue<std::string> requests;
+    std::mutex mutex;
+
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
         Network::Client client(ip, port);
-        client.run();
+        std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(mutex), std::ref(receive), std::ref(requests));
+        std::thread guiThread(gui, std::ref(receive), std::ref(requests));
+        guiThread.join();
+
+        mutex.lock();
+        isClosed = true;
+        mutex.unlock();
+        serverThread.join();
         return 0;
     } catch (Network::Socket::ConnectionException const &e) {
         std::cerr << e.what() << std::endl;
@@ -125,9 +155,3 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
-
-// int main(void) {
-//     ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
-//     createScene(renderer);
-//     return 0;
-// }
