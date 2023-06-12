@@ -18,12 +18,14 @@ SRC =			main.c							\
 				initialization/init_game.c		\
 				initialization/init_resource.c	\
 				gui/handle_gui_client.c			\
+				gui/init_gui_client.c			\
 				gui/commands/map_size.c			\
 				gui/commands/tile_content.c		\
 				gui/commands/map_content.c		\
 				gui/commands/team_names.c		\
 				gui/commands/player_infos.c		\
 				gui/commands/time_unit.c		\
+				gui/events/new_player.c			\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

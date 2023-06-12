@@ -29,7 +29,11 @@ int handle_gui(struct client_entry *client, struct server *server, char *line)
     for (int i = 1; i < 4; i++)
         command[i] = strtok(NULL, " \t");
     command_func = get_gui_command(command[0]);
-    if (command_func == NULL)
-        return EXIT_FAILURE;
-    return command_func(command, server, client);
+    if (command_func == NULL) {
+        add_to_buffer(&client->buf_to_send, "suc\n", 4);
+        return EXIT_SUCCESS;
+    }
+    if (command_func(command, server, client) == EXIT_FAILURE)
+        add_to_buffer(&client->buf_to_send, "sbp\n", 4);
+    return EXIT_SUCCESS;
 }
