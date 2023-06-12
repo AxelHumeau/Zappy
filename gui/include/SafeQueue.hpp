@@ -53,6 +53,8 @@ class SafeQueue : public ISafeQueue<T> {
             return value;
         }
 
+        /// @brief Returns the current size of the queue.
+        /// @return size_t of the size of the queue.
         size_t size() const
         {
             return queue.size();

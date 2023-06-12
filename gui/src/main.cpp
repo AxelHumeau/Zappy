@@ -73,14 +73,15 @@ void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, 
     t.setTileSize(2.0f, 2.0f);
 
     float deltaTime = renderer.getDeltaTime();
+    std::string rec;
 
     while (!renderer.isDone())
     {
         renderer.updateDeltaTime();
         deltaTime = renderer.getDeltaTime();
 
-        while (receive.size() > 0)
-            std::cout << receive.pop() << std::endl;
+        while (receive.tryPop(rec))
+            std::cout << rec << std::endl;
 
         renderer.event();
         renderer.processInputs();
