@@ -21,5 +21,7 @@ int send_map_size(char **, struct server *server, struct client_entry *client)
     add_to_buffer(&client->buf_to_send, " ", 1);
     add_to_buffer(&client->buf_to_send, y, strlen(y));
     add_to_buffer(&client->buf_to_send, "\n", 1);
+    free(x);
+    free(y);
     return EXIT_SUCCESS;
 }

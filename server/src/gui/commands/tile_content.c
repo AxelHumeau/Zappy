@@ -31,5 +31,6 @@ int send_tile_content(char **args, struct server *server,
         server->maps[y][x].resources[PHIRAS],
         server->maps[y][x].resources[THYSMANE]);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
+    free(result);
     return EXIT_SUCCESS;
 }
