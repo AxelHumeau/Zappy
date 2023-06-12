@@ -65,6 +65,7 @@ void destroy_clients(struct server *server);
 int display_help(void);
 void display_map(struct server server);
 char *concat_info_string(char *src, const char *value, bool space);
+int find_power_of_base(int nb, int base);
 
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);
@@ -89,4 +90,6 @@ void exec_player_command(struct client_entry *client,
 
 // handle_gui_client.c
 int handle_gui(struct client_entry *client, struct server *server, char *line);
-int find_power_of_base(int nb, int base);
+
+// init_gui_client.c
+int init_gui_client(struct server *server, struct client_entry *client);

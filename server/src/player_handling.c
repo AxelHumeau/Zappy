@@ -63,8 +63,10 @@ int put_client_team(struct server *server, struct client_entry *entry)
     char *line = NULL;
 
     line = get_line_in_buffer(&entry->buf_to_recv);
-    if (is_graphic_client(entry, line) == EXIT_SUCCESS)
+    if (is_graphic_client(entry, line) == EXIT_SUCCESS) {
+        init_gui_client(server, entry);
         return EXIT_SUCCESS;
+    }
     for (size_t i = 0; i < server->nb_teams; i++) {
         if (accept_player_team(server, entry, line, i) == EXIT_SUCCESS)
             return EXIT_SUCCESS;
