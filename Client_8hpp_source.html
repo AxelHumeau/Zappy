@@ -89,7 +89,7 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classNetwork_1_1Client.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classNetwork_1_1Client.html">Client</a> {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <a class="code" href="classNetwork_1_1Client.html#aef161ee9c14c570b675bd57657797f22">Client</a>(std::string ip, uint16_t port);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            ~<a class="code" href="classNetwork_1_1Client.html">Client</a>() {};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            ~<a class="code" href="classNetwork_1_1Client.html">Client</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Client.html#a9855c11590838616d0b32f4f827a63a4">run</a>(<span class="keywordtype">bool</span> &amp;isClosed, std::mutex &amp;mutex, <a class="code" href="classSafeQueue.html">SafeQueue&lt;std::string&gt;</a> &amp;receive, <a class="code" href="classSafeQueue.html">SafeQueue&lt;std::string&gt;</a> &amp;requests);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">private</span>:</div>
