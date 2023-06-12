@@ -9,7 +9,8 @@
 #include <string.h>
 #include "gui/commands.h"
 
-int send_map_content(char **, struct server *server, struct client_entry *client)
+int send_map_content(char **, struct server *server,
+    struct client_entry *client)
 {
     char *x;
     char *y;
