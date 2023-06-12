@@ -114,22 +114,23 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">return</span> value;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">size_t</span> size()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> queue.size();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::queue&lt;T&gt; queue;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        std::mutex mutex;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::condition_variable cond;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classSafeQueue.html#ae80ce615654331a9577aaf56c5cfd073">   58</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classSafeQueue.html#ae80ce615654331a9577aaf56c5cfd073">size</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">return</span> queue.size();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::queue&lt;T&gt; queue;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::mutex mutex;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::condition_variable cond;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
 <div class="ttc" id="aclassISafeQueue_html"><div class="ttname"><a href="classISafeQueue.html">ISafeQueue</a></div><div class="ttdoc">Interface for queue that is thread safe.</div><div class="ttdef"><b>Definition:</b> ISafeQueue.hpp:13</div></div>
 <div class="ttc" id="aclassSafeQueue_html"><div class="ttname"><a href="classSafeQueue.html">SafeQueue</a></div><div class="ttdoc">A queue class that is thread safe.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:17</div></div>
 <div class="ttc" id="aclassSafeQueue_html_a00f86f06ee418f783f367f3f45ebfbbe"><div class="ttname"><a href="classSafeQueue.html#a00f86f06ee418f783f367f3f45ebfbbe">SafeQueue::tryPop</a></div><div class="ttdeci">bool tryPop(T &amp;value) override</div><div class="ttdoc">Try to pop a value from the queue, lock a mutex while trying to pop the value.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:34</div></div>
 <div class="ttc" id="aclassSafeQueue_html_a2e65646107e4542c024e6094d58cab8e"><div class="ttname"><a href="classSafeQueue.html#a2e65646107e4542c024e6094d58cab8e">SafeQueue::pop</a></div><div class="ttdeci">T pop() override</div><div class="ttdoc">Pop a value from the queue, lock a mutex and wait if the queue is empty.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:46</div></div>
 <div class="ttc" id="aclassSafeQueue_html_a639e3eb096849bc6166a20799f1c78db"><div class="ttname"><a href="classSafeQueue.html#a639e3eb096849bc6166a20799f1c78db">SafeQueue::~SafeQueue</a></div><div class="ttdeci">~SafeQueue()=default</div><div class="ttdoc">Destructor.</div></div>
 <div class="ttc" id="aclassSafeQueue_html_a95a9c7d6e1a76eb525e967fef3ce484a"><div class="ttname"><a href="classSafeQueue.html#a95a9c7d6e1a76eb525e967fef3ce484a">SafeQueue::push</a></div><div class="ttdeci">void push(T value) override</div><div class="ttdoc">Push in queue, lock a mutex while pushing the value.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:24</div></div>
+<div class="ttc" id="aclassSafeQueue_html_ae80ce615654331a9577aaf56c5cfd073"><div class="ttname"><a href="classSafeQueue.html#ae80ce615654331a9577aaf56c5cfd073">SafeQueue::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">Returns the current size of the queue.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

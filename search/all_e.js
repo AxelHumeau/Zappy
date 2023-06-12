@@ -16,5 +16,6 @@ var searchData=
   ['setspotlightrange_72',['setSpotlightRange',['../classZappyGui_1_1Light.html#a31371f296ec8bbd5470a287b994914e8',1,'ZappyGui::Light']]],
   ['settilesize_73',['setTileSize',['../classZappyGui_1_1Tilemap.html#abd0d3c5af60246d6df056e8c128e0234',1,'ZappyGui::Tilemap']]],
   ['settype_74',['setType',['../classZappyGui_1_1Light.html#ac48bf38aa674b720fa45e026b7a03f14',1,'ZappyGui::Light']]],
-  ['socket_75',['Socket',['../classNetwork_1_1Socket.html',1,'Network::Socket'],['../classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b',1,'Network::Socket::Socket(std::string const &amp;ip, uint16_t port, std::size_t bufferSize=256)'],['../classNetwork_1_1Socket.html#a262f657f5d056606fbfa4448988678a6',1,'Network::Socket::Socket(uint32_t ip, uint16_t port, std::size_t bufferSize=256)']]]
+  ['size_75',['size',['../classSafeQueue.html#ae80ce615654331a9577aaf56c5cfd073',1,'SafeQueue']]],
+  ['socket_76',['Socket',['../classNetwork_1_1Socket.html',1,'Network::Socket'],['../classNetwork_1_1Socket.html#a7c9dd2ae8b6226689dbc2ba6f176057b',1,'Network::Socket::Socket(std::string const &amp;ip, uint16_t port, std::size_t bufferSize=256)'],['../classNetwork_1_1Socket.html#a262f657f5d056606fbfa4448988678a6',1,'Network::Socket::Socket(uint32_t ip, uint16_t port, std::size_t bufferSize=256)']]]
 ];
