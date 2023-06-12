@@ -9,6 +9,21 @@
 #include <string.h>
 #include "server.h"
 
+static char *get_result_string(int x, int y, struct server *server)
+{
+    char *result = NULL;
+
+    asprintf(&result, "bct %d %d %ld %ld %ld %ld %ld %ld %ld\n", x, y,
+        server->maps[y][x].resources[FOOD],
+        server->maps[y][x].resources[LINEMATE],
+        server->maps[y][x].resources[DERAUMERE],
+        server->maps[y][x].resources[SIBUR],
+        server->maps[y][x].resources[MENDIANE],
+        server->maps[y][x].resources[PHIRAS],
+        server->maps[y][x].resources[THYSMANE]);
+    return result;
+}
+
 int send_tile_content(char **args, struct server *server,
     struct client_entry *client)
 {
@@ -22,14 +37,7 @@ int send_tile_content(char **args, struct server *server,
     y = atoi(args[2]);
     if (x < 0 || y < 0 || x >= server->width || y >= server->height)
         return EXIT_FAILURE;
-    asprintf(&result, "bct %d %d %ld %ld %ld %ld %ld %ld %ld\n", x, y,
-        server->maps[y][x].resources[FOOD],
-        server->maps[y][x].resources[LINEMATE],
-        server->maps[y][x].resources[DERAUMERE],
-        server->maps[y][x].resources[SIBUR],
-        server->maps[y][x].resources[MENDIANE],
-        server->maps[y][x].resources[PHIRAS],
-        server->maps[y][x].resources[THYSMANE]);
+    result = get_result_string(x, y, server);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
     return EXIT_SUCCESS;
