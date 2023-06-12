@@ -18,6 +18,7 @@ SRC =			main.c							\
 				initialization/init_resource.c	\
 				utils/utils.c					\
 				utils/str_to_array.c			\
+				utils/utils_object.c			\
 				command/player/player_command.c	\
 				command/player/forward.c		\
 				command/player/right.c			\

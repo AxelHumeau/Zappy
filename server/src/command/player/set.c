@@ -1,16 +1,33 @@
 /*
 ** EPITECH PROJECT, 2023
-** set.c
+** take.c
 ** File description:
-** set
+** take
 */
 
 #include <string.h>
 #include "macro.h"
 
-void set(char **cmd, struct client_entry *client, struct server *)
+static bool set_object(struct client_entry *client, struct server *server,
+    char *object)
 {
-    if (cmd[1] == NULL) {
+    int index_object = is_object(object);
+    int pos_y = client->player_info.y;
+    int pos_x = client->player_info.x;
+
+    if (index_object == -1)
+        return false;
+    if (client->player_info.inventory[index_object] <= 0)
+        return false;
+    server->maps[pos_y][pos_x].resources[index_object]++;
+    client->player_info.inventory[index_object]--;
+    return true;
+}
+
+void set(char **cmd, struct client_entry *client, struct server *server)
+{
+    if (cmd[1] != NULL && cmd[2] == NULL &&
+            set_object(client, server, cmd[1])) {
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
         write_buffer(&client->buf_to_send, client->fd);
     } else {
