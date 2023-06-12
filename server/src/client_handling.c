@@ -27,12 +27,11 @@ void accept_client(struct server *server)
     entry->fd = fd;
     entry->id = count++;
     entry->is_gui = false;
+    entry->is_role_defined = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
-    if (put_client_team(server, entry) != EXIT_SUCCESS)
-        destroy_client(entry);
-    else
-        SLIST_INSERT_HEAD(&server->clients, entry, next);
+    add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
+    SLIST_INSERT_HEAD(&server->clients, entry, next);
 }
 
 static void handle_lines(struct client_entry *client, struct server *server)
@@ -41,7 +40,10 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("[client %d]: %s\n", client->id, line);
+        if (client->is_gui)
+            handle_gui(client, server, line);
+        else
+            printf("[client %d]: %s\n", client->id, line);
         free(line);
         line = get_line_in_buffer(&client->buf_to_recv);
     }
@@ -59,6 +61,8 @@ int handle_client(struct client_entry *client,
     if (read_char <= 0)
         return 1;
     add_to_buffer(&client->buf_to_recv, buffer, read_char);
+    if (!client->is_role_defined)
+        return put_client_team(server, client);
     handle_lines(client, server);
     return 0;
 }
