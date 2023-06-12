@@ -1,6 +1,7 @@
 from enum import Enum
 import select
 import sys
+import commands
 
 class priority(Enum):
     FOOD = 1
@@ -8,7 +9,7 @@ class priority(Enum):
 
 
 class AI:
-    prio = priority.FOOD
+    prio = priority.RESSOURCES
     slot = 0
     goto = 0
     mapsize = (1, 1)
@@ -88,7 +89,7 @@ class AI:
         "phiras": 0,
         "thystame": 0
     }
-    lvl = 3
+    lvl = 1
     vision = []
     q_command = []
     # init
@@ -143,6 +144,9 @@ class AI:
         print("SENDING")
         self.s.send(("Inventory\n").encode())
         self.communication.request.push(["Inventory"])
+        commands.try_elevation(self, self.communication)
+        self.s.send(("Look\n").encode())
+        self.communication.request.push(["Look"])
     # run the AI
     def run(self):
         i = 0
@@ -169,16 +173,24 @@ class AI:
             # print(self.communication.request)
             # print(self.communication.response)
             # print("Look info : ")
-            # if (len(self.communication.inventory) != 0):
-            #     print(self.communication.inventory)
+            if (len(self.communication.inventory) != 0):
+                self.fill_inventory(self.communication.inventory)
+            if (len(self.communication.look_info) != 0):
+                print(self.communication.look_info)
+                print(self.get_best_path(self.get_target(self.communication.look_info)))
             # print("Inventory info : ")
             # print(self.communication.inventory)
             # print("-----------\n")
         self.s.close()
 
-    # def fill_inventory(self, inventory):
-    #     for obj in inventory:
-    #         if
+    def fill_inventory(self, inventory):
+            for item in inventory:
+                key = list(item.keys())[0]
+                value = item[key]
+                if key in self.inventory:
+                    self.inventory[key] = value
+                if key == "food":
+                    self.food = value
 
 def generate_instructions(path):
     instructions = []

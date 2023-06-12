@@ -31,9 +31,11 @@ class Communication:
         """
         self.look_info.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
+        print("info =", info)
         for square in info.split(","):
             dict_info = {}
             for elem in square.strip().split(" "):
+                print(elem)
                 if elem != "":
                     try:
                         dict_info[elem] += 1
@@ -57,6 +59,8 @@ class Communication:
         for square in info.split(","):
             dict_info = {}
             elem = square.strip().split(" ")
+            if len(elem) != 2 or elem[1].isnumeric() == False:
+                break
             dict_info[elem[0]] = int(elem[1])
             self.inventory.append(dict_info)
         return self.pop_information()
