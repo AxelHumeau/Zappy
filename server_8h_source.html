@@ -135,32 +135,35 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">char</span> *concat_info_string(<span class="keywordtype">char</span> *src, <span class="keyword">const</span> <span class="keywordtype">char</span> *value, <span class="keywordtype">bool</span> space);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">int</span> find_power_of_base(<span class="keywordtype">int</span> nb, <span class="keywordtype">int</span> base);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// Str_to_array.c</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">char</span> **str_to_array(<span class="keywordtype">char</span> *str, <span class="keywordtype">char</span> *separator);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> free_array(<span class="keywordtype">char</span> **array);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">// Init_game.c</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">int</span> init_game(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// Utils_object.c</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> is_object(<span class="keywordtype">char</span> *<span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">// Str_to_array.c</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">char</span> **str_to_array(<span class="keywordtype">char</span> *str, <span class="keywordtype">char</span> *separator);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> free_array(<span class="keywordtype">char</span> **array);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// Init_resource.c</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> set_resource_map(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// Init_game.c</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">int</span> init_game(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">// player_handling.c</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">int</span> put_client_team(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *entry);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">// Init_resource.c</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> set_resource_map(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// command_handling.c</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">int</span> exec_command(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">// Player/player_command.c</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> exec_player_command(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// handle_gui_client.c</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">int</span> handle_gui(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client, <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// player_handling.c</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">int</span> put_client_team(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *entry);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">// command_handling.c</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">int</span> exec_command(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// Player/player_command.c</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> exec_player_command(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">// init_gui_client.c</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span> init_gui_client(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">// handle_gui_client.c</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span> handle_gui(<span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client, <span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keywordtype">char</span> *line);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// init_gui_client.c</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">int</span> init_gui_client(<span class="keyword">struct</span> <a class="code" href="structserver.html">server</a> *<a class="code" href="structserver.html">server</a>, <span class="keyword">struct</span> <a class="code" href="structclient__entry.html">client_entry</a> *client);</div>
 <div class="ttc" id="astructbuffer_html"><div class="ttname"><a href="structbuffer.html">buffer</a></div><div class="ttdef"><b>Definition:</b> buffering.h:12</div></div>
 <div class="ttc" id="astructclient__entry_html"><div class="ttname"><a href="structclient__entry.html">client_entry</a></div><div class="ttdoc">Node of a client linked list.</div><div class="ttdef"><b>Definition:</b> server.h:18</div></div>
 <div class="ttc" id="astructplayer_html"><div class="ttname"><a href="structplayer.html">player</a></div><div class="ttdef"><b>Definition:</b> game.h:40</div></div>
