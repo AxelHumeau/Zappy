@@ -22,7 +22,7 @@ namespace Network {
             /// @param port to connect
             /// @return The new client instance or ConnectionException if an error occurs
             Client(std::string ip, uint16_t port);
-            ~Client() {};
+            ~Client() = default;
             /// @brief run the client main loop. the loop will process the incoming response and send the pending requests
             /// @param isClosed condition to end the loop
             /// @param mutex used to ckeck the isClosed condition safely

@@ -1,7 +1,19 @@
 cmake_minimum_required(VERSION 3.20.5)
 
 set(CXX=g++)
-set(SRCS src/main.cpp src/Renderer.cpp src/GameObject.cpp src/Socket.cpp src/Camera.cpp src/Light.cpp src/Tilemap.cpp src/Tile.cpp src/ResourceLoader.cpp src/Client.cpp src/Error.cpp)
+set(SRCS
+    src/main.cpp
+    src/Renderer.cpp
+    src/GameObject.cpp
+    src/Socket.cpp
+    src/Camera.cpp
+    src/Light.cpp
+    src/Tilemap.cpp
+    src/Tile.cpp
+    src/ResourceLoader.cpp
+    src/Client.cpp
+    src/Error.cpp
+)
 set(INCLUDES include)
 
 project(zappy_gui)
