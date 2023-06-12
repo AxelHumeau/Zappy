@@ -12,7 +12,7 @@
 #include "Light.hpp"
 #include "Tilemap.hpp"
 #include <iostream>
-#include "Socket.hpp"
+#include "Client.hpp"
 #include <cstdlib>
 
 void createScene(ZappyGui::Renderer &renderer)
@@ -104,29 +104,26 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
+int commandLoop(Network::Socket &socket) {
+
+}
+
 int main(int argc, char *argv[]) {
     // Zappy::Renderer renderer(std::string("Zappy"));
     // createScene(renderer);
-    int i = 0;
     int port = 0;
     std::string ip("");
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
-        Network::Socket socket(ip, port);
-        while (true) { //TODO: change with window closing condition
-            if (i % 10 != 0)
-                socket.addToBuffer("a", false);
-            else
-                socket.addToBuffer("\n", false);
-            socket.select();
-            socket.send();
-            i++;
-        }
+        Network::Client client(ip, port);
+        client.run();
+        return 0;
     } catch (Network::Socket::ConnectionException const &e) {
         std::cerr << e.what() << std::endl;
         return 84;
     }
+    return 0;
 }
 
 // int main(void) {
