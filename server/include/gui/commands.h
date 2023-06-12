@@ -18,3 +18,5 @@ gui_command_t send_team_names;
 gui_command_t send_player_pos;
 gui_command_t send_player_level;
 gui_command_t send_player_inventory;
+gui_command_t send_time_request;
+gui_command_t send_time_modification;

@@ -24,4 +24,6 @@ static const gui_command_pair_t GUI_COMMANDS[] = {
     {"ppo", &send_player_pos},
     {"plv", &send_player_level},
     {"pin", &send_player_inventory},
+    {"sgt", &send_time_request},
+    {"sst", &send_time_modification},
 };

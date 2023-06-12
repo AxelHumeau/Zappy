@@ -28,7 +28,10 @@ static int get_id_from_args(char **args)
 
     if (args[1] == NULL)
         return -1;
-    return atoi(args[1]);
+    id = atoi(args[1]);
+    if (id < 0)
+        return -1;
+    return id;
 }
 
 int send_player_pos(char **args, struct server *server,
@@ -62,7 +65,7 @@ int send_player_level(char **args, struct server *server,
     player = get_player(server->teams, id, server->nb_teams);
     if (player == NULL)
         return EXIT_FAILURE;
-    asprintf(&result, "plv %d %d\n", id, player->level);
+    asprintf(&result, "plv %d %ld\n", id, player->level);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
     return EXIT_SUCCESS;
@@ -80,8 +83,9 @@ int send_player_inventory(char **args, struct server *server,
     player = get_player(server->teams, id, server->nb_teams);
     if (player == NULL)
         return EXIT_FAILURE;
-    asprintf(&result, "pin %d %d %d %d %d %d %d %d %d %d\n", id, player->x,
-        player->y, player->inventory[FOOD], player->inventory[LINEMATE],
+    asprintf(&result, "pin %d %d %d %ld %ld %ld %ld %ld %ld %ld\n",
+        id, player->x, player->y,
+        player->inventory[FOOD], player->inventory[LINEMATE],
         player->inventory[DERAUMERE], player->inventory[SIBUR],
         player->inventory[MENDIANE], player->inventory[PHIRAS],
         player->inventory[THYSMANE]);

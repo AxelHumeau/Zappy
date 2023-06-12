@@ -23,6 +23,7 @@ SRC =			main.c							\
 				gui/commands/map_content.c		\
 				gui/commands/team_names.c		\
 				gui/commands/player_infos.c		\
+				gui/commands/time_unit.c		\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 
