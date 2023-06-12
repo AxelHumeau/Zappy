@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['light_95',['Light',['../classZappyGui_1_1Light.html',1,'ZappyGui']]]
+  ['light_97',['Light',['../classZappyGui_1_1Light.html',1,'ZappyGui']]]
 ];
