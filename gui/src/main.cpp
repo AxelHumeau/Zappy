@@ -14,8 +14,10 @@
 #include <iostream>
 #include "Socket.hpp"
 #include <cstdlib>
+#include <thread>
+#include "SafeQueue.hpp"
 
-void createScene(ZappyGui::Renderer &renderer)
+void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
     // Directional light
     // Ogre::Light* directionalLight = scnMgr->createLight("DirectionalLight");
@@ -76,6 +78,10 @@ void createScene(ZappyGui::Renderer &renderer)
     {
         renderer.updateDeltaTime();
         deltaTime = renderer.getDeltaTime();
+
+        while (receive.size() > 0)
+            std::cout << receive.pop() << std::endl;
+
         renderer.event();
         renderer.processInputs();
         jerome.setRotation(Ogre::Radian(1.0f * deltaTime), Ogre::Radian(-1.0f * deltaTime), Ogre::Radian(5.0f * deltaTime));
@@ -108,30 +114,63 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
-// int main(int argc, char *argv[]) {
-//     // Zappy::Renderer renderer(std::string("Zappy"));
-//     // createScene(renderer);
-//     int i = 0;
-//     int port = 0;
-//     std::string ip("");
-//     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
-//         return 84;
-//     try {
-//         Network::Socket socket(ip, port);
-//         while (true) { //TODO: change with window closing condition
-//             if (i % 10 != 0)
-//                 socket.addToBuffer("a", false);
-//             else
-//                 socket.addToBuffer("\n", false);
-//             socket.select();
-//             socket.send();
-//             i++;
-//         }
-//     }
-// }
+void server(int port, std::string ip, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+{
+    receive.push("Connected");
+    while (1)
+    {
+        mutex.lock();
+        if (isClosed)
+            break;
+        mutex.unlock();
+    }
 
-int main(void) {
+    // int i = 0;
+
+    // try {
+    //     Network::Socket socket(ip, port);
+    //     while (true) { //TODO: change with window closing condition
+    //         if (i % 10 != 0)
+    //             socket.addToBuffer("a", false);
+    //         else
+    //             socket.addToBuffer("\n", false);
+    //         socket.select();
+    //         socket.send();
+    //         i++;
+    //     }
+    // } catch (Network::Socket::ConnectionException const &e) {
+    //     std::cerr << e.what() << std::endl;
+    //     return 84;
+    // }
+}
+
+int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+{
     ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
-    createScene(renderer);
+    createScene(renderer, receive, requests);
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    int port = 0;
+    std::string ip("");
+    bool isClosed = false;
+    SafeQueue<std::string> receive;
+    SafeQueue<std::string> requests;
+    std::mutex mutex;
+
+    if (getOptions(argc - 1, argv + 1, port, ip) == -1)
+        return 84;
+
+    std::thread serverThread(server, port, ip, std::ref(isClosed), std::ref(mutex), std::ref(receive), std::ref(requests));
+
+    std::thread guiThread(gui, std::ref(receive), std::ref(requests));
+    guiThread.join();
+
+    mutex.lock();
+    isClosed = true;
+    mutex.unlock();
+    serverThread.join();
     return 0;
 }
