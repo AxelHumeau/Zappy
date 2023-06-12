@@ -64,6 +64,7 @@ void destroy_clients(struct server *server);
 // Utils.c
 int display_help(void);
 void display_map(struct server server);
+char *concat_info_string(char *src, const char *value, bool space);
 
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);

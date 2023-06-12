@@ -9,18 +9,6 @@
 #include <stdio.h>
 #include "macro.h"
 
-static char *concat_info_string(char *src, const char *value, bool space)
-{
-    char *tmp = NULL;
-
-    if (space)
-        asprintf(&tmp, "%s %s", src, value);
-    else
-        asprintf(&tmp, "%s,", src);
-    free(src);
-    return tmp;
-}
-
 static char *get_info_player_pos(struct client_entry *client,
     struct server *server)
 {
@@ -58,19 +46,24 @@ static void get_look_position(struct client_entry *client,
 }
 
 static char *get_tile_resources(struct client_entry *client,
-    struct server *server, int *pos_index, char *look_info)
+    struct server *server, int *index, char *look_info)
 {
     int pos[2] = {0};
     int pos_y = 0;
     int pos_x = 0;
+    int level = client->player_info.level;
+    enum direction dir = client->player_info.direction;
 
-    get_look_position(client, server, pos_index, pos);
+    get_look_position(client, server, index, pos);
     pos_y = pos[0];
     pos_x = pos[1];
     for (int i = 0; i < NB_RESOURCES; i++) {
         for (size_t nb = 0; nb < server->maps[pos_y][pos_x].resources[i]; nb++)
             look_info = concat_info_string(look_info, RESSOURCE_STR[i], true);
     }
+    if (index[0] == level && index[1] == -(index[0] * POS_LOOK[dir]))
+        return look_info;
+    look_info = concat_info_string(look_info, NULL, false);
     return look_info;
 }
 
@@ -90,9 +83,6 @@ static char *get_ressources_look
             pos[0] = i;
             pos[1] = j;
             look_info = get_tile_resources(client, server, pos, look_info);
-            if (i == client->player_info.level && j == tmp)
-                break;
-            look_info = concat_info_string(look_info, NULL, false);
         }
     }
     look_info = concat_info_string(look_info, "]", true);
