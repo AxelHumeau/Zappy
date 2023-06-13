@@ -17,7 +17,7 @@ static player_t *get_player(struct team *team, int id, int nb_teams)
         return NULL;
     SLIST_FOREACH(entry, &team->players, next) {
         if (entry->id == id)
-            return &entry->player;
+            return &entry->player_info;
     }
     return get_player(team + 1, id, nb_teams - 1);
 }
@@ -65,7 +65,7 @@ int send_player_level(char **args, struct server *server,
     player = get_player(server->teams, id, server->nb_teams);
     if (player == NULL)
         return EXIT_FAILURE;
-    asprintf(&result, "plv %d %ld\n", id, player->level);
+    asprintf(&result, "plv %d %d\n", id, player->level);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
     return EXIT_SUCCESS;

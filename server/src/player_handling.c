@@ -10,6 +10,21 @@
 #include <string.h>
 #include "macro.h"
 
+static void set_info_player(struct client_entry *entry, struct server *server,
+    struct team *team)
+{
+    entry->player_info.x = rand() % server->width;
+    entry->player_info.y = rand() % server->height;
+    memset(entry->player_info.inventory, 0,
+        sizeof(entry->player_info.inventory));
+    entry->player_info.inventory[0] = 10;
+    entry->player_info.level = 1;
+    entry->player_info.time_units_left = 10;
+    entry->player_info.team = team;
+    entry->player_info.last_action = 0;
+    entry->player_info.direction = rand() % NB_DIRECTIONS;
+}
+
 static int accept_player_team(struct server *server,
     struct client_entry *entry, char *line, int i)
 {
@@ -17,28 +32,25 @@ static int accept_player_team(struct server *server,
     int slot_left = server->teams[i].nb_slots_left;
     struct client_entry *copy = NULL;
 
-    if (!strcmp(server->teams[i].name, line) && slot_left != 0) {
-        server->teams[i].nb_slots_left--;
-        asprintf(&info, "%d\n%d %d\n", server->teams[i].nb_slots_left,
-            server->width, server->height);
-        add_to_buffer(&entry->buf_to_send, info, strlen(info));
-        copy = malloc(sizeof(struct client_entry));
-        memcpy(copy, entry, sizeof(struct client_entry));
-        SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
-        entry->player.team = &server->teams[i];
-        entry->player.orientation = rand() % 4 + 1;
-        free(info);
-        free(line);
-        entry->is_role_defined = true;
-        return EXIT_SUCCESS;
-    }
-    return EXIT_FAIL;
+    if (strcmp(server->teams[i].name, line) || slot_left == 0)
+        return EXIT_FAIL;
+    server->teams[i].nb_slots_left--;
+    asprintf(&info, "%d\n%d %d\n", server->teams[i].nb_slots_left,
+        server->width, server->height);
+    add_to_buffer(&entry->buf_to_send, info, strlen(info));
+    set_info_player(entry, server, &server->teams[i]);
+    copy = malloc(sizeof(struct client_entry));
+    memcpy(copy, entry, sizeof(struct client_entry));
+    SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
+    free(info);
+    free(line);
+    entry->is_role_defined = true;
+    return EXIT_SUCCESS;
 }
 
 int is_graphic_client(struct client_entry *entry, char *line)
 {
     if (!strcmp(line, GRAPHIC)) {
-        entry->is_gui = true;
         free(line);
         entry->is_role_defined = true;
         return EXIT_SUCCESS;

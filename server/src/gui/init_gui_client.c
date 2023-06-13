@@ -19,7 +19,7 @@ int init_gui_client(struct server *server, struct client_entry *client)
     SLIST_FOREACH(entry, &server->clients, next) {
         if (entry->is_gui)
             continue;
-        notify_new_player(server, client, &entry->player, entry->id);
+        notify_new_player(server, client, &entry->player_info, entry->id);
     }
     return EXIT_SUCCESS;
 }

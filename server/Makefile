@@ -11,12 +11,27 @@ SRC =			main.c							\
 				loop.c							\
 				destroy_server.c				\
 				buffer.c						\
-				utils.c							\
 				initialization/get_params.c		\
 				initialization/init_server.c	\
 				initialization/setup_server.c	\
 				initialization/init_game.c		\
 				initialization/init_resource.c	\
+				utils/utils.c					\
+				utils/str_to_array.c			\
+				utils/utils_object.c			\
+				command/player/player_command.c	\
+				command/player/forward.c		\
+				command/player/right.c			\
+				command/player/left.c			\
+				command/player/look.c			\
+				command/player/inventory.c		\
+				command/player/broadcast.c		\
+				command/player/connect_nbr.c	\
+				command/player/fork.c			\
+				command/player/eject.c			\
+				command/player/take.c			\
+				command/player/set.c			\
+				command/player/incantation.c	\
 				gui/handle_gui_client.c			\
 				gui/init_gui_client.c			\
 				gui/commands/map_size.c			\

@@ -50,3 +50,15 @@ void display_map(struct server server)
         }
     }
 }
+
+char *concat_info_string(char *src, const char *value, bool space)
+{
+    char *tmp = NULL;
+
+    if (space)
+        asprintf(&tmp, "%s %s", src, value);
+    else
+        asprintf(&tmp, "%s,", src);
+    free(src);
+    return tmp;
+}

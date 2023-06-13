@@ -22,7 +22,7 @@ struct client_entry {
     buffer_t buf_to_recv;
     bool is_role_defined;
     bool is_gui;
-    player_t player;
+    player_t player_info;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -64,7 +64,15 @@ void destroy_clients(struct server *server);
 // Utils.c
 int display_help(void);
 void display_map(struct server server);
+char *concat_info_string(char *src, const char *value, bool space);
 int find_power_of_base(int nb, int base);
+
+// Utils_object.c
+bool is_object(char *object);
+
+// Str_to_array.c
+char **str_to_array(char *str, char *separator);
+void free_array(char **array);
 
 // Init_game.c
 int init_game(struct server *server);
@@ -74,6 +82,14 @@ void set_resource_map(struct server *server);
 
 // player_handling.c
 int put_client_team(struct server *server, struct client_entry *entry);
+
+// command_handling.c
+int exec_command(struct client_entry *client,
+    struct server *server, char *line);
+
+// Player/player_command.c
+void exec_player_command(struct client_entry *client,
+    struct server *server, char *line);
 
 // handle_gui_client.c
 int handle_gui(struct client_entry *client, struct server *server, char *line);

@@ -58,8 +58,9 @@ void set_resource_map(struct server *server)
     int select_resource = 0;
 
     check_stock_resources(resource);
-    do {
-        select_resource = resources_left(resource);
+    select_resource = resources_left(resource);
+    while (select_resource != -1) {
         place_resource(server, resource, select_resource);
-    } while (select_resource != -1);
+        select_resource = resources_left(resource);
+    }
 }
