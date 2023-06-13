@@ -24,9 +24,7 @@ void exec_player_command(struct client_entry *client,
                 return;
         }
     }
-    if (command[0] != NULL) {
+    if (command[0] != NULL)
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
     free_array(command);
 }

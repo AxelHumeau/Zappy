@@ -14,9 +14,6 @@ void right(char **cmd, struct client_entry *client, struct server *)
         client->player_info.direction =
         (enum direction) ((client->player_info.direction + 1) % NB_DIRECTIONS);
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-        write_buffer(&client->buf_to_send, client->fd);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

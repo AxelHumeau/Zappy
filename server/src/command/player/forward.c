@@ -29,9 +29,6 @@ void forward(char **cmd, struct client_entry *client, struct server *server)
         client->player_info.y += DIRECTION[direction_player][1];
         replace_player(client, server);
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-        write_buffer(&client->buf_to_send, client->fd);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

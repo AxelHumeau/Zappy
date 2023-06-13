@@ -96,10 +96,7 @@ void look(char **cmd, struct client_entry *client, struct server * server)
     if (cmd[1] == NULL) {
         look_info = get_ressources_look(client, server);
         add_to_buffer(&client->buf_to_send, look_info, strlen(look_info));
-        write_buffer(&client->buf_to_send, client->fd);
         free(look_info);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

@@ -27,11 +27,8 @@ static bool set_object(struct client_entry *client, struct server *server,
 void set(char **cmd, struct client_entry *client, struct server *server)
 {
     if (cmd[1] != NULL && cmd[2] == NULL &&
-            set_object(client, server, cmd[1])) {
+            set_object(client, server, cmd[1]))
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-        write_buffer(&client->buf_to_send, client->fd);
-    } else {
+    else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

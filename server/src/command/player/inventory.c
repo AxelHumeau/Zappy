@@ -31,10 +31,7 @@ void inventory(char **cmd, struct client_entry *client, struct server *)
     if (cmd[1] == NULL) {
         inventory = set_inventory_message(client);
         add_to_buffer(&client->buf_to_send, inventory, strlen(inventory));
-        write_buffer(&client->buf_to_send, client->fd);
         free(inventory);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

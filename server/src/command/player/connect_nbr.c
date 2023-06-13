@@ -18,10 +18,7 @@ void connect_nbr(char **cmd, struct client_entry *client,
         asprintf(&slots_left, "%d\n",
             client->player_info.team->nb_slots_left);
         add_to_buffer(&client->buf_to_send, slots_left, strlen(slots_left));
-        write_buffer(&client->buf_to_send, client->fd);
         free(slots_left);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }

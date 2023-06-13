@@ -15,9 +15,6 @@ void left(char **cmd, struct client_entry *client, struct server *)
             (NB_DIRECTIONS - 1) :
             client->player_info.direction - 1;
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-        write_buffer(&client->buf_to_send, client->fd);
-    } else {
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        write_buffer(&client->buf_to_send, client->fd);
-    }
 }
