@@ -6,6 +6,7 @@ set(SRCS
     src/Renderer.cpp
     src/GameObject.cpp
     src/Socket.cpp
+    src/Gui.cpp
     src/Camera.cpp
     src/Light.cpp
     src/Tilemap.cpp

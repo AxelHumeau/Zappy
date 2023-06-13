@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <thread>
 #include "SafeQueue.hpp"
+#include "Gui.hpp"
 
 void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
@@ -30,64 +31,42 @@ void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, 
     // directionalLightNode->setDirection(Ogre::Vector3(0, 0, -1));
 
     // without light we would just get a black screen
-    ZappyGui::Light light2(renderer.getSceneManager(), "light2", Ogre::Light::LT_SPOTLIGHT);
-    light2.setDiffuseColour(1, 1, 1);
-    light2.setSpecularColour(1, 1, 1);
-    light2.setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-    light2.setPosition(0, 0, 15);
-    light2.setDirection(0, 0, -1);
-
-    ZappyGui::Light light(renderer.getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
-    light.setDiffuseColour(1, 1, 1);
-    light.setSpecularColour(1, 1, 1);
-    light.setDirection(0, -1, -1);
+    // ZappyGui::Light light2(renderer.getSceneManager(), "light2", Ogre::Light::LT_SPOTLIGHT);
+    // light2.setDiffuseColour(1, 1, 1);
+    // light2.setSpecularColour(1, 1, 1);
+    // light2.setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+    // light2.setPosition(0, 0, 15);
+    // light2.setDirection(0, 0, -1);
 
     // also need to tell where we are
 
-    // create the camera
-    ZappyGui::Camera camera(renderer.getSceneManager(), "myCam");
-    std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
-    cam->setNearClipDistance(0.05); // specific to this sample
-    cam->setAutoAspectRatio(true);
-    cam->setPosition(0, 0, 0);
-    cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+    // // create the camera
+    // ZappyGui::Camera camera(renderer.getSceneManager(), "myCam");
+    // std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
+    // cam->setNearClipDistance(0.05); // specific to this sample
+    // cam->setAutoAspectRatio(true);
+    // cam->setPosition(0, 0, 0);
+    // cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 
-    // and tell it to render into the main window
-    renderer.registerCamera(cam);
+    // // and tell it to render into the main window
+    // renderer.registerCamera(cam);
 
     // finally something to render
     ZappyGui::GameObject jerome(renderer.getSceneManager(), "Mathias.mesh");
     jerome.setPosition(0, 0, -5);
     jerome.lookAt(Ogre::Vector3(10, 10, 0), Ogre::Node::TS_PARENT);
 
-    ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
-    t.setPosition(0.0f, 0.0f, -10.0f);
-    ZappyGui::Vector2i size = t.getSize();
-    for (int y = 0; y < size.data[1]; y++) {
-        for (int x = 0; x < size.data[0]; x++) {
-            ZappyGui::GameObject obj(renderer.getSceneManager(), "hamster.mesh");
-            std::shared_ptr<ZappyGui::GameObject> g = std::make_shared<ZappyGui::GameObject>(obj);
-            t[y][x].bindGameObject(g);
-        }
-    }
-    t.setTileSize(2.0f, 2.0f);
-
-    float deltaTime = renderer.getDeltaTime();
-    std::string rec;
-
-    while (!renderer.isDone())
-    {
-        renderer.updateDeltaTime();
-        deltaTime = renderer.getDeltaTime();
-
-        while (receive.tryPop(rec))
-            std::cout << rec << std::endl;
-
-        renderer.event();
-        renderer.processInputs();
-        jerome.setRotation(Ogre::Radian(1.0f * deltaTime), Ogre::Radian(-1.0f * deltaTime), Ogre::Radian(5.0f * deltaTime));
-        renderer.renderOneFrame();
-    }
+    // ZappyGui::Tilemap t(renderer.getSceneManager(), 10, 10);
+    // t.setPosition(0.0f, 0.0f, -10.0f);
+    // ZappyGui::Vector2i size = t.getSize();
+    // for (int y = 0; y < size.data[1]; y++) {
+    //     for (int x = 0; x < size.data[0]; x++) {
+    //         ZappyGui::GameObject obj(renderer.getSceneManager(), "hamster.mesh");
+    //         std::shared_ptr<ZappyGui::GameObject> g = std::make_shared<ZappyGui::GameObject>(obj);
+    //         t[y][x].bindGameObject(g);
+    //     }
+    // }
+    // t.setTileSize(2.0f, 2.0f);
 }
 
 static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
@@ -118,12 +97,14 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
 void server(Network::Client &client, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
     client.run(isClosed, mutex, receive, requests);
+    receive.push("quit\n");
 }
 
 int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
-    ZappyGui::Renderer renderer(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
-    createScene(renderer, receive, requests);
+    ZappyGui::Gui gui(receive, requests);
+    gui.initialize();
+    gui.run();
     return 0;
 }
 

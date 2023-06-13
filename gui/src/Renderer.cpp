@@ -80,8 +80,13 @@ bool ZappyGui::Renderer::renderOneFrame()
 {
     bool ret = _root->renderOneFrame();
 
-    SDL_GL_SwapWindow(_sdlWindow.get());
+    renderSdl2();
     return ret;
+}
+
+void ZappyGui::Renderer::renderSdl2()
+{
+    SDL_GL_SwapWindow(_sdlWindow.get());
 }
 
 void ZappyGui::Renderer::event()

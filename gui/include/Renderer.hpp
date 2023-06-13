@@ -37,6 +37,9 @@ namespace ZappyGui {
             /// @brief Render a single frame of the scene. First update the ogre scene and then render the sdl2 window
             bool renderOneFrame();
 
+            /// @brief Renders a single frame of the sdl2 window
+            void renderSdl2();
+
             /// @brief Handles the window events and inputs
             void event();
 
