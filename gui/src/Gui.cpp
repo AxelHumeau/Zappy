@@ -6,12 +6,17 @@
 */
 
 #include "Gui.hpp"
+#include <sstream>
 #include <iostream>
 
-void ZappyGui::GuiCommands::quit(std::vector<std::string>) {}
-void ZappyGui::GuiCommands::msz(std::vector<std::string>) {}
+void ZappyGui::quit(ZappyGui::Gui &gui, std::vector<std::string> args) {
+    gui.setDone(true);
+}
+void ZappyGui::msz(ZappyGui::Gui &gui, std::vector<std::string> args) {}
 
 ZappyGui::Gui::Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests): _receive{receive}, _requests{requests} {
+    _commands.emplace("quit", quit);
+    _commands.emplace("msz", msz);
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
 }
 
@@ -35,12 +40,13 @@ void ZappyGui::Gui::initialize() {
         _renderer->updateDeltaTime();
 
         while (_receive.tryPop(command))
-            std::cout << command << std::endl;
-        // processCommand(command);
+            processCommand(command);
 
         _renderer->event();
         _renderer->renderSdl2();
     }
+    if (_renderer->isDone())
+        return;
     ZappyGui::Tilemap tilemap(_renderer->getSceneManager(), 10, 10);
     tilemap.setPosition(0.0f, 0.0f, -10.0f);
     ZappyGui::Vector2i size = tilemap.getSize();
@@ -63,11 +69,31 @@ void ZappyGui::Gui::run() {
         _renderer->updateDeltaTime();
         deltaTime = _renderer->getDeltaTime();
 
-        // while (receive.tryPop(command))
-        //     processCommand(command);
+        while (_receive.tryPop(command))
+            processCommand(command);
 
         _renderer->event();
         _renderer->processInputs();
         _renderer->renderOneFrame();
     }
+}
+
+void ZappyGui::Gui::processCommand(std::string command) {
+    std::string commandName;
+    std::string arg;
+    std::vector<std::string> args;
+    if (command[command.length() - 1] == '\n')
+        command.erase(command.length() - 1);
+    std::istringstream ss(command);
+    getline(ss, commandName, ' ');
+    if (commandName == "")
+        return;
+    while(getline(ss, arg, ' '))
+        args.push_back(arg);
+    if (_commands.find(commandName) != _commands.end())
+        _commands.at(commandName)(*this, args);
+}
+
+void ZappyGui::Gui::setDone(bool done) {
+    _renderer->setDone(done);
 }

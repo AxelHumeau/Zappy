@@ -14,14 +14,10 @@ namespace Network {
         _socket.send();
     }
 
-    void Client::run(bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests) {
+    void Client::run(bool &isClosed, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests) {
         std::string request;
 
-        while (true) {
-            mutex.lock();
-            if (isClosed)
-                break;
-            mutex.unlock();
+        while (!isClosed) {
             _socket.select();
             _socket.receive();
             while (requests.tryPop(request))

@@ -28,7 +28,7 @@ namespace Network {
             /// @param mutex used to ckeck the isClosed condition safely
             /// @param receive a SafeQueue that store the received response
             /// @param requests a SafeQueue that store the pending requests
-            void run(bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests);
+            void run(bool &isClosed, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests);
 
         private:
             Network::Socket _socket;

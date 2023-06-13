@@ -7,6 +7,7 @@
 
 #ifndef GUI_HPP_
     #define GUI_HPP_
+    #include <functional>
     #include "Renderer.hpp"
     #include "Camera.hpp"
     #include "Light.hpp"
@@ -15,15 +16,6 @@
 
 namespace ZappyGui {
 
-    namespace GuiCommands {
-        void quit(std::vector<std::string>);
-        void msz(std::vector<std::string>);
-
-        static const std::unordered_map<std::string, std::function<void(std::vector<std::string>)>> commands = {
-            {"quit", quit},
-            {"msz", msz}
-        };
-    }
 
     class Gui {
         public:
@@ -31,6 +23,8 @@ namespace ZappyGui {
             ~Gui() = default;
             void initialize();
             void run();
+            void processCommand(std::string command);
+            void setDone(bool done);
 
         private:
             SafeQueue<std::string> &_receive;
@@ -39,7 +33,11 @@ namespace ZappyGui {
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
 
+            std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
     };
+
+    void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
+    void msz(ZappyGui::Gui &gui, std::vector<std::string> args);
 }
 
 #endif

@@ -47,6 +47,10 @@ namespace ZappyGui {
             /// @return Boolean of the state of the window
             bool isDone();
 
+            /// @brief Sets the current state of the window to the one passed in parameter
+            /// @param done Boolean of the new state of the window
+            void setDone(bool done);
+
             /// @brief Processes the inputs of the user
             void processInputs();
 

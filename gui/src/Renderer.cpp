@@ -259,6 +259,11 @@ bool ZappyGui::Renderer::isDone()
     return _done;
 }
 
+void ZappyGui::Renderer::setDone(bool done)
+{
+    _done = done;
+}
+
 void ZappyGui::Renderer::_loadResources(std::string resourceFile)
 {
     ZappyGui::ResourceLoader::load(resourceFile);

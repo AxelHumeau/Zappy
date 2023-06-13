@@ -94,9 +94,9 @@ static int getOptions(int nb_args, char *args[], int &port, std::string &ip)
     return -1;
 }
 
-void server(Network::Client &client, bool &isClosed, std::mutex &mutex, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+void server(Network::Client &client, bool &isClosed, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
-    client.run(isClosed, mutex, receive, requests);
+    client.run(isClosed, receive, requests);
     receive.push("quit\n");
 }
 
@@ -115,19 +115,16 @@ int main(int argc, char *argv[])
     bool isClosed = false;
     SafeQueue<std::string> receive;
     SafeQueue<std::string> requests;
-    std::mutex mutex;
 
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
         Network::Client client(ip, port);
-        std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(mutex), std::ref(receive), std::ref(requests));
+        std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(receive), std::ref(requests));
         std::thread guiThread(gui, std::ref(receive), std::ref(requests));
         guiThread.join();
 
-        mutex.lock();
         isClosed = true;
-        mutex.unlock();
         serverThread.join();
         return 0;
     } catch (Network::Socket::ConnectionException const &e) {
