@@ -37,4 +37,10 @@ namespace ZappyGui {
             throw TileUndifinedResourceTypeError(resourceType);
         return _resources[resourceType];
     }
+
+    void Tile::setResourceAmount(const std::string &resourceType, std::size_t amount) {
+        if (_resources.find(resourceType) == _resources.end())
+            throw TileUndifinedResourceTypeError(resourceType);
+        _resources[resourceType] = amount;
+    }
 }

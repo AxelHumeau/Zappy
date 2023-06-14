@@ -55,6 +55,7 @@ namespace ZappyGui {
             /// @param resourceType to get the amount
             /// @return the amount of the given resourceType or throw an TileUndifinedResourceTypeError
             std::size_t getResourceAmount(const std::string &resourceType);
+            void setResourceAmount(const std::string &resourceType, std::size_t amount);
 
         private:
             int _x;
