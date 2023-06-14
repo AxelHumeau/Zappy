@@ -12,6 +12,7 @@ int init_gui_client(struct server *server, struct client_entry *client)
 {
     struct client_entry *entry = NULL;
 
+    client->is_gui = true;
     send_map_size((char *[]) {}, server, client);
     send_time_request((char *[]) {}, server, client);
     send_map_content((char *[]) {}, server, client);
@@ -19,7 +20,7 @@ int init_gui_client(struct server *server, struct client_entry *client)
     SLIST_FOREACH(entry, &server->clients, next) {
         if (entry->is_gui)
             continue;
-        notify_new_player(server, client, &entry->player_info, entry->id);
+        send_new_player_str(client, entry->id, &entry->player_info);
     }
     return EXIT_SUCCESS;
 }

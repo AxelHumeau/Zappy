@@ -30,13 +30,6 @@ enum direction {
     LEFT = 3,
 };
 
-enum orientation {
-    NORTH = 1,
-    EAST,
-    SOUTH,
-    WEST
-};
-
 typedef struct player {
     int x;
     int y;
@@ -46,7 +39,6 @@ typedef struct player {
     size_t time_units_left;
     time_t last_action;
     struct team *team;
-    enum orientation orientation;
 } player_t;
 
 struct tile {

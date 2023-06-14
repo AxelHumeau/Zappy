@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static void set_info_player(struct client_entry *entry, struct server *server,
     struct team *team)
@@ -45,6 +46,8 @@ static int accept_player_team(struct server *server,
     free(info);
     free(line);
     entry->is_role_defined = true;
+    broadcast_to_guis(server, &notify_new_player,
+        entry->id, &entry->player_info);
     return EXIT_SUCCESS;
 }
 

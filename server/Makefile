@@ -34,6 +34,7 @@ SRC =			main.c							\
 				command/player/incantation.c	\
 				gui/handle_gui_client.c			\
 				gui/init_gui_client.c			\
+				gui/broadcast_to_guis.c			\
 				gui/commands/map_size.c			\
 				gui/commands/tile_content.c		\
 				gui/commands/map_content.c		\
