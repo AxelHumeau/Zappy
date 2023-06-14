@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20.5)
 
-set(OGRE_DIR "/usr/local/lib/OGRE/cmake")
+set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake;${CMAKE_MODULE_PATH}")
 
 set(CXX=g++)
 set(SRCS
