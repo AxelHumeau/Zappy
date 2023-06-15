@@ -16,7 +16,7 @@ jobs:
   check_program_compilation:
     if: success()
     runs-on: ubuntu-latest
-    container: biozzzzz/zappy_docker
+    container: biozzzzz/zappy_docker:latest
     name: check_program_compilation
     steps:
       - uses: actions/checkout@v3
@@ -68,7 +68,7 @@ jobs:
     if: success()
     needs: [check_program_compilation]
     runs-on: ubuntu-latest
-    container: biozzzzz/zappy_docker
+    container: biozzzzz/zappy_docker:latest
     name: run_tests
     steps:
       - uses: actions/checkout@v3
