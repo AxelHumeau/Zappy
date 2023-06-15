@@ -8,13 +8,14 @@
 #ifndef MACRO_H_
     #define MACRO_H_
 
-    #include "server.h"
     #define KO "ko\n"
     #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
     #define NB_DIRECTIONS 4
-    #define MAX_COMMAND_PLAYER 12
+    #define NB_COMMAND_PLAYER 12
+    #define MAX_COMMAND_SIZE 10
+    #include "server.h"
 
 enum resource;
 
@@ -22,6 +23,8 @@ static const int EXIT_FAIL = -1;
 static const int EXIT_ERROR = 84;
 static const size_t MAX_SIZE_BUFFER = 256;
 static const int MAX_PORT_NUMBER = 65535;
+static const int REFILL_TIME = 20;
+static const int UNIT_TIME = 126;
 static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,

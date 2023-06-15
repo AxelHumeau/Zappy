@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "buffering.h"
 #include "game.h"
+#include "macro.h"
 
 /// @brief Node of a client linked list
 struct client_entry {
@@ -20,9 +21,12 @@ struct client_entry {
     int fd;
     buffer_t buf_to_send;
     buffer_t buf_to_recv;
+    char *command[MAX_COMMAND_SIZE];
+    int count_command;
     bool is_role_defined;
     bool is_gui;
     player_t player_info;
+    int timer;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -41,6 +45,9 @@ struct server {
     struct tile **maps;
     int max_players_per_team;
     struct clients clients;
+    long timestamp;
+    long resources_time;
+    int timerfd;
 };
 
 struct team {
@@ -88,6 +95,7 @@ int exec_command(struct client_entry *client,
     struct server *server, char *line);
 
 // Player/player_command.c
+void handle_player_command(struct client_entry *client, char *line);
 void exec_player_command(struct client_entry *client,
     struct server *server, char *line);
 
