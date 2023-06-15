@@ -76,7 +76,7 @@ jobs:
           fetch-depth: 0
       - run: timeout 2m make tests_run
   push_to_mirror:
-    if: success() && ${{ github.event_name == 'push' }}
+    if: success() && ${{ github.event_name == 'push' }} && ${{ github.ref == 'refs/heads/main' }}
     needs: [run_tests, check_coding_style]
     runs-on: ubuntu-latest
     name: push_to_mirror
@@ -91,7 +91,7 @@ jobs:
           ssh_private_key:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
   make_deploy_doxygen:
-    if: success() && ${{ github.event_name == 'push' }}
+    if: success() && ${{ github.event_name == 'push' }} && ${{ github.ref == 'refs/heads/main' }}
     needs: [push_to_mirror]
     runs-on: ubuntu-latest
     steps:
