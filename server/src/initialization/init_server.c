@@ -72,7 +72,6 @@ static void init_timer(struct server *server)
 {
     time_t second = (server->freq == 1) ? 1 : 0;
     long nanosecond = (server->freq != 1) ? 1e9 / server->freq : 0;
-
     struct itimerspec spec = {
         {second, nanosecond},
         {second, nanosecond}
