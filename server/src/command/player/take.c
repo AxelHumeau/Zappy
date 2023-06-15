@@ -15,7 +15,7 @@ static bool take_object(struct client_entry *client, struct server *server,
     int pos_y = client->player_info.y;
     int pos_x = client->player_info.x;
 
-    if (index_object == -1)
+    if (index_object == EXIT_FAIL)
         return false;
     if (server->maps[pos_y][pos_x].resources[index_object] <= 0)
         return false;

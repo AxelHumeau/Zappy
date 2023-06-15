@@ -75,7 +75,7 @@ char *concat_info_string(char *src, const char *value, bool space);
 int find_power_of_base(int nb, int base);
 
 // Utils_object.c
-bool is_object(char *object);
+int is_object(char *object);
 
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);
