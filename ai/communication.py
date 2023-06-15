@@ -74,7 +74,6 @@ class Communication:
                 else:
                     dict_info[None] = 0
             self.look_info.append(dict_info)
-        print("POP")
         self.request.pop()
         self.response.pop()
         return True
@@ -191,7 +190,6 @@ class Communication:
         read, write, error = select.select([self.s], [self.s], [])
         if write and len(self.writebuffer) != 0:
             self.s.send((self.writebuffer).encode())
-            print("send")
             self.writebuffer = ""
         if read:
             self.readbuffer += self.s.recv(1024).decode()

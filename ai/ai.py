@@ -16,7 +16,7 @@ class AI:
     lookaround = 0
     food = 10
     target = -1
-    nb_players_at_same_level = 0
+    nb_players_at_same_level = 1
     lvl = 1
     elevation = {
         1: {
@@ -140,36 +140,12 @@ class AI:
         paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
         return paths[indexbest]
 
-    #def bot_engine(self):
-        # print("SENDING")
-        # #  if self.lookaround != 3 or len(self.path) != 0:
-        # self.s.send(("Inventory\n").encode())
-        # self.communication.request.push(["Inventory"])
-        # if (len(self.communication.inventory) != 0):
-        #     self.fill_inventory(self.communication.inventory)
-        # commands.try_elevation(self, self.communication)
-        # if (len(self.path) == 0):
-        #     self.s.send(("Look\n").encode())
-        #     self.communication.request.push(["Look"])
-        #     if (len(self.communication.look_info) != 0):
-        #         self.path = self.get_best_path(self.get_target(self.communication.look_info))
-        #         print("" self.communication.look_info)
-        #         print(self.get_best_path(self.get_target(self.communication.look_info)))
-        #         if len(self.path) == 0 self.lookaround != 3:
-        #             self.s.send(("Right\n").encode())
-        #             self.lookaround += 1
-        #             self.communication.request.push(["Right"])
-            #     if len(self.path) == 0 and self.lookaround == 3:
-            #         self.s.send(("Right\n").encode())
-            #         self.s.send(("Forward\n").encode())
-            #         self.communication.request.push(["Rigth", "Forward"])
-            #         self.lookaround = 0
-            # else:
-            #     for cmd in self.path:
-            #         self.s.send((cmd + "\n").encode())
-            #     self.communication.request.push(self.path)
-
-    # run the AI
+    # run the A
+    def convert_list_to_string(self, lst):
+        result = ''
+        for inner_list in lst:
+            result += ' '.join(inner_list) + '\n'
+        return result
 
     def add_to_request_queue(self, commande):
         for cmd in commande:
@@ -177,9 +153,9 @@ class AI:
 
     def act_look(self):
         path = self.get_best_path(self.get_target(self.communication.look_info))
-        print(path)
+        print("path", path)
         if len(path) == 0 and self.lookaround == 3:
-            self.lookaround += 0
+            self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
             self.add_to_request_queue([["Right"], ["Forward"]])
             return
@@ -188,6 +164,8 @@ class AI:
             self.communication.writebuffer += "Right\n"
             self.add_to_request_queue([["Right"]])
             return
+        self.add_to_request_queue(path)
+        self.communication.writebuffer += self.convert_list_to_string(path)
         # self.communication.request.push(path)
         # self.communication.writebuffer += "Inventory\n"
         # self.communication.request.push(["Inventory"])
@@ -204,14 +182,21 @@ class AI:
     def Right(self):
         print("Right")
 
+    def Left(self):
+        print("Left")
+
+    def Take(self):
+        print("Take")
+        self.communication.writebuffer += "Inventory\n"
+        self.communication.request.push(["Inventory"])
 
     dic_function = {
         action.LOOK: act_look,
         action.INVENTORY: act_inventory,
         action.RIGHT: Right,
+        action.LEFT: Left,
         action.FORWARD: Forward,
-        # action.LEFT: left,
-        # action.RIGHT: right,
+        action.TAKE: Take,
     }
 
     def run(self):
@@ -230,7 +215,6 @@ class AI:
                 self.dic_function[handling](self)
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
-        self.s.close()
 
     def fill_inventory(self, inventory):
             for item in inventory:
@@ -248,13 +232,13 @@ def generate_instructions(path):
         next_num = path[i]
         if not is_part_of_sequence(next_num) and is_part_of_sequence(current):
             if next_num < current:
-                instructions.append("Left")
-                instructions.append("Forward")
+                instructions.append(["Left"])
+                instructions.append(["Forward"])
             else:
-                instructions.append("Right")
-                instructions.append("Forward")
+                instructions.append(["Right"])
+                instructions.append(["Forward"])
         else:
-            instructions.append("Forward")
+            instructions.append(["Forward"])
     instructions.append("Take")
     return instructions
 

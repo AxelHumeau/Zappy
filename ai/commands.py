@@ -12,4 +12,5 @@ def try_elevation(ai, request_queue: Queue):
         if el[1] < ai.inventory[el[0]]:
             return False
     request_queue.push(["Incantation"])
+    ai.communication.writebuffer += "Incantation"
     return True
