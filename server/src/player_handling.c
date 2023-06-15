@@ -23,6 +23,8 @@ static void set_info_player(struct client_entry *entry, struct server *server,
     entry->player_info.team = team;
     entry->player_info.last_action = 0;
     entry->player_info.direction = rand() % NB_DIRECTIONS;
+    memset(entry->command, 0, sizeof(char *) * MAX_COMMAND_SIZE);
+    entry->count_command = 0;
 }
 
 static int accept_player_team(struct server *server,
