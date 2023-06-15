@@ -14,10 +14,10 @@ def loop_client(dict_args):
         dict_args (dict): dictionnary of informations entered by users
     """
     message = ""
-    communication = Communication()
     s = connexion_server(dict_args["port"], dict_args["machine"])
+    communication = Communication(s)
     connexion_team(s, dict_args)
-    bot = AI(s, communication)
+    bot = AI(communication)
     bot.run()
 
 

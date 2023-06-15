@@ -1,5 +1,6 @@
 from enum import Enum
-import select
+from communication import action
+
 import sys
 import commands
 
@@ -10,12 +11,13 @@ class priority(Enum):
 
 class AI:
     prio = priority.RESSOURCES
-    slot = 0
-    goto = 0
     mapsize = (1, 1)
+    path = []
+    lookaround = 0
     food = 10
     target = -1
     nb_players_at_same_level = 0
+    lvl = 1
     elevation = {
         1: {
                 "nb_players": 1,
@@ -89,13 +91,9 @@ class AI:
         "phiras": 0,
         "thystame": 0
     }
-    lvl = 1
-    vision = []
-    q_command = []
     # init
 
-    def __init__(self, socket, communication):
-        self.s = socket
+    def __init__(self, communication):
         self.communication = communication
 
     def get_target(self, vision):
@@ -138,50 +136,83 @@ class AI:
             if pathscores[i] < bestscore:
                 indexbest = i
                 bestscore = pathscores[i]
+        paths[indexbest][len(paths[indexbest]) - 1] += " " + obj[0]
+        paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
         return paths[indexbest]
 
-    def bot_engine(self):
-        print("SENDING")
-        self.s.send(("Inventory\n").encode())
-        self.communication.request.push(["Inventory"])
-        commands.try_elevation(self, self.communication)
-        self.s.send(("Look\n").encode())
-        self.communication.request.push(["Look"])
+    #def bot_engine(self):
+        # print("SENDING")
+        # #  if self.lookaround != 3 or len(self.path) != 0:
+        # self.s.send(("Inventory\n").encode())
+        # self.communication.request.push(["Inventory"])
+        # if (len(self.communication.inventory) != 0):
+        #     self.fill_inventory(self.communication.inventory)
+        # commands.try_elevation(self, self.communication)
+        # if (len(self.path) == 0):
+        #     self.s.send(("Look\n").encode())
+        #     self.communication.request.push(["Look"])
+        #     if (len(self.communication.look_info) != 0):
+        #         self.path = self.get_best_path(self.get_target(self.communication.look_info))
+        #         print("" self.communication.look_info)
+        #         print(self.get_best_path(self.get_target(self.communication.look_info)))
+        #         if len(self.path) == 0 self.lookaround != 3:
+        #             self.s.send(("Right\n").encode())
+        #             self.lookaround += 1
+        #             self.communication.request.push(["Right"])
+            #     if len(self.path) == 0 and self.lookaround == 3:
+            #         self.s.send(("Right\n").encode())
+            #         self.s.send(("Forward\n").encode())
+            #         self.communication.request.push(["Rigth", "Forward"])
+            #         self.lookaround = 0
+            # else:
+            #     for cmd in self.path:
+            #         self.s.send((cmd + "\n").encode())
+            #     self.communication.request.push(self.path)
+
     # run the AI
+
+
+    def act_look(self):
+        path = self.get_best_path(self.get_target(self.communication.look_info))
+        print(path)
+        #self.communication.request.push(path)
+        self.communication.writebuffer += "Inventory\n"
+        self.communication.request.push(["Inventory"])
+
+        # print(self.communication.request)
+
+    def act_inventory(self):
+        self.fill_inventory(self.communication.inventory)
+        print(self.inventory)
+
+    dic_function = {
+        action.LOOK: act_look,
+        action.INVENTORY: act_inventory,
+        # action.FORWARD: forward,
+        # action.LEFT: left,
+        # action.RIGHT: right,
+    }
+
     def run(self):
-        i = 0
-        message = ""
         while True:
-            read, write, error = select.select([self.s], [self.s], [])
-            if write:
-                self.bot_engine()
-            if read:
-                message += self.s.recv(1024).decode()
-            tmp = []
-            pos = message.find('\n')
-            while (pos != -1):
-                tmp.append(message[:pos])
-                message = message[pos + 1:]
-                pos = message.find('\n')
-            for elem in tmp:
-                self.communication.response.push(elem)
+            self.communication.network()
             if (len(self.communication.response) != 0 and self.communication.response.front() == 'dead'):
                 break
-            while (self.communication.clean_information()):
-                continue
-            # print("\n----------")
-            # print(self.communication.request)
-            # print(self.communication.response)
-            # print("Look info : ")
-            if (len(self.communication.inventory) != 0):
-                self.fill_inventory(self.communication.inventory)
-            if (len(self.communication.look_info) != 0):
-                print(self.communication.look_info)
-                print(self.get_best_path(self.get_target(self.communication.look_info)))
-            # print("Inventory info : ")
-            # print(self.communication.inventory)
-            # print("-----------\n")
+            handling = self.communication.clean_information()
+            if (handling == action.NOTHING and len(self.communication.response) == 0):
+                self.communication.writebuffer += "Look\n"
+                self.communication.request.push(["Look"])
+            while (handling != action.NOTHING):
+                if handling == action.WAITING:
+                    break
+                self.dic_function[handling](self)
+                print(handling)
+                handling = self.communication.clean_information()
+                # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
         self.s.close()
+
+    def Forward(self):
+        print("forward")
 
     def fill_inventory(self, inventory):
             for item in inventory:
@@ -206,6 +237,7 @@ def generate_instructions(path):
                 instructions.append("Forward")
         else:
             instructions.append("Forward")
+    instructions.append("Take")
     return instructions
 
 def is_part_of_sequence(number):
