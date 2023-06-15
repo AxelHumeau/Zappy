@@ -117,7 +117,6 @@ void ZappyGui::Gui::run() {
         _renderer->event();
         _renderer->processInputs();
         _renderer->renderOneFrame();
-        break;
     }
 }
 

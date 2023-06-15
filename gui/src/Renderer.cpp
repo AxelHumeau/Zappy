@@ -37,6 +37,7 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     _window->setVisible(true);
 
 
+    _loadResources(resourceFile);
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
@@ -48,7 +49,6 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
         _resolverListener.reset(new OgreBites::SGTechniqueResolverListener(_shaderGenerator.get()));
         Ogre::MaterialManager::getSingleton().addListener(_resolverListener.get());
     }
-    _loadResources(resourceFile);
     _sceneManager->setSkyBox(true, "MaterialHamsterSky");
 
     _lastTime = std::chrono::steady_clock::now();
