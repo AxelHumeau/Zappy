@@ -78,6 +78,7 @@ static void init_timer(struct server *server)
     };
 
     server->timerfd = timerfd_create(CLOCK_REALTIME, 0);
+    server->resources_time = 0;
     timerfd_settime(server->timerfd, 0, &spec, NULL);
 }
 
@@ -92,7 +93,7 @@ int get_server_params(char **params, int nb_params, struct server *server)
     server->max_players_per_team = -1;
     server->freq = -1;
     server->timestamp = 0;
-    server->resources_time = 0;
+    server->multiplier_resource = 1;
     if (get_port_and_team_name(params, nb_params, server, &i) != EXIT_SUCCESS)
         return EXIT_FAIL;
     if (server->height == -1 || server->width == -1 ||
