@@ -72,7 +72,8 @@ void timer_command(struct server *server)
     server->timestamp++;
     server->resources_time++;
     if (server->resources_time % 20 == 0) {
-        printf("REFIILLL\n");
+        server->multiplier_resource = server->nb_players / PORTION_REFILL + 1;
+        refill_resources(server);
         server->resources_time = 0;
     }
     SLIST_FOREACH(client, &server->clients, next) {

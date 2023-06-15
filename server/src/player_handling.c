@@ -47,6 +47,7 @@ static int accept_player_team(struct server *server,
     free(info);
     free(line);
     entry->is_role_defined = true;
+    server->nb_players++;
     return EXIT_SUCCESS;
 }
 

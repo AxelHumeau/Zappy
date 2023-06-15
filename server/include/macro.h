@@ -20,6 +20,7 @@
 enum resource;
 
 static const int EXIT_FAIL = -1;
+static const int PORTION_REFILL = 5;
 static const int EXIT_ERROR = 84;
 static const size_t MAX_SIZE_BUFFER = 256;
 static const int MAX_PORT_NUMBER = 65535;

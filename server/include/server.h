@@ -43,7 +43,11 @@ struct server {
     struct team *teams;
     size_t nb_teams;
     struct tile **maps;
+    size_t ref_resource[NB_RESOURCES];
+    size_t map_resource[NB_RESOURCES];
+    size_t multiplier_resource;
     int max_players_per_team;
+    int nb_players;
     struct clients clients;
     long timestamp;
     long resources_time;
@@ -85,6 +89,7 @@ void free_array(char **array);
 int init_game(struct server *server);
 
 // Init_resource.c
+void refill_resources(struct server *server);
 void set_resource_map(struct server *server);
 
 // player_handling.c
