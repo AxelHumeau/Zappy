@@ -16,3 +16,4 @@ zappy_gui:
 	$(MAKE) -C gui
 zappy_ai:
 	$(MAKE) -C ai
+
