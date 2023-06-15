@@ -47,6 +47,7 @@ struct server {
     size_t map_resource[NB_RESOURCES];
     size_t multiplier_resource;
     int max_players_per_team;
+    int nb_players;
     struct clients clients;
     long timestamp;
     long resources_time;

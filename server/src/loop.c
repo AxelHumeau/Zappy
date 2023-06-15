@@ -72,6 +72,7 @@ void timer_command(struct server *server)
     server->timestamp++;
     server->resources_time++;
     if (server->resources_time % 20 == 0) {
+        server->multiplier_resource = server->nb_players / PORTION_REFILL + 1;
         refill_resources(server);
         server->resources_time = 0;
     }
