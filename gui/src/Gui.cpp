@@ -34,6 +34,8 @@ void ZappyGui::Gui::initialize() {
     light.setSpecularColour(1, 1, 1);
     light.setDirection(0, -1, -1);
 
+    _renderer->createTestOverlay();
+
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
     {
@@ -43,7 +45,7 @@ void ZappyGui::Gui::initialize() {
             processCommand(command);
 
         _renderer->event();
-        _renderer->renderSdl2();
+        _renderer->renderOneFrame();
     }
     if (_renderer->isDone())
         return;

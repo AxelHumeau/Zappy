@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <OGRE/OgreColourValue.h>
+#include <OGRE/Overlay/OgreOverlaySystem.h>
 #include "ResourceLoader.hpp"
 #include "Renderer.hpp"
 
@@ -28,6 +29,7 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     params["parentWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.x11.window));
 
     _root.reset(new Ogre::Root("./gui/config/plugins.cfg", "./gui/config/ogre.cfg", "./gui/config/ogre.log"));
+    _overlaySystem.reset(new Ogre::OverlaySystem());
     _root->setRenderSystem(_root->getRenderSystemByName("OpenGL Rendering Subsystem"));
     _root->showConfigDialog(NULL);
     _root->restoreConfig();
@@ -36,9 +38,9 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     _window.reset(_root->createRenderWindow(name, width, height, false, &params));
     _window->setVisible(true);
 
-
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+    _sceneManager->addRenderQueueListener(_overlaySystem.get());
 
     if (Ogre::RTShader::ShaderGenerator::initialize())
     {
