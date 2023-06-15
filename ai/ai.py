@@ -171,13 +171,26 @@ class AI:
 
     # run the AI
 
+    def add_to_request_queue(self, commande):
+        for cmd in commande:
+            self.communication.request.push(cmd)
 
     def act_look(self):
         path = self.get_best_path(self.get_target(self.communication.look_info))
         print(path)
-        #self.communication.request.push(path)
-        self.communication.writebuffer += "Inventory\n"
-        self.communication.request.push(["Inventory"])
+        if len(path) == 0 and self.lookaround == 3:
+            self.lookaround += 0
+            self.communication.writebuffer += "Right\nForward\n"
+            self.add_to_request_queue([["Right"], ["Forward"]])
+            return
+        if len(path) == 0:
+            self.lookaround += 1
+            self.communication.writebuffer += "Right\n"
+            self.add_to_request_queue([["Right"]])
+            return
+        # self.communication.request.push(path)
+        # self.communication.writebuffer += "Inventory\n"
+        # self.communication.request.push(["Inventory"])
 
         # print(self.communication.request)
 
@@ -185,10 +198,18 @@ class AI:
         self.fill_inventory(self.communication.inventory)
         print(self.inventory)
 
+    def Forward(self):
+        print("forward")
+
+    def Right(self):
+        print("Right")
+
+
     dic_function = {
         action.LOOK: act_look,
         action.INVENTORY: act_inventory,
-        # action.FORWARD: forward,
+        action.RIGHT: Right,
+        action.FORWARD: Forward,
         # action.LEFT: left,
         # action.RIGHT: right,
     }
@@ -205,14 +226,11 @@ class AI:
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
-                self.dic_function[handling](self)
                 print(handling)
+                self.dic_function[handling](self)
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
         self.s.close()
-
-    def Forward(self):
-        print("forward")
 
     def fill_inventory(self, inventory):
             for item in inventory:

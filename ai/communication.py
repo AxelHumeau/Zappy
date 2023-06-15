@@ -26,12 +26,12 @@ class Communication:
 
     communication = {
         "": ["WELCOME"],
-        "Forward": ["ok"],
-        "Right": ["ok"],
-        "Left": ["ok"],
-        "Broadcast text": ["ok"],
-        "Fork": ["ok"],
-        "Eject": ["ok", "ko"],
+        "Forward": [["ok"], action.FORWARD],
+        "Right": [["ok"], action.RIGHT],
+        "Left": [["ok"], action.LEFT],
+        "Broadcast text": [["ok"], action.BROADCAST],
+        "Fork": [["ok"], action.FORK],
+        "Eject": [["ok", "ko"], action.EJECT],
     }
 
     def __init__(self, socket):
@@ -168,7 +168,6 @@ class Communication:
         Returns:
             boolean: True/False
         """
-
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
@@ -177,14 +176,15 @@ class Communication:
                 self.response.front().find("message") != -1):
             self.get_message()
         if (self.request.front()[0] in Communication.communication):
-            return self.pop_response()
+            oldrq = self.request.front()[0]
+            self.pop_information()
+            return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
             self.pop_information()
             return action.FAILED
         if len(self.request) != 0:
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
-        print(len(self.request))
         return self.dict_function[oldrq][1]
 
     def network(self):
