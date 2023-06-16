@@ -81,6 +81,10 @@ int find_power_of_base(int nb, int base);
 // Utils_object.c
 int is_object(char *object);
 
+// Utils_broadcast.c
+void debug_map_broadcast(struct server *server, struct client_entry *client,
+    struct client_entry *player, struct position zone[]);
+
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);
 void free_array(char **array);

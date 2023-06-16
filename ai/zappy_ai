@@ -56,15 +56,17 @@ def loop_client(dict_args):
         print(communication.look_info)
         print("Inventory info : ")
         print(communication.inventory)
+        print("Message info : ")
+        print(communication.message)
         print("-----------\n")
 
 
 if __name__ == "__main__":
     dict_argument = {}
-    try:
-        error_handling.error_handler(sys.argv[1:], dict_argument)
-        loop_client(dict_argument)
-    except Exception as error:
-        print(error, file=sys.stderr)
-        sys.exit(84)
+    error_handling.error_handler(sys.argv[1:], dict_argument)
+    loop_client(dict_argument)
+    # try:
+    # except Exception as error:
+    #     print(error, file=sys.stderr)
+    #     sys.exit(84)
     sys.exit(0)

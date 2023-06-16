@@ -59,19 +59,21 @@ int handle_client(struct client_entry *client,
     int read_char = 0;
 
     if (!FD_ISSET(client->fd, read_fds))
-        return 0;
+        return EXIT_SUCCESS;
     read_char = read(client->fd, buffer, MAX_SIZE_BUFFER);
     if (read_char <= 0)
-        return 1;
+        return EXIT_FAIL;
     add_to_buffer(&client->buf_to_recv, buffer, read_char);
     if (!client->is_role_defined)
         return put_client_team(server, client);
     handle_lines(client, server);
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 void destroy_client(struct client_entry *client)
 {
+    if (client->is_role_defined && !client->is_gui)
+        client->player_info.team->nb_slots_left++;
     close(client->fd);
     destroy_buffer(&client->buf_to_send);
     destroy_buffer(&client->buf_to_recv);

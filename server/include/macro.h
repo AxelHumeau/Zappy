@@ -15,9 +15,12 @@
     #define NB_DIRECTIONS 4
     #define NB_COMMAND_PLAYER 12
     #define MAX_COMMAND_SIZE 10
+    #define ZONE_SIZE 8
+    #define ABS(x) (((x) < 0 ? (-x) : (x)))
     #include "server.h"
 
 enum resource;
+struct position;
 
 static const int EXIT_FAIL = -1;
 static const int PORTION_REFILL = 5;
@@ -61,6 +64,22 @@ static const int POS_LOOK[4] = {
     [RIGHT] = -1,
     [DOWN] = 1,
     [LEFT] = 1
+};
+static const int DIRECTION_ZONE[4] = {
+    [UP] = 1,
+    [RIGHT] = 3,
+    [DOWN] = 5,
+    [LEFT] = 7,
+};
+static const struct position ZONE_INDEX[ZONE_SIZE] = {
+    {0, -1},
+    {-1, -1},
+    {-1, 0},
+    {-1, 1},
+    {0, 1},
+    {1, 1},
+    {1, 0},
+    {1, -1},
 };
 
 #endif /* !MACRO_H_ */

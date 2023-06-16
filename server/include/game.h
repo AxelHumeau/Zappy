@@ -37,6 +37,11 @@ enum orientation {
     WEST
 };
 
+struct position {
+    int x;
+    int y;
+};
+
 typedef struct player {
     int x;
     int y;

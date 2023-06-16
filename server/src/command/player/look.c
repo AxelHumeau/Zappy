@@ -89,11 +89,11 @@ static char *get_ressources_look
     return look_info;
 }
 
-void look(char **cmd, struct client_entry *client, struct server * server)
+void look(char *cmd, struct client_entry *client, struct server * server)
 {
     char *look_info = NULL;
 
-    if (cmd[1] == NULL) {
+    if (cmd[0] == '\0') {
         look_info = get_ressources_look(client, server);
         add_to_buffer(&client->buf_to_send, look_info, strlen(look_info));
         free(look_info);
