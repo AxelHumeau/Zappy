@@ -23,14 +23,30 @@ enum resource {
     THYSMANE,
 };
 
+enum direction {
+    UP = 0,
+    RIGHT = 1,
+    DOWN = 2,
+    LEFT = 3,
+};
+
+enum orientation {
+    NORTH = 1,
+    EAST,
+    SOUTH,
+    WEST
+};
+
 typedef struct player {
     int x;
     int y;
+    enum direction direction;
     size_t inventory[NB_RESOURCES];
-    size_t level;
+    int level;
     size_t time_units_left;
     time_t last_action;
     struct team *team;
+    enum orientation orientation;
 } player_t;
 
 struct tile {

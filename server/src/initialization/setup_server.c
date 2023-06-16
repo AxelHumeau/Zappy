@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
+#include <stdio.h>
 #include <fcntl.h>
 #include "server.h"
 #include "macro.h"
@@ -31,7 +32,10 @@ int setup_server(struct server *server)
     ad.sin_addr.s_addr = INADDR_ANY;
     if (server->listening_fd < 0 ||
         bind(server->listening_fd, (struct sockaddr *) &ad, sizeof(ad)) != 0 ||
-        listen(server->listening_fd, FD_SETSIZE - 1) != 0)
+        listen(server->listening_fd, FD_SETSIZE - 1) != 0) {
+        dprintf(2, "Non valid port.\n");
+        free(server->teams);
         return EXIT_FAIL;
+    }
     return EXIT_SUCCESS;
 }

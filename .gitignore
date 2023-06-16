@@ -31,6 +31,7 @@
 *.out
 *.app
 zappy_server
+zappy_server_intra
 zappy_gui
 zappy_ai
 !ai/zappy_ai
@@ -45,9 +46,12 @@ dist
 #Other files
 .vscode
 run.sh
+vgcore*
+gui/config/ogre.log
 
 # Coding style report
 coding-style-reports.log
 
 # Valgrind
 vgcore*
+

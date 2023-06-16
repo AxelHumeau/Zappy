@@ -27,7 +27,7 @@ int write_buffer(buffer_t *buffer, int fd)
     if (write(fd, buffer->buffer, buffer->buffer_size) == -1)
         return EXIT_FAIL;
     buffer->buffer_size = 0;
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 void init_buffer(buffer_t *buffer)
