@@ -55,6 +55,8 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
 
     _lastTime = std::chrono::steady_clock::now();
     _deltaTime = 0.0;
+
+    loadFont("defaultFont", "General", "Roboto-Bold.ttf", "26", "156");
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -284,4 +286,19 @@ void ZappyGui::Renderer::updateDeltaTime()
 const float &ZappyGui::Renderer::getDeltaTime() const
 {
     return _deltaTime;
+}
+
+void ZappyGui::Renderer::setSkyBoxVisibility(bool visible)
+{
+    _sceneManager->setSkyBox(visible, "MaterialHamsterSky");
+}
+
+void ZappyGui::Renderer::loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution)
+{
+    Ogre::FontPtr mFont = Ogre::FontManager::getSingleton().create(name, group);
+    mFont->setType(Ogre::FT_TRUETYPE);
+    mFont->setSource(fontFile);
+    mFont->setParameter("size", size);
+    mFont->setParameter("resolution", resolution);
+    mFont->load();
 }

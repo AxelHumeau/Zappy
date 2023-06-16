@@ -11,7 +11,6 @@
     #include <memory>
     #include <OGRE/Ogre.h>
     #include <OGRE/Bites/OgreApplicationContext.h>
-    #include <OGRE/Overlay/imgui.h>
     #include <OGRE/Overlay/OgreOverlayManager.h>
     #include <OGRE/Overlay/OgreOverlayContainer.h>
     #include <OGRE/Overlay/OgreOverlay.h>
@@ -67,39 +66,17 @@ namespace ZappyGui {
             /// @return Float of the delta time
             const float &getDeltaTime() const;
 
-            void createTestOverlay()
-            {
-                Ogre::FontPtr mFont = Ogre::FontManager::getSingleton().create("tutorialFont","General");
-                mFont->setType(Ogre::FT_TRUETYPE);
-                mFont->setSource("Roboto-Bold.ttf");
-                mFont->setParameter("size","26");
-                mFont->setParameter("resolution","96");
-                mFont->load();
+            /// @brief Changes the state of the skybox with the one in parameter
+            /// @param visible Boolean which sets the visiblity of the SkyBox. True is visible, false is not.
+            void setSkyBoxVisibility(bool visible);
 
-                Ogre::OverlayContainer* panel = static_cast<Ogre::OverlayContainer*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("Panel", "myPanel"));
-                panel->setMetricsMode(Ogre::GMM_PIXELS);
-                panel->setPosition(0, 0);
-                panel->setDimensions(300.0, 100.0);
-                panel->setMaterialName("RedTransparent");
-
-                Ogre::TextAreaOverlayElement *textArea = static_cast<Ogre::TextAreaOverlayElement*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("TextArea", "TextAreaName"));
-                textArea->setMetricsMode(Ogre::GMM_PIXELS);
-                textArea->setPosition(150, 25);
-                textArea->setAlignment(Ogre::TextAreaOverlayElement::Center);
-                panel->setDimensions(300, 100);
-                textArea->setCaption("Hello, World!");
-                textArea->setCharHeight(50);
-                textArea->setFontName("tutorialFont");
-                textArea->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
-                textArea->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
-
-                Ogre::Overlay *overlay = Ogre::OverlayManager::getSingletonPtr()->create("myOverlay");
-                overlay->add2D(panel);
-
-                panel->addChild(textArea);
-
-                overlay->show();
-            };
+            /// @brief Loads a font into ogre.
+            /// @param name String of the font name in ogre.
+            /// @param group String defining the group in which the font is loaded.
+            /// @param fontFile String of the file path to the string. File path to the directory needs to be loaded in ogre before.
+            /// @param size String defining the size of the font.
+            /// @param resolution String defining the resolution of the font.
+            void loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution);
 
         private:
             /// @brief Loads all resources in the file in parameter in ogre

@@ -8,6 +8,7 @@
 #include "Gui.hpp"
 #include <sstream>
 #include <iostream>
+#include "Overlay.hpp"
 
 void ZappyGui::quit(ZappyGui::Gui &gui, std::vector<std::string> args) {
     gui.setDone(true);
@@ -34,7 +35,21 @@ void ZappyGui::Gui::initialize() {
     light.setSpecularColour(1, 1, 1);
     light.setDirection(0, -1, -1);
 
-    _renderer->createTestOverlay();
+    _renderer->setSkyBoxVisibility(false);
+    // _renderer->createTestOverlay();
+
+    Overlay ol("testPanel");
+    ol.panelSetPosition(0, 0);
+    ol.panelSetDimensions(300, 110);
+    ol.panelSetMaterial("RedTransparent");
+    ol.addTextArea("test", 150, 10, "defaultFont");
+    ol.textSetAlignment("test", Ogre::TextAreaOverlayElement::Center);
+    ol.textSetText("test", "Hello, World!\nYO");
+    ol.textSetCharacterHeight("test", 50);
+    ol.textSetColorBottom("test", Ogre::ColourValue(0.3, 0.5, 0.3));
+    ol.textSetColorTop("test", Ogre::ColourValue(0.5, 0.7, 0.5));
+
+    ol.showOverlay();
 
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
@@ -60,6 +75,8 @@ void ZappyGui::Gui::initialize() {
         }
     }
     tilemap.setTileSize(2.0f, 2.0f);
+
+    _renderer->setSkyBoxVisibility(true);
 }
 
 void ZappyGui::Gui::run() {
