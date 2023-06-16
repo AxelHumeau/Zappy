@@ -29,7 +29,7 @@ void ZappyGui::bct(ZappyGui::Gui &gui, std::vector<std::string> args) {
     std::size_t value;
     if (args.size() != 9)
         return;
-    for (size_t i = 0; i < args.size(); ++i) {
+    for (size_t i = 0; i < args.size(); i++) {
         if (args[i].find('-') != std::string::npos)
             return;
         value = strtoul(args[i].c_str(), NULL, 10);
@@ -54,26 +54,74 @@ void ZappyGui::bct(ZappyGui::Gui &gui, std::vector<std::string> args) {
     }
 }
 
-ZappyGui::Gui::Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests): _receive{receive}, _requests{requests} {
+void ZappyGui::tna(ZappyGui::Gui &gui, std::vector<std::string> args) {
+    if (args.size() != 1)
+        return;
+    gui.getGame().addTeam(args[0]);
+}
+
+void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
+    if (args.size() != 6)
+        return;
+    std::vector<std::size_t> values;
+    std::size_t value;
+    for (size_t i = 0; i < args.size() - 1; i++) {
+        if (args[i].find('-') != std::string::npos)
+            return;
+        value = strtoul(args[i].c_str(), NULL, 10);
+        if (value == 0 && args[i] != "0")
+            return;
+        values.push_back(value);
+    }
+    try {
+        gui.getGame().getTeam(args[5]).emplace_back(gui.getRenderer().getSceneManager(), "Mathias.mesh", values[0]);
+        gui.getGame().getTeam(args[5]).back().setMapPosition(values[1], values[2]);
+        gui.getGame().getTeam(args[5]).back().setOrientation(values[3]);
+        gui.getGame().getTeam(args[5]).back().setLevel(values[4]);
+    } catch (ZappyGui::TeamUndifinedError const &e) {
+        return;
+    }
+}
+
+void ZappyGui::pdi(ZappyGui::Gui &gui, std::vector<std::string> args) {
+    if (args.size() != 1)
+        return;
+    std::size_t value;
+    if (args[0].find('-') != std::string::npos)
+        return;
+    value = strtoul(args[0].c_str(), NULL, 10);
+    if (value == 0 && args[0] != "0")
+        return;
+    try {
+        gui.getGame().removePlayer(value);
+    } catch (ZappyGui::PlayerUndifinedError const &e) {
+        return;
+    }
+}
+
+ZappyGui::Gui::Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, ZappyGui::Game &game): _receive{receive}, _requests{requests}, _game{game} {
     _commands.emplace("quit", quit);
     _commands.emplace("msz", msz);
     _commands.emplace("bct", bct);
+    _commands.emplace("tna", tna);
+    _commands.emplace("pnw", pnw);
+    _commands.emplace("pdi", pdi);
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
 }
 
-void ZappyGui::Gui::initialize() {
-    ZappyGui::Camera camera(_renderer->getSceneManager(), "myCam");
-    std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
+void ZappyGui::Gui::initialize()
+{
+    std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(_renderer->getSceneManager(), "myCam");
     cam->setNearClipDistance(0.05);
     cam->setAutoAspectRatio(true);
     cam->setPosition(0, 0, 0);
     cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
     _renderer->registerCamera(cam);
 
-    ZappyGui::Light light(_renderer->getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
-    light.setDiffuseColour(1, 1, 1);
-    light.setSpecularColour(1, 1, 1);
-    light.setDirection(0, -1, -1);
+    _lights.emplace_back(_renderer->getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
+    _lights.back().setDiffuseColour(1, 1, 1);
+    _lights.back().setSpecularColour(1, 1, 1);
+    _lights.back().setDirection(0, -1, -1);
 
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
@@ -88,18 +136,17 @@ void ZappyGui::Gui::initialize() {
     }
     if (_renderer->isDone())
         return;
-    ZappyGui::Tilemap tilemap(_renderer->getSceneManager(), _mapWidth, _mapHeight);
-    tilemap.setPosition(0.0f, 0.0f, -10.0f);
-    ZappyGui::Vector2i size = tilemap.getSize();
+    auto tilemap = std::make_shared<ZappyGui::Tilemap>(_renderer->getSceneManager(), _mapWidth, _mapHeight);
+    tilemap->setPosition(0.0f, 0.0f, -10.0f);
+    ZappyGui::Vector2i size = tilemap->getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
-            ZappyGui::GameObject obj(_renderer->getSceneManager(), "hamster.mesh");
-            std::shared_ptr<ZappyGui::GameObject> obj_ptr = std::make_shared<ZappyGui::GameObject>(obj);
-            tilemap[y][x].bindGameObject(obj_ptr);
+            std::shared_ptr<ZappyGui::GameObject> obj_ptr = std::make_shared<ZappyGui::GameObject>(_renderer->getSceneManager(), "hamster.mesh");
+            (*tilemap)[y][x].bindGameObject(obj_ptr);
         }
     }
-    tilemap.setTileSize(2.0f, 2.0f);
-    setTilemap(std::make_shared<ZappyGui::Tilemap>(tilemap));
+    tilemap->setTileSize(2.0f, 2.0f);
+    setTilemap(tilemap);
 }
 
 void ZappyGui::Gui::run() {

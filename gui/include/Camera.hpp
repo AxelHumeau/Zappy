@@ -15,7 +15,6 @@ namespace ZappyGui {
     class Camera : public AGameObject {
         public:
             Camera(std::shared_ptr<Ogre::SceneManager> sceneManager, const Ogre::String &name);
-            ~Camera() {};
 
             /// @brief Return a shared pointer to the camera
             /// @param orderStr the serialization of the order

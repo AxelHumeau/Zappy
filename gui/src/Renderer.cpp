@@ -57,6 +57,8 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
 
 ZappyGui::Renderer::~Renderer()
 {
+    _window->removeAllViewports();
+    _camera.reset();
     _root->destroySceneManager(_sceneManager.get());
     _sceneManager.reset();
     SDL_DestroyWindow(_sdlWindow.get());

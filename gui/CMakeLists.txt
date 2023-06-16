@@ -13,6 +13,8 @@ set(SRCS
     src/Tile.cpp
     src/ResourceLoader.cpp
     src/Client.cpp
+    src/Game.cpp
+    src/Player.cpp
     src/Error.cpp
 )
 set(INCLUDES include)

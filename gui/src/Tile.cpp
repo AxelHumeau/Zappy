@@ -26,7 +26,7 @@ namespace ZappyGui {
         _resources["Thystame"] = 0;
     }
 
-    ZappyGui::GameObject const &Tile::getGameobject() {
+    ZappyGui::GameObject &Tile::getGameobject() {
         if (_gameobject == nullptr)
             throw TileNoGameobjectBoundError();
         return *_gameobject.get();

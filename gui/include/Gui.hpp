@@ -14,31 +14,36 @@
     #include "Light.hpp"
     #include "Tilemap.hpp"
     #include "SafeQueue.hpp"
+    #include "Game.hpp"
 
 namespace ZappyGui {
 
 
     class Gui {
         public:
-            Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests);
+            Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, ZappyGui::Game &game);
             ~Gui() = default;
             void initialize();
             void run();
             void processCommand(std::string command);
             void setDone(bool done);
 
+            ZappyGui::Renderer &getRenderer() const { return *_renderer.get(); }
             void setMapSize(size_t width, size_t height) { _mapWidth = width; _mapHeight = height; }
             std::pair<size_t, size_t> getMapSize() const { return std::pair<size_t, size_t>(_mapWidth, _mapHeight); }
             void setTilemap(std::shared_ptr<ZappyGui::Tilemap> tilemap) { _tilemap = tilemap; }
             std::shared_ptr<ZappyGui::Tilemap> getTilemap() { return _tilemap; }
+            ZappyGui::Game &getGame() { return _game; }
 
         private:
             SafeQueue<std::string> &_receive;
             SafeQueue<std::string> &_requests;
             std::unique_ptr<ZappyGui::Renderer> _renderer;
+            std::shared_ptr<ZappyGui::Tilemap> _tilemap;
+            std::vector<Light> _lights;
+            ZappyGui::Game &_game;
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
-            std::shared_ptr<ZappyGui::Tilemap> _tilemap;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
     };
@@ -46,6 +51,9 @@ namespace ZappyGui {
     void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
     void msz(ZappyGui::Gui &gui, std::vector<std::string> args);
     void bct(ZappyGui::Gui &gui, std::vector<std::string> args);
+    void tna(ZappyGui::Gui &gui, std::vector<std::string> args);
+    void pnw(ZappyGui::Gui &gui, std::vector<std::string> args);
+    void pdi(ZappyGui::Gui &gui, std::vector<std::string> args);
 }
 
 #endif

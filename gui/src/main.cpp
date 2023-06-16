@@ -100,9 +100,9 @@ void server(Network::Client &client, bool &isClosed, SafeQueue<std::string> &rec
     receive.push("quit\n");
 }
 
-int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, ZappyGui::Game &game)
 {
-    ZappyGui::Gui gui(receive, requests);
+    ZappyGui::Gui gui(receive, requests, game);
     gui.initialize();
     gui.run();
     return 0;
@@ -115,13 +115,14 @@ int main(int argc, char *argv[])
     bool isClosed = false;
     SafeQueue<std::string> receive;
     SafeQueue<std::string> requests;
+    ZappyGui::Game game;
 
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
         Network::Client client(ip, port);
         std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(receive), std::ref(requests));
-        std::thread guiThread(gui, std::ref(receive), std::ref(requests));
+        std::thread guiThread(gui, std::ref(receive), std::ref(requests), std::ref(game));
         guiThread.join();
 
         isClosed = true;

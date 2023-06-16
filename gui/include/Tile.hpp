@@ -50,7 +50,7 @@ namespace ZappyGui {
             void bindGameObject(std::shared_ptr<ZappyGui::GameObject> gameObject) { _gameobject = gameObject; }
             /// @brief return the gameobject bound to the tile
             /// @return the gameobject bound or throw an TileNoGameobjectBoundError if no gameobject is bound
-            ZappyGui::GameObject const &getGameobject();
+            ZappyGui::GameObject &getGameobject();
             /// @brief get the amount of the given resourceType
             /// @param resourceType to get the amount
             /// @return the amount of the given resourceType or throw an TileUndifinedResourceTypeError
