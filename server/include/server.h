@@ -37,7 +37,7 @@ struct server {
     int port;
     int freq;
     struct team *teams;
-    size_t nb_teams;
+    int nb_teams;
     struct tile **maps;
     int max_players_per_team;
     struct clients clients;

@@ -76,14 +76,15 @@ int get_server_params(char **params, int nb_params, struct server *server)
     server->teams = NULL;
     server->nb_teams = -1;
     server->max_players_per_team = -1;
-    server->freq = -1;
+    server->freq = 100;
+    server->port = -1;
     if (get_port_and_team_name(params, nb_params, server, &i) != EXIT_SUCCESS)
         return EXIT_FAIL;
-    if (server->height == -1 || server->width == -1 ||
+    if (server->height == -1 || server->width == -1 || server->port == -1 ||
         server->teams == NULL || server->nb_teams <= 0 ||
         server->max_players_per_team == -1 || server->freq == -1)
         return EXIT_FAIL;
-    for (size_t i = 0; i < server->nb_teams; i++)
+    for (i = 0; i < server->nb_teams; i++)
         server->teams[i].nb_slots_left = server->max_players_per_team;
     return EXIT_SUCCESS;
 }

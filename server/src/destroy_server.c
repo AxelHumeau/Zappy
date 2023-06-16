@@ -19,7 +19,7 @@ void destroy_server(struct server *server)
 {
     struct client_entry *tmp = NULL;
 
-    for (size_t i = 0; i < server->nb_teams; i++)
+    for (int i = 0; i < server->nb_teams; i++)
         for (struct client_entry *client = server->teams[i].players.slh_first;
             client; client = tmp) {
             tmp = client->next.sle_next;

@@ -70,7 +70,7 @@ int put_client_team(struct server *server, struct client_entry *entry)
         init_gui_client(server, entry);
         return EXIT_SUCCESS;
     }
-    for (size_t i = 0; i < server->nb_teams; i++) {
+    for (int i = 0; i < server->nb_teams; i++) {
         if (accept_player_team(server, entry, line, i) == EXIT_SUCCESS)
             return EXIT_SUCCESS;
     }
