@@ -205,7 +205,7 @@ class AI:
             if (len(self.communication.response) != 0 and self.communication.response.front() == 'dead'):
                 break
             handling = self.communication.clean_information()
-            if (handling == action.NOTHING and len(self.communication.response) == 0):
+            if (handling == action.NOTHING):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
             while (handling != action.NOTHING):
