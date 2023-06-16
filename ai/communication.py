@@ -40,6 +40,7 @@ class Communication:
         self.look_info = []
         self.inventory = []
         self.message = []
+        self.elevation = False
         self.current_level = 1
         self.nbr_conect = 1
         self.readbuffer = ""
@@ -140,16 +141,25 @@ class Communication:
         Returns:
             boolean: True if the elevation is successful, False otherwise
         """
-        resp = self.response.pop()
-        if resp[0] == "ko":
-            self.current_level = -1
-            return False
-        try:
-            self.current_level = int(resp[4])
-            return True
-        except Exception:
-            self.current_level = -1
-            return False
+        resp = self.response.front()
+        if self.elevation == True:
+            if resp != None and resp[0] == "ko":
+                self.elevation = False
+                self.pop_information()
+                return False
+            else:
+                self.current_level = int(resp[15])
+                self.pop_information()
+                return True
+        else:
+            if resp != None and resp == "ko":
+                self.elevation = False
+                self.pop_information()
+                return False
+            if resp != None and resp == "Elevation underway":
+                self.elevation = True
+                self.response.pop()
+                return True
 
     dict_function = {
         "Take": [interaction_object, action.TAKE],
@@ -158,6 +168,7 @@ class Communication:
         "ko": [pop_information, action.NOTHING],
         "Look": [parse_information_look, action.LOOK],
         "Inventory": [parse_information_inventory, action.INVENTORY],
+        "Incantation": [get_elevation_response, action.INCANTATION]
         # "Connect_nbr" : connect_number
     }
 
@@ -179,6 +190,7 @@ class Communication:
             self.pop_information()
             return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
+            print(self.response, self.request)
             self.pop_information()
             return action.FAILED
         if len(self.request) != 0:

@@ -105,15 +105,12 @@ class AI:
                     itemtoget.append((item, nbr - self.inventory[item]))
         if (self.prio == priority.FOOD):
             itemtoget.append(("food", 1))
-        if (itemtoget):
-            self.target = len(itemtoget)
-        else:
-            self.target = -1
         for i in range(len(vision)):
             for obj, nbr in vision[i].items():
                 for objects in itemtoget:
                     if (obj == objects[0]):
                         pos.append((objects[0], nbr, i))
+        print("item in vison needed:", pos)
         return pos
 
     def get_best_path(self, objs):
@@ -136,7 +133,9 @@ class AI:
             if pathscores[i] < bestscore:
                 indexbest = i
                 bestscore = pathscores[i]
-        paths[indexbest][len(paths[indexbest]) - 1] += " " + obj[0]
+        # print("all path:", paths)
+        # print("obj:", objs)
+        paths[indexbest][len(paths[indexbest]) - 1] += " " + objs[indexbest][0]
         paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
         return paths[indexbest]
 
@@ -154,6 +153,8 @@ class AI:
     def act_look(self):
         path = self.get_best_path(self.get_target(self.communication.look_info))
         print("path", path)
+        if len(path) != 0:
+            print(self.communication.look_info)
         if len(path) == 0 and self.lookaround == 3:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
@@ -174,7 +175,15 @@ class AI:
 
     def act_inventory(self):
         self.fill_inventory(self.communication.inventory)
-        print(self.inventory)
+        print(self.communication.inventory)
+        if self.food <= 6:
+            self.prio == priority.FOOD
+        commands.try_elevation(self, self.communication.request)
+
+    def incantation(self):
+        print("INCANTATION")
+        self.lvl = self.communication.current_level
+        print("lvl:", self.lvl)
 
     def Forward(self):
         print("forward")
@@ -185,10 +194,16 @@ class AI:
     def Left(self):
         print("Left")
 
+    def Set(self):
+        print("set")
+
     def Take(self):
         print("Take")
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+
+    def failed(self):
+        print("Failed")
 
     dic_function = {
         action.LOOK: act_look,
@@ -197,6 +212,9 @@ class AI:
         action.LEFT: Left,
         action.FORWARD: Forward,
         action.TAKE: Take,
+        action.INCANTATION: incantation,
+        action.FAILED: failed,
+        action.SET: Set
     }
 
     def run(self):
@@ -211,19 +229,19 @@ class AI:
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
-                print(handling)
+                # print(handling)
                 self.dic_function[handling](self)
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
 
     def fill_inventory(self, inventory):
-            for item in inventory:
-                key = list(item.keys())[0]
-                value = item[key]
-                if key in self.inventory:
-                    self.inventory[key] = value
-                if key == "food":
-                    self.food = value
+        for item in inventory:
+            key = list(item.keys())[0]
+            value = item[key]
+            if key in self.inventory:
+                self.inventory[key] = value
+            if key == "food":
+                self.food = value
 
 def generate_instructions(path):
     instructions = []
