@@ -100,3 +100,44 @@ event_func_t notify_resource_collecting;
  *  an int describing the id of the player
 */
 event_func_t notify_death;
+
+/** @brief notify when a egg was layed
+ * @param client gui client to notify
+ *
+ * @param args argument list that must contain the following:
+ *  a egg_t * describing the egg, 
+ *  an int describing the id of the player who lyed the egg
+*/
+event_func_t notify_egg_layed;
+
+/** @brief notify when a player connect to an egg
+ * @param client gui client to notify
+ *
+ * @param args argument list that must contain the following:
+ *  an int describing the id of the egg
+*/
+event_func_t notify_egg_connection;
+
+/** @brief notify when a egg dies
+ * @param client gui client to notify
+ *
+ * @param args argument list that must contain the following:
+ *  an int describing the id of the egg
+*/
+event_func_t notify_egg_death;
+
+/** @brief notify when the server send a message to the gui
+ * @param client gui client to notify
+ *
+ * @param args argument list that must contain the following:
+ *  a char * describing the message
+*/
+event_func_t notify_server_message;
+
+/** @brief notify when the game ended
+ * @param client gui client to notify
+ *
+ * @param args argument list that must contain the following:
+ *  a char * describing the team that move
+*/
+event_func_t notify_end_of_game;

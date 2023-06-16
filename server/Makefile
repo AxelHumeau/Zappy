@@ -42,6 +42,13 @@ SRC =			main.c							\
 				gui/commands/player_infos.c		\
 				gui/commands/time_unit.c		\
 				gui/events/new_player.c			\
+				gui/events/broadcast.c			\
+				gui/events/death.c				\
+				gui/events/egg.c				\
+				gui/events/expulsion.c			\
+				gui/events/incantation.c		\
+				gui/events/resources.c			\
+				gui/events/server_message.c		\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

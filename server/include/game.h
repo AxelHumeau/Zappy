@@ -25,10 +25,17 @@ enum resource {
 
 enum direction {
     UP = 0,
-    RIGHT = 1,
-    DOWN = 2,
-    LEFT = 3,
+    RIGHT,
+    DOWN,
+    LEFT,
 };
+
+typedef struct egg {
+    int id;
+    int x;
+    int y;
+    struct team *team;
+} egg_t;
 
 typedef struct player {
     int x;
