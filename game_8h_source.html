@@ -108,26 +108,32 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    WEST</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structplayer.html">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structplayer.html">player</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structposition.html">   40</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structposition.html">position</a> {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">int</span> x;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> y;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">enum</span> direction direction;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">size_t</span> inventory[NB_RESOURCES];</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> level;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">size_t</span> time_units_left;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    time_t last_action;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">struct </span><a class="code" href="structteam.html">team</a> *<a class="code" href="structteam.html">team</a>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">enum</span> orientation orientation;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <a class="code" href="structplayer.html">player_t</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="structtile.html">   52</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structtile.html">tile</a> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">size_t</span> resources[NB_RESOURCES];</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> x;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">int</span> y;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="ttc" id="astructplayer_html"><div class="ttname"><a href="structplayer.html">player</a></div><div class="ttdef"><b>Definition:</b> game.h:40</div></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structplayer.html">   45</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structplayer.html">player</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> x;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> y;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">enum</span> direction direction;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">size_t</span> inventory[NB_RESOURCES];</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> level;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">size_t</span> time_units_left;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    time_t last_action;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">struct </span><a class="code" href="structteam.html">team</a> *<a class="code" href="structteam.html">team</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">enum</span> orientation orientation;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <a class="code" href="structplayer.html">player_t</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structtile.html">   57</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structtile.html">tile</a> {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">size_t</span> resources[NB_RESOURCES];</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">int</span> x;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span> y;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="ttc" id="astructplayer_html"><div class="ttname"><a href="structplayer.html">player</a></div><div class="ttdef"><b>Definition:</b> game.h:45</div></div>
+<div class="ttc" id="astructposition_html"><div class="ttname"><a href="structposition.html">position</a></div><div class="ttdef"><b>Definition:</b> game.h:40</div></div>
 <div class="ttc" id="astructteam_html"><div class="ttname"><a href="structteam.html">team</a></div><div class="ttdef"><b>Definition:</b> server.h:57</div></div>
-<div class="ttc" id="astructtile_html"><div class="ttname"><a href="structtile.html">tile</a></div><div class="ttdef"><b>Definition:</b> game.h:52</div></div>
+<div class="ttc" id="astructtile_html"><div class="ttname"><a href="structtile.html">tile</a></div><div class="ttdef"><b>Definition:</b> game.h:57</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
