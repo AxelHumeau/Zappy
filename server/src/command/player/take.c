@@ -7,6 +7,7 @@
 
 #include <string.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static bool take_object(struct client_entry *client, struct server *server,
     char *object)
@@ -21,6 +22,8 @@ static bool take_object(struct client_entry *client, struct server *server,
         return false;
     server->maps[pos_y][pos_x].resources[index_object]--;
     client->player_info.inventory[index_object]++;
+    broadcast_to_guis(server, &notify_resource_collecting,
+        client->id, index_object);
     return true;
 }
 

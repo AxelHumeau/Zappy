@@ -17,7 +17,7 @@ static char *construct_start_incantation_str(player_t *player,
     char *tmp = NULL;
     int i = 0;
 
-    asprintf(&result, "pic %d %d %d %d\n", player->x, player->y,
+    asprintf(&result, "pic %d %d %d %d", player->x, player->y,
         player->level, player_id);
     for (; i < nb_additional_players; i++) {
         asprintf(&tmp, "%s %d", result, additional_player_ids[i]);
