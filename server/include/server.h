@@ -25,8 +25,10 @@ struct client_entry {
     int count_command;
     bool is_role_defined;
     bool is_gui;
+    bool is_dead;
     player_t player_info;
     int timer;
+    long food_time;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -98,6 +100,7 @@ void set_resource_map(struct server *server);
 
 // player_handling.c
 int put_client_team(struct server *server, struct client_entry *entry);
+void handle_player_timer(struct server *server);
 
 // command_handling.c
 int exec_command(struct client_entry *client,
