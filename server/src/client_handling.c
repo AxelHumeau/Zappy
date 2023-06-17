@@ -29,6 +29,8 @@ void accept_client(struct server *server)
     entry->is_gui = false;
     entry->is_role_defined = false;
     entry->timer = -1;
+    entry->food_time = 0;
+    entry->is_dead = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
@@ -58,6 +60,13 @@ int handle_client(struct client_entry *client,
     char buffer[MAX_SIZE_BUFFER];
     int read_char = 0;
 
+    if (client->is_dead)
+        return EXIT_FAIL;
+    if (client->is_role_defined && !client->is_gui &&
+        client->player_info.inventory[FOOD] == 0) {
+            client->is_dead = true;
+            add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
+    }
     if (!FD_ISSET(client->fd, read_fds))
         return EXIT_SUCCESS;
     read_char = read(client->fd, buffer, MAX_SIZE_BUFFER);
@@ -74,6 +83,10 @@ void destroy_client(struct client_entry *client)
 {
     if (client->is_role_defined && !client->is_gui)
         client->player_info.team->nb_slots_left++;
+    if (client->is_role_defined && !client->is_gui) {
+        for (int i = 0; i < client->count_command; i++)
+            free(client->command[i]);
+    }
     close(client->fd);
     destroy_buffer(&client->buf_to_send);
     destroy_buffer(&client->buf_to_recv);
