@@ -28,6 +28,7 @@ void accept_client(struct server *server)
     entry->id = count++;
     entry->is_gui = false;
     entry->is_role_defined = false;
+    entry->timer = -1;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
@@ -45,7 +46,7 @@ static void handle_lines(struct client_entry *client, struct server *server)
         if (client->is_gui)
             handle_gui(client, server, line);
         else
-            exec_player_command(client, server, line);
+            handle_player_command(client, line);
         free(line);
         line = get_line_in_buffer(&client->buf_to_recv);
     }

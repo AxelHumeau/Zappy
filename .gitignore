@@ -45,6 +45,7 @@ dist
 
 #Other files
 .vscode
+run.sh
 vgcore*
 gui/config/ogre.log
 
@@ -53,3 +54,4 @@ coding-style-reports.log
 
 # Valgrind
 vgcore*
+
