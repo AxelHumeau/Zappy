@@ -12,7 +12,7 @@
     #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
-    #define DEATH "death\n"
+    #define DEAD "dead\n"
     #define NB_DIRECTIONS 4
     #define NB_COMMAND_PLAYER 12
     #define MAX_COMMAND_SIZE 10

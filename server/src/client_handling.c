@@ -65,7 +65,7 @@ int handle_client(struct client_entry *client,
     if (client->is_role_defined && !client->is_gui &&
         client->player_info.inventory[FOOD] == 0) {
             client->is_dead = true;
-            add_to_buffer(&client->buf_to_send, DEATH, strlen(DEATH));
+            add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
     }
     if (!FD_ISSET(client->fd, read_fds))
         return EXIT_SUCCESS;

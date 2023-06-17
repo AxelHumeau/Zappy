@@ -66,7 +66,6 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
 static void timer_command(struct server *server)
 {
     long nb = 0;
-    struct client_entry *client = NULL;
 
     read(server->timerfd, &nb, sizeof(long));
     server->timestamp++;
