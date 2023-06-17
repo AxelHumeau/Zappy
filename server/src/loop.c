@@ -54,7 +54,6 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
         if (FD_ISSET(client->fd, writefds))
             write_buffer(&client->buf_to_send, client->fd);
         if (handle_client(client, server, readfds) != EXIT_SUCCESS) {
-            printf("QUIT\n");
             FD_CLR(client->fd, readfds);
             FD_CLR(client->fd, writefds);
             SLIST_REMOVE(&server->clients, client, client_entry, next);
