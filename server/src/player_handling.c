@@ -76,5 +76,5 @@ int put_client_team(struct server *server, struct client_entry *entry)
     }
     add_to_buffer(&entry->buf_to_send, KO, strlen(KO));
     free(line);
-    return EXIT_FAIL;
+    return EXIT_SUCCESS;
 }
