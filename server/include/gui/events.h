@@ -25,8 +25,8 @@ void send_new_player_str(struct client_entry *client, int player_id,
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  an int describing the id of the new player, 
- *  a player_t * describing the new player
+ *  an int describing the id of the new player, a
+ *  player_t * describing the new player
 */
 event_func_t notify_new_player;
 
@@ -34,8 +34,8 @@ event_func_t notify_new_player;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  an int describing the id of the player, 
- *  a char * describing the message
+ *  an int describing the id of the player, a
+ *  char * describing the message
 */
 event_func_t notify_broadcast;
 
@@ -59,10 +59,10 @@ event_func_t notify_expulsion;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  an int describing the id of the player, 
- *  a player_t * describing the player, 
- *  the number of additional players taking part in the incantation, 
- *  all the ids of the additionals players, as parameters
+ *  an int describing the id of the player, a
+ *  player_t * describing the player, the
+ *  number of additional players taking part in the incantation, all
+ *  the ids of the additionals players, as parameters
 */
 event_func_t notify_start_of_incantation;
 
@@ -70,8 +70,8 @@ event_func_t notify_start_of_incantation;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  a player_t * describing the player, 
- *  an int describing the success of the incantation (0 or 1)
+ *  a player_t * describing the player, an
+ *  int describing the success of the incantation (0 or 1)
 */
 event_func_t notify_end_of_incantation;
 
@@ -79,8 +79,8 @@ event_func_t notify_end_of_incantation;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  an int describing the id of the player, 
- *  an int int corresponding to the resource number (refer to enum resource)
+ *  an int describing the id of the player, an
+ *  int int corresponding to the resource number (refer to enum resource)
 */
 event_func_t notify_resource_dropping;
 
@@ -88,8 +88,8 @@ event_func_t notify_resource_dropping;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  an int describing the id of the player, 
- *  an int int corresponding to the resource number (refer to enum resource)
+ *  an int describing the id of the player, an
+ *  int int corresponding to the resource number (refer to enum resource)
 */
 event_func_t notify_resource_collecting;
 
@@ -105,8 +105,8 @@ event_func_t notify_death;
  * @param client gui client to notify
  *
  * @param args argument list that must contain the following:
- *  a egg_t * describing the egg, 
- *  an int describing the id of the player who lyed the egg
+ *  a egg_t * describing the egg, an
+ *  int describing the id of the player who lyed the egg
 */
 event_func_t notify_egg_layed;
 
