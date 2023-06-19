@@ -28,7 +28,12 @@ fclean: clean
 
 re: fclean all
 
-tests_run:
+tests_run: func_tests
+
+func_tests: DEBUG += -DCOMPILE_FLAGS=--coverage
+func_tests: re
+	find . -name "*.gcda" -delete
+	./tests/functional/tester.sh
 
 debug: DEBUG += -DCMAKE_BUILD_TYPE=Debug
 debug: re
