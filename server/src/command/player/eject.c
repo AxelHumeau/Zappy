@@ -29,14 +29,14 @@ static void move_player(struct client_entry *client,
 
     player->player_info.x += DIRECTION[client->player_info.direction][0];
     player->player_info.y += DIRECTION[client->player_info.direction][1];
-    player->player_info.x += (player->player_info.x < 0) ? server->width : 0;
-    player->player_info.y += (player->player_info.y < 0) ? server->height : 0;
     for (int i = 0; i < NB_DIRECTIONS; i++) {
         move.x = save_pos.x - player->player_info.x;
         move.y = save_pos.y - player->player_info.y;
         if (move.x == DIRECTION[i][0] && move.y == DIRECTION[i][1])
             send_eject_message(player, i);
     }
+    player->player_info.x += (player->player_info.x < 0) ? server->width : 0;
+    player->player_info.y += (player->player_info.y < 0) ? server->height : 0;
 }
 
 static bool eject_player(struct client_entry *client, struct server *server)
