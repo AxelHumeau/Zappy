@@ -14,6 +14,7 @@ class AI:
     mapsize = (1, 1)
     path = []
     lookaround = 0
+    start_elevation = False
     food = 10
     target = -1
     nb_players_at_same_level = 1
@@ -135,9 +136,10 @@ class AI:
                 bestscore = pathscores[i]
         # print("all path:", paths)
         # print("obj:", objs)
+        print("select =", objs[indexbest])
         paths[indexbest][len(paths[indexbest]) - 1] += " " + objs[indexbest][0]
         paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
-        for i in range(int(obj[1] - 1)):
+        for i in range(int(objs[indexbest][1] - 1)):
             paths[indexbest].append(paths[indexbest][len(paths[indexbest]) - 1])
         return paths[indexbest]
 
@@ -153,6 +155,7 @@ class AI:
             self.communication.request.push(cmd)
 
     def act_look(self):
+        print("priority", self.prio)
         path = self.get_best_path(self.get_target(self.communication.look_info))
         print("path", path)
         if len(path) != 0:
@@ -161,6 +164,8 @@ class AI:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
             self.add_to_request_queue([["Right"], ["Forward"]])
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
             return
         if len(path) == 0:
             self.lookaround += 1
@@ -178,14 +183,17 @@ class AI:
         self.fill_inventory(self.communication.inventory)
         print(self.communication.inventory)
         commands.try_elevation(self, self.communication.request)
+        print(self.food)
         if self.food <= 6:
-            self.prio == priority.FOOD
-        else: priority == priority.RESSOURCES
+            self.prio = priority.FOOD
+        else: self.prio = priority.RESSOURCES
 
     def incantation(self):
         print("INCANTATION")
-        self.lvl = self.communication.current_level
-        print("lvl:", self.lvl)
+        if (self.lvl != self.communication.current_level):
+            self.lvl = self.communication.current_level
+            self.start_elevation = False
+            print("lvl:", self.lvl)
 
     def Forward(self):
         print("forward")
@@ -205,6 +213,8 @@ class AI:
         self.communication.request.push(["Inventory"])
 
     def failed(self):
+        if (self.start_elevation == True):
+            self.start_elevation = False
         print("Failed")
 
     dic_function = {

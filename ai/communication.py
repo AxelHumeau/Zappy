@@ -149,8 +149,11 @@ class Communication:
                 self.pop_information()
                 return False
             else:
+                print("req =", self.request.front)
+                print("res =", resp)
                 self.current_level = int(resp[15])
                 self.pop_information()
+                self.elevation = False
                 return True
         else:
             if resp != None and resp == "ko":
@@ -188,7 +191,7 @@ class Communication:
         if (len(self.response) != 0 and
                 self.response.front().find("message") != -1):
             self.get_message()
-        if (self.request.front()[0] in Communication.communication):
+        if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
             self.pop_information()
             return self.communication[oldrq][1]
@@ -199,7 +202,9 @@ class Communication:
         if len(self.request) != 0:
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
-        return self.dict_function[oldrq][1]
+            return self.dict_function[oldrq][1]
+        print(self.response, self.request)
+        return action.WAITING
 
     def network(self):
         read, write, error = select.select([self.s], [self.s], [])

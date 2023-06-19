@@ -8,10 +8,14 @@ def try_elevation(ai, request_queue: Queue):
     """
     if ai.nb_players_at_same_level < ai.elevation[ai.lvl]["nb_players"]:
         return False
+    if ai.start_elevation == True:
+        return False
+    else:
+        ai.start_elevation = True
     for el in ai.elevation[ai.lvl].items():
         if (el[0] == "nb_players"):
             continue
-        elif el[1] < ai.inventory[el[0]]:
+        elif ai.inventory[el[0]] < el[1]:
             return False
     for item in ai.elevation[ai.lvl].items():
         if (item[0] == "nb_players"):
@@ -21,6 +25,6 @@ def try_elevation(ai, request_queue: Queue):
             ai.communication.writebuffer += "Set " + item[0] + "\n"
     request_queue.push(["Incantation"])
     ai.communication.writebuffer += "Incantation\n"
-    request_queue.push(["Inventory"])
-    ai.communication.writebuffer += "Inventory\n"
+    # request_queue.push(["Inventory"])
+    # ai.communication.writebuffer += "Inventory\n"
     return True
