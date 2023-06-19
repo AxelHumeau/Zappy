@@ -16,6 +16,16 @@ namespace ZappyGui {
     typedef Ogre::Vector2 Vector2;
     typedef Ogre::Vector2i Vector2i;
 
+    enum ResourceType {
+        Food,
+        Linemate,
+        Deraumere,
+        Sibur,
+        Mendiane,
+        Phiras,
+        Thystame
+    };
+
     struct Nop
     {
         template <typename T>

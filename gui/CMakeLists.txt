@@ -16,6 +16,15 @@ set(SRCS
     src/Game.cpp
     src/Player.cpp
     src/Error.cpp
+    src/commands/msz.cpp
+    src/commands/bct.cpp
+    src/commands/pdi.cpp
+    src/commands/pin.cpp
+    src/commands/plv.cpp
+    src/commands/pnw.cpp
+    src/commands/ppo.cpp
+    src/commands/quit.cpp
+    src/commands/tna.cpp
 )
 set(INCLUDES include)
 

@@ -10,8 +10,9 @@
     #include <OGRE/Ogre.h>
     #include <string>
     #include <memory>
-    #include "Utils.hpp"
     #include <iostream>
+    #include "Utils.hpp"
+    #include "Error.hpp"
 
 namespace ZappyGui {
     /// @brief Interface representing a generic object in the world

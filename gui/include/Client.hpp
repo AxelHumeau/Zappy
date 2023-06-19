@@ -29,6 +29,11 @@ namespace Network {
             /// @param receive a SafeQueue that store the received response
             /// @param requests a SafeQueue that store the pending requests
             void run(bool &isClosed, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests);
+            /// @brief create a request with the given command and args then queue it for sending
+            /// @param requests SafeQueue to queue the request
+            /// @param command command name
+            /// @param args string vector of args of the command
+            static void queueRequest(SafeQueue<std::string> &requests, std::string command, std::vector<std::string> args);
 
         private:
             Network::Socket _socket;

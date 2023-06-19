@@ -20,7 +20,7 @@ namespace ZappyGui {
 
     class Player : public GameObject {
         public:
-            Player(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName, std::size_t id): GameObject(sceneManager, meshName), _id{id} {};
+            Player(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName, std::size_t id);
             ~Player() = default;
 
             size_t getId() const { return _id; }
@@ -29,6 +29,8 @@ namespace ZappyGui {
             void setLevel(size_t level) { _level = level; }
             void setOrientation(size_t orientation);
             void setOrientation(Orientation orientation) { _orientation = orientation; }
+            std::size_t getInventoryAmount(const ResourceType &resourceType);
+            void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
 
         private:
             std::size_t _id;
@@ -36,6 +38,7 @@ namespace ZappyGui {
             size_t _mapPositionY;
             size_t _level;
             Orientation _orientation;
+            std::unordered_map<ResourceType, std::size_t> _inventory;
     };
 }
 

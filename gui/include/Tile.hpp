@@ -24,19 +24,6 @@ namespace ZappyGui {
         private:
             std::string message;
     };
-    /**
-     * @brief
-     * TileUndifinedResourceTypeError Class Error
-     * Error thrown when trying to get a Tile Gameobject that is not bind.
-     */
-    class TileUndifinedResourceTypeError : public std::exception {
-        public:
-            TileUndifinedResourceTypeError(std::string resourceType);
-            ~TileUndifinedResourceTypeError() = default;
-            const char *what() const noexcept override;
-        private:
-            std::string message;
-    };
 
     class Tile {
         public:
@@ -54,14 +41,14 @@ namespace ZappyGui {
             /// @brief get the amount of the given resourceType
             /// @param resourceType to get the amount
             /// @return the amount of the given resourceType or throw an TileUndifinedResourceTypeError
-            std::size_t getResourceAmount(const std::string &resourceType);
-            void setResourceAmount(const std::string &resourceType, std::size_t amount);
+            std::size_t getResourceAmount(const ResourceType &resourceType);
+            void setResourceAmount(const ResourceType &resourceType, std::size_t amount);
 
         private:
             int _x;
             int _y;
             std::shared_ptr<ZappyGui::GameObject> _gameobject = nullptr;
-            std::unordered_map<std::string, std::size_t> _resources;
+            std::unordered_map<ResourceType, std::size_t> _resources;
     };
 }
 

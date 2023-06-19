@@ -30,4 +30,17 @@ namespace Network {
             }
         }
     }
+
+    void Client::queueRequest(SafeQueue<std::string> &requests, std::string command, std::vector<std::string> args) {
+        std::string request;
+
+        request += command + " ";
+        for (int i = 0; i < args.size(); i++) {
+            request += args[i];
+            if (i != args.size() - 1)
+                request += " ";
+        }
+        request += "\n";
+        requests.push(request);
+    }
 }

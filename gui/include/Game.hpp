@@ -8,9 +8,12 @@
 #ifndef GAME_HPP_
     #define GAME_HPP_
     #include <vector>
+    #include <list>
     #include <map>
     #include <string>
     #include "Player.hpp"
+    #include "SafeQueue.hpp"
+    #include "Client.hpp"
 
 namespace ZappyGui {
 
@@ -49,12 +52,13 @@ namespace ZappyGui {
 
             std::size_t getNbTeams() const { return _teams.size(); }
             void addTeam(std::string teamName);
-            std::vector<ZappyGui::Player> &getTeam(std::string teamName);
+            std::list<ZappyGui::Player> &getTeam(std::string teamName);
             Player &getPlayer(size_t playerId);
             void removePlayer(size_t playerId);
+            void update(SafeQueue<std::string> &requests);
 
         private:
-            std::map<std::string, std::vector<ZappyGui::Player>> _teams;
+            std::map<std::string, std::list<ZappyGui::Player>> _teams;
     };
 }
 
