@@ -28,7 +28,7 @@ void set_teams(struct server *server, char **teams)
     free(teams);
 }
 
-static void init_timer_resources(struct server *server)
+static void init_timer(struct server *server)
 {
     time_t second = (server->freq == 1) ? 1 : 0;
     long nanosecond = (server->freq != 1) ? 1e9 / server->freq : 0;
@@ -69,6 +69,6 @@ int get_server_params(char **params, int nb_params, struct server *server)
         return EXIT_FAIL;
     for (i = 0; i < server->nb_teams; i++)
         server->teams[i].nb_slots_left = server->max_players_per_team;
-    init_timer_resources(server);
+    init_timer(server);
     return EXIT_SUCCESS;
 }

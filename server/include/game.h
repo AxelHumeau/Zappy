@@ -37,6 +37,11 @@ typedef struct egg {
     struct team *team;
 } egg_t;
 
+struct position {
+    int x;
+    int y;
+};
+
 typedef struct player {
     int x;
     int y;

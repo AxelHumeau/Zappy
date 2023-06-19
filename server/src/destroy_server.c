@@ -25,8 +25,8 @@ void destroy_server(struct server *server)
             tmp = client->next.sle_next;
             free(client);
         }
-    free(server->teams);
     destroy_clients(server);
+    free(server->teams);
     destroy_game(server);
     close(server->listening_fd);
     close(server->sig_fd);

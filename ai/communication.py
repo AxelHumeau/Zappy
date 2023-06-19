@@ -129,8 +129,8 @@ class Communication:
 
     def get_message(self):
         """ Get a message (from the command Broadcast 'Message') """
-        info = self.response.front()[0].split(",")
-        message_info = {int(info[0].split()(" ")[1]): info[1].strip()}
+        info = self.response.front().split(",")
+        message_info = {int(info[0].split(" ")[1]): info[1].strip()}
         self.message.append(message_info)
         self.response.pop()
 
