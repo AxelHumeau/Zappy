@@ -71,6 +71,8 @@ static void find_closest_zone(struct client_entry *client,
         zone[i].x += (zone[i].x < 0) ? server->width : 0;
     }
     index = get_closest_zone(zone, sender, dir, server);
+    if (sender.x == target.x && sender.y == target.y)
+        index = 0;
     send_message(index, args, player);
 }
 

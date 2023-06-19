@@ -12,6 +12,7 @@
     #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
+    #define DEAD "dead\n"
     #define NB_DIRECTIONS 4
     #define NB_COMMAND_PLAYER 12
     #define MAX_COMMAND_SIZE 10
@@ -29,6 +30,7 @@ static const size_t MAX_SIZE_BUFFER = 256;
 static const int MAX_PORT_NUMBER = 65535;
 static const int REFILL_TIME = 20;
 static const int FOOD_TIME = 126;
+static const long FOOD_PLAYER = 10;
 static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,
