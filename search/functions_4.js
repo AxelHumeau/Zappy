@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['empty_139',['empty',['../classqueue_1_1Queue.html#a97246dddf8973a174ebcc3ceb1fc85f3',1,'queue::Queue']]],
-  ['event_140',['event',['../classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4',1,'ZappyGui::Renderer']]]
+  ['debug_5fmap_5fbroadcast_577',['debug_map_broadcast',['../server_8h.html#a4f6dcff93f4acde2a891935454a4e2e0',1,'debug_map_broadcast(struct server *server, struct client_entry *client, struct client_entry *player, struct position zone[]):&#160;utils_broadcast.c'],['../utils__broadcast_8c.html#aba82c3515f618252ec16480b6ceb40c2',1,'debug_map_broadcast(struct server *, struct client_entry *client, struct client_entry *player, struct position zone[]):&#160;utils_broadcast.c']]],
+  ['destroy_5fbuffer_578',['destroy_buffer',['../buffering_8h.html#af95c21202f99e1f2c0da7f2180448578',1,'destroy_buffer(buffer_t *buffer):&#160;buffer.c'],['../buffer_8c.html#af95c21202f99e1f2c0da7f2180448578',1,'destroy_buffer(buffer_t *buffer):&#160;buffer.c']]],
+  ['destroy_5fclient_579',['destroy_client',['../server_8h.html#ae1ad0ec90fffa948adbc11ebadedf641',1,'destroy_client(struct client_entry *client):&#160;client_handling.c'],['../client__handling_8c.html#ae1ad0ec90fffa948adbc11ebadedf641',1,'destroy_client(struct client_entry *client):&#160;client_handling.c']]],
+  ['destroy_5fclients_580',['destroy_clients',['../server_8h.html#a401094a20ff409b433aadee692409fd3',1,'destroy_clients(struct server *server):&#160;client_handling.c'],['../client__handling_8c.html#a401094a20ff409b433aadee692409fd3',1,'destroy_clients(struct server *server):&#160;client_handling.c']]],
+  ['destroy_5fgame_581',['destroy_game',['../destroy__server_8c.html#a1a80fe2de14d290f91d2ced0ed78fe28',1,'destroy_server.c']]],
+  ['destroy_5fserver_582',['destroy_server',['../server_8h.html#a35f350dac1c6e01375df1ec66b450a09',1,'destroy_server(struct server *server):&#160;destroy_server.c'],['../destroy__server_8c.html#a35f350dac1c6e01375df1ec66b450a09',1,'destroy_server(struct server *server):&#160;destroy_server.c']]],
+  ['display_5fhelp_583',['display_help',['../server_8h.html#aef8e877dcb55b17489eedb0cae8a1c3e',1,'display_help(void):&#160;utils.c'],['../utils_8c.html#aef8e877dcb55b17489eedb0cae8a1c3e',1,'display_help(void):&#160;utils.c']]],
+  ['display_5fmap_584',['display_map',['../server_8h.html#a58e8d5efcb8f2ec499dc6eed579dc56a',1,'display_map(struct server server):&#160;utils.c'],['../utils_8c.html#a58e8d5efcb8f2ec499dc6eed579dc56a',1,'display_map(struct server server):&#160;utils.c']]]
 ];

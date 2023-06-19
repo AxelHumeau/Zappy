@@ -69,7 +69,7 @@ $(function() {
 <div class="title">Client.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="Client_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">** EPITECH PROJECT, 2023</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">** Zappy</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">** File description:</span></div>
@@ -82,14 +82,14 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &lt;unordered_map&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">    #include &lt;mutex&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">    #include &quot;Socket.hpp&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">    #include &quot;SafeQueue.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="Socket_8hpp.html">Socket.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="SafeQueue_8hpp.html">SafeQueue.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>Network {</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespaceNetwork.html">   17</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceNetwork.html">Network</a> {</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classNetwork_1_1Client.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classNetwork_1_1Client.html">Client</a> {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <a class="code" href="classNetwork_1_1Client.html#aef161ee9c14c570b675bd57657797f22">Client</a>(std::string ip, uint16_t port);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            ~<a class="code" href="classNetwork_1_1Client.html">Client</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classNetwork_1_1Client.html#aba4f8ffe99dc7341f6c386603c20f612">   25</a></span>&#160;            <a class="code" href="classNetwork_1_1Client.html#aba4f8ffe99dc7341f6c386603c20f612">~Client</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1Client.html#a9855c11590838616d0b32f4f827a63a4">run</a>(<span class="keywordtype">bool</span> &amp;isClosed, std::mutex &amp;mutex, <a class="code" href="classSafeQueue.html">SafeQueue&lt;std::string&gt;</a> &amp;receive, <a class="code" href="classSafeQueue.html">SafeQueue&lt;std::string&gt;</a> &amp;requests);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">private</span>:</div>
@@ -98,11 +98,15 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !CLIENT_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aSafeQueue_8hpp_html"><div class="ttname"><a href="SafeQueue_8hpp.html">SafeQueue.hpp</a></div></div>
+<div class="ttc" id="aSocket_8hpp_html"><div class="ttname"><a href="Socket_8hpp.html">Socket.hpp</a></div></div>
 <div class="ttc" id="aclassNetwork_1_1Client_html"><div class="ttname"><a href="classNetwork_1_1Client.html">Network::Client</a></div><div class="ttdef"><b>Definition:</b> Client.hpp:18</div></div>
 <div class="ttc" id="aclassNetwork_1_1Client_html_a9855c11590838616d0b32f4f827a63a4"><div class="ttname"><a href="classNetwork_1_1Client.html#a9855c11590838616d0b32f4f827a63a4">Network::Client::run</a></div><div class="ttdeci">void run(bool &amp;isClosed, std::mutex &amp;mutex, SafeQueue&lt; std::string &gt; &amp;receive, SafeQueue&lt; std::string &gt; &amp;requests)</div><div class="ttdoc">run the client main loop. the loop will process the incoming response and send the pending requests</div><div class="ttdef"><b>Definition:</b> Client.cpp:17</div></div>
+<div class="ttc" id="aclassNetwork_1_1Client_html_aba4f8ffe99dc7341f6c386603c20f612"><div class="ttname"><a href="classNetwork_1_1Client.html#aba4f8ffe99dc7341f6c386603c20f612">Network::Client::~Client</a></div><div class="ttdeci">~Client()=default</div></div>
 <div class="ttc" id="aclassNetwork_1_1Client_html_aef161ee9c14c570b675bd57657797f22"><div class="ttname"><a href="classNetwork_1_1Client.html#aef161ee9c14c570b675bd57657797f22">Network::Client::Client</a></div><div class="ttdeci">Client(std::string ip, uint16_t port)</div><div class="ttdoc">Create a new client, open a new socket and try to connect to the given ip and port.</div><div class="ttdef"><b>Definition:</b> Client.cpp:11</div></div>
 <div class="ttc" id="aclassNetwork_1_1Socket_html"><div class="ttname"><a href="classNetwork_1_1Socket.html">Network::Socket</a></div><div class="ttdoc">Class for Socket.</div><div class="ttdef"><b>Definition:</b> Socket.hpp:23</div></div>
 <div class="ttc" id="aclassSafeQueue_html"><div class="ttname"><a href="classSafeQueue.html">SafeQueue</a></div><div class="ttdoc">A queue class that is thread safe.</div><div class="ttdef"><b>Definition:</b> SafeQueue.hpp:17</div></div>
+<div class="ttc" id="anamespaceNetwork_html"><div class="ttname"><a href="namespaceNetwork.html">Network</a></div><div class="ttdef"><b>Definition:</b> Client.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

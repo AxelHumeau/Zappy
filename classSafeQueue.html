@@ -85,9 +85,10 @@ Inheritance diagram for SafeQueue&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a639e3eb096849bc6166a20799f1c78db"><td class="memItemLeft" align="right" valign="top"><a id="a639e3eb096849bc6166a20799f1c78db"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafeQueue.html#a639e3eb096849bc6166a20799f1c78db">~SafeQueue</a> ()=default</td></tr>
-<tr class="memdesc:a639e3eb096849bc6166a20799f1c78db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="memitem:a802bf49b2bb2b5ac296bbaa5955d5020"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafeQueue.html#a802bf49b2bb2b5ac296bbaa5955d5020">SafeQueue</a> ()=default</td></tr>
+<tr class="separator:a802bf49b2bb2b5ac296bbaa5955d5020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639e3eb096849bc6166a20799f1c78db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafeQueue.html#a639e3eb096849bc6166a20799f1c78db">~SafeQueue</a> ()=default</td></tr>
+<tr class="memdesc:a639e3eb096849bc6166a20799f1c78db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classSafeQueue.html#a639e3eb096849bc6166a20799f1c78db">More...</a><br /></td></tr>
 <tr class="separator:a639e3eb096849bc6166a20799f1c78db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95a9c7d6e1a76eb525e967fef3ce484a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafeQueue.html#a95a9c7d6e1a76eb525e967fef3ce484a">push</a> (T value) override</td></tr>
 <tr class="memdesc:a95a9c7d6e1a76eb525e967fef3ce484a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push in queue, lock a mutex while pushing the value.  <a href="classSafeQueue.html#a95a9c7d6e1a76eb525e967fef3ce484a">More...</a><br /></td></tr>
@@ -102,9 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae80ce615654331a9577aaf56c5cfd073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current size of the queue.  <a href="classSafeQueue.html#ae80ce615654331a9577aaf56c5cfd073">More...</a><br /></td></tr>
 <tr class="separator:ae80ce615654331a9577aaf56c5cfd073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classISafeQueue"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classISafeQueue')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classISafeQueue.html">ISafeQueue&lt; T &gt;</a></td></tr>
-<tr class="memitem:a9586a25005f4b153488c14887743e9f2 inherit pub_methods_classISafeQueue"><td class="memItemLeft" align="right" valign="top"><a id="a9586a25005f4b153488c14887743e9f2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classISafeQueue.html#a9586a25005f4b153488c14887743e9f2">~ISafeQueue</a> ()=default</td></tr>
-<tr class="memdesc:a9586a25005f4b153488c14887743e9f2 inherit pub_methods_classISafeQueue"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="memitem:a9586a25005f4b153488c14887743e9f2 inherit pub_methods_classISafeQueue"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classISafeQueue.html#a9586a25005f4b153488c14887743e9f2">~ISafeQueue</a> ()=default</td></tr>
+<tr class="memdesc:a9586a25005f4b153488c14887743e9f2 inherit pub_methods_classISafeQueue"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classISafeQueue.html#a9586a25005f4b153488c14887743e9f2">More...</a><br /></td></tr>
 <tr class="separator:a9586a25005f4b153488c14887743e9f2 inherit pub_methods_classISafeQueue"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -118,7 +118,64 @@ class SafeQueue&lt; T &gt;</h3>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a802bf49b2bb2b5ac296bbaa5955d5020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802bf49b2bb2b5ac296bbaa5955d5020">&#9670;&nbsp;</a></span>SafeQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; T &gt;::<a class="el" href="classSafeQueue.html">SafeQueue</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a639e3eb096849bc6166a20799f1c78db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639e3eb096849bc6166a20799f1c78db">&#9670;&nbsp;</a></span>~SafeQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; T &gt;::~<a class="el" href="classSafeQueue.html">SafeQueue</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2e65646107e4542c024e6094d58cab8e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2e65646107e4542c024e6094d58cab8e">&#9670;&nbsp;</a></span>pop()</h2>
 

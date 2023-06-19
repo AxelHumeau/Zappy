@@ -69,7 +69,7 @@ $(function() {
 <div class="title">ResourceLoader.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="ResourceLoader_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">** EPITECH PROJECT, 2023</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">** ResourceLoader.hpp</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">** File description:</span></div>
@@ -83,12 +83,12 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">    #include &lt;exception&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>ZappyGui {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceZappyGui.html">ZappyGui</a> {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classZappyGui_1_1ResourceLoader.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classZappyGui_1_1ResourceLoader.html">ResourceLoader</a> {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <a class="code" href="classZappyGui_1_1ResourceLoader.html">ResourceLoader</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            ~<a class="code" href="classZappyGui_1_1ResourceLoader.html">ResourceLoader</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classZappyGui_1_1ResourceLoader.html#a5a0dd4206452a11e00d560cb77f88393">   20</a></span>&#160;            <a class="code" href="classZappyGui_1_1ResourceLoader.html#a5a0dd4206452a11e00d560cb77f88393">ResourceLoader</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classZappyGui_1_1ResourceLoader.html#a9b7b261e4cf9b937eb226b7807f23138">   21</a></span>&#160;            <a class="code" href="classZappyGui_1_1ResourceLoader.html#a9b7b261e4cf9b937eb226b7807f23138">~ResourceLoader</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1ResourceLoader.html#aaf2fd944784d7319bb518f2cefb046a9">load</a>(std::string resourceFile);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
@@ -102,30 +102,37 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classZappyGui_1_1ResourceFileNotFoundError.html">   49</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html">ResourceFileNotFoundError</a> : <span class="keyword">public</span> std::exception {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html">ResourceFileNotFoundError</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            ~<a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html">ResourceFileNotFoundError</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *what() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::string message;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html#aa9fd75ea2be9e30a84373e18f767948f">ResourceFileNotFoundError</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classZappyGui_1_1ResourceFileNotFoundError.html#aa8d5c6fd8fef2380d559b2ff7b5dcf41">   52</a></span>&#160;            <a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html#aa8d5c6fd8fef2380d559b2ff7b5dcf41">~ResourceFileNotFoundError</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html#a7e321f4d7b9fb205cb4c38252ec1efaa">what</a>() const noexcept override;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        private:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::<span class="keywordtype">string</span> message;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    };</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classZappyGui_1_1InvalidResourceError.html">   63</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classZappyGui_1_1InvalidResourceError.html">InvalidResourceError</a> : <span class="keyword">public</span> std::exception {</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classZappyGui_1_1InvalidResourceError.html">   63</a></span>&#160;    class <a class="code" href="classZappyGui_1_1InvalidResourceError.html">InvalidResourceError</a> : public std::exception {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="classZappyGui_1_1InvalidResourceError.html">InvalidResourceError</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            ~<a class="code" href="classZappyGui_1_1InvalidResourceError.html">InvalidResourceError</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *what() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            std::string message;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classZappyGui_1_1InvalidResourceError.html#aa47922639974502ebda74624dda988f0">   66</a></span>&#160;            <a class="code" href="classZappyGui_1_1InvalidResourceError.html#aa47922639974502ebda74624dda988f0">~InvalidResourceError</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classZappyGui_1_1ResourceFileNotFoundError.html#a7e321f4d7b9fb205cb4c38252ec1efaa">what</a>() const noexcept override;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        private:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            std::<span class="keywordtype">string</span> message;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !RESOURCELOADER_HPP_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclassZappyGui_1_1InvalidResourceError_html"><div class="ttname"><a href="classZappyGui_1_1InvalidResourceError.html">ZappyGui::InvalidResourceError</a></div><div class="ttdoc">InvalidResourceError Class Error Error thrown when the resource format is invalid.</div><div class="ttdef"><b>Definition:</b> ResourceLoader.hpp:63</div></div>
+<div class="ttc" id="aclassZappyGui_1_1InvalidResourceError_html_aa47922639974502ebda74624dda988f0"><div class="ttname"><a href="classZappyGui_1_1InvalidResourceError.html#aa47922639974502ebda74624dda988f0">ZappyGui::InvalidResourceError::~InvalidResourceError</a></div><div class="ttdeci">~InvalidResourceError()=default</div></div>
 <div class="ttc" id="aclassZappyGui_1_1ResourceFileNotFoundError_html"><div class="ttname"><a href="classZappyGui_1_1ResourceFileNotFoundError.html">ZappyGui::ResourceFileNotFoundError</a></div><div class="ttdoc">ResourceFileNotFoundError Class Error Error thrown when the resource file for the gui can't be read o...</div><div class="ttdef"><b>Definition:</b> ResourceLoader.hpp:49</div></div>
+<div class="ttc" id="aclassZappyGui_1_1ResourceFileNotFoundError_html_a7e321f4d7b9fb205cb4c38252ec1efaa"><div class="ttname"><a href="classZappyGui_1_1ResourceFileNotFoundError.html#a7e321f4d7b9fb205cb4c38252ec1efaa">ZappyGui::ResourceFileNotFoundError::what</a></div><div class="ttdeci">const char * what() const noexcept override</div><div class="ttdef"><b>Definition:</b> ResourceLoader.cpp:77</div></div>
+<div class="ttc" id="aclassZappyGui_1_1ResourceFileNotFoundError_html_aa8d5c6fd8fef2380d559b2ff7b5dcf41"><div class="ttname"><a href="classZappyGui_1_1ResourceFileNotFoundError.html#aa8d5c6fd8fef2380d559b2ff7b5dcf41">ZappyGui::ResourceFileNotFoundError::~ResourceFileNotFoundError</a></div><div class="ttdeci">~ResourceFileNotFoundError()=default</div></div>
+<div class="ttc" id="aclassZappyGui_1_1ResourceFileNotFoundError_html_aa9fd75ea2be9e30a84373e18f767948f"><div class="ttname"><a href="classZappyGui_1_1ResourceFileNotFoundError.html#aa9fd75ea2be9e30a84373e18f767948f">ZappyGui::ResourceFileNotFoundError::ResourceFileNotFoundError</a></div><div class="ttdeci">ResourceFileNotFoundError()</div><div class="ttdef"><b>Definition:</b> ResourceLoader.cpp:73</div></div>
 <div class="ttc" id="aclassZappyGui_1_1ResourceLoader_html"><div class="ttname"><a href="classZappyGui_1_1ResourceLoader.html">ZappyGui::ResourceLoader</a></div><div class="ttdoc">Resource loader for the ZappyGui::Renderer.</div><div class="ttdef"><b>Definition:</b> ResourceLoader.hpp:18</div></div>
+<div class="ttc" id="aclassZappyGui_1_1ResourceLoader_html_a5a0dd4206452a11e00d560cb77f88393"><div class="ttname"><a href="classZappyGui_1_1ResourceLoader.html#a5a0dd4206452a11e00d560cb77f88393">ZappyGui::ResourceLoader::ResourceLoader</a></div><div class="ttdeci">ResourceLoader()=default</div></div>
+<div class="ttc" id="aclassZappyGui_1_1ResourceLoader_html_a9b7b261e4cf9b937eb226b7807f23138"><div class="ttname"><a href="classZappyGui_1_1ResourceLoader.html#a9b7b261e4cf9b937eb226b7807f23138">ZappyGui::ResourceLoader::~ResourceLoader</a></div><div class="ttdeci">~ResourceLoader()=default</div></div>
 <div class="ttc" id="aclassZappyGui_1_1ResourceLoader_html_aaf2fd944784d7319bb518f2cefb046a9"><div class="ttname"><a href="classZappyGui_1_1ResourceLoader.html#aaf2fd944784d7319bb518f2cefb046a9">ZappyGui::ResourceLoader::load</a></div><div class="ttdeci">static void load(std::string resourceFile)</div><div class="ttdoc">Load every resources in the resource file.</div><div class="ttdef"><b>Definition:</b> ResourceLoader.cpp:11</div></div>
 <div class="ttc" id="aclassZappyGui_1_1ResourceLoader_html_acfa524eba52460e4d1f138581f920150"><div class="ttname"><a href="classZappyGui_1_1ResourceLoader.html#acfa524eba52460e4d1f138581f920150">ZappyGui::ResourceLoader::initAll</a></div><div class="ttdeci">static void initAll()</div><div class="ttdoc">Encapsulation of the function loading all ogre's resources.</div><div class="ttdef"><b>Definition:</b> ResourceLoader.cpp:33</div></div>
+<div class="ttc" id="anamespaceZappyGui_html"><div class="ttname"><a href="namespaceZappyGui.html">ZappyGui</a></div><div class="ttdef"><b>Definition:</b> Camera.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
