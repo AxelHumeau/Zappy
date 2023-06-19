@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Zappy: server/src/command/player/eject.c File Reference</title>
+<title>Zappy: server/src/utils/utils_player.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,50 +61,62 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li><li class="navelem"><a class="el" href="dir_2489f843ffddf14d853d9392f68a56a8.html">command</a></li><li class="navelem"><a class="el" href="dir_6a711e088e8f902e9df528a82ff17f70.html">player</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li><li class="navelem"><a class="el" href="dir_08dc77f694786b07780ebbca062c7ec3.html">utils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">eject.c File Reference</div>  </div>
+<div class="title">utils_player.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="macro_8h_source.html">macro.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="events_8h_source.html">gui/events.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3ee4b4181101b9904169913244024007"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eject_8c.html#a3ee4b4181101b9904169913244024007">eject</a> (char *cmd, struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
-<tr class="separator:a3ee4b4181101b9904169913244024007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a25c3a3df97f310df1bf1ed140eb7d01c">is_player</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *<a class="el" href="structplayer.html">player</a>, struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
+<tr class="separator:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae40da77746f5c6ed2a4c6d6633f899"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a9ae40da77746f5c6ed2a4c6d6633f899">display_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="separator:a9ae40da77746f5c6ed2a4c6d6633f899"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3ee4b4181101b9904169913244024007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ee4b4181101b9904169913244024007">&#9670;&nbsp;</a></span>eject()</h2>
+<a id="a9ae40da77746f5c6ed2a4c6d6633f899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ae40da77746f5c6ed2a4c6d6633f899">&#9670;&nbsp;</a></span>display_player()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void eject </td>
+          <td class="memname">void display_player </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>cmd</em>, </td>
+          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25c3a3df97f310df1bf1ed140eb7d01c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c3a3df97f310df1bf1ed140eb7d01c">&#9670;&nbsp;</a></span>is_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_player </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>&#160;</td>
+          <td class="paramname"><em>client</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
