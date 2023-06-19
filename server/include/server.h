@@ -25,8 +25,10 @@ struct client_entry {
     int count_command;
     bool is_role_defined;
     bool is_gui;
+    bool is_dead;
     player_t player_info;
     int timer;
+    long food_time;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -81,6 +83,10 @@ int find_power_of_base(int nb, int base);
 // Utils_object.c
 int is_object(char *object);
 
+// Utils_broadcast.c
+void debug_map_broadcast(struct server *server, struct client_entry *client,
+    struct client_entry *player, struct position zone[]);
+
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);
 void free_array(char **array);
@@ -94,6 +100,7 @@ void set_resource_map(struct server *server);
 
 // player_handling.c
 int put_client_team(struct server *server, struct client_entry *entry);
+void handle_player_timer(struct server *server);
 
 // command_handling.c
 int exec_command(struct client_entry *client,

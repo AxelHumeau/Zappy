@@ -24,11 +24,11 @@ static char *set_inventory_message(struct client_entry *client)
     return inventory;
 }
 
-void inventory(char **cmd, struct client_entry *client, struct server *)
+void inventory(char *cmd, struct client_entry *client, struct server *)
 {
     char *inventory = NULL;
 
-    if (cmd[1] == NULL) {
+    if (cmd[0] == '\0') {
         inventory = set_inventory_message(client);
         add_to_buffer(&client->buf_to_send, inventory, strlen(inventory));
         free(inventory);

@@ -28,12 +28,12 @@ static void clean_player_command(struct client_entry *client)
 }
 
 static void time_command(struct client_entry *client,
-    struct server *server, char **command_line, command_t command)
+    struct server *server, char *line, command_t command)
 {
     if (client->timer == -1)
         client->timer = server->timestamp;
     else if (server->timestamp - client->timer >= command.cooldown) {
-        (command.function) (command_line, client, server);
+        (command.function) (line + strlen(command.command), client, server);
         clean_player_command(client);
         client->timer = -1;
     }
@@ -42,19 +42,15 @@ static void time_command(struct client_entry *client,
 void exec_player_command(struct client_entry *client,
     struct server *server, char *line)
 {
-    char **command = str_to_array(line, " ");
+    char *cmd = NULL;
 
-    if (command == NULL)
-        return;
     for (int i = 0; i < NB_COMMAND_PLAYER; i++) {
-        if (command[0] != NULL &&
-            !strcmp(player_command_list[i].command, command[0])) {
-                time_command(client, server, command, player_command_list[i]);
-                free_array(command);
-                return;
+        cmd = player_command_list[i].command;
+        if (!strncmp(cmd, line, strlen(cmd))) {
+            time_command(client, server, line, player_command_list[i]);
+            return;
         }
     }
     add_to_buffer(&client->buf_to_send, KO, strlen(KO));
     clean_player_command(client);
-    free_array(command);
 }
