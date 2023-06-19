@@ -43,7 +43,7 @@ struct server {
     int port;
     int freq;
     struct team *teams;
-    size_t nb_teams;
+    int nb_teams;
     struct tile **maps;
     size_t ref_resource[NB_RESOURCES];
     size_t map_resource[NB_RESOURCES];

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static void send_eject_message(struct client_entry *player, int i)
 {
@@ -59,8 +60,9 @@ static bool eject_player(struct client_entry *client, struct server *server)
 
 void eject(char *cmd, struct client_entry *client, struct server *server)
 {
-    if (cmd[0] == '\0' && eject_player(client, server))
+    if (cmd[0] == '\0' && eject_player(client, server)) {
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-    else
+        broadcast_to_guis(server, &notify_expulsion, client->id);
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
 }
