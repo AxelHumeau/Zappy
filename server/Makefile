@@ -94,4 +94,4 @@ func_tests: re
 	find . -name "*.gcda" -delete
 	./tests/functional/tester.sh
 
-.PHONY: fclean all re clean debug tests_run
+.PHONY: fclean all re clean debug tests_run func_tests

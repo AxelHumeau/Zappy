@@ -11,9 +11,9 @@ for file in ./tests/functional/bad_arguments/* ; do
     while IFS=$'\n' read -r line; do
         if [[ "$1" == "-v" ]]
         then
-            printf "checking command: ../zappy_server %s\n" "$line"
+            printf "checking command: ../zappy_ai %s\n" "$line"
         fi
-        timeout 10s ../zappy_server $line > /dev/null 2>&1
+        timeout 10s coverage run ./zappy_ai $line > /dev/null 2>&1
         if [ ! $? -eq 84 ]
         then
             validity=1
@@ -24,7 +24,7 @@ for file in ./tests/functional/bad_arguments/* ; do
     then
         ((nb_valid++))
     else
-        printf "\e[1;31m---- %s test fail: Program launched but shouldn't or crashed ----\e[0m\n"
+        printf "\e[1;31m---- %s test fail: Program launched but shouldn't ----\e[0m\n"
         break
     fi
 done

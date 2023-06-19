@@ -38,4 +38,4 @@ func_tests: re
 debug: DEBUG += -DCMAKE_BUILD_TYPE=Debug
 debug: re
 
-.PHONY: fclean all re clean tests_run
+.PHONY: fclean all re clean tests_run debug func_tests
