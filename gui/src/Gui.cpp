@@ -60,7 +60,7 @@ void ZappyGui::Gui::initialize() {
             (*tilemap)[y][x].bindGameObject(obj_ptr);
         }
     }
-    tilemap->setTileSize(2.0f, 2.0f);
+    tilemap->setTileSize(2.0f, 2.0f, 2.0f);
     setTilemap(tilemap);
 }
 

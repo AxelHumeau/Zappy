@@ -20,13 +20,15 @@ namespace ZappyGui {
             /// @brief set the spacing between tiles of the tilemap
             /// @param width spacing
             /// @param height spacing
-            void setTileSize(ZappyGui::Real width, ZappyGui::Real height);
+            void setTileSize(ZappyGui::Real width, ZappyGui::Real height, ZappyGui::Real depth);
             /// @brief return the size of the tiles in the tilemap
             /// @return a Vector2 containing the width and the height of the tiles
-            Vector2 getTileSize() { return Vector2(_tileWidth, _tileHeight); }
+            Vector3 getTileSize() { return _tileSize; }
             /// @brief return the size of the tilemap
             /// @return a Vector2i containing the width and the height of tilemap
             Vector2i getSize() { return Vector2i(_width, _height); }
+
+            void placeGameObjectOnTile(ZappyGui::Tile &tile, ZappyGui::GameObject &obj);
 
             /// @brief Not implemented !
             /// @return throw an NotImplementedError
@@ -55,8 +57,7 @@ namespace ZappyGui {
         private:
             int _width;
             int _height;
-            ZappyGui::Real _tileWidth;
-            ZappyGui::Real _tileHeight;
+            ZappyGui::Vector3 _tileSize;
             std::vector<std::vector<Tile>> _tilemap;
     };
 }

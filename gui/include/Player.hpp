@@ -8,6 +8,7 @@
 #ifndef PLAYER_HPP_
     #define PLAYER_HPP_
     #include "GameObject.hpp"
+    #include "Tilemap.hpp"
 
 namespace ZappyGui {
 
@@ -25,17 +26,15 @@ namespace ZappyGui {
 
             size_t getId() const { return _id; }
 
-            void setMapPosition(size_t x, size_t y) { _mapPositionX = x; _mapPositionY = y; }
+            void setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y);
             void setLevel(size_t level) { _level = level; }
-            void setOrientation(size_t orientation);
-            void setOrientation(Orientation orientation) { _orientation = orientation; }
+            void setFacing(size_t orientation);
             std::size_t getInventoryAmount(const ResourceType &resourceType);
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
 
         private:
             std::size_t _id;
-            size_t _mapPositionX;
-            size_t _mapPositionY;
+            ZappyGui::Vector2i _mapPosition;
             size_t _level;
             Orientation _orientation;
             std::unordered_map<ResourceType, std::size_t> _inventory;

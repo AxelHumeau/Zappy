@@ -18,8 +18,8 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
     try {
         std::list<ZappyGui::Player> &team = gui.getGame().getTeam(args[5]);
         team.emplace_back(gui.getRenderer().getSceneManager(), "Mathias.mesh", values[0]);
-        team.back().setMapPosition(values[1], values[2]);
-        team.back().setOrientation(values[3]);
+        team.back().setMapPosition(gui.getTilemap(), values[1], values[2]);
+        team.back().setFacing(values[3]);
         team.back().setLevel(values[4]);
     } catch (ZappyGui::TeamUndifinedError const &e) {
         return;
