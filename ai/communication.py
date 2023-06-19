@@ -19,6 +19,7 @@ class action(Enum):
     INCANTATION = 12
     FAILED = 13
     WAITING = 14
+    DEAD = 15
 
 
 class Communication:
@@ -40,6 +41,7 @@ class Communication:
         self.look_info = []
         self.inventory = []
         self.message = []
+        self.elevation = False
         self.current_level = 1
         self.nbr_conect = 1
         self.readbuffer = ""
@@ -140,16 +142,28 @@ class Communication:
         Returns:
             boolean: True if the elevation is successful, False otherwise
         """
-        resp = self.response.pop()
-        if resp[0] == "ko":
-            self.current_level = -1
-            return False
-        try:
-            self.current_level = int(resp[4])
-            return True
-        except Exception:
-            self.current_level = -1
-            return False
+        resp = self.response.front()
+        if self.elevation == True:
+            if resp != None and resp[0] == "ko":
+                self.elevation = False
+                self.pop_information()
+                return False
+            else:
+                print("req =", self.request.front)
+                print("res =", resp)
+                self.current_level = int(resp[15])
+                self.pop_information()
+                self.elevation = False
+                return True
+        else:
+            if resp != None and resp == "ko":
+                self.elevation = False
+                self.pop_information()
+                return False
+            if resp != None and resp == "Elevation underway":
+                self.elevation = True
+                self.response.pop()
+                return True
 
     dict_function = {
         "Take": [interaction_object, action.TAKE],
@@ -158,6 +172,7 @@ class Communication:
         "ko": [pop_information, action.NOTHING],
         "Look": [parse_information_look, action.LOOK],
         "Inventory": [parse_information_inventory, action.INVENTORY],
+        "Incantation": [get_elevation_response, action.INCANTATION]
         # "Connect_nbr" : connect_number
     }
 
@@ -167,6 +182,8 @@ class Communication:
         Returns:
             boolean: True/False
         """
+        if (len(self.response) != 0 and self.response.front() == 'dead'):
+            return action.DEAD
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
@@ -174,17 +191,20 @@ class Communication:
         if (len(self.response) != 0 and
                 self.response.front().find("message") != -1):
             self.get_message()
-        if (self.request.front()[0] in Communication.communication):
+        if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
             self.pop_information()
             return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
+            print(self.response, self.request)
             self.pop_information()
             return action.FAILED
         if len(self.request) != 0:
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
-        return self.dict_function[oldrq][1]
+            return self.dict_function[oldrq][1]
+        print(self.response, self.request)
+        return action.WAITING
 
     def network(self):
         read, write, error = select.select([self.s], [self.s], [])
