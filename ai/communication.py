@@ -19,6 +19,7 @@ class action(Enum):
     INCANTATION = 12
     FAILED = 13
     WAITING = 14
+    DEAD = 15
 
 
 class Communication:
@@ -178,6 +179,8 @@ class Communication:
         Returns:
             boolean: True/False
         """
+        if (len(self.response) != 0 and self.response.front() == 'dead'):
+            return action.DEAD
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):

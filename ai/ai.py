@@ -137,6 +137,8 @@ class AI:
         # print("obj:", objs)
         paths[indexbest][len(paths[indexbest]) - 1] += " " + objs[indexbest][0]
         paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
+        for i in range(int(obj[1] - 1)):
+            paths[indexbest].append(paths[indexbest][len(paths[indexbest]) - 1])
         return paths[indexbest]
 
     # run the A
@@ -170,15 +172,15 @@ class AI:
         # self.communication.request.push(path)
         # self.communication.writebuffer += "Inventory\n"
         # self.communication.request.push(["Inventory"])
-
         # print(self.communication.request)
 
     def act_inventory(self):
         self.fill_inventory(self.communication.inventory)
         print(self.communication.inventory)
+        commands.try_elevation(self, self.communication.request)
         if self.food <= 6:
             self.prio == priority.FOOD
-        commands.try_elevation(self, self.communication.request)
+        else: priority == priority.RESSOURCES
 
     def incantation(self):
         print("INCANTATION")
@@ -220,15 +222,17 @@ class AI:
     def run(self):
         while True:
             self.communication.network()
-            if (len(self.communication.response) != 0 and self.communication.response.front() == 'dead'):
-                break
             handling = self.communication.clean_information()
+            if handling == action.DEAD:
+                return
             if (handling == action.NOTHING):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
+                if handling == action.DEAD:
+                    return
                 # print(handling)
                 self.dic_function[handling](self)
                 handling = self.communication.clean_information()
