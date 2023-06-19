@@ -8,9 +8,10 @@
 #include "Gui.hpp"
 #include <sstream>
 #include <iostream>
-#include "Overlay.hpp"
+#include "Panel.hpp"
 
-void ZappyGui::quit(ZappyGui::Gui &gui, std::vector<std::string> args) {
+void ZappyGui::quit(ZappyGui::Gui &gui, std::vector<std::string> args)
+{
     gui.setDone(true);
 }
 void ZappyGui::msz(ZappyGui::Gui &gui, std::vector<std::string> args) {}
@@ -21,7 +22,8 @@ ZappyGui::Gui::Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requ
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
 }
 
-void ZappyGui::Gui::initialize() {
+void ZappyGui::Gui::initialize()
+{
     ZappyGui::Camera camera(_renderer->getSceneManager(), "myCam");
     std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(camera);
     cam->setNearClipDistance(0.05); // specific to this sample
@@ -38,18 +40,18 @@ void ZappyGui::Gui::initialize() {
     _renderer->setSkyBoxVisibility(false);
     // _renderer->createTestOverlay();
 
-    Overlay ol("testPanel");
-    ol.panelSetPosition(0, 0);
-    ol.panelSetDimensions(300, 110);
-    ol.panelSetMaterial("RedTransparent");
-    ol.addTextArea("test", 150, 10, "defaultFont");
-    ol.textSetAlignment("test", Ogre::TextAreaOverlayElement::Center);
-    ol.textSetText("test", "Hello, World!\nYO");
-    ol.textSetCharacterHeight("test", 50);
-    ol.textSetColorBottom("test", Ogre::ColourValue(0.3, 0.5, 0.3));
-    ol.textSetColorTop("test", Ogre::ColourValue(0.5, 0.7, 0.5));
+    std::shared_ptr<ZappyGui::Panel> ol(new ZappyGui::Panel(_renderer->getOverlay(), "testPanel", true));
+    ol->panelSetPosition(0, 0);
+    ol->panelSetDimensions(300, 110);
+    ol->panelSetMaterial("RedTransparent");
+    ol->addTextArea("test", 150, 10, "defaultFont");
+    ol->textSetAlignment("test", Ogre::TextAreaOverlayElement::Center);
+    ol->textSetText("test", "Hello, World!\nYO");
+    ol->textSetCharacterHeight("test", 50);
+    ol->textSetColorBottom("test", Ogre::ColourValue(0.3, 0.5, 0.3));
+    ol->textSetColorTop("test", Ogre::ColourValue(0.5, 0.7, 0.5));
 
-    ol.showOverlay();
+    _renderer->getPanels().insert({"testPanel", std::move(ol)});
 
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
@@ -60,6 +62,7 @@ void ZappyGui::Gui::initialize() {
             processCommand(command);
 
         _renderer->event();
+        _renderer->dragPanel();
         _renderer->renderOneFrame();
     }
     if (_renderer->isDone())
@@ -79,7 +82,8 @@ void ZappyGui::Gui::initialize() {
     _renderer->setSkyBoxVisibility(true);
 }
 
-void ZappyGui::Gui::run() {
+void ZappyGui::Gui::run()
+{
     float deltaTime = _renderer->getDeltaTime();
     std::string command;
 
@@ -97,7 +101,8 @@ void ZappyGui::Gui::run() {
     }
 }
 
-void ZappyGui::Gui::processCommand(std::string command) {
+void ZappyGui::Gui::processCommand(std::string command)
+{
     std::string commandName;
     std::string arg;
     std::vector<std::string> args;
@@ -113,6 +118,7 @@ void ZappyGui::Gui::processCommand(std::string command) {
         _commands.at(commandName)(*this, args);
 }
 
-void ZappyGui::Gui::setDone(bool done) {
+void ZappyGui::Gui::setDone(bool done)
+{
     _renderer->setDone(done);
 }

@@ -17,13 +17,25 @@
 
 namespace ZappyGui {
 
-    class Overlay {
+    class Rect {
         public:
-            Overlay(std::string panelName);
-            ~Overlay();
+            bool isInRect(int x, int y)
+            {
+                if (x > left && x < left + width && y > top && y < top + height)
+                    return true;
+                return false;
+            };
 
-            void showOverlay();
-            void hideOverlay();
+            Real left;
+            Real top;
+            Real width;
+            Real height;
+    };
+
+    class Panel {
+        public:
+            Panel(std::shared_ptr<Ogre::Overlay> overlay, std::string panelName, bool dragabble = true);
+            ~Panel();
 
             void panelSetPosition(Real left, Real top);
             void panelSetDimensions(Real width, Real height);
@@ -40,15 +52,16 @@ namespace ZappyGui {
             void textSetColorBottom(const std::string &name, Ogre::ColourValue color);
             void textSetColorTop(const std::string &name, Ogre::ColourValue color);
 
+            ZappyGui::Rect getRect();
+
+            bool isDraggable;
+
         protected:
-            std::unique_ptr<Ogre::Overlay, Nop> _overlay;
+            std::shared_ptr<Ogre::Overlay> _overlay;
             std::unique_ptr<Ogre::OverlayContainer, Nop> _panel;
             std::map<std::string, std::unique_ptr<Ogre::TextAreaOverlayElement, Nop>> _textAreas;
 
-            Real _left;
-            Real _top;
-            Real _width;
-            Real _height;
+            Rect _rect;
     };
 
 }

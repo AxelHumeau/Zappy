@@ -22,8 +22,15 @@
     #include <chrono>
     #include "Utils.hpp"
     #include "Camera.hpp"
+    #include "Panel.hpp"
 
 namespace ZappyGui {
+
+    struct Mouse {
+        bool lbIsPressed;
+        int x;
+        int y;
+    };
 
     /// @brief Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs
     class Renderer {
@@ -78,6 +85,12 @@ namespace ZappyGui {
             /// @param resolution String defining the resolution of the font.
             void loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution);
 
+            std::map<std::string, std::shared_ptr<ZappyGui::Panel>> &getPanels();
+
+            std::shared_ptr<Ogre::Overlay> getOverlay();
+
+            void dragPanel();
+
         private:
             /// @brief Loads all resources in the file in parameter in ogre
             /// @param resourceFile File containing the resources to load
@@ -100,6 +113,7 @@ namespace ZappyGui {
             /// @brief Handles the camera rotation based on the inputs
             void _processInputsCamRotation();
 
+            std::map<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::map<SDL_KeyCode, bool> _inputs;
             std::unique_ptr<SDL_Window, ZappyGui::Nop> _sdlWindow;
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;
@@ -110,6 +124,7 @@ namespace ZappyGui {
             std::shared_ptr<ZappyGui::Camera> _camera;
             std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::Nop> _shaderGenerator;
             std::unique_ptr<OgreBites::SGTechniqueResolverListener, ZappyGui::Nop> _resolverListener;
+            std::shared_ptr<Ogre::Overlay> _overlay;
             bool _done;
             float _camRotationSpeed;
             float _camMovementSpeed;
@@ -117,6 +132,12 @@ namespace ZappyGui {
             int _height;
             float _deltaTime;
             std::chrono::steady_clock::time_point _lastTime;
+            ZappyGui::Mouse _curMouse;
+            ZappyGui::Mouse _prevMouse;
+            std::string _dragPanelName;
+
+            int _mPosX;
+            int _mPosY;
     };
 
 }

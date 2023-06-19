@@ -16,9 +16,13 @@ ZappyGui::Renderer::Renderer(std::string name, int width, int height, std::strin
 _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
 {
     _done = false;
+    _dragPanelName = "";
+
+    _curMouse = { false, 0, 0 };
+    _prevMouse = { false, 0, 0 };
 
     SDL_Init(SDL_INIT_VIDEO);
-    _sdlWindow.reset(SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0));
+    _sdlWindow.reset(SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_FULLSCREEN));
     Ogre::NameValuePairList params;
     params["externalWindowHandle"] = "true";
 
@@ -57,6 +61,9 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     _deltaTime = 0.0;
 
     loadFont("defaultFont", "General", "Roboto-Bold.ttf", "26", "156");
+
+    _overlay = std::shared_ptr<Ogre::Overlay>(Ogre::OverlayManager::getSingletonPtr()->create("myOverlay"), ZappyGui::Nop{});
+    _overlay->show();
 }
 
 ZappyGui::Renderer::~Renderer()
@@ -97,6 +104,7 @@ void ZappyGui::Renderer::event()
 {
     SDL_Event event;
 
+    _prevMouse = _curMouse;
     while(SDL_PollEvent(&event))
     {
         switch(event.type)
@@ -107,10 +115,27 @@ void ZappyGui::Renderer::event()
             case SDL_KEYUP:
                 _checkKeyup(event);
             case SDL_MOUSEBUTTONDOWN:
-                // Handle mouse clicks here.
+                if (event.button.button == SDL_BUTTON_LEFT)
+                {
+                    SDL_GetGlobalMouseState(&_curMouse.x,&_curMouse.y);
+                    _prevMouse.x = _curMouse.x;
+                    _prevMouse.y = _curMouse.y;
+                    _curMouse.lbIsPressed = true;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if (event.button.button == SDL_BUTTON_LEFT)
+                {
+                    _curMouse.lbIsPressed = false;
+                }
                 break;
             case SDL_QUIT:
                 _done = true;
+                break;
+            case SDL_MOUSEMOTION:
+                _prevMouse.x = _curMouse.x;
+                _prevMouse.y = _curMouse.y;
+                SDL_GetGlobalMouseState(&_curMouse.x,&_curMouse.y);
                 break;
             default:
                 break;
@@ -200,6 +225,7 @@ void ZappyGui::Renderer::processInputs()
 {
     _processInputsCamMovement();
     _processInputsCamRotation();
+    dragPanel();
 }
 
 void ZappyGui::Renderer::_processInputsCamMovement()
@@ -301,4 +327,60 @@ void ZappyGui::Renderer::loadFont(std::string name, std::string group, std::stri
     mFont->setParameter("size", size);
     mFont->setParameter("resolution", resolution);
     mFont->load();
+}
+
+std::map<std::string, std::shared_ptr<ZappyGui::Panel>> &ZappyGui::Renderer::getPanels()
+{
+    return _panels;
+}
+
+std::shared_ptr<Ogre::Overlay> ZappyGui::Renderer::getOverlay()
+{
+    return _overlay;
+}
+
+void ZappyGui::Renderer::dragPanel()
+{
+    int x = 0;
+    int y = 0;
+    ZappyGui::Rect rect;
+
+    if (!_prevMouse.lbIsPressed && _curMouse.lbIsPressed)
+    {
+        std::cout << _panels.size() << std::endl;
+        for (auto &cur : _panels)
+        {
+            if (cur.second->getRect().isInRect(_curMouse.x, _curMouse.y) && cur.second->isDraggable)
+            {
+                SDL_GetMouseState(&_mPosX, &_mPosY);
+                _dragPanelName = cur.first;
+                break;
+            }
+        }
+    }
+
+    if (_prevMouse.lbIsPressed && _curMouse.lbIsPressed && _dragPanelName != "")
+    {
+        SDL_GetMouseState(&x, &y);
+        x -= _mPosX;
+        y -= _mPosY;
+        SDL_GetMouseState(&_mPosX, &_mPosY);
+        if (_panels.find(_dragPanelName) == _panels.end())
+            return;
+        rect = _panels[_dragPanelName]->getRect();
+        _panels[_dragPanelName]->panelSetPosition(rect.left + x, rect.top + y);
+        if (rect.left + x < 0)
+            _panels[_dragPanelName]->panelSetPosition(0, rect.top);
+        if (rect.left + x + rect.width > _width)
+            _panels[_dragPanelName]->panelSetPosition(_width - rect.width, rect.top);
+        if (rect.top + y < 0)
+            _panels[_dragPanelName]->panelSetPosition(rect.left, 0);
+        if (rect.top + y + rect.height > _height)
+            _panels[_dragPanelName]->panelSetPosition(rect.left, _height - rect.height);
+    }
+
+    if (_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
+    {
+        _dragPanelName = "";
+    }
 }
