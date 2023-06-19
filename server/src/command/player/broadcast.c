@@ -72,6 +72,8 @@ static void find_closest_zone(struct client_entry *client,
         zone[i].x += (zone[i].x < 0) ? server->width : 0;
     }
     index = get_closest_zone(zone, sender, dir, server);
+    if (sender.x == target.x && sender.y == target.y)
+        index = 0;
     send_message(index, args, player);
 }
 
@@ -85,9 +87,9 @@ void broadcast(char *cmd, struct client_entry *client, struct server *server)
         return;
     }
     args = str_to_array(cmd, "\t ");
-    for (size_t i = 0; i < server->nb_teams; i++) {
+    for (int i = 0; i < server->nb_teams; i++) {
         SLIST_FOREACH(player, &server->clients, next) {
-            if (player->is_role_defined && !player->is_gui && client != player)
+            if (is_player(player, client))
                 find_closest_zone(client, player, server, args);
         }
     }

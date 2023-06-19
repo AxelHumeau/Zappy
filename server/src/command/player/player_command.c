@@ -34,6 +34,7 @@ static void time_command(struct client_entry *client,
         client->timer = server->timestamp;
     else if (server->timestamp - client->timer >= command.cooldown) {
         (command.function) (line + strlen(command.command), client, server);
+        display_player(server);
         clean_player_command(client);
         client->timer = -1;
     }
