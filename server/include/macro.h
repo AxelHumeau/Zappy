@@ -49,7 +49,7 @@ static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [PHIRAS] = "phiras",
     [THYSMANE] = "thysmane",
 };
-static const int DIRECTION[4][2] = {
+static const int DIRECTION[NB_DIRECTIONS][2] = {
     [UP] = {0, -1},
     [RIGHT] = {1, 0},
     [DOWN] = {0, 1},
@@ -61,13 +61,13 @@ static const char * const DIRECTION_STR[NB_DIRECTIONS] = {
     [DOWN] = "down",
     [LEFT] = "left",
 };
-static const int POS_LOOK[4] = {
+static const int POS_LOOK[NB_DIRECTIONS] = {
     [UP] = -1,
     [RIGHT] = -1,
     [DOWN] = 1,
     [LEFT] = 1
 };
-static const int DIRECTION_ZONE[4] = {
+static const int DIRECTION_ZONE[NB_DIRECTIONS] = {
     [UP] = 1,
     [RIGHT] = 3,
     [DOWN] = 5,

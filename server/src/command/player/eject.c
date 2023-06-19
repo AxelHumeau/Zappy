@@ -6,15 +6,36 @@
 */
 
 #include <string.h>
+#include <stdio.h>
 #include "macro.h"
+
+static void send_eject_message(struct client_entry *player, int i)
+{
+    char *message = NULL;
+    enum direction dir = player->player_info.direction;
+    int index = (DIRECTION_ZONE[dir] + (ZONE_SIZE - 2 * i)) % ZONE_SIZE;
+
+    asprintf(&message, "eject: %d\n", index);
+    add_to_buffer(&player->buf_to_send, message, strlen(message));
+    free(message);
+}
 
 static void move_player(struct client_entry *client,
     struct client_entry *player, struct server *server)
 {
+    struct position save_pos = {player->player_info.x, player->player_info.y};
+    struct position move = {0};
+
     player->player_info.x += DIRECTION[client->player_info.direction][0];
     player->player_info.y += DIRECTION[client->player_info.direction][1];
     player->player_info.x += (player->player_info.x < 0) ? server->width : 0;
     player->player_info.y += (player->player_info.y < 0) ? server->height : 0;
+    for (int i = 0; i < NB_DIRECTIONS; i++) {
+        move.x = save_pos.x - player->player_info.x;
+        move.y = save_pos.y - player->player_info.y;
+        if (move.x == DIRECTION[i][0] && move.y == DIRECTION[i][1])
+            send_eject_message(player, i);
+    }
 }
 
 static bool eject_player(struct client_entry *client, struct server *server)
