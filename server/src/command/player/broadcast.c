@@ -11,6 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static double get_distance(struct server *server, struct position zone,
     struct position sender)
@@ -90,6 +91,8 @@ void broadcast(char *cmd, struct client_entry *client, struct server *server)
                 find_closest_zone(client, player, server, args);
         }
     }
+    broadcast_to_guis(server, &notify_broadcast,
+        client->id, cmd + 1);
     add_to_buffer(&client->buf_to_send, OK, strlen(OK));
     free_array(args);
 }

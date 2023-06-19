@@ -35,6 +35,7 @@ SRC =			main.c							\
 				command/player/incantation.c	\
 				gui/handle_gui_client.c			\
 				gui/init_gui_client.c			\
+				gui/broadcast_to_guis.c			\
 				gui/commands/map_size.c			\
 				gui/commands/tile_content.c		\
 				gui/commands/map_content.c		\
@@ -42,6 +43,13 @@ SRC =			main.c							\
 				gui/commands/player_infos.c		\
 				gui/commands/time_unit.c		\
 				gui/events/new_player.c			\
+				gui/events/broadcast.c			\
+				gui/events/death.c				\
+				gui/events/egg.c				\
+				gui/events/expulsion.c			\
+				gui/events/incantation.c		\
+				gui/events/resources.c			\
+				gui/events/server_message.c		\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 

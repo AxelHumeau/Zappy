@@ -7,11 +7,14 @@
 
 #include <string.h>
 #include "macro.h"
+#include "gui/events.h"
 
-void fork_cmd(char *cmd, struct client_entry *client, struct server *)
+void fork_cmd(char *cmd, struct client_entry *client,
+    struct server *server)
 {
-    if (cmd[0] == '\0')
+    if (cmd[0] == '\0') {
         add_to_buffer(&client->buf_to_send, OK, strlen(OK));
-    else
+        broadcast_to_guis(server, &notify_egg_laying, client->id);
+    } else
         add_to_buffer(&client->buf_to_send, KO, strlen(KO));
 }

@@ -25,17 +25,17 @@ enum resource {
 
 enum direction {
     UP = 0,
-    RIGHT = 1,
-    DOWN = 2,
-    LEFT = 3,
+    RIGHT,
+    DOWN,
+    LEFT,
 };
 
-enum orientation {
-    NORTH = 1,
-    EAST,
-    SOUTH,
-    WEST
-};
+typedef struct egg {
+    int id;
+    int x;
+    int y;
+    struct team *team;
+} egg_t;
 
 struct position {
     int x;
@@ -51,7 +51,6 @@ typedef struct player {
     size_t time_units_left;
     time_t last_action;
     struct team *team;
-    enum orientation orientation;
 } player_t;
 
 struct tile {
