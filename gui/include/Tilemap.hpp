@@ -10,6 +10,7 @@
     #include "Tile.hpp"
     #include "GameObject.hpp"
     #include "Error.hpp"
+    #include "SafeQueue.hpp"
     #include <vector>
 
 namespace ZappyGui {
@@ -49,6 +50,7 @@ namespace ZappyGui {
             /// @brief Not implemented !
             /// @return throw an NotImplementedError
             void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) { throw NotImplementedError(); }
+            void update(SafeQueue<std::string> &requests);
 
             /// @brief operator[] overload to access the _tilemap
             /// @param index index of the the tilemap row to get

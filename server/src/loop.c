@@ -85,8 +85,8 @@ int loop(struct server *server)
 
     while (select(set_fds(server, &readfds, &writefds),
         &readfds, &writefds, NULL, NULL) >= 0) {
-        if (FD_ISSET(server->timerfd, &readfds))
-            timer_command(server);
+        // if (FD_ISSET(server->timerfd, &readfds))
+        //     timer_command(server);
         if (FD_ISSET(server->sig_fd, &readfds) && have_to_stop(server))
             break;
         if (FD_ISSET(server->listening_fd, &readfds))

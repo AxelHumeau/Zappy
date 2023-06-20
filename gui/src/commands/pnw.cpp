@@ -17,7 +17,8 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
         return;
     try {
         std::list<ZappyGui::Player> &team = gui.getGame().getTeam(args[5]);
-        team.emplace_back(gui.getRenderer().getSceneManager(), "Mathias.mesh", values[0]);
+        team.emplace_back(gui.getRenderer().getSceneManager(), "Washy.mesh", values[0]);
+        team.back().setRotation(Ogre::Radian(0), Ogre::Radian(0), Ogre::Radian(0));
         team.back().setMapPosition(gui.getTilemap(), values[1], values[2]);
         team.back().setFacing(values[3]);
         team.back().setLevel(values[4]);

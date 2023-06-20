@@ -26,6 +26,8 @@ namespace ZappyGui {
         Thystame
     };
 
+    std::ostream &operator<< (std::ostream &os, ZappyGui::ResourceType type);
+
     struct Nop
     {
         template <typename T>

@@ -22,6 +22,22 @@ _receive{receive}, _requests{requests}, _minDelayServerUpdates{minDelayServerUpd
     _commands.emplace("ppo", ppo);
     _commands.emplace("plv", plv);
     _commands.emplace("pin", pin);
+    _commands.emplace("pex", pex);
+    _commands.emplace("pbc", pbc);
+    _commands.emplace("pic", pic);
+    _commands.emplace("pie", pie);
+    _commands.emplace("pfk", pfk);
+    _commands.emplace("pdr", pdr);
+    _commands.emplace("pgt", pgt);
+    _commands.emplace("enw", enw);
+    _commands.emplace("ebo", ebo);
+    _commands.emplace("edi", edi);
+    _commands.emplace("sgt", sgt);
+    _commands.emplace("sst", sst);
+    _commands.emplace("seg", seg);
+    _commands.emplace("smg", smg);
+    _commands.emplace("suc", suc);
+    _commands.emplace("sbp", sbp);
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
 }
 
@@ -75,6 +91,7 @@ void ZappyGui::Gui::run() {
 
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
             _game.update(_requests);
+            _tilemap->update(_requests);
             _waitedServerUpdateDelay = 0.0f;
         } else
             _waitedServerUpdateDelay += deltaTime;
@@ -100,16 +117,12 @@ void ZappyGui::Gui::processCommand(std::string command) {
         return;
     while(getline(ss, arg, ' '))
         args.push_back(arg);
-    std::cout << commandName << " ";
-    for (std::string arg : args)
-        std::cout << arg << " ";
-    std::cout << std::endl;
     if (_commands.find(commandName) != _commands.end())
         _commands.at(commandName)(*this, args);
 }
 
 std::vector<std::size_t> ZappyGui::Gui::convertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex, std::size_t endIndex) {
-    if (endIndex == 0)
+    if (endIndex == static_cast<std::size_t>(-1))
         endIndex = args.size() - 1;
     return _ImplconvertArgsToSize_t(args, startIndex, endIndex);
 }

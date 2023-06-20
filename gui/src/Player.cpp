@@ -10,6 +10,7 @@
 namespace ZappyGui {
 
     Player::Player(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName, std::size_t id): GameObject(sceneManager, meshName), _id{id} {
+        setFacing(3);
         _inventory[ResourceType::Food] = 0;
         _inventory[ResourceType::Linemate] = 0;
         _inventory[ResourceType::Deraumere] = 0;
@@ -29,23 +30,19 @@ namespace ZappyGui {
         switch (orientation) {
         case 1:
             _orientation = Orientation::North;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
+            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
             break;
         case 2:
             setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
             _orientation = Orientation::East;
             break;
         case 3:
-            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
+            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
             _orientation = Orientation::South;
             break;
         case 4:
             setOrientation(Ogre::Quaternion(Ogre::Degree(-90),Vector3(0, 1, 0)));
             _orientation = Orientation::West;
-            break;
-        default:
-            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
-            _orientation = Orientation::North;
             break;
         }
     }
@@ -60,6 +57,5 @@ namespace ZappyGui {
             throw UndifinedResourceTypeError();
         _inventory[resourceType] = amount;
     }
-
 }
 

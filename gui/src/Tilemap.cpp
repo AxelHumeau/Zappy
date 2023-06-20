@@ -6,6 +6,7 @@
 */
 
 #include "Tilemap.hpp"
+#include "Client.hpp"
 #include <iostream>
 
 namespace ZappyGui {
@@ -43,6 +44,10 @@ namespace ZappyGui {
         finalPosition.y = getPosition().y + _tileSize.y;
         finalPosition.z = getPosition().z - tile.getPosition().data[1] * _tileSize.z;
         obj.setPosition(finalPosition.x, finalPosition.y, finalPosition.z);
+    }
+
+    void Tilemap::update(SafeQueue<std::string> &requests) {
+        Network::Client::queueRequest(requests, "mct", {});
     }
 
     std::vector<Tile> &Tilemap::operator[](std::size_t index) {

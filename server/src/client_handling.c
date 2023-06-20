@@ -84,6 +84,7 @@ void destroy_client(struct client_entry *client)
     if (client->is_role_defined && !client->is_gui)
         client->player_info.team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
+        printf("DELETE PLAYER\n");
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
     }

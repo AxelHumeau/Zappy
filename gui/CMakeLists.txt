@@ -15,6 +15,7 @@ set(SRCS
     src/Client.cpp
     src/Game.cpp
     src/Player.cpp
+    src/Utils.cpp
     src/Error.cpp
     src/commands/msz.cpp
     src/commands/bct.cpp
@@ -25,6 +26,22 @@ set(SRCS
     src/commands/ppo.cpp
     src/commands/quit.cpp
     src/commands/tna.cpp
+    src/commands/pex.cpp
+    src/commands/pbc.cpp
+    src/commands/pic.cpp
+    src/commands/pie.cpp
+    src/commands/pfk.cpp
+    src/commands/pdr.cpp
+    src/commands/pgt.cpp
+    src/commands/enw.cpp
+    src/commands/ebo.cpp
+    src/commands/edi.cpp
+    src/commands/sgt.cpp
+    src/commands/sst.cpp
+    src/commands/seg.cpp
+    src/commands/smg.cpp
+    src/commands/suc.cpp
+    src/commands/sbp.cpp
 )
 set(INCLUDES include)
 

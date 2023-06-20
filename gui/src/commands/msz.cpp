@@ -10,7 +10,6 @@
 void ZappyGui::msz(ZappyGui::Gui &gui, std::vector<std::string> args) {
     std::vector<std::size_t> values;
     std::pair<size_t, size_t> mapSize = gui.getMapSize();
-
     if (args.size() != 2 || mapSize.first != 0 || mapSize.second != 0)
         return;
     values = gui.convertArgsToSize_t(args);
