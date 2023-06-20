@@ -34,14 +34,28 @@ static const int MAX_PORT_NUMBER = 65535;
 static const int REFILL_TIME = 20;
 static const int FOOD_TIME = 126;
 static const long FOOD_PLAYER = 10;
+
+static const int TIMER_CLASSIC = 7;
+static const int TIMER_FAST = 1;
+static const int NO_TIMER = 0;
+static const int TIMER_FORK = 42;
+static const int TIMER_INCANTATION = 300;
+
 static const double DENSITY[NB_RESOURCES] = {
-    [FOOD] = 0.5,
-    [LINEMATE] = 0.3,
-    [DERAUMERE] = 0.15,
-    [SIBUR] = 0.1,
-    [MENDIANE] = 0.1,
-    [PHIRAS] = 0.08,
-    [THYSMANE] = 0.05,
+    [FOOD] = 2.0,
+    [LINEMATE] = 2.0,
+    [DERAUMERE] = 2.0,
+    [SIBUR] = 2.0,
+    [MENDIANE] = 2.0,
+    [PHIRAS] = 2.0,
+    [THYSMANE] = 2.0,
+    // [FOOD] = 0.5,
+    // [LINEMATE] = 0.3,
+    // [DERAUMERE] = 0.15,
+    // [SIBUR] = 0.1,
+    // [MENDIANE] = 0.1,
+    // [PHIRAS] = 0.08,
+    // [THYSMANE] = 0.05,
 };
 static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [FOOD] = "food",

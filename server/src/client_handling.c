@@ -42,6 +42,7 @@ static void handle_lines(struct client_entry *client, struct server *server)
 {
     char *line;
 
+    printf("GET_LINE HANDLE\n");
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
         printf("id : %d\n", client->id);

@@ -46,8 +46,8 @@ struct server {
     struct team *teams;
     int nb_teams;
     struct tile **maps;
-    size_t ref_resource[NB_RESOURCES];
-    size_t map_resource[NB_RESOURCES];
+    int ref_resource[NB_RESOURCES];
+    int map_resource[NB_RESOURCES];
     size_t multiplier_resource;
     int max_players_per_team;
     int nb_players;
@@ -95,12 +95,14 @@ char *add_tiles_elem_string(struct server *server, struct client_entry *client,
 // Utils_player.c
 bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
+bool same_pos(struct client_entry *player, struct client_entry *client);
+
 
 // Utils_incantation.c
 struct client_entry **condition_ritual(struct client_entry *client,
     struct server *server);
-void send_ritual_message(struct server *server, struct client_entry **list,
-    bool is_elevate);
+void send_ritual_message(struct client_entry *client, struct server *server,
+    struct client_entry **list, bool is_elevate);
 
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);

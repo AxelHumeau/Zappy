@@ -10,13 +10,13 @@
 #include "server.h"
 #include "macro.h"
 
-static int resources_left(size_t resource[])
+static int resources_left(int resource[])
 {
     bool empty = true;
     int select_resource = rand() % NB_RESOURCES;
 
     for (int i = 0; i < NB_RESOURCES; i++) {
-        if (resource[i] != 0) {
+        if (resource[i] > 0) {
             empty = false;
             break;
         }
@@ -28,7 +28,7 @@ static int resources_left(size_t resource[])
     return select_resource;
 }
 
-static void place_resource(struct server *server, size_t *resource, int index,
+static void place_resource(struct server *server, int *resource, int index,
     bool increment)
 {
     int pos_y = rand() % server->height;
@@ -40,7 +40,7 @@ static void place_resource(struct server *server, size_t *resource, int index,
     resource[index]--;
 }
 
-static void check_stock_resources(size_t *resource)
+static void check_stock_resources(int *resource)
 {
     for (int i = 0; i < NB_RESOURCES; i++) {
         if (resource[i] == 0)
@@ -51,7 +51,7 @@ static void check_stock_resources(size_t *resource)
 void refill_resources(struct server *server)
 {
     size_t nb = server->multiplier_resource;
-    size_t resource[NB_RESOURCES] = {
+    int resource[NB_RESOURCES] = {
         nb * server->ref_resource[FOOD] - server->map_resource[FOOD],
         nb * server->ref_resource[LINEMATE] - server->map_resource[LINEMATE],
         nb * server->ref_resource[DERAUMERE] - server->map_resource[DERAUMERE],
@@ -71,7 +71,7 @@ void refill_resources(struct server *server)
 
 void set_resource_map(struct server *server)
 {
-    size_t resource[NB_RESOURCES] = {
+    int resource[NB_RESOURCES] = {
         DENSITY[FOOD] * server->width * server->height,
         DENSITY[LINEMATE] * server->width * server->height,
         DENSITY[DERAUMERE] * server->width * server->height,
@@ -83,8 +83,8 @@ void set_resource_map(struct server *server)
     int select_resource = 0;
 
     check_stock_resources(resource);
-    memcpy(&server->ref_resource, resource, sizeof(size_t[NB_RESOURCES]));
-    memcpy(&server->map_resource, resource, sizeof(size_t[NB_RESOURCES]));
+    memcpy(&server->ref_resource, resource, sizeof(int[NB_RESOURCES]));
+    memcpy(&server->map_resource, resource, sizeof(int[NB_RESOURCES]));
     select_resource = resources_left(resource);
     while (select_resource != -1) {
         place_resource(server, resource, select_resource, false);

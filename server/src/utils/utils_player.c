@@ -13,6 +13,19 @@ bool is_player(struct client_entry *player, struct client_entry *client)
     return player->is_role_defined && !player->is_gui && client != player;
 }
 
+bool same_pos(struct client_entry *player, struct client_entry *client)
+{
+    struct position player_pos;
+    struct position client_pos;
+
+    player_pos.x = player->player_info.x;
+    player_pos.y = player->player_info.y;
+    client_pos.x = client->player_info.x;
+    client_pos.y = client->player_info.y;
+
+    return player_pos.x == client_pos.x && player_pos.y == client_pos.y;
+}
+
 void display_player(struct server *server)
 {
     struct client_entry *player = NULL;

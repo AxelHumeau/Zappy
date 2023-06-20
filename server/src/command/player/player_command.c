@@ -35,9 +35,9 @@ static void check_incantation(struct client_entry *client,
     if (!strncmp(line, INCANTATION, strlen(INCANTATION)) && !client->ritual) {
         list_players = condition_ritual(client, server);
         if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL)
-            send_ritual_message(server, list_players, true);
+            send_ritual_message(client, server, list_players, true);
         else
-            send_ritual_message(server, list_players, false);
+            add_to_buffer(&client->buf_to_send, KO, strlen(KO));
         client->ritual = true;
     }
     free(list_players);
@@ -48,8 +48,8 @@ static void time_command(struct client_entry *client,
 {
     check_incantation(client, server, line);
     if (client->timer == -1)
-        client->timer = server->timestamp;
-    else if (server->timestamp - client->timer >= command.cooldown) {
+        client->timer = command.cooldown;
+    else if (client->timer <= 0) {
         (command.function) (line + strlen(command.command), client, server);
         display_player(server);
         clean_player_command(client);
