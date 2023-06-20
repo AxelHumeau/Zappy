@@ -88,6 +88,12 @@ re: fclean all
 debug: CPPFLAGS += -ggdb
 debug: fclean $(NAME)
 
-tests_run:
+tests_run: func_tests
 
-.PHONY: fclean all re clean debug tests_run
+func_tests: CFLAGS += --coverage
+func_tests: LDFLAGS += --coverage
+func_tests: re
+	find . -name "*.gcda" -delete
+	./tests/functional/tester.sh
+
+.PHONY: fclean all re clean debug tests_run func_tests

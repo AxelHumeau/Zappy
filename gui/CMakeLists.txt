@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.20.5)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${COMPILE_FLAGS}")
+
 set(CXX=g++)
 set(SRCS
     src/main.cpp

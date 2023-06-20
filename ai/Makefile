@@ -24,6 +24,10 @@ fclean: clean
 
 re: fclean all
 
-tests_run:
+tests_run: func_tests
 
-.PHONY: fclean all re clean tests_run
+func_tests: re
+	find . -name "*.gcda" -delete
+	./tests/functional/tester.sh
+
+.PHONY: fclean all re clean debug tests_run func_tests

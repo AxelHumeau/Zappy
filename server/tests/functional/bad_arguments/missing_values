@@ -1,0 +1,10 @@
+-x -y 30 -n name1 name2 -c 5 -f 80 -p 1500
+-x 30 -y -n name1 name2 -c 5 -f 80 -p 1500
+-x 30 -y 30 -n -c 5 -f 80 -p 1500
+-x 30 -y 30 -n name1 name2 -c -f 80 -p 1500
+-x 30 -y 30 -n name1 name2 -c 5 -f -p 1500
+-x 30 -y 30 -n name1 name2 -c 5 -f 80 -p
+-x -y -n name1 name2 -c 5 -f 80 -p 1500
+-x 30 -y 30 -n -c 5 -f 80 -p
+-x -y -n -c -f -p
+-x 30 -y 30 -n name1 name2 -c 5 -f -p
