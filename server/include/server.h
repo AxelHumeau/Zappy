@@ -131,4 +131,3 @@ int handle_gui(struct client_entry *client, struct server *server, char *line);
 
 // init_gui_client.c
 int init_gui_client(struct server *server, struct client_entry *client);
-
