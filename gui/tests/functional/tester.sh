@@ -3,6 +3,7 @@
 nb_valid=0
 validity=0
 total=0
+failed=0
 
 for file in ./tests/functional/bad_arguments/* ; do
     ((total++))
@@ -25,8 +26,14 @@ for file in ./tests/functional/bad_arguments/* ; do
         ((nb_valid++))
     else
         printf "\e[1;31m---- %s test fail: Program launched but shouldn't or crashed ----\e[0m\n"
+        failed=1
         break
     fi
 done
 
 printf "\e[1;32m---- %d/%d tests valided ----\e[0m\n" $nb_valid $total
+if [ failed -eq 1 ]
+then
+    exit 1
+fi
+
