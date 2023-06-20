@@ -87,7 +87,6 @@ int loop(struct server *server)
 {
     fd_set readfds;
     fd_set writefds;
-    static int index = 1;
 
     while (select(set_fds(server, &readfds, &writefds),
         &readfds, &writefds, NULL, NULL) >= 0) {

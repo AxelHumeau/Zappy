@@ -101,7 +101,7 @@ bool same_pos(struct client_entry *player, struct client_entry *client);
 // Utils_incantation.c
 struct client_entry **condition_ritual(struct client_entry *client,
     struct server *server);
-void send_ritual_message(struct client_entry *client, struct server *server,
+void send_ritual_message(struct client_entry *client,
     struct client_entry **list, bool is_elevate);
 
 // Str_to_array.c

@@ -35,7 +35,7 @@ static void check_incantation(struct client_entry *client,
     if (!strncmp(line, INCANTATION, strlen(INCANTATION)) && !client->ritual) {
         list_players = condition_ritual(client, server);
         if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL)
-            send_ritual_message(client, server, list_players, true);
+            send_ritual_message(client, list_players, true);
         else
             add_to_buffer(&client->buf_to_send, KO, strlen(KO));
         client->ritual = true;

@@ -11,7 +11,7 @@
 #include "elevation_level.h"
 #include "gui/events.h"
 
-void send_ritual_message(struct client_entry *client, struct server *server,
+void send_ritual_message(struct client_entry *client,
     struct client_entry **list, bool is_elevate)
 {
     int timer = 0;
@@ -69,7 +69,7 @@ void incantation(char *cmd, struct client_entry *client,
         broadcast_to_guis(server, &notify_start_of_incantation,
             client->id, &client->player_info, 0);
     } else
-        send_ritual_message(client, server, list_players, false);
+        send_ritual_message(client, list_players, false);
     client->ritual = false;
     free(list_players);
 }
