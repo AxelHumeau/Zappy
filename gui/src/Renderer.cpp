@@ -344,14 +344,21 @@ void ZappyGui::Renderer::dragPanel()
     int x = 0;
     int y = 0;
     ZappyGui::Rect rect;
+    std::string name = "";
 
     if (!_prevMouse.lbIsPressed && _curMouse.lbIsPressed)
     {
-        std::cout << _panels.size() << std::endl;
         for (auto &cur : _panels)
         {
             if (cur.second->getRect().isInRect(_curMouse.x, _curMouse.y) && cur.second->isDraggable)
             {
+                if (cur.second->closeButton != nullptr &&
+                    cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top))
+                {
+                    cur.second->closeButton->isClick = true;
+                    cur.second->closeButton->isHover = false;
+                    break;
+                }
                 SDL_GetMouseState(&_mPosX, &_mPosY);
                 _dragPanelName = cur.first;
                 break;
@@ -381,6 +388,37 @@ void ZappyGui::Renderer::dragPanel()
 
     if (_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
     {
+        for (auto &cur : _panels)
+        {
+            if (cur.second->closeButton != nullptr && cur.second->closeButton->isClick)
+            {
+                if (cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top))
+                    name = cur.first;
+                cur.second->closeButton->isClick = false;
+            }
+        }
+        if (name != "")
+            _panels.erase(name);
         _dragPanelName = "";
+    }
+
+    if (!_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
+    {
+        for (auto &cur : _panels)
+        {
+            if (cur.second->closeButton == nullptr)
+                continue;
+            if (cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top)
+                && !cur.second->closeButton->isClick)
+                cur.second->closeButton->isHover = true;
+            else
+                cur.second->closeButton->isHover = false;
+        }
+    }
+
+    for (auto &cur : _panels)
+    {
+        if (cur.second->closeButton != nullptr)
+            cur.second->closeButton->update();
     }
 }

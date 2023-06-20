@@ -17,11 +17,16 @@ ZappyGui::Panel::Panel(std::shared_ptr<Ogre::Overlay> overlay, std::string panel
 
     _overlay = overlay;
     _overlay->add2D(_panel.get());
+
+    _panelName = panelName;
+
+    closeButton.reset(nullptr);
 }
 
 ZappyGui::Panel::~Panel()
 {
     _overlay->remove2D(_panel.get());
+    Ogre::OverlayManager::getSingletonPtr()->destroyOverlayElement(_panel.get());
 }
 
 void ZappyGui::Panel::panelSetPosition(Real left, Real top)
@@ -117,4 +122,17 @@ void ZappyGui::Panel::textSetColorTop(const std::string &name, Ogre::ColourValue
 ZappyGui::Rect ZappyGui::Panel::getRect()
 {
     return _rect;
+}
+
+void ZappyGui::Panel::addCloseButton(Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat)
+{
+    if (closeButton != nullptr)
+        return;
+    closeButton.reset(new ZappyGui::ClosePanel(_panelName + "_closeButton", r, defaultMat, hoverMat, clickMat));
+    _panel->addChild(closeButton->getPointer().get());
+}
+
+std::string ZappyGui::Panel::getName()
+{
+    return _panelName;
 }

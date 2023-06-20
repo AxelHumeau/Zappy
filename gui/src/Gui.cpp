@@ -50,8 +50,23 @@ void ZappyGui::Gui::initialize()
     ol->textSetCharacterHeight("test", 50);
     ol->textSetColorBottom("test", Ogre::ColourValue(0.3, 0.5, 0.3));
     ol->textSetColorTop("test", Ogre::ColourValue(0.5, 0.7, 0.5));
+    ol->addCloseButton(ZappyGui::Rect{10, 10, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
 
     _renderer->getPanels().insert({"testPanel", std::move(ol)});
+
+    std::shared_ptr<ZappyGui::Panel> ol2(new ZappyGui::Panel(_renderer->getOverlay(), "testPanel2", true));
+    ol2->panelSetPosition(0, 0);
+    ol2->panelSetDimensions(300, 110);
+    ol2->panelSetMaterial("RedTransparent");
+    ol2->addTextArea("test2", 150, 10, "defaultFont");
+    ol2->textSetAlignment("test2", Ogre::TextAreaOverlayElement::Center);
+    ol2->textSetText("test2", "Hello, World!\nHI");
+    ol2->textSetCharacterHeight("test2", 50);
+    ol2->textSetColorBottom("test2", Ogre::ColourValue(0.3, 0.5, 0.3));
+    ol2->textSetColorTop("test2", Ogre::ColourValue(0.5, 0.7, 0.5));
+    ol2->addCloseButton(ZappyGui::Rect{10, 10, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
+
+    _renderer->getPanels().insert({"testPanel2", std::move(ol2)});
 
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)

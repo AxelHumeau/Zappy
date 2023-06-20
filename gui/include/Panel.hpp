@@ -32,6 +32,47 @@ namespace ZappyGui {
             Real height;
     };
 
+    class ClosePanel {
+        public:
+            ClosePanel(std::string name, Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat):
+            rect(r), isHover(false), isClick(false), _defaultMat(defaultMat), _hoverMat(hoverMat), _clickMat(clickMat)
+            {
+                _panel.reset(static_cast<Ogre::OverlayContainer*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("Panel", name)), ZappyGui::Nop{});
+                _panel->setMetricsMode(Ogre::GMM_PIXELS);
+
+                _panel->setPosition(rect.left, rect.top);
+                _panel->setDimensions(rect.width, rect.height);
+
+                _panel->setMaterialName(_defaultMat, "Assets");
+            };
+            ~ClosePanel() = default;
+
+            void update()
+            {
+                if (isHover)
+                    _panel->setMaterialName(_hoverMat, "Assets");
+                else if (isClick)
+                    _panel->setMaterialName(_clickMat, "Assets");
+                else
+                    _panel->setMaterialName(_defaultMat, "Assets");
+            };
+
+            std::shared_ptr<Ogre::OverlayElement> getPointer()
+            {
+                return _panel;
+            };
+
+            Rect rect;
+
+            bool isHover;
+            bool isClick;
+        private:
+            std::shared_ptr<Ogre::OverlayElement> _panel;
+            std::string _defaultMat;
+            std::string _hoverMat;
+            std::string _clickMat;
+    };
+
     class Panel {
         public:
             Panel(std::shared_ptr<Ogre::Overlay> overlay, std::string panelName, bool dragabble = true);
@@ -52,15 +93,21 @@ namespace ZappyGui {
             void textSetColorBottom(const std::string &name, Ogre::ColourValue color);
             void textSetColorTop(const std::string &name, Ogre::ColourValue color);
 
+            void addCloseButton(Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat);
+
+            std::string getName();
+
             ZappyGui::Rect getRect();
 
             bool isDraggable;
+            std::unique_ptr<ZappyGui::ClosePanel> closeButton;
 
         protected:
             std::shared_ptr<Ogre::Overlay> _overlay;
             std::unique_ptr<Ogre::OverlayContainer, Nop> _panel;
             std::map<std::string, std::unique_ptr<Ogre::TextAreaOverlayElement, Nop>> _textAreas;
 
+            std::string _panelName;
             Rect _rect;
     };
 

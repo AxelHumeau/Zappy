@@ -23,6 +23,7 @@
     #include "Utils.hpp"
     #include "Camera.hpp"
     #include "Panel.hpp"
+    #include "VectorMap.hpp"
 
 namespace ZappyGui {
 
