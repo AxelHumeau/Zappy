@@ -27,9 +27,26 @@ static void clean_player_command(struct client_entry *client)
     memmove(&client->command[0], &client->command[1], size);
 }
 
+static void check_incantation(struct client_entry *client,
+    struct server *server, char *line)
+{
+    struct client_entry **list_players = NULL;
+
+    if (!strncmp(line, INCANTATION, strlen(INCANTATION)) && !client->ritual) {
+        list_players = condition_ritual(client, server);
+        if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL)
+            send_ritual_message(server, list_players, true);
+        else
+            send_ritual_message(server, list_players, false);
+        client->ritual = true;
+    }
+    free(list_players);
+}
+
 static void time_command(struct client_entry *client,
     struct server *server, char *line, command_t command)
 {
+    check_incantation(client, server, line);
     if (client->timer == -1)
         client->timer = server->timestamp;
     else if (server->timestamp - client->timer >= command.cooldown) {

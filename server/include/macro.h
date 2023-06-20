@@ -12,11 +12,14 @@
     #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
+    #define ELEVATION "Elevation underway\n"
     #define DEAD "dead\n"
     #define NB_DIRECTIONS 4
     #define NB_COMMAND_PLAYER 12
     #define MAX_COMMAND_SIZE 10
+    #define NB_LEVEL 7
     #define ZONE_SIZE 8
+    #define INCANTATION "Incantation"
     #define ABS(x) (((x) < 0 ? (-x) : (x)))
     #include "server.h"
 

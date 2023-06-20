@@ -31,6 +31,7 @@ void accept_client(struct server *server)
     entry->timer = -1;
     entry->food_time = 0;
     entry->is_dead = false;
+    entry->ritual = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));

@@ -29,6 +29,7 @@ struct client_entry {
     player_t player_info;
     int timer;
     long food_time;
+    bool ritual;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -95,6 +96,12 @@ char *add_tiles_elem_string(struct server *server, struct client_entry *client,
 bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
 
+// Utils_incantation.c
+struct client_entry **condition_ritual(struct client_entry *client,
+    struct server *server);
+void send_ritual_message(struct server *server, struct client_entry **list,
+    bool is_elevate);
+
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);
 void free_array(char **array);
@@ -124,3 +131,4 @@ int handle_gui(struct client_entry *client, struct server *server, char *line);
 
 // init_gui_client.c
 int init_gui_client(struct server *server, struct client_entry *client);
+

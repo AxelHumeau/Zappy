@@ -19,7 +19,8 @@ SRC =			main.c							\
 				utils/utils.c					\
 				utils/utils_broadcast.c			\
 				utils/utils_look.c				\
-				utils/utils_player.c				\
+				utils/utils_player.c			\
+				utils/utils_incantation.c		\
 				utils/str_to_array.c			\
 				utils/utils_object.c			\
 				command/player/player_command.c	\
