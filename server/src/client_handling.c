@@ -17,22 +17,16 @@
 
 void accept_client(struct server *server)
 {
-    int fd = 0;
     struct client_entry *entry = NULL;
     static int count = 0;
+    int fd = accept(server->listening_fd, NULL, NULL);
 
-    fd = accept(server->listening_fd, NULL, NULL);
     if (fd < 0)
         return;
     entry = malloc(sizeof(struct client_entry));
     entry->fd = fd;
     entry->id = count++;
-    entry->is_gui = false;
-    entry->is_role_defined = false;
-    entry->timer = -1;
-    entry->food_time = 0;
-    entry->is_dead = false;
-    entry->ritual = false;
+    init_entry(entry);
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
