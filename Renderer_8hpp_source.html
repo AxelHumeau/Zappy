@@ -102,63 +102,69 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="classZappyGui_1_1Renderer.html#a13bf36043a4ac7b8c78a56b267109ecd">renderOneFrame</a>();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#aad12f09d6598a8bcf84852aed674a340">renderSdl2</a>();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">isDone</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#ab89509595c635b45d65386d2fcb2df3f">processInputs</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">isDone</a>();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7">updateDeltaTime</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;<a class="code" href="classZappyGui_1_1Renderer.html#a2b8df008a76aeba5c02e6ff2d02aaf69">getDeltaTime</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#aae3c8c347327acf6fd35e3129cc0a529">setDone</a>(<span class="keywordtype">bool</span> done);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#ab89509595c635b45d65386d2fcb2df3f">processInputs</a>();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">void</span> _loadResources(std::string resourceFile);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">void</span> _checkKeydown(SDL_Event &amp;<a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">void</span> _checkKeyup(SDL_Event &amp;<a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">void</span> _initInputs();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7">updateDeltaTime</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;<a class="code" href="classZappyGui_1_1Renderer.html#a2b8df008a76aeba5c02e6ff2d02aaf69">getDeltaTime</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">void</span> _loadResources(std::string resourceFile);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">void</span> _checkKeydown(SDL_Event &amp;<a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">void</span> _processInputsCamMovement();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">void</span> _processInputsCamRotation();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            std::map&lt;SDL_KeyCode, bool&gt; _inputs;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            std::unique_ptr&lt;SDL_Window, ZappyGui::Nop&gt; _sdlWindow;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            std::unique_ptr&lt;Ogre::RenderWindow, ZappyGui::Nop&gt; _window;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::unique_ptr&lt;Ogre::Root&gt; _root;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            std::shared_ptr&lt;Ogre::SceneManager&gt; _sceneManager;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            std::unique_ptr&lt;Ogre::Viewport, ZappyGui::Nop&gt; _viewport;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            std::shared_ptr&lt;ZappyGui::Camera&gt; _camera;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            std::unique_ptr&lt;Ogre::RTShader::ShaderGenerator, ZappyGui::Nop&gt; _shaderGenerator;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            std::unique_ptr&lt;OgreBites::SGTechniqueResolverListener, ZappyGui::Nop&gt; _resolverListener;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordtype">bool</span> _done;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordtype">float</span> _camRotationSpeed;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordtype">float</span> _camMovementSpeed;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordtype">int</span> _width;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordtype">int</span> _height;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordtype">float</span> _deltaTime;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            std::chrono::steady_clock::time_point _lastTime;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    };</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !RENDERER_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordtype">void</span> _checkKeyup(SDL_Event &amp;<a class="code" href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">event</a>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordtype">void</span> _initInputs();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">void</span> _processInputsCamMovement();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordtype">void</span> _processInputsCamRotation();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            std::map&lt;SDL_KeyCode, bool&gt; _inputs;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            std::unique_ptr&lt;SDL_Window, ZappyGui::Nop&gt; _sdlWindow;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            std::unique_ptr&lt;Ogre::RenderWindow, ZappyGui::Nop&gt; _window;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            std::unique_ptr&lt;Ogre::Root&gt; _root;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            std::unique_ptr&lt;Ogre::Viewport, ZappyGui::Nop&gt; _viewport;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            std::shared_ptr&lt;ZappyGui::Camera&gt; _camera;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            std::shared_ptr&lt;Ogre::SceneManager&gt; _sceneManager;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            std::unique_ptr&lt;Ogre::RTShader::ShaderGenerator, ZappyGui::Nop&gt; _shaderGenerator;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            std::unique_ptr&lt;OgreBites::SGTechniqueResolverListener, ZappyGui::Nop&gt; _resolverListener;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordtype">bool</span> _done;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordtype">float</span> _camRotationSpeed;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">float</span> _camMovementSpeed;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordtype">int</span> _width;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordtype">int</span> _height;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordtype">float</span> _deltaTime;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            std::chrono::steady_clock::time_point _lastTime;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    };</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !RENDERER_HPP_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aCamera_8hpp_html"><div class="ttname"><a href="Camera_8hpp.html">Camera.hpp</a></div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aclassZappyGui_1_1Renderer_html"><div class="ttname"><a href="classZappyGui_1_1Renderer.html">ZappyGui::Renderer</a></div><div class="ttdoc">Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs.</div><div class="ttdef"><b>Definition:</b> Renderer.hpp:24</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a13bf36043a4ac7b8c78a56b267109ecd"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a13bf36043a4ac7b8c78a56b267109ecd">ZappyGui::Renderer::renderOneFrame</a></div><div class="ttdeci">bool renderOneFrame()</div><div class="ttdoc">Render a single frame of the scene. First update the ogre scene and then render the sdl2 window.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:79</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a2b8df008a76aeba5c02e6ff2d02aaf69"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a2b8df008a76aeba5c02e6ff2d02aaf69">ZappyGui::Renderer::getDeltaTime</a></div><div class="ttdeci">const float &amp; getDeltaTime() const</div><div class="ttdoc">Getter for the current delta time in second.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:272</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a3d7edbd0a9b682907bd756eed19cbf42"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a3d7edbd0a9b682907bd756eed19cbf42">ZappyGui::Renderer::registerCamera</a></div><div class="ttdeci">void registerCamera(std::shared_ptr&lt; ZappyGui::Camera &gt; camera)</div><div class="ttdoc">Registers a new camera in the window viewpoint.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:71</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a783faa28df2f6ef8c3a1a0490ebb24a7"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7">ZappyGui::Renderer::updateDeltaTime</a></div><div class="ttdeci">void updateDeltaTime()</div><div class="ttdoc">Updates the delta time since the last update. Should be called at the beginning of the loop.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:263</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a95bdb88b0015ca0b702edea96e7d2554"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a95bdb88b0015ca0b702edea96e7d2554">ZappyGui::Renderer::getSceneManager</a></div><div class="ttdeci">std::shared_ptr&lt; Ogre::SceneManager &gt; getSceneManager()</div><div class="ttdoc">Returns a shared pointer to the scene manager.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:66</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a13bf36043a4ac7b8c78a56b267109ecd"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a13bf36043a4ac7b8c78a56b267109ecd">ZappyGui::Renderer::renderOneFrame</a></div><div class="ttdeci">bool renderOneFrame()</div><div class="ttdoc">Render a single frame of the scene. First update the ogre scene and then render the sdl2 window.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:81</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a2b8df008a76aeba5c02e6ff2d02aaf69"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a2b8df008a76aeba5c02e6ff2d02aaf69">ZappyGui::Renderer::getDeltaTime</a></div><div class="ttdeci">const float &amp; getDeltaTime() const</div><div class="ttdoc">Getter for the current delta time in second.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:284</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a3d7edbd0a9b682907bd756eed19cbf42"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a3d7edbd0a9b682907bd756eed19cbf42">ZappyGui::Renderer::registerCamera</a></div><div class="ttdeci">void registerCamera(std::shared_ptr&lt; ZappyGui::Camera &gt; camera)</div><div class="ttdoc">Registers a new camera in the window viewpoint.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:73</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a783faa28df2f6ef8c3a1a0490ebb24a7"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7">ZappyGui::Renderer::updateDeltaTime</a></div><div class="ttdeci">void updateDeltaTime()</div><div class="ttdoc">Updates the delta time since the last update. Should be called at the beginning of the loop.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:275</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_a95bdb88b0015ca0b702edea96e7d2554"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#a95bdb88b0015ca0b702edea96e7d2554">ZappyGui::Renderer::getSceneManager</a></div><div class="ttdeci">std::shared_ptr&lt; Ogre::SceneManager &gt; getSceneManager()</div><div class="ttdoc">Returns a shared pointer to the scene manager.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:68</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_aad12f09d6598a8bcf84852aed674a340"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#aad12f09d6598a8bcf84852aed674a340">ZappyGui::Renderer::renderSdl2</a></div><div class="ttdeci">void renderSdl2()</div><div class="ttdoc">Renders a single frame of the sdl2 window.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:89</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_aae3c8c347327acf6fd35e3129cc0a529"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#aae3c8c347327acf6fd35e3129cc0a529">ZappyGui::Renderer::setDone</a></div><div class="ttdeci">void setDone(bool done)</div><div class="ttdoc">Sets the current state of the window to the one passed in parameter.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:264</div></div>
 <div class="ttc" id="aclassZappyGui_1_1Renderer_html_ab3d41c90f0f9136ff9f3f0065b407b89"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#ab3d41c90f0f9136ff9f3f0065b407b89">ZappyGui::Renderer::~Renderer</a></div><div class="ttdeci">~Renderer()</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:58</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_ab89509595c635b45d65386d2fcb2df3f"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#ab89509595c635b45d65386d2fcb2df3f">ZappyGui::Renderer::processInputs</a></div><div class="ttdeci">void processInputs()</div><div class="ttdoc">Processes the inputs of the user.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:190</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_ade1c4dd5053507d30f9a01a0ce3609c4"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">ZappyGui::Renderer::event</a></div><div class="ttdeci">void event()</div><div class="ttdoc">Handles the window events and inputs.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:87</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_ab89509595c635b45d65386d2fcb2df3f"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#ab89509595c635b45d65386d2fcb2df3f">ZappyGui::Renderer::processInputs</a></div><div class="ttdeci">void processInputs()</div><div class="ttdoc">Processes the inputs of the user.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:197</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_ade1c4dd5053507d30f9a01a0ce3609c4"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#ade1c4dd5053507d30f9a01a0ce3609c4">ZappyGui::Renderer::event</a></div><div class="ttdeci">void event()</div><div class="ttdoc">Handles the window events and inputs.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:94</div></div>
 <div class="ttc" id="aclassZappyGui_1_1Renderer_html_aef5ce3bd6918feb4d5700698197d8f57"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#aef5ce3bd6918feb4d5700698197d8f57">ZappyGui::Renderer::Renderer</a></div><div class="ttdeci">Renderer(std::string name, int width, int height, std::string resourceFile)</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:14</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Renderer_html_afe0f7aff3dbdf250e5a227971caca27d"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">ZappyGui::Renderer::isDone</a></div><div class="ttdeci">bool isDone()</div><div class="ttdoc">Returns the current state of the window, false if it is running, true if it's over.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:252</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Renderer_html_afe0f7aff3dbdf250e5a227971caca27d"><div class="ttname"><a href="classZappyGui_1_1Renderer.html#afe0f7aff3dbdf250e5a227971caca27d">ZappyGui::Renderer::isDone</a></div><div class="ttdeci">bool isDone()</div><div class="ttdoc">Returns the current state of the window, false if it is running, true if it's over.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:259</div></div>
 <div class="ttc" id="anamespaceZappyGui_html"><div class="ttname"><a href="namespaceZappyGui.html">ZappyGui</a></div><div class="ttdef"><b>Definition:</b> Camera.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue_476',['queue',['../namespacequeue.html',1,'']]]
+  ['queue_597',['queue',['../namespacequeue.html',1,'']]]
 ];

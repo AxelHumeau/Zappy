@@ -89,13 +89,16 @@ Inheritance diagram for ZappyGui::AGameObject:</div>
 <area href="classZappyGui_1_1GameObject.html" title="represent a object in the world that have a model" alt="ZappyGui::GameObject" shape="rect" coords="162,112,314,136"/>
 <area href="classZappyGui_1_1Light.html" title="represent a Light" alt="ZappyGui::Light" shape="rect" coords="324,112,476,136"/>
 <area href="classZappyGui_1_1Tilemap.html" alt="ZappyGui::Tilemap" shape="rect" coords="486,112,638,136"/>
+<area href="classZappyGui_1_1Player.html" alt="ZappyGui::Player" shape="rect" coords="162,168,314,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aacbab83679763c55b45b004fe2a4cd8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#aacbab83679763c55b45b004fe2a4cd8a">~AGameObject</a> ()=default</td></tr>
-<tr class="separator:aacbab83679763c55b45b004fe2a4cd8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8ba54b65920886f10ab4a1eba39ba2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#a3b8ba54b65920886f10ab4a1eba39ba2">AGameObject</a> (std::shared_ptr&lt; Ogre::SceneManager &gt; sceneManager)</td></tr>
+<tr class="separator:a3b8ba54b65920886f10ab4a1eba39ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae15e4676ee47854dc9d35a4d9296146"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#aae15e4676ee47854dc9d35a4d9296146">~AGameObject</a> ()</td></tr>
+<tr class="separator:aae15e4676ee47854dc9d35a4d9296146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4848ff0ee464c36ed40fe16021ff95c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#a4848ff0ee464c36ed40fe16021ff95c7">setPosition</a> (<a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">ZappyGui::Real</a> x, <a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">ZappyGui::Real</a> y, <a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">ZappyGui::Real</a> z) override</td></tr>
 <tr class="memdesc:a4848ff0ee464c36ed40fe16021ff95c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the object in the world space by the given coordinates.  <a href="classZappyGui_1_1AGameObject.html#a4848ff0ee464c36ed40fe16021ff95c7">More...</a><br /></td></tr>
 <tr class="separator:a4848ff0ee464c36ed40fe16021ff95c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,12 +137,32 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aae7e713559a0060c5b999486c9d0db27"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Ogre::SceneNode &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#aae7e713559a0060c5b999486c9d0db27">_node</a></td></tr>
 <tr class="separator:aae7e713559a0060c5b999486c9d0db27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a215dfdb12dedd9fe086f433c6690899e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; Ogre::SceneManager &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1AGameObject.html#a215dfdb12dedd9fe086f433c6690899e">_sceneManager</a></td></tr>
+<tr class="separator:a215dfdb12dedd9fe086f433c6690899e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class representing a generic object in the world. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aacbab83679763c55b45b004fe2a4cd8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacbab83679763c55b45b004fe2a4cd8a">&#9670;&nbsp;</a></span>~AGameObject()</h2>
+<a id="a3b8ba54b65920886f10ab4a1eba39ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8ba54b65920886f10ab4a1eba39ba2">&#9670;&nbsp;</a></span>AGameObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ZappyGui::AGameObject::AGameObject </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; Ogre::SceneManager &gt;&#160;</td>
+          <td class="paramname"><em>sceneManager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae15e4676ee47854dc9d35a4d9296146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae15e4676ee47854dc9d35a4d9296146">&#9670;&nbsp;</a></span>~AGameObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +179,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -667,8 +690,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a215dfdb12dedd9fe086f433c6690899e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a215dfdb12dedd9fe086f433c6690899e">&#9670;&nbsp;</a></span>_sceneManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;Ogre::SceneManager&gt; ZappyGui::AGameObject::_sceneManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>gui/include/<a class="el" href="GameObject_8hpp_source.html">GameObject.hpp</a></li>
+<li>gui/src/<a class="el" href="GameObject_8cpp.html">GameObject.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

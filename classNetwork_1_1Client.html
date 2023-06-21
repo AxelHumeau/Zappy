@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classNetwork_1_1Client-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Network::Client Class Reference</div>  </div>
@@ -82,9 +83,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aef161ee9c14c570b675bd57657797f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba4f8ffe99dc7341f6c386603c20f612"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1Client.html#aba4f8ffe99dc7341f6c386603c20f612">~Client</a> ()=default</td></tr>
 <tr class="separator:aba4f8ffe99dc7341f6c386603c20f612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9855c11590838616d0b32f4f827a63a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1Client.html#a9855c11590838616d0b32f4f827a63a4">run</a> (bool &amp;isClosed, std::mutex &amp;mutex, <a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;receive, <a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests)</td></tr>
-<tr class="memdesc:a9855c11590838616d0b32f4f827a63a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">run the client main loop. the loop will process the incoming response and send the pending requests  <a href="classNetwork_1_1Client.html#a9855c11590838616d0b32f4f827a63a4">More...</a><br /></td></tr>
-<tr class="separator:a9855c11590838616d0b32f4f827a63a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab868788b2a1442820c7e0f66f0df3ab3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1Client.html#ab868788b2a1442820c7e0f66f0df3ab3">run</a> (bool &amp;isClosed, <a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;receive, <a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests)</td></tr>
+<tr class="memdesc:ab868788b2a1442820c7e0f66f0df3ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">run the client main loop. the loop will process the incoming response and send the pending requests  <a href="classNetwork_1_1Client.html#ab868788b2a1442820c7e0f66f0df3ab3">More...</a><br /></td></tr>
+<tr class="separator:ab868788b2a1442820c7e0f66f0df3ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8fdb24ff061d4d0ac59e8b456ffc206d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1Client.html#a8fdb24ff061d4d0ac59e8b456ffc206d">queueRequest</a> (<a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests, std::string command, std::vector&lt; std::string &gt; args)</td></tr>
+<tr class="memdesc:a8fdb24ff061d4d0ac59e8b456ffc206d"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a request with the given command and args then queue it for sending  <a href="classNetwork_1_1Client.html#a8fdb24ff061d4d0ac59e8b456ffc206d">More...</a><br /></td></tr>
+<tr class="separator:a8fdb24ff061d4d0ac59e8b456ffc206d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aef161ee9c14c570b675bd57657797f22"></a>
@@ -151,8 +158,60 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9855c11590838616d0b32f4f827a63a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9855c11590838616d0b32f4f827a63a4">&#9670;&nbsp;</a></span>run()</h2>
+<a id="a8fdb24ff061d4d0ac59e8b456ffc206d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fdb24ff061d4d0ac59e8b456ffc206d">&#9670;&nbsp;</a></span>queueRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::Client::queueRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>requests</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>create a request with the given command and args then queue it for sending </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td><a class="el" href="classSafeQueue.html" title="A queue class that is thread safe.">SafeQueue</a> to queue the request </td></tr>
+    <tr><td class="paramname">command</td><td>command name </td></tr>
+    <tr><td class="paramname">args</td><td>string vector of args of the command </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab868788b2a1442820c7e0f66f0df3ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab868788b2a1442820c7e0f66f0df3ab3">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,12 +221,6 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">bool &amp;&#160;</td>
           <td class="paramname"><em>isClosed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::mutex &amp;&#160;</td>
-          <td class="paramname"><em>mutex</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

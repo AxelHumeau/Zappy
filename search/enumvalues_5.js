@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['right_899',['RIGHT',['../game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38',1,'game.h']]]
+  ['north_1124',['North',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077a85c0d519fb7066e39ae14fb0fd8bb786',1,'ZappyGui']]]
 ];

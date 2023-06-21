@@ -1,22 +1,5 @@
 var searchData=
 [
-  ['_7eagameobject_748',['~AGameObject',['../classZappyGui_1_1AGameObject.html#aacbab83679763c55b45b004fe2a4cd8a',1,'ZappyGui::AGameObject']]],
-  ['_7ecamera_749',['~Camera',['../classZappyGui_1_1Camera.html#aa669026924f21bcfebd8e346ed6fd429',1,'ZappyGui::Camera']]],
-  ['_7eclient_750',['~Client',['../classNetwork_1_1Client.html#aba4f8ffe99dc7341f6c386603c20f612',1,'Network::Client']]],
-  ['_7egameobject_751',['~GameObject',['../classZappyGui_1_1GameObject.html#a26597aca8bdfabf4f720986149d21b43',1,'ZappyGui::GameObject']]],
-  ['_7eigameobject_752',['~IGameObject',['../classZappyGui_1_1IGameObject.html#acfcb0711443ab2b5a063e54e09d8db39',1,'ZappyGui::IGameObject']]],
-  ['_7eindexoutofboundserror_753',['~IndexOutOfBoundsError',['../classZappyGui_1_1IndexOutOfBoundsError.html#af3b6652180a59e35933c885d0ea3ef6b',1,'ZappyGui::IndexOutOfBoundsError']]],
-  ['_7einvalidresourceerror_754',['~InvalidResourceError',['../classZappyGui_1_1InvalidResourceError.html#aa47922639974502ebda74624dda988f0',1,'ZappyGui::InvalidResourceError']]],
-  ['_7eisafequeue_755',['~ISafeQueue',['../classISafeQueue.html#a9586a25005f4b153488c14887743e9f2',1,'ISafeQueue']]],
-  ['_7elight_756',['~Light',['../classZappyGui_1_1Light.html#af16ebfcfd089372b620d8f11d4ed959b',1,'ZappyGui::Light']]],
-  ['_7enotimplementederror_757',['~NotImplementedError',['../classZappyGui_1_1NotImplementedError.html#ac5eb3f1fb21c40f742e4e66658f265ba',1,'ZappyGui::NotImplementedError']]],
-  ['_7erenderer_758',['~Renderer',['../classZappyGui_1_1Renderer.html#ab3d41c90f0f9136ff9f3f0065b407b89',1,'ZappyGui::Renderer']]],
-  ['_7eresourcefilenotfounderror_759',['~ResourceFileNotFoundError',['../classZappyGui_1_1ResourceFileNotFoundError.html#aa8d5c6fd8fef2380d559b2ff7b5dcf41',1,'ZappyGui::ResourceFileNotFoundError']]],
-  ['_7eresourceloader_760',['~ResourceLoader',['../classZappyGui_1_1ResourceLoader.html#a9b7b261e4cf9b937eb226b7807f23138',1,'ZappyGui::ResourceLoader']]],
-  ['_7esafequeue_761',['~SafeQueue',['../classSafeQueue.html#a639e3eb096849bc6166a20799f1c78db',1,'SafeQueue']]],
-  ['_7esocket_762',['~Socket',['../classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9',1,'Network::Socket']]],
-  ['_7etile_763',['~Tile',['../classZappyGui_1_1Tile.html#a3a5ddb0a9f59ec8772ed37e2c1cbebf7',1,'ZappyGui::Tile']]],
-  ['_7etilemap_764',['~Tilemap',['../classZappyGui_1_1Tilemap.html#a876f07d352f44e0e2984b7fe2ae18be9',1,'ZappyGui::Tilemap']]],
-  ['_7etilenogameobjectbounderror_765',['~TileNoGameobjectBoundError',['../classZappyGui_1_1TileNoGameobjectBoundError.html#a2166af97ea13e427153198ee3e886e30',1,'ZappyGui::TileNoGameobjectBoundError']]],
-  ['_7etileundifinedresourcetypeerror_766',['~TileUndifinedResourceTypeError',['../classZappyGui_1_1TileUndifinedResourceTypeError.html#ae102e4abb2bf84bd992810e6e3765216',1,'ZappyGui::TileUndifinedResourceTypeError']]]
+  ['what_960',['what',['../classZappyGui_1_1NotImplementedError.html#ab791878891ae916974765d03f0bb4eed',1,'ZappyGui::NotImplementedError::what()'],['../classZappyGui_1_1IndexOutOfBoundsError.html#a6995f95ffec26b76dd7ffce15fbd7f6f',1,'ZappyGui::IndexOutOfBoundsError::what()'],['../classZappyGui_1_1UndifinedResourceTypeError.html#aaf6da4ce798d3f027fb29d9d0a69c8d8',1,'ZappyGui::UndifinedResourceTypeError::what()'],['../classZappyGui_1_1TeamUndifinedError.html#ac208b32a9230d17ea32c112b9015125f',1,'ZappyGui::TeamUndifinedError::what()'],['../classZappyGui_1_1PlayerUndifinedError.html#ad8e43c0d7439c5f296f3fd64c207d523',1,'ZappyGui::PlayerUndifinedError::what()'],['../classZappyGui_1_1ResourceFileNotFoundError.html#a7e321f4d7b9fb205cb4c38252ec1efaa',1,'ZappyGui::ResourceFileNotFoundError::what()'],['../classZappyGui_1_1InvalidResourceError.html#ac7cac629e8c85381dd2622e30fa4ea56',1,'ZappyGui::InvalidResourceError::what()'],['../classNetwork_1_1Socket_1_1ConnectionException.html#aa3df13931ea35af4fcbb2b880eb20d4c',1,'Network::Socket::ConnectionException::what()'],['../classZappyGui_1_1TileNoGameobjectBoundError.html#a40637414c7f8105da08a67c810d32ae9',1,'ZappyGui::TileNoGameobjectBoundError::what()']]],
+  ['write_5fbuffer_961',['write_buffer',['../buffering_8h.html#af5486b64c7334a7c5615821459f0bfa6',1,'write_buffer(buffer_t *buffer, int fd):&#160;buffer.c'],['../buffer_8c.html#af5486b64c7334a7c5615821459f0bfa6',1,'write_buffer(buffer_t *buffer, int fd):&#160;buffer.c']]]
 ];
