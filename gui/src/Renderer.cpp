@@ -60,7 +60,7 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     _lastTime = std::chrono::steady_clock::now();
     _deltaTime = 0.0;
 
-    loadFont("defaultFont", "General", "Roboto-Bold.ttf", "26", "156");
+    loadFont("defaultFont", "Assets", "Roboto-Bold.ttf", "26", "156");
 
     _overlay = std::shared_ptr<Ogre::Overlay>(Ogre::OverlayManager::getSingletonPtr()->create("myOverlay"), ZappyGui::Nop{});
     _overlay->show();

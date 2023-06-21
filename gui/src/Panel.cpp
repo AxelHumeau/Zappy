@@ -136,7 +136,7 @@ void ZappyGui::Panel::textSetFont(const std::string &name, const std::string &fo
 {
     if (_textAreas.find(name) == _textAreas.end())
         return;
-    _textAreas[name]->setFontName(fontName);
+    _textAreas[name]->setFontName(fontName, "Assets");
 }
 
 void ZappyGui::Panel::textSetColorBottom(const std::string &name, Ogre::ColourValue color)
