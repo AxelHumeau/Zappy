@@ -39,7 +39,6 @@ static void check_incantation(struct client_entry *client,
         list_players = condition_ritual(client, server);
         if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL) {
             size = list_ids_size(list_players);
-            // printf("SIZE %d\n", size);
             list_ids = get_list_ids(list_players, size);
             broadcast_to_guis(server, &notify_start_of_incantation,
                 client->id, &client->player_info, size, list_ids);
@@ -59,7 +58,6 @@ static void time_command(struct client_entry *client,
         client->timer = command.cooldown;
     else if (client->timer <= 0) {
         (command.function) (line + strlen(command.command), client, server);
-        // display_player(server);
         clean_player_command(client);
         client->timer = -1;
     }
