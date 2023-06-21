@@ -79,7 +79,7 @@ void ZappyGui::Gui::initialize()
             processCommand(command);
 
         _renderer->event();
-        _renderer->dragPanel();
+        _renderer->mouseEvent();
         _renderer->renderOneFrame();
     }
     if (_renderer->isDone())

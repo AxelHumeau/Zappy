@@ -90,7 +90,7 @@ namespace ZappyGui {
 
             std::shared_ptr<Ogre::Overlay> getOverlay();
 
-            void dragPanel();
+            void mouseEvent();
 
         private:
             /// @brief Loads all resources in the file in parameter in ogre
@@ -113,6 +113,14 @@ namespace ZappyGui {
 
             /// @brief Handles the camera rotation based on the inputs
             void _processInputsCamRotation();
+
+            void _mouseEventOnClick();
+
+            void _mouseEventHold();
+
+            void _mouseEventOnRelease();
+
+            void _mouseEventUpdate();
 
             VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::map<SDL_KeyCode, bool> _inputs;

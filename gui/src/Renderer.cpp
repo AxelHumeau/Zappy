@@ -225,7 +225,7 @@ void ZappyGui::Renderer::processInputs()
 {
     _processInputsCamMovement();
     _processInputsCamRotation();
-    dragPanel();
+    mouseEvent();
 }
 
 void ZappyGui::Renderer::_processInputsCamMovement()
@@ -339,13 +339,8 @@ std::shared_ptr<Ogre::Overlay> ZappyGui::Renderer::getOverlay()
     return _overlay;
 }
 
-void ZappyGui::Renderer::dragPanel()
+void ZappyGui::Renderer::_mouseEventOnClick()
 {
-    int x = 0;
-    int y = 0;
-    ZappyGui::Rect rect;
-    std::string name = "";
-
     if (!_prevMouse.lbIsPressed && _curMouse.lbIsPressed)
     {
         for (std::size_t i = 0; i < _panels.size(); i++)
@@ -365,6 +360,13 @@ void ZappyGui::Renderer::dragPanel()
             }
         }
     }
+}
+
+void ZappyGui::Renderer::_mouseEventHold()
+{
+    int x = 0;
+    int y = 0;
+    ZappyGui::Rect rect;
 
     if (_prevMouse.lbIsPressed && _curMouse.lbIsPressed && _dragPanelName != "")
     {
@@ -385,6 +387,11 @@ void ZappyGui::Renderer::dragPanel()
         if (rect.top + y + rect.height > _height)
             _panels[_dragPanelName]->panelSetPosition(rect.left, _height - rect.height);
     }
+}
+
+void ZappyGui::Renderer::_mouseEventOnRelease()
+{
+    std::string name = "";
 
     if (_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
     {
@@ -401,7 +408,10 @@ void ZappyGui::Renderer::dragPanel()
             _panels.erase(name);
         _dragPanelName = "";
     }
+}
 
+void ZappyGui::Renderer::_mouseEventUpdate()
+{
     if (!_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
     {
         for (std::size_t i = 0; i < _panels.size(); i++)
@@ -415,6 +425,14 @@ void ZappyGui::Renderer::dragPanel()
                 _panels.at(i).second->closeButton->isHover = false;
         }
     }
+}
+
+void ZappyGui::Renderer::mouseEvent()
+{
+    _mouseEventOnClick();
+    _mouseEventHold();
+    _mouseEventOnRelease();
+    _mouseEventUpdate();
 
     for (std::size_t i = 0; i < _panels.size(); i++)
     {
