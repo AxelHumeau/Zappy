@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static void set_info_player(struct client_entry *entry, struct server *server,
     struct team *team)
@@ -25,6 +26,7 @@ static void set_info_player(struct client_entry *entry, struct server *server,
     entry->player_info.direction = rand() % NB_DIRECTIONS;
     memset(entry->command, 0, sizeof(char *) * MAX_COMMAND_SIZE);
     entry->count_command = 0;
+    entry->is_role_defined = true;
 }
 
 static int accept_player_team(struct server *server,
@@ -46,7 +48,8 @@ static int accept_player_team(struct server *server,
     SLIST_INSERT_HEAD(&server->teams[i].players, copy, next);
     free(info);
     free(line);
-    entry->is_role_defined = true;
+    broadcast_to_guis(server, &notify_new_player,
+        entry->id, &entry->player_info);
     server->nb_players++;
     return EXIT_SUCCESS;
 }
@@ -67,10 +70,11 @@ int put_client_team(struct server *server, struct client_entry *entry)
 
     line = get_line_in_buffer(&entry->buf_to_recv);
     if (is_graphic_client(entry, line) == EXIT_SUCCESS) {
+        entry->is_gui = true;
         init_gui_client(server, entry);
         return EXIT_SUCCESS;
     }
-    for (size_t i = 0; i < server->nb_teams; i++) {
+    for (int i = 0; i < server->nb_teams; i++) {
         if (accept_player_team(server, entry, line, i) == EXIT_SUCCESS)
             return EXIT_SUCCESS;
     }

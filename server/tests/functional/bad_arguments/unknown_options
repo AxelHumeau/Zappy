@@ -1,0 +1,4 @@
+-x 30 -y 30 -n name1 name2 -c 5 boufax -f 80 -p 1500
+-x 30 -y 30 -n name1 name2 -c 5 -f 80 -p 1500 -g
+--boufax
+-x 30 -y 30 -n name1 name2 -c 5 -f 80 1500

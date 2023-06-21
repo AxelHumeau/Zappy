@@ -47,7 +47,7 @@ int send_player_pos(char **args, struct server *server,
     if (player == NULL)
         return EXIT_FAILURE;
     asprintf(&result, "ppo %d %d %d %d\n", id, player->x, player->y,
-        player->orientation);
+        player->direction + 1);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
     return EXIT_SUCCESS;

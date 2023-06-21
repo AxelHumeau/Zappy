@@ -37,6 +37,7 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     _window->setVisible(true);
 
 
+    _loadResources(resourceFile);
     _sceneManager.reset(_root->createSceneManager(), ZappyGui::Nop());
     _sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
@@ -48,7 +49,6 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
         _resolverListener.reset(new OgreBites::SGTechniqueResolverListener(_shaderGenerator.get()));
         Ogre::MaterialManager::getSingleton().addListener(_resolverListener.get());
     }
-    _loadResources(resourceFile);
     _sceneManager->setSkyBox(true, "MaterialHamsterSky");
 
     _lastTime = std::chrono::steady_clock::now();
@@ -57,6 +57,8 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
 
 ZappyGui::Renderer::~Renderer()
 {
+    _window->removeAllViewports();
+    _camera.reset();
     _root->destroySceneManager(_sceneManager.get());
     _sceneManager.reset();
     SDL_DestroyWindow(_sdlWindow.get());
@@ -80,8 +82,13 @@ bool ZappyGui::Renderer::renderOneFrame()
 {
     bool ret = _root->renderOneFrame();
 
-    SDL_GL_SwapWindow(_sdlWindow.get());
+    renderSdl2();
     return ret;
+}
+
+void ZappyGui::Renderer::renderSdl2()
+{
+    SDL_GL_SwapWindow(_sdlWindow.get());
 }
 
 void ZappyGui::Renderer::event()
@@ -252,6 +259,11 @@ void ZappyGui::Renderer::_initInputs()
 bool ZappyGui::Renderer::isDone()
 {
     return _done;
+}
+
+void ZappyGui::Renderer::setDone(bool done)
+{
+    _done = done;
 }
 
 void ZappyGui::Renderer::_loadResources(std::string resourceFile)

@@ -37,6 +37,19 @@ namespace ZappyGui {
         private:
             std::string message;
     };
+    /**
+     * @brief
+     * UndifinedResourceTypeError Class Error
+     * Error thrown when trying to get or set an amount of a resource that dosen't exist.
+     */
+    class UndifinedResourceTypeError : public std::exception {
+        public:
+            UndifinedResourceTypeError();
+            ~UndifinedResourceTypeError() = default;
+            const char *what() const noexcept override;
+        private:
+            std::string message;
+    };
 };
 
 #endif

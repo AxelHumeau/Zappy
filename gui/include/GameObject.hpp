@@ -10,7 +10,9 @@
     #include <OGRE/Ogre.h>
     #include <string>
     #include <memory>
+    #include <iostream>
     #include "Utils.hpp"
+    #include "Error.hpp"
 
 namespace ZappyGui {
     /// @brief Interface representing a generic object in the world
@@ -76,7 +78,11 @@ namespace ZappyGui {
     /// @brief Abstract class representing a generic object in the world
     class AGameObject : public IGameObject {
         public:
-            ~AGameObject() = default;
+            AGameObject(std::shared_ptr<Ogre::SceneManager> sceneManager);
+            ~AGameObject() {
+                _node->detachAllObjects();
+                _sceneManager->destroySceneNode(_node->getName());
+            }
             /// @brief Set the position of the object in the world space by the given coordinates
             /// @param x x coordinate
             /// @param y y coordinate
@@ -141,13 +147,14 @@ namespace ZappyGui {
             void translate(const ZappyGui::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT) override { _node->translate(d, relativeTo); };
         protected:
             std::shared_ptr<Ogre::SceneNode> _node;
+            std::shared_ptr<Ogre::SceneManager> _sceneManager;
     };
 
     /// @brief represent a object in the world that have a model
     class GameObject : public AGameObject {
         public:
             GameObject(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName);
-            ~GameObject() {};
+            ~GameObject() { _sceneManager->destroyEntity(_entity->getName()); }
         private:
             std::shared_ptr<Ogre::Entity> _entity;
     };

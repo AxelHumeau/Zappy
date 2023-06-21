@@ -1,0 +1,5 @@
+-p 1000 -n name1 -h
+-p -n name1 -h 127.0.0.1
+-p 1000 -n -h 127.0.0.1
+-p -n name1 -h
+-p -n -h

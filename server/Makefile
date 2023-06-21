@@ -18,6 +18,8 @@ SRC =			main.c							\
 				initialization/init_resource.c	\
 				utils/utils.c					\
 				utils/utils_broadcast.c			\
+				utils/utils_look.c				\
+				utils/utils_player.c				\
 				utils/str_to_array.c			\
 				utils/utils_object.c			\
 				command/player/player_command.c	\
@@ -35,6 +37,7 @@ SRC =			main.c							\
 				command/player/incantation.c	\
 				gui/handle_gui_client.c			\
 				gui/init_gui_client.c			\
+				gui/broadcast_to_guis.c			\
 				gui/commands/map_size.c			\
 				gui/commands/tile_content.c		\
 				gui/commands/map_content.c		\
@@ -42,6 +45,13 @@ SRC =			main.c							\
 				gui/commands/player_infos.c		\
 				gui/commands/time_unit.c		\
 				gui/events/new_player.c			\
+				gui/events/broadcast.c			\
+				gui/events/death.c				\
+				gui/events/egg.c				\
+				gui/events/expulsion.c			\
+				gui/events/incantation.c		\
+				gui/events/resources.c			\
+				gui/events/server_message.c		\
 
 OBJ 		= 			$(SRC:%.c=obj/%.o)
 
@@ -78,6 +88,12 @@ re: fclean all
 debug: CPPFLAGS += -ggdb
 debug: fclean $(NAME)
 
-tests_run:
+tests_run: func_tests
 
-.PHONY: fclean all re clean debug tests_run
+func_tests: CFLAGS += --coverage
+func_tests: LDFLAGS += --coverage
+func_tests: re
+	find . -name "*.gcda" -delete
+	./tests/functional/tester.sh
+
+.PHONY: fclean all re clean debug tests_run func_tests

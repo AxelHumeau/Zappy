@@ -37,12 +37,19 @@ namespace ZappyGui {
             /// @brief Render a single frame of the scene. First update the ogre scene and then render the sdl2 window
             bool renderOneFrame();
 
+            /// @brief Renders a single frame of the sdl2 window
+            void renderSdl2();
+
             /// @brief Handles the window events and inputs
             void event();
 
             /// @brief Returns the current state of the window, false if it is running, true if it's over
             /// @return Boolean of the state of the window
             bool isDone();
+
+            /// @brief Sets the current state of the window to the one passed in parameter
+            /// @param done Boolean of the new state of the window
+            void setDone(bool done);
 
             /// @brief Processes the inputs of the user
             void processInputs();
@@ -80,9 +87,9 @@ namespace ZappyGui {
             std::unique_ptr<SDL_Window, ZappyGui::Nop> _sdlWindow;
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;
             std::unique_ptr<Ogre::Root> _root;
-            std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::Viewport, ZappyGui::Nop> _viewport;
             std::shared_ptr<ZappyGui::Camera> _camera;
+            std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::Nop> _shaderGenerator;
             std::unique_ptr<OgreBites::SGTechniqueResolverListener, ZappyGui::Nop> _resolverListener;
             bool _done;
