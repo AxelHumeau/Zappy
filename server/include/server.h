@@ -96,7 +96,8 @@ char *add_tiles_elem_string(struct server *server, struct client_entry *client,
 bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
 bool same_pos(struct client_entry *player, struct client_entry *client);
-
+int list_ids_size(struct client_entry **list_players);
+int *get_list_ids(struct client_entry **list_players, int size);
 
 // Utils_incantation.c
 struct client_entry **condition_ritual(struct client_entry *client,

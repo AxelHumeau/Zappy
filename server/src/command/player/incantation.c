@@ -66,8 +66,8 @@ void incantation(char *cmd, struct client_entry *client,
     list_players = condition_ritual(client, server);
     if (cmd[0] == '\0' && list_players != NULL) {
         do_elevation(client, server, list_players);
-        broadcast_to_guis(server, &notify_start_of_incantation,
-            client->id, &client->player_info, 0);
+        broadcast_to_guis(server, &notify_end_of_incantation,
+            &client->player_info, 1);
     } else
         send_ritual_message(client, list_players, false);
     client->ritual = false;

@@ -8,6 +8,7 @@
 #include <string.h>
 #include "macro.h"
 #include "player_command.h"
+#include "gui/events.h"
 
 void handle_player_command(struct client_entry *client, char *line)
 {
@@ -31,12 +32,19 @@ static void check_incantation(struct client_entry *client,
     struct server *server, char *line)
 {
     struct client_entry **list_players = NULL;
+    int *list_ids = NULL;
+    int size = 0;
 
     if (!strncmp(line, INCANTATION, strlen(INCANTATION)) && !client->ritual) {
         list_players = condition_ritual(client, server);
-        if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL)
+        if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL) {
+            size = list_ids_size(list_players);
+            printf("SIZE %d\n", size);
+            list_ids = get_list_ids(list_players, size);
+            broadcast_to_guis(server, &notify_start_of_incantation,
+                client->id, &client->player_info, size, list_ids);
             send_ritual_message(client, list_players, true);
-        else
+        } else
             add_to_buffer(&client->buf_to_send, KO, strlen(KO));
         client->ritual = true;
     }
