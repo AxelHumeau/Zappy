@@ -86,7 +86,7 @@ namespace ZappyGui {
             /// @param resolution String defining the resolution of the font.
             void loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution);
 
-            std::map<std::string, std::shared_ptr<ZappyGui::Panel>> &getPanels();
+            VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> &getPanels();
 
             std::shared_ptr<Ogre::Overlay> getOverlay();
 
@@ -114,7 +114,7 @@ namespace ZappyGui {
             /// @brief Handles the camera rotation based on the inputs
             void _processInputsCamRotation();
 
-            std::map<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
+            VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::map<SDL_KeyCode, bool> _inputs;
             std::unique_ptr<SDL_Window, ZappyGui::Nop> _sdlWindow;
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;

@@ -329,7 +329,7 @@ void ZappyGui::Renderer::loadFont(std::string name, std::string group, std::stri
     mFont->load();
 }
 
-std::map<std::string, std::shared_ptr<ZappyGui::Panel>> &ZappyGui::Renderer::getPanels()
+VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> &ZappyGui::Renderer::getPanels()
 {
     return _panels;
 }
@@ -348,19 +348,19 @@ void ZappyGui::Renderer::dragPanel()
 
     if (!_prevMouse.lbIsPressed && _curMouse.lbIsPressed)
     {
-        for (auto &cur : _panels)
+        for (std::size_t i = 0; i < _panels.size(); i++)
         {
-            if (cur.second->getRect().isInRect(_curMouse.x, _curMouse.y) && cur.second->isDraggable)
+            if (_panels.at(i).second->getRect().isInRect(_curMouse.x, _curMouse.y) && _panels.at(i).second->isDraggable)
             {
-                if (cur.second->closeButton != nullptr &&
-                    cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top))
+                if (_panels.at(i).second->closeButton != nullptr &&
+                    _panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
                 {
-                    cur.second->closeButton->isClick = true;
-                    cur.second->closeButton->isHover = false;
+                    _panels.at(i).second->closeButton->isClick = true;
+                    _panels.at(i).second->closeButton->isHover = false;
                     break;
                 }
                 SDL_GetMouseState(&_mPosX, &_mPosY);
-                _dragPanelName = cur.first;
+                _dragPanelName = _panels.at(i).first;
                 break;
             }
         }
@@ -388,13 +388,13 @@ void ZappyGui::Renderer::dragPanel()
 
     if (_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
     {
-        for (auto &cur : _panels)
+        for (std::size_t i = 0; i < _panels.size(); i++)
         {
-            if (cur.second->closeButton != nullptr && cur.second->closeButton->isClick)
+            if (_panels.at(i).second->closeButton != nullptr && _panels.at(i).second->closeButton->isClick)
             {
-                if (cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top))
-                    name = cur.first;
-                cur.second->closeButton->isClick = false;
+                if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
+                    name = _panels.at(i).first;
+                _panels.at(i).second->closeButton->isClick = false;
             }
         }
         if (name != "")
@@ -404,21 +404,21 @@ void ZappyGui::Renderer::dragPanel()
 
     if (!_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
     {
-        for (auto &cur : _panels)
+        for (std::size_t i = 0; i < _panels.size(); i++)
         {
-            if (cur.second->closeButton == nullptr)
+            if (_panels.at(i).second->closeButton == nullptr)
                 continue;
-            if (cur.second->closeButton->rect.isInRect(_curMouse.x - cur.second->getRect().left, _curMouse.y - cur.second->getRect().top)
-                && !cur.second->closeButton->isClick)
-                cur.second->closeButton->isHover = true;
+            if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top)
+                && !_panels.at(i).second->closeButton->isClick)
+                _panels.at(i).second->closeButton->isHover = true;
             else
-                cur.second->closeButton->isHover = false;
+                _panels.at(i).second->closeButton->isHover = false;
         }
     }
 
-    for (auto &cur : _panels)
+    for (std::size_t i = 0; i < _panels.size(); i++)
     {
-        if (cur.second->closeButton != nullptr)
-            cur.second->closeButton->update();
+        if (_panels.at(i).second->closeButton != nullptr)
+            _panels.at(i).second->closeButton->update();
     }
 }

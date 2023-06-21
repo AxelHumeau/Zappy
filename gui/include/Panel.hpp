@@ -34,33 +34,13 @@ namespace ZappyGui {
 
     class ClosePanel {
         public:
-            ClosePanel(std::string name, Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat):
-            rect(r), isHover(false), isClick(false), _defaultMat(defaultMat), _hoverMat(hoverMat), _clickMat(clickMat)
-            {
-                _panel.reset(static_cast<Ogre::OverlayContainer*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("Panel", name)), ZappyGui::Nop{});
-                _panel->setMetricsMode(Ogre::GMM_PIXELS);
+            ClosePanel(std::string name, Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat);
 
-                _panel->setPosition(rect.left, rect.top);
-                _panel->setDimensions(rect.width, rect.height);
+            ~ClosePanel();
 
-                _panel->setMaterialName(_defaultMat, "Assets");
-            };
-            ~ClosePanel() = default;
+            void update();
 
-            void update()
-            {
-                if (isHover)
-                    _panel->setMaterialName(_hoverMat, "Assets");
-                else if (isClick)
-                    _panel->setMaterialName(_clickMat, "Assets");
-                else
-                    _panel->setMaterialName(_defaultMat, "Assets");
-            };
-
-            std::shared_ptr<Ogre::OverlayElement> getPointer()
-            {
-                return _panel;
-            };
+            std::shared_ptr<Ogre::OverlayElement> getPointer();
 
             Rect rect;
 

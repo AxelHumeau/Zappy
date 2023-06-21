@@ -27,21 +27,22 @@ class VectorMap {
         VectorMap() = default;
         ~VectorMap() = default;
 
-        typename std::vector<std::pair<Key,T>>::iterator find(const Key &key) const
+        typename std::vector<std::pair<Key,T>>::const_iterator find(const Key &key) const
         {
-            for (std::pair<Key, T> &cur : _vectorMap)
+            for (typename std::vector<std::pair<Key, T>>::const_iterator it = _vectorMap.begin(); it != _vectorMap.end();)
             {
-                if (cur.first == key)
-                    return cur;
+                if (it->first == key)
+                    return it;
+                it++;
             }
             return _vectorMap.end();
         };
 
         void push(std::pair<Key, T> p)
         {
-            if (!find(p.first))
+            if (find(p.first) == end())
             {
-                _vectorMap.emplace(0, p);
+                _vectorMap.insert(begin(), p);
             }
         };
 
@@ -59,7 +60,7 @@ class VectorMap {
             return false;
         };
 
-        std::pair<Key, T> &at(const int &id)
+        std::pair<Key, T> &at(const std::size_t &id)
         {
             return _vectorMap[id];
         }
@@ -69,12 +70,22 @@ class VectorMap {
             return _vectorMap.size();
         }
 
-        std::pair<Key, T> &operator[](const Key &key)
+        typename std::vector<std::pair<Key, T>>::iterator begin()
+        {
+            return _vectorMap.begin();
+        }
+
+        typename std::vector<std::pair<Key,T>>::iterator end()
+        {
+            return _vectorMap.end();
+        }
+
+        T &operator[](const Key &key)
         {
             for (typename std::vector<std::pair<Key, T>>::iterator it = _vectorMap.begin(); it != _vectorMap.end();)
             {
                 if (it->first == key)
-                    return *it;
+                    return (*it).second;
                 it++;
             }
             throw NotInMapError();

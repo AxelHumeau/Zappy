@@ -8,6 +8,38 @@
 #include <iostream>
 #include "Panel.hpp"
 
+ZappyGui::ClosePanel::ClosePanel(std::string name, Rect r, std::string defaultMat, std::string hoverMat, std::string clickMat):
+rect(r), isHover(false), isClick(false), _defaultMat(defaultMat), _hoverMat(hoverMat), _clickMat(clickMat)
+{
+    _panel.reset(static_cast<Ogre::OverlayContainer*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("Panel", name)), ZappyGui::Nop{});
+    _panel->setMetricsMode(Ogre::GMM_PIXELS);
+
+    _panel->setPosition(rect.left, rect.top);
+    _panel->setDimensions(rect.width, rect.height);
+
+    _panel->setMaterialName(_defaultMat, "Assets");
+}
+
+ZappyGui::ClosePanel::~ClosePanel()
+{
+    Ogre::OverlayManager::getSingletonPtr()->destroyOverlayElement(_panel.get());
+}
+
+void ZappyGui::ClosePanel::update()
+{
+    if (isHover)
+        _panel->setMaterialName(_hoverMat, "Assets");
+    else if (isClick)
+        _panel->setMaterialName(_clickMat, "Assets");
+    else
+        _panel->setMaterialName(_defaultMat, "Assets");
+}
+
+std::shared_ptr<Ogre::OverlayElement> ZappyGui::ClosePanel::getPointer()
+{
+    return _panel;
+}
+
 ZappyGui::Panel::Panel(std::shared_ptr<Ogre::Overlay> overlay, std::string panelName, bool draggable)
 {
     _panel.reset(static_cast<Ogre::OverlayContainer*>(Ogre::OverlayManager::getSingletonPtr()->createOverlayElement("Panel", panelName)));
@@ -27,6 +59,8 @@ ZappyGui::Panel::~Panel()
 {
     _overlay->remove2D(_panel.get());
     Ogre::OverlayManager::getSingletonPtr()->destroyOverlayElement(_panel.get());
+    for (auto &ta : _textAreas)
+        Ogre::OverlayManager::getSingletonPtr()->destroyOverlayElement(ta.second.get());
 }
 
 void ZappyGui::Panel::panelSetPosition(Real left, Real top)
