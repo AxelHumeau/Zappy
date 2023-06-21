@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "server.h"
 #include "macro.h"
+#include "gui/events.h"
 
 void accept_client(struct server *server)
 {
@@ -31,6 +32,7 @@ void accept_client(struct server *server)
     entry->timer = -1;
     entry->food_time = 0;
     entry->is_dead = false;
+    entry->ritual = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
@@ -43,9 +45,6 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("id : %d\n", client->id);
-        printf("%s\n", DIRECTION_STR[client->player_info.direction]);
-        printf("%d - %d\n", client->player_info.x, client->player_info.y);
         if (client->is_gui)
             handle_gui(client, server, line);
         else
@@ -64,7 +63,7 @@ int handle_client(struct client_entry *client,
     if (client->is_dead)
         return EXIT_FAIL;
     if (client->is_role_defined && !client->is_gui &&
-        client->player_info.inventory[FOOD] == 0) {
+        client->player_info->inventory[FOOD] == 0) {
             client->is_dead = true;
             add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
     }
@@ -80,11 +79,13 @@ int handle_client(struct client_entry *client,
     return EXIT_SUCCESS;
 }
 
-void destroy_client(struct client_entry *client)
+void destroy_client(struct client_entry *client, struct server *server)
 {
     if (client->is_role_defined && !client->is_gui)
-        client->player_info.team->nb_slots_left++;
+        client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
+        broadcast_to_guis(server, &notify_death, client->id);
+        free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
     }
@@ -100,7 +101,7 @@ void destroy_clients(struct server *server)
 
     for (struct client_entry *client = server->clients.slh_first; client;) {
         tmp = client->next.sle_next;
-        destroy_client(client);
+        destroy_client(client, server);
         client = tmp;
     }
 }

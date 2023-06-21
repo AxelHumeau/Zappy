@@ -57,7 +57,7 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
             FD_CLR(client->fd, readfds);
             FD_CLR(client->fd, writefds);
             SLIST_REMOVE(&server->clients, client, client_entry, next);
-            destroy_client(client);
+            destroy_client(client, server);
             return loop_through_clients(server, readfds, writefds);
         }
     }
@@ -66,10 +66,15 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
 static void timer_command(struct server *server)
 {
     long nb = 0;
+    struct client_entry *player = NULL;
 
     read(server->timerfd, &nb, sizeof(long));
     server->timestamp++;
     server->resources_time++;
+    SLIST_FOREACH(player, &server->clients, next) {
+        if (player->timer != -1)
+            player->timer--;
+    }
     if (server->resources_time % REFILL_TIME == 0) {
         server->multiplier_resource = server->nb_players / PORTION_REFILL + 1;
         refill_resources(server);
