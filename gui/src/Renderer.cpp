@@ -354,7 +354,7 @@ void ZappyGui::Renderer::_mouseEventOnClick()
                     _panels.at(i).second->closeButton->isHover = false;
                     break;
                 }
-                SDL_GetMouseState(&_mPosX, &_mPosY);
+                SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
                 _dragPanelName = _panels.at(i).first;
                 break;
             }
@@ -371,9 +371,9 @@ void ZappyGui::Renderer::_mouseEventHold()
     if (_prevMouse.lbIsPressed && _curMouse.lbIsPressed && _dragPanelName != "")
     {
         SDL_GetMouseState(&x, &y);
-        x -= _mPosX;
-        y -= _mPosY;
-        SDL_GetMouseState(&_mPosX, &_mPosY);
+        x -= _mDragPosX;
+        y -= _mDragPosY;
+        SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
         if (_panels.find(_dragPanelName) == _panels.end())
             return;
         rect = _panels[_dragPanelName]->getRect();

@@ -86,10 +86,15 @@ namespace ZappyGui {
             /// @param resolution String defining the resolution of the font.
             void loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution);
 
+            /// @brief Getter for the vector map of the panels
+            /// @return Reference to the vector map of the panels
             VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> &getPanels();
 
+            /// @brief Getter for the shared pointer of the overlay
+            /// @return Shared pointer of the overlay
             std::shared_ptr<Ogre::Overlay> getOverlay();
 
+            /// @brief Handles the events for the mouse.
             void mouseEvent();
 
         private:
@@ -114,12 +119,16 @@ namespace ZappyGui {
             /// @brief Handles the camera rotation based on the inputs
             void _processInputsCamRotation();
 
+            /// @brief Handles the mouse event when the left button is clicked.
             void _mouseEventOnClick();
 
+            /// @brief Handles the mouse event when the left button is holded.
             void _mouseEventHold();
 
+            /// @brief Handles the mouse event when the left button is released.
             void _mouseEventOnRelease();
 
+            /// @brief Handles the mouse event when the left button is neither clicked, holded nor released.
             void _mouseEventUpdate();
 
             VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
@@ -145,8 +154,8 @@ namespace ZappyGui {
             ZappyGui::Mouse _prevMouse;
             std::string _dragPanelName;
 
-            int _mPosX;
-            int _mPosY;
+            int _mDragPosX;
+            int _mDragPosY;
     };
 
 }
