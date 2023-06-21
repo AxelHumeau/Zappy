@@ -33,7 +33,7 @@ var searchData=
   ['player_5fcommand_2ec_336',['player_command.c',['../player__command_8c.html',1,'']]],
   ['player_5fcommand_2eh_337',['player_command.h',['../player__command_8h.html',1,'']]],
   ['player_5fhandling_2ec_338',['player_handling.c',['../player__handling_8c.html',1,'']]],
-  ['player_5finfo_339',['player_info',['../structclient__entry.html#a590a1f0c580780339e1dc3d2abcf5ace',1,'client_entry']]],
+  ['player_5finfo_339',['player_info',['../structclient__entry.html#a0f19d1f488ca3d6cbeaabc0c6e4db7ab',1,'client_entry']]],
   ['player_5finfos_2ec_340',['player_infos.c',['../player__infos_8c.html',1,'']]],
   ['player_5ft_341',['player_t',['../game_8h.html#a9df65ef34efcf40007091fa0e679ea0c',1,'game.h']]],
   ['players_342',['players',['../structteam.html#a56e7b12c741429e4d7ae2b74d375ad3a',1,'team']]],
