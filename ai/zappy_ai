@@ -17,16 +17,16 @@ def loop_client(dict_args):
     s = connexion_server(dict_args["port"], dict_args["machine"])
     communication = Communication(s)
     connexion_team(s, dict_args)
-    bot = AI(communication)
+    bot = AI(communication, dict_args["name"])
     bot.run()
 
 
 if __name__ == "__main__":
     dict_argument = {}
-    try:
-        error_handling.error_handler(sys.argv[1:], dict_argument)
-        loop_client(dict_argument)
-    except Exception as error:
-        print(error, file=sys.stderr)
-        sys.exit(84)
+    error_handling.error_handler(sys.argv[1:], dict_argument)
+    loop_client(dict_argument)
+    # try:
+    # except Exception as error:
+    #     print(error, file=sys.stderr)
+    #     sys.exit(84)
     sys.exit(0)

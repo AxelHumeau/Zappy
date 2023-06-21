@@ -4,19 +4,23 @@ def try_elevation(ai, request_queue: Queue):
     """Try to do an elevation, add the request in the queue
 
     Returns:
-        boolean: True if the elevation requirement are fulfilled, false otherwise
+        boolean: True if the elevation requirement are fulfilled, 0 otherwise
     """
-    if ai.nb_players_at_same_level < ai.elevation[ai.lvl]["nb_players"]:
-        return False
-    if ai.start_elevation == True:
-        return False
-    else:
-        ai.start_elevation = True
     for el in ai.elevation[ai.lvl].items():
         if (el[0] == "nb_players"):
             continue
         elif ai.inventory[el[0]] < el[1]:
-            return False
+            return 0
+    if ai.start_elevation == True:
+        return 0
+    if ai.nb_players_on_me < ai.elevation[ai.lvl]["nb_players"]:
+        if ai.need_player == False:
+            ai.communication.writebuffer += "Broadcast " + str(ai.team) + " " + str(ai.lvl) + "\n"
+            request_queue.push(["Broadcast", str(ai.team) + " " + str(ai.lvl)])
+            ai.need_player = True
+        return 0
+    else:
+        ai.start_elevation = True
     for item in ai.elevation[ai.lvl].items():
         if (item[0] == "nb_players"):
             continue
@@ -27,4 +31,4 @@ def try_elevation(ai, request_queue: Queue):
     ai.communication.writebuffer += "Incantation\n"
     # request_queue.push(["Inventory"])
     # ai.communication.writebuffer += "Inventory\n"
-    return True
+    return 1

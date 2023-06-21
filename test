@@ -1,0 +1,292 @@
+WELCOME
+select = ('linemate', 1, 3)
+[{'player': 1, 'sibur': 1, 'phiras': 1}, {'mendiane': 1}, {None: 0}, {'linemate': 1, 'phiras': 1}]
+forward
+Right
+forward
+Take
+[{'food': 9}, {'linemate': 1}, {'deraumere': 0}, {'sibur': 0}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+9
+set
+INCANTATION
+req = <bound method Queue.front of [['Incantation']]>
+res = Current level: 2
+INCANTATION
+lvl: 2
+select = ('deraumere', 1, 1)
+[{'player': 1, 'phiras': 1}, {'food': 2, 'deraumere': 1}, {'linemate': 1}, {'linemate': 1}, {None: 0}, {'food': 3, 'mendiane': 1}, {'linemate': 1, 'sibur': 1}, {None: 0}, {'thystame': 1}]
+forward
+Left
+forward
+Take
+[{'food': 6}, {'linemate': 0}, {'deraumere': 1}, {'sibur': 0}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 2, 0)
+[{'player': 1, 'food': 2}, {'deraumere': 1}, {'mendiane': 1}, {None: 0}, {'sibur': 1, 'mendiane': 1, 'phiras': 1}, {'linemate': 1}, {'food': 1, 'linemate': 1, 'phiras': 1}, {'food': 1, 'linemate': 2, 'sibur': 1}, {'food': 2, 'sibur': 2}]
+Take
+Take
+[{'food': 8}, {'linemate': 0}, {'deraumere': 1}, {'sibur': 0}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+[{'food': 8}, {'linemate': 0}, {'deraumere': 1}, {'sibur': 0}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+select = ('linemate', 1, 6)
+[{'player': 1}, {'deraumere': 1}, {'mendiane': 1}, {None: 0}, {'sibur': 1, 'mendiane': 1, 'phiras': 1}, {'linemate': 1}, {'food': 1, 'linemate': 1, 'phiras': 1}, {'food': 1, 'linemate': 2, 'sibur': 1}, {'food': 2, 'sibur': 2}]
+forward
+forward
+Take
+[{'food': 8}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 0}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+select = ('sibur', 1, 1)
+[{'player': 1, 'food': 1, 'phiras': 1}, {'sibur': 1}, {None: 0}, {'food': 2, 'linemate': 1, 'mendiane': 2}, {'food': 1, 'mendiane': 1}, {'linemate': 1, 'phiras': 1}, {'food': 3, 'phiras': 1}, {'food': 1}, {'linemate': 1}]
+forward
+Left
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 6)
+[{'player': 1, 'sibur': 1, 'mendiane': 1}, {'sibur': 1}, {'linemate': 1, 'phiras': 1}, {'linemate': 2, 'mendiane': 1}, {'linemate': 2, 'deraumere': 1}, {'linemate': 1}, {'food': 1, 'linemate': 2, 'phiras': 1}, {'linemate': 1}, {'linemate': 2}]
+forward
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 2)
+[{'player': 1}, {'food': 1, 'phiras': 1}, {'food': 1, 'linemate': 1, 'mendiane': 2}, {None: 0}, {None: 0}, {'food': 2, 'linemate': 1, 'sibur': 2}, {None: 0}, {'linemate': 1}, {'sibur': 1}]
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 2, 2)
+[{'player': 1}, {'food': 1, 'linemate': 2, 'sibur': 1}, {'food': 2, 'linemate': 1, 'mendiane': 2}, {'food': 1}, {'mendiane': 1}, {'food': 1, 'phiras': 1}, {None: 0}, {'food': 3, 'phiras': 1}, {'food': 1, 'linemate': 3}]
+forward
+Take
+Take
+[{'food': 8}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+[{'food': 8}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+Right
+Right
+Right
+Right
+forward
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 3)
+[{'player': 1}, {'sibur': 1, 'mendiane': 1, 'phiras': 1}, {None: 0}, {'food': 1, 'mendiane': 1}, {None: 0}, {'mendiane': 1}, {'food': 1, 'sibur': 1, 'mendiane': 1}, {None: 0}, {'deraumere': 1}]
+forward
+Right
+forward
+Take
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 4)
+[{'player': 1, 'mendiane': 1}, {'deraumere': 1}, {'linemate': 1, 'mendiane': 1}, {'linemate': 3, 'deraumere': 1}, {'food': 1}, {'food': 1, 'linemate': 1, 'deraumere': 1}, {'deraumere': 2, 'phiras': 1}, {'linemate': 2, 'deraumere': 1}, {'mendiane': 1, 'phiras': 1}]
+forward
+forward
+Left
+forward
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 2, 2)
+[{'player': 1, 'linemate': 1, 'sibur': 1, 'phiras': 1}, {'food': 1, 'sibur': 2}, {'food': 2, 'mendiane': 1}, {None: 0}, {None: 0}, {'food': 1, 'linemate': 1, 'phiras': 1}, {'phiras': 1}, {'sibur': 1}, {'deraumere': 1, 'thystame': 2}]
+forward
+Take
+Take
+[{'food': 8}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+[{'food': 8}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+8
+Right
+Right
+Right
+Right
+forward
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 0)
+[{'player': 1, 'food': 1, 'mendiane': 1}, {'phiras': 1}, {None: 0}, {'thystame': 1}, {'food': 3, 'phiras': 1}, {'food': 1, 'linemate': 3}, {'food': 1, 'mendiane': 1, 'phiras': 1}, {'food': 2}, {'linemate': 1}]
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 2)
+[{'player': 1}, {'food': 1, 'linemate': 3}, {'food': 1, 'mendiane': 1, 'phiras': 1}, {'food': 2}, {'linemate': 1, 'phiras': 1}, {'linemate': 3, 'deraumere': 1}, {'linemate': 2, 'deraumere': 1}, {'food': 1, 'sibur': 2, 'mendiane': 1}, {'phiras': 1}]
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 6)
+[{'player': 1, 'linemate': 2, 'deraumere': 1}, {'linemate': 1, 'mendiane': 1}, {'deraumere': 2, 'phiras': 1}, {'food': 1, 'deraumere': 2}, {'food': 1}, {'deraumere': 1}, {'food': 1, 'linemate': 1, 'deraumere': 1}, {'food': 2}, {'food': 1, 'deraumere': 1}]
+forward
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 5)
+[{'player': 1}, {'linemate': 2}, {'linemate': 1, 'sibur': 1, 'phiras': 1}, {'linemate': 1}, {'food': 1, 'linemate': 1, 'sibur': 1}, {'food': 1, 'sibur': 2}, {'mendiane': 1}, {None: 0}, {'food': 4}]
+forward
+forward
+Left
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 0)
+[{'player': 1, 'food': 1, 'linemate': 1, 'sibur': 1}, {'linemate': 2, 'phiras': 1}, {None: 0}, {'linemate': 1, 'mendiane': 2}, {'sibur': 1}, {'linemate': 1}, {'food': 1}, {'food': 1, 'phiras': 1}, {'food': 2, 'linemate': 1, 'sibur': 2}]
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 2)
+[{'player': 1}, {'linemate': 1}, {'food': 1}, {'food': 1, 'phiras': 1}, {'linemate': 3}, {'linemate': 2, 'deraumere': 1}, {'food': 1, 'phiras': 2}, {None: 0}, {None: 0}]
+forward
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 0)
+[{'player': 1, 'food': 1, 'phiras': 2}, {'mendiane': 1}, {'food': 1, 'linemate': 1, 'sibur': 1}, {'sibur': 1}, {'food': 1, 'linemate': 1, 'mendiane': 1}, {'deraumere': 3}, {'deraumere': 1}, {None: 0}, {None: 0}]
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 2, 1)
+[{'player': 1, 'deraumere': 1}, {'food': 2, 'linemate': 1}, {'food': 4}, {'deraumere': 1, 'thystame': 2}, {'deraumere': 1}, {'linemate': 1}, {None: 0}, {'sibur': 1}, {None: 0}]
+forward
+Left
+forward
+Take
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 0)
+[{'player': 1, 'food': 1, 'deraumere': 1, 'mendiane': 1, 'phiras': 1}, {'food': 1, 'mendiane': 1}, {'food': 1, 'deraumere': 1}, {'food': 2}, {'food': 2}, {None: 0}, {'sibur': 1, 'phiras': 1}, {'food': 1, 'deraumere': 2}, {'deraumere': 2, 'phiras': 1}]
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7
+Right
+Right
+Right
+Right
+forward
+[{'food': 6}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+6
+select = ('food', 1, 0)
+[{'player': 1, 'food': 1, 'deraumere': 1}, {None: 0}, {'sibur': 1, 'phiras': 1}, {'food': 1, 'deraumere': 2}, {'food': 3}, {'phiras': 1}, {'phiras': 1}, {'food': 1, 'sibur': 2, 'mendiane': 1}, {'linemate': 2, 'deraumere': 1}]
+Take
+[{'food': 7}, {'linemate': 1}, {'deraumere': 1}, {'sibur': 1}, {'mendiane': 0}, {'phiras': 0}, {'thystame': 0}]
+7

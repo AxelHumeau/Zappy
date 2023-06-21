@@ -1,22 +1,27 @@
 from enum import Enum
 from communication import action
 
+
 import sys
 import commands
 
 class priority(Enum):
     FOOD = 1
     RESSOURCES = 2
+    PLAYER = 3
 
 
 class AI:
     prio = priority.RESSOURCES
     mapsize = (1, 1)
+    message = []
     path = []
     lookaround = 0
+    need_player = False
     start_elevation = False
     food = 10
     target = -1
+    nb_players_on_me = 1
     nb_players_at_same_level = 1
     lvl = 1
     elevation = {
@@ -94,8 +99,9 @@ class AI:
     }
     # init
 
-    def __init__(self, communication):
+    def __init__(self, communication, team):
         self.communication = communication
+        self.team = team
 
     def get_target(self, vision):
         itemtoget = []
@@ -111,7 +117,7 @@ class AI:
                 for objects in itemtoget:
                     if (obj == objects[0]):
                         pos.append((objects[0], nbr, i))
-        print("item in vison needed:", pos)
+        #print("item in vison needed:", pos)
         return pos
 
     def get_best_path(self, objs):
@@ -136,7 +142,7 @@ class AI:
                 bestscore = pathscores[i]
         # print("all path:", paths)
         # print("obj:", objs)
-        print("select =", objs[indexbest])
+        # print("select =", objs[indexbest])
         paths[indexbest][len(paths[indexbest]) - 1] += " " + objs[indexbest][0]
         paths[indexbest][len(paths[indexbest]) - 1] = paths[indexbest][len(paths[indexbest]) - 1].split(" ")
         for i in range(int(objs[indexbest][1] - 1)):
@@ -155,11 +161,19 @@ class AI:
             self.communication.request.push(cmd)
 
     def act_look(self):
-        print("priority", self.prio)
+        self.nb_players_on_me = self.communication.look_info[0]['player']
+        if (self.need_player == True):
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " here\n"
+            self.communication.request.push(["Broadcast", str(self.team) + " here\n"])
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
+            if self.prio != priority.FOOD:
+                return
         path = self.get_best_path(self.get_target(self.communication.look_info))
-        print("path", path)
-        if len(path) != 0:
-            print(self.communication.look_info)
+        #print("path", path)
+        #print("nb_players_on_me", self.nb_players_on_me)
+        #if len(path) != 0:
+            # print(self.communication.look_info)
         if len(path) == 0 and self.lookaround == 3:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
@@ -181,9 +195,10 @@ class AI:
 
     def act_inventory(self):
         self.fill_inventory(self.communication.inventory)
-        print(self.communication.inventory)
+        #print(self.communication.inventory)
         commands.try_elevation(self, self.communication.request)
-        print(self.food)
+        #print(self.need_player)
+        #print(self.food)
         if self.food <= 6:
             self.prio = priority.FOOD
         else: self.prio = priority.RESSOURCES
@@ -193,7 +208,11 @@ class AI:
         if (self.lvl != self.communication.current_level):
             self.lvl = self.communication.current_level
             self.start_elevation = False
+            self.need_player = False
             print("lvl:", self.lvl)
+
+    def broadcast(self):
+        print("broadcast")
 
     def Forward(self):
         print("forward")
@@ -225,9 +244,17 @@ class AI:
         action.FORWARD: Forward,
         action.TAKE: Take,
         action.INCANTATION: incantation,
+        action.BROADCAST: broadcast,
         action.FAILED: failed,
         action.SET: Set
     }
+
+    def handling_message(self):
+        if self.communication.messagelen != len(self.communication.message):
+            self.communication.messagelen = len(self.communication.message)
+            if self.communication.message.front()[1].find(str(self.team)) != -1:
+                if self.lvl == int(self.communication.message.front()[1].split(' ')[1]):
+                    print("same team")
 
     def run(self):
         while True:
@@ -235,6 +262,7 @@ class AI:
             handling = self.communication.clean_information()
             if handling == action.DEAD:
                 return
+            self.handling_message()
             if (handling == action.NOTHING):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
@@ -243,7 +271,7 @@ class AI:
                     break
                 if handling == action.DEAD:
                     return
-                # print(handling)
+                #print(handling)
                 self.dic_function[handling](self)
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
