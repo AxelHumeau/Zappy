@@ -26,7 +26,7 @@ struct client_entry {
     bool is_role_defined;
     bool is_gui;
     bool is_dead;
-    player_t player_info;
+    player_t *player_info;
     int timer;
     long food_time;
     bool ritual;

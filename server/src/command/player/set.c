@@ -13,16 +13,16 @@ static bool set_object(struct client_entry *client, struct server *server,
     char *object)
 {
     int index_object = is_object(object);
-    int pos_y = client->player_info.y;
-    int pos_x = client->player_info.x;
+    int pos_y = client->player_info->y;
+    int pos_x = client->player_info->x;
 
     if (index_object == -1)
         return false;
-    if (client->player_info.inventory[index_object] <= 0)
+    if (client->player_info->inventory[index_object] <= 0)
         return false;
     server->maps[pos_y][pos_x].resources[index_object]++;
     server->map_resource[index_object]++;
-    client->player_info.inventory[index_object]--;
+    client->player_info->inventory[index_object]--;
     broadcast_to_guis(server, &notify_resource_dropping,
         client->id, index_object);
     return true;

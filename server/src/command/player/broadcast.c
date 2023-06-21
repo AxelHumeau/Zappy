@@ -21,7 +21,7 @@ static double get_distance(struct server *server, struct position zone,
     int dx = MIN(abs(sender.x - zone.x), width - abs(sender.x - zone.x));
     int dy = MIN(abs(sender.y - zone.y), height - abs(sender.y - zone.y));
 
-    return (sqrtf(dx * dx + dy * dy));
+    return (sqrt(dx * dx + dy * dy));
 }
 
 static int get_closest_zone(struct position zone[], struct position sender,
@@ -60,9 +60,9 @@ static void find_closest_zone(struct client_entry *client,
     struct client_entry *player, struct server *server, char **args)
 {
     struct position zone[ZONE_SIZE];
-    struct position sender = {client->player_info.x, client->player_info.y};
-    struct position target = {player->player_info.x, player->player_info.y};
-    enum direction dir = player->player_info.direction;
+    struct position sender = {client->player_info->x, client->player_info->y};
+    struct position target = {player->player_info->x, player->player_info->y};
+    enum direction dir = player->player_info->direction;
     int index = 0;
 
     for (int i = 0; i < ZONE_SIZE; i++) {

@@ -62,7 +62,7 @@ int handle_client(struct client_entry *client,
     if (client->is_dead)
         return EXIT_FAIL;
     if (client->is_role_defined && !client->is_gui &&
-        client->player_info.inventory[FOOD] == 0) {
+        client->player_info->inventory[FOOD] == 0) {
             client->is_dead = true;
             add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
     }
@@ -81,8 +81,9 @@ int handle_client(struct client_entry *client,
 void destroy_client(struct client_entry *client)
 {
     if (client->is_role_defined && !client->is_gui)
-        client->player_info.team->nb_slots_left++;
+        client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
+        free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
     }

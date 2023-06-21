@@ -13,8 +13,8 @@ static bool take_object(struct client_entry *client, struct server *server,
     char *object)
 {
     int index_object = is_object(object);
-    int pos_y = client->player_info.y;
-    int pos_x = client->player_info.x;
+    int pos_y = client->player_info->y;
+    int pos_x = client->player_info->x;
 
     if (index_object == EXIT_FAIL)
         return false;
@@ -22,7 +22,7 @@ static bool take_object(struct client_entry *client, struct server *server,
         return false;
     server->maps[pos_y][pos_x].resources[index_object]--;
     server->map_resource[index_object]--;
-    client->player_info.inventory[index_object]++;
+    client->player_info->inventory[index_object]++;
     broadcast_to_guis(server, &notify_resource_collecting,
         client->id, index_object);
     return true;

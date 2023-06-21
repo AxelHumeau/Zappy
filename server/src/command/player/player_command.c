@@ -41,7 +41,7 @@ static void check_incantation(struct client_entry *client,
             size = list_ids_size(list_players);
             list_ids = get_list_ids(list_players, size);
             broadcast_to_guis(server, &notify_start_of_incantation,
-                client->id, &client->player_info, size, list_ids);
+                client->id, client->player_info, size, list_ids);
             send_ritual_message(client, list_players, true);
         } else
             add_to_buffer(&client->buf_to_send, KO, strlen(KO));
