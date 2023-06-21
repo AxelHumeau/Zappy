@@ -32,9 +32,13 @@ namespace ZappyGui {
             std::size_t getInventoryAmount(const ResourceType &resourceType);
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
 
+            Vector3 _startingPoint;
+            Vector3 _moveTarget;
+            Real _timeForAction;
+            Real _actionTimer;
         private:
             std::size_t _id;
-            ZappyGui::Vector2i _mapPosition;
+            Vector2i _mapPosition;
             size_t _level;
             Orientation _orientation;
             std::unordered_map<ResourceType, std::size_t> _inventory;

@@ -67,8 +67,9 @@ void ZappyGui::Gui::initialize() {
     }
     if (_renderer->isDone())
         return;
+    float tileSize = 2.0f;
     std::shared_ptr<ZappyGui::Tilemap> tilemap = std::make_shared<ZappyGui::Tilemap>(_renderer->getSceneManager(), _mapWidth, _mapHeight);
-    tilemap->setPosition(0.0f, 0.0f, -10.0f);
+    tilemap->setPosition(-(_mapHeight * tileSize) / 2.0f, -(tileSize) * 2.0f, -(_mapHeight * tileSize));
     ZappyGui::Vector2i size = tilemap->getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
@@ -76,7 +77,7 @@ void ZappyGui::Gui::initialize() {
             (*tilemap)[y][x].bindGameObject(obj_ptr);
         }
     }
-    tilemap->setTileSize(2.0f, 2.0f, 2.0f);
+    tilemap->setTileSize(tileSize, tileSize, tileSize);
     setTilemap(tilemap);
 }
 
@@ -90,11 +91,28 @@ void ZappyGui::Gui::run() {
         deltaTime = _renderer->getDeltaTime();
 
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
-            _game.update(_requests);
+            _game.update(_requests, deltaTime);
             _tilemap->update(_requests);
             _waitedServerUpdateDelay = 0.0f;
         } else
             _waitedServerUpdateDelay += deltaTime;
+
+        std::map<std::string, std::vector<ZappyGui::Player>>::iterator team;
+        for (auto iterator = _game._teams.begin(); iterator != _game._teams.end(); iterator++) {
+            for (ZappyGui::Player &player : iterator->second) {
+                if (player.getPosition() == player._moveTarget)
+                    continue;
+                player._actionTimer += deltaTime / player._timeForAction;
+                std::cout << player._actionTimer << std::endl;
+                Vector3 newPos = player.getPosition();
+                newPos = lerp(player._startingPoint, player._moveTarget, player._actionTimer);
+                player.setPosition(newPos.x, newPos.y, newPos.z);
+                if (player.getPosition().distance(player._startingPoint) >= player._startingPoint.distance(player._moveTarget) || player._actionTimer >= 1.0f) {
+                    player.setPosition(player._moveTarget.x, player._moveTarget.y, player._moveTarget.z);
+                    player._actionTimer = 0.0f;
+                }
+            }
+        }
 
         while (_receive.tryPop(command))
             processCommand(command);

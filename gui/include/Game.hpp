@@ -55,10 +55,10 @@ namespace ZappyGui {
             std::list<ZappyGui::Player> &getTeam(std::string teamName);
             Player &getPlayer(size_t playerId);
             void removePlayer(size_t playerId);
-            void update(SafeQueue<std::string> &requests);
+            void update(SafeQueue<std::string> &requests, float deltaTime);
 
-        private:
             std::map<std::string, std::list<ZappyGui::Player>> _teams;
+        private:
     };
 }
 

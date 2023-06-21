@@ -8,6 +8,7 @@
 #include "Game.hpp"
 #include <iostream>
 #include <algorithm>
+#include "Utils.hpp"
 
 namespace ZappyGui {
 
@@ -48,12 +49,12 @@ namespace ZappyGui {
         throw PlayerUndifinedError(playerId);
     }
 
-    void Game::update(SafeQueue<std::string> &requests) {
+    void Game::update(SafeQueue<std::string> &requests, float deltaTime) {
         std::map<std::string, std::vector<ZappyGui::Player>>::iterator team;
 
         for (auto iterator = _teams.begin(); iterator != _teams.end(); iterator++) {
             for (ZappyGui::Player &player : iterator->second) {
-                // Network::Client::queueRequest(requests, "ppo", { std::to_string(player.getId()) });
+                Network::Client::queueRequest(requests, "ppo", { std::to_string(player.getId()) });
             }
         }
     }
