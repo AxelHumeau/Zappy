@@ -52,7 +52,7 @@ static void do_elevation(struct client_entry *client, struct server *server,
     remove_resources_map(client, server);
     for (int i = 0; list_players[i] != NULL; i++) {
         list_players[i]->player_info.level++;
-        asprintf(&message, "Current level : %d\n", client->player_info.level);
+        asprintf(&message, "Current level: %d\n", client->player_info.level);
         add_to_buffer(&list_players[i]->buf_to_send, message, strlen(message));
         free(message);
     }

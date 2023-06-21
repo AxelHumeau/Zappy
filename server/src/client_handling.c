@@ -42,12 +42,11 @@ static void handle_lines(struct client_entry *client, struct server *server)
 {
     char *line;
 
-    printf("GET_LINE HANDLE\n");
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("id : %d\n", client->id);
-        printf("%s\n", DIRECTION_STR[client->player_info.direction]);
-        printf("%d - %d\n", client->player_info.x, client->player_info.y);
+        // printf("id : %d\n", client->id);
+        // printf("%s\n", DIRECTION_STR[client->player_info.direction]);
+        // printf("%d - %d\n", client->player_info.x, client->player_info.y);
         if (client->is_gui)
             handle_gui(client, server, line);
         else
