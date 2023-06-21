@@ -7,29 +7,35 @@
 
 #include <stdio.h>
 #include "macro.h"
+#include "gui/events.h"
 
-int *get_list_ids(struct client_entry **list_players, int size)
+void init_entry(struct client_entry *entry)
 {
-    int *list_ids = NULL;
-    int index = 0;
-
-    if (size == 0)
-        return NULL;
-    list_ids = malloc(sizeof(int) * size);
-    for (int i = 1; list_players[i] != NULL; i++) {
-        list_ids[index] = list_players[i]->id;
-        index++;
-    }
-    return list_ids;
+    entry->is_gui = false;
+    entry->is_role_defined = false;
+    entry->timer = -1;
+    entry->food_time = 0;
+    entry->is_dead = false;
+    entry->ritual = false;
+    entry->laying_egg = false;
+    entry->egg = NULL;
 }
 
-int list_ids_size(struct client_entry **list_players)
+void set_position_player(struct server *server, player_t *info)
 {
-    int size = 0;
+    struct egg *egg = NULL;
 
-    for (int i = 1; list_players[i] != NULL; i++)
-        size++;
-    return size;
+    if (!LIST_EMPTY(&server->list_eggs)) {
+        egg = LIST_FIRST(&server->list_eggs);
+        LIST_REMOVE(server->list_eggs.lh_first, next);
+        info->x = egg->x;
+        info->y = egg->y;
+        broadcast_to_guis(server, &notify_egg_connection, egg->id);
+        free(egg);
+    } else {
+        info->x = rand() % server->width;
+        info->y = rand() % server->height;
+    }
 }
 
 bool is_player(struct client_entry *player, struct client_entry *client)

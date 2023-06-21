@@ -7,7 +7,6 @@
 
 SRC =			main.c							\
 				client_handling.c				\
-				player_handling.c				\
 				loop.c							\
 				destroy_server.c				\
 				buffer.c						\
@@ -21,21 +20,24 @@ SRC =			main.c							\
 				utils/utils_look.c				\
 				utils/utils_player.c			\
 				utils/utils_incantation.c		\
+				utils/utils_list.c				\
 				utils/str_to_array.c			\
 				utils/utils_object.c			\
-				command/player/player_command.c	\
-				command/player/forward.c		\
-				command/player/right.c			\
-				command/player/left.c			\
-				command/player/look.c			\
-				command/player/inventory.c		\
-				command/player/broadcast.c		\
-				command/player/connect_nbr.c	\
-				command/player/fork.c			\
-				command/player/eject.c			\
-				command/player/take.c			\
-				command/player/set.c			\
-				command/player/incantation.c	\
+				ai/player_handling.c			\
+				ai/player_command.c				\
+				ai/check_instant_command.c		\
+				ai/commands/forward.c			\
+				ai/commands/right.c				\
+				ai/commands/left.c				\
+				ai/commands/look.c				\
+				ai/commands/inventory.c			\
+				ai/commands/broadcast.c			\
+				ai/commands/connect_nbr.c		\
+				ai/commands/fork.c				\
+				ai/commands/eject.c				\
+				ai/commands/take.c				\
+				ai/commands/set.c				\
+				ai/commands/incantation.c		\
 				gui/handle_gui_client.c			\
 				gui/init_gui_client.c			\
 				gui/broadcast_to_guis.c			\

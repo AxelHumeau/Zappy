@@ -20,6 +20,7 @@
     #define NB_LEVEL 7
     #define ZONE_SIZE 8
     #define INCANTATION "Incantation"
+    #define FORK "Fork"
     #define ABS(x) (((x) < 0 ? (-x) : (x)))
     #include "server.h"
 

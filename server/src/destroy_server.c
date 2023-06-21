@@ -5,14 +5,25 @@
 ** destroy_server
 */
 
-#include "server.h"
 #include <unistd.h>
+#include "server.h"
 
-void destroy_game(struct server *server)
+static void destroy_game(struct server *server)
 {
     for (int y = 0; y < server->height; y++)
         free(server->maps[y]);
     free(server->maps);
+}
+
+static void destroy_eggs(struct server *server)
+{
+    struct egg *tmp = NULL;
+
+    for (struct egg *egg = server->list_eggs.lh_first; egg;) {
+        tmp = egg->next.le_next;
+        free(egg);
+        egg = tmp;
+    }
 }
 
 void destroy_server(struct server *server)
@@ -25,6 +36,7 @@ void destroy_server(struct server *server)
             tmp = client->next.sle_next;
             free(client);
         }
+    destroy_eggs(server);
     destroy_clients(server);
     free(server->teams);
     destroy_game(server);
