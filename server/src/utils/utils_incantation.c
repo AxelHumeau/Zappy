@@ -24,20 +24,17 @@ static void get_players_ritual(struct client_entry *client,
 struct server *server, elevation_t ritual, struct client_entry **list_players)
 {
     int index = 1;
-    int id = 1;
     struct client_entry *player = NULL;
     player_t entry;
-    bool put_player = true;
+    bool put_player;
 
-    while (index != ritual.nb_players) {
+    for (int id = 1; index != ritual.nb_players; id++) {
         SLIST_FOREACH(player, &server->clients, next) {
             entry = player->player_info;
             put_player = is_player(player, client) && same_pos(player, client)
                 && id == player->id && entry.level == ritual.level;
             put_player_ritual(list_players, player, put_player, &index);
-
         }
-        id++;
     }
 }
 
