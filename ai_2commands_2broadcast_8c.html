@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Zappy: server/src/ai/commands/inventory.c File Reference</title>
+<title>Zappy: server/src/ai/commands/broadcast.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,27 +68,31 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">inventory.c File Reference</div>  </div>
+<div class="title">broadcast.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/param.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="macro_8h_source.html">macro.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="events_8h_source.html">gui/events.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a61db136e3cbc449974daa7c88d287b92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8c.html#a61db136e3cbc449974daa7c88d287b92">inventory</a> (char *cmd, struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *)</td></tr>
-<tr class="separator:a61db136e3cbc449974daa7c88d287b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551e59d67b5da0c24c3c883f1a1985ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ai_2commands_2broadcast_8c.html#a551e59d67b5da0c24c3c883f1a1985ff">broadcast</a> (char *cmd, struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="separator:a551e59d67b5da0c24c3c883f1a1985ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a61db136e3cbc449974daa7c88d287b92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61db136e3cbc449974daa7c88d287b92">&#9670;&nbsp;</a></span>inventory()</h2>
+<a id="a551e59d67b5da0c24c3c883f1a1985ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551e59d67b5da0c24c3c883f1a1985ff">&#9670;&nbsp;</a></span>broadcast()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void inventory </td>
+          <td class="memname">void broadcast </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>cmd</em>, </td>
@@ -103,7 +107,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

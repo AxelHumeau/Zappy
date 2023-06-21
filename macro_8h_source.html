@@ -91,81 +91,82 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="macro_8h.html#a42c37a9c15aecd5e42fa334c059a2770">   20</a></span>&#160;<span class="preprocessor">    #define NB_LEVEL 7</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="macro_8h.html#a9038fefbff7f02c8a6e70fdae195cc83">   21</a></span>&#160;<span class="preprocessor">    #define ZONE_SIZE 8</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="macro_8h.html#a4ca7eb630f31457bae207265554c7a5e">   22</a></span>&#160;<span class="preprocessor">    #define INCANTATION &quot;Incantation&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="macro_8h.html#a996f7be338ccb40d1a2a5abc1ad61759">   23</a></span>&#160;<span class="preprocessor">    #define ABS(x) (((x) &lt; 0 ? (-x) : (x)))</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="server_8h.html">server.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">enum</span> <a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817">resource</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">struct </span><a class="code" href="structposition.html">position</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EXIT_FAIL = -1;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> PORTION_REFILL = 5;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EXIT_ERROR = 84;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> MAX_SIZE_BUFFER = 256;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="Socket_8hpp.html#a5ab1c3f109907815ec12f9423f352a2a">MAX_PORT_NUMBER</a> = 65535;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> REFILL_TIME = 20;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> FOOD_TIME = 126;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">long</span> FOOD_PLAYER = 10;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_CLASSIC = 7;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_FAST = 1;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> NO_TIMER = 0;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_FORK = 42;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_INCANTATION = 300;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> DENSITY[<a class="code" href="game_8h.html#abb5fa6651dcc55e43efd0ec7f8c6df6d">NB_RESOURCES</a>] = {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817abaad2be1abe0cffbc3a0bbf032a604c4">FOOD</a>] = 0.5,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a8c5241e45d7a43f38ab379e79e9466eb">LINEMATE</a>] = 0.3,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817af5641be4a6ed19b9d6bb816bfbe590e1">DERAUMERE</a>] = 0.15,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a38d54bcfbd316bc737fa680e796e60d5">SIBUR</a>] = 0.1,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a52a4fda632b2e9f5d1472ba2190218f9">MENDIANE</a>] = 0.1,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a5580e70ebf42665014dca5cfdaa11b82">PHIRAS</a>] = 0.08,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a3723a926389a41fd088b1028dd720796">THYSMANE</a>] = 0.05,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> RESSOURCE_STR[<a class="code" href="game_8h.html#abb5fa6651dcc55e43efd0ec7f8c6df6d">NB_RESOURCES</a>] = {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817abaad2be1abe0cffbc3a0bbf032a604c4">FOOD</a>] = <span class="stringliteral">&quot;food&quot;</span>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a8c5241e45d7a43f38ab379e79e9466eb">LINEMATE</a>] = <span class="stringliteral">&quot;linemate&quot;</span>,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817af5641be4a6ed19b9d6bb816bfbe590e1">DERAUMERE</a>] = <span class="stringliteral">&quot;deraumere&quot;</span>,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a38d54bcfbd316bc737fa680e796e60d5">SIBUR</a>] = <span class="stringliteral">&quot;sibur&quot;</span>,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a52a4fda632b2e9f5d1472ba2190218f9">MENDIANE</a>] = <span class="stringliteral">&quot;mendiane&quot;</span>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a5580e70ebf42665014dca5cfdaa11b82">PHIRAS</a>] = <span class="stringliteral">&quot;phiras&quot;</span>,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a3723a926389a41fd088b1028dd720796">THYSMANE</a>] = <span class="stringliteral">&quot;thysmane&quot;</span>,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> DIRECTION[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>][2] = {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = {0, -1},</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = {1, 0},</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = {0, 1},</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = {-1, 0},</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> DIRECTION_STR[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <span class="stringliteral">&quot;up&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <span class="stringliteral">&quot;right&quot;</span>,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <span class="stringliteral">&quot;down&quot;</span>,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = <span class="stringliteral">&quot;left&quot;</span>,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> POS_LOOK[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = -1,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = -1,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = 1,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = 1</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> DIRECTION_ZONE[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = 1,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = 3,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = 5,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = 7,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="structposition.html">position</a> ZONE_INDEX[<a class="code" href="macro_8h.html#a9038fefbff7f02c8a6e70fdae195cc83">ZONE_SIZE</a>] = {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {0, -1},</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {-1, -1},</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {-1, 0},</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {-1, 1},</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {0, 1},</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {1, 1},</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {1, 0},</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {1, -1},</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !MACRO_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="macro_8h.html#a93182e924cb059b7c3639d5bf3b12c9e">   23</a></span>&#160;<span class="preprocessor">    #define FORK &quot;Fork&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="macro_8h.html#a996f7be338ccb40d1a2a5abc1ad61759">   24</a></span>&#160;<span class="preprocessor">    #define ABS(x) (((x) &lt; 0 ? (-x) : (x)))</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="server_8h.html">server.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">enum</span> <a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817">resource</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">struct </span><a class="code" href="structposition.html">position</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EXIT_FAIL = -1;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> PORTION_REFILL = 5;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EXIT_ERROR = 84;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> MAX_SIZE_BUFFER = 256;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="Socket_8hpp.html#a5ab1c3f109907815ec12f9423f352a2a">MAX_PORT_NUMBER</a> = 65535;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> REFILL_TIME = 20;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> FOOD_TIME = 126;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">long</span> FOOD_PLAYER = 10;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_CLASSIC = 7;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_FAST = 1;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> NO_TIMER = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_FORK = 42;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> TIMER_INCANTATION = 300;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> DENSITY[<a class="code" href="game_8h.html#abb5fa6651dcc55e43efd0ec7f8c6df6d">NB_RESOURCES</a>] = {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817abaad2be1abe0cffbc3a0bbf032a604c4">FOOD</a>] = 0.5,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a8c5241e45d7a43f38ab379e79e9466eb">LINEMATE</a>] = 0.3,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817af5641be4a6ed19b9d6bb816bfbe590e1">DERAUMERE</a>] = 0.15,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a38d54bcfbd316bc737fa680e796e60d5">SIBUR</a>] = 0.1,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a52a4fda632b2e9f5d1472ba2190218f9">MENDIANE</a>] = 0.1,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a5580e70ebf42665014dca5cfdaa11b82">PHIRAS</a>] = 0.08,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a3723a926389a41fd088b1028dd720796">THYSMANE</a>] = 0.05,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> RESSOURCE_STR[<a class="code" href="game_8h.html#abb5fa6651dcc55e43efd0ec7f8c6df6d">NB_RESOURCES</a>] = {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817abaad2be1abe0cffbc3a0bbf032a604c4">FOOD</a>] = <span class="stringliteral">&quot;food&quot;</span>,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a8c5241e45d7a43f38ab379e79e9466eb">LINEMATE</a>] = <span class="stringliteral">&quot;linemate&quot;</span>,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817af5641be4a6ed19b9d6bb816bfbe590e1">DERAUMERE</a>] = <span class="stringliteral">&quot;deraumere&quot;</span>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a38d54bcfbd316bc737fa680e796e60d5">SIBUR</a>] = <span class="stringliteral">&quot;sibur&quot;</span>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a52a4fda632b2e9f5d1472ba2190218f9">MENDIANE</a>] = <span class="stringliteral">&quot;mendiane&quot;</span>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a5580e70ebf42665014dca5cfdaa11b82">PHIRAS</a>] = <span class="stringliteral">&quot;phiras&quot;</span>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    [<a class="code" href="game_8h.html#ab00e7685de21356f97a42d26fe8e9817a3723a926389a41fd088b1028dd720796">THYSMANE</a>] = <span class="stringliteral">&quot;thysmane&quot;</span>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> DIRECTION[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>][2] = {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = {0, -1},</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = {1, 0},</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = {0, 1},</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = {-1, 0},</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> DIRECTION_STR[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = <span class="stringliteral">&quot;up&quot;</span>,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = <span class="stringliteral">&quot;right&quot;</span>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = <span class="stringliteral">&quot;down&quot;</span>,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = <span class="stringliteral">&quot;left&quot;</span>,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> POS_LOOK[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = -1,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = -1,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = 1,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = 1</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> DIRECTION_ZONE[<a class="code" href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a>] = {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = 1,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = 3,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = 5,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    [<a class="code" href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098adb45120aafd37a973140edee24708065">LEFT</a>] = 7,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="structposition.html">position</a> ZONE_INDEX[<a class="code" href="macro_8h.html#a9038fefbff7f02c8a6e70fdae195cc83">ZONE_SIZE</a>] = {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {0, -1},</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {-1, -1},</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {-1, 0},</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {-1, 1},</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {0, 1},</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {1, 1},</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {1, 0},</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    {1, -1},</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !MACRO_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aSocket_8hpp_html_a5ab1c3f109907815ec12f9423f352a2a"><div class="ttname"><a href="Socket_8hpp.html#a5ab1c3f109907815ec12f9423f352a2a">MAX_PORT_NUMBER</a></div><div class="ttdeci">#define MAX_PORT_NUMBER</div><div class="ttdef"><b>Definition:</b> Socket.hpp:19</div></div>
 <div class="ttc" id="agame_8h_html_a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da"><div class="ttname"><a href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098a9b0b4a95b99523966e0e34ffdadac9da">DOWN</a></div><div class="ttdeci">@ DOWN</div><div class="ttdef"><b>Definition:</b> game.h:29</div></div>
 <div class="ttc" id="agame_8h_html_a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa"><div class="ttname"><a href="game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa">UP</a></div><div class="ttdeci">@ UP</div><div class="ttdef"><b>Definition:</b> game.h:27</div></div>
@@ -183,7 +184,7 @@ $(function() {
 <div class="ttc" id="amacro_8h_html_a3636307415546d3bb9ad017eff8dd872"><div class="ttname"><a href="macro_8h.html#a3636307415546d3bb9ad017eff8dd872">NB_DIRECTIONS</a></div><div class="ttdeci">#define NB_DIRECTIONS</div><div class="ttdef"><b>Definition:</b> macro.h:17</div></div>
 <div class="ttc" id="amacro_8h_html_a9038fefbff7f02c8a6e70fdae195cc83"><div class="ttname"><a href="macro_8h.html#a9038fefbff7f02c8a6e70fdae195cc83">ZONE_SIZE</a></div><div class="ttdeci">#define ZONE_SIZE</div><div class="ttdef"><b>Definition:</b> macro.h:21</div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
-<div class="ttc" id="astructposition_html"><div class="ttname"><a href="structposition.html">position</a></div><div class="ttdef"><b>Definition:</b> game.h:40</div></div>
+<div class="ttc" id="astructposition_html"><div class="ttname"><a href="structposition.html">position</a></div><div class="ttdef"><b>Definition:</b> game.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

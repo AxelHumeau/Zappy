@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['death_2ec_627',['death.c',['../death_8c.html',1,'']]],
-  ['destroy_5fserver_2ec_628',['destroy_server.c',['../destroy__server_8c.html',1,'']]]
+  ['death_2ec_636',['death.c',['../death_8c.html',1,'']]],
+  ['destroy_5fserver_2ec_637',['destroy_server.c',['../destroy__server_8c.html',1,'']]]
 ];
