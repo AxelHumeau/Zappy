@@ -8,17 +8,39 @@
 #ifndef MACRO_H_
     #define MACRO_H_
 
-    #include "server.h"
     #define KO "ko\n"
+    #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
+    #define ELEVATION "Elevation underway\n"
+    #define DEAD "dead\n"
+    #define NB_DIRECTIONS 4
+    #define NB_COMMAND_PLAYER 12
+    #define MAX_COMMAND_SIZE 10
+    #define NB_LEVEL 7
+    #define ZONE_SIZE 8
+    #define INCANTATION "Incantation"
+    #define ABS(x) (((x) < 0 ? (-x) : (x)))
+    #include "server.h"
 
 enum resource;
+struct position;
 
 static const int EXIT_FAIL = -1;
+static const int PORTION_REFILL = 5;
 static const int EXIT_ERROR = 84;
 static const size_t MAX_SIZE_BUFFER = 256;
 static const int MAX_PORT_NUMBER = 65535;
+static const int REFILL_TIME = 20;
+static const int FOOD_TIME = 126;
+static const long FOOD_PLAYER = 10;
+
+static const int TIMER_CLASSIC = 7;
+static const int TIMER_FAST = 1;
+static const int NO_TIMER = 0;
+static const int TIMER_FORK = 42;
+static const int TIMER_INCANTATION = 300;
+
 static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,
@@ -36,6 +58,40 @@ static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [MENDIANE] = "mendiane",
     [PHIRAS] = "phiras",
     [THYSMANE] = "thysmane",
+};
+static const int DIRECTION[NB_DIRECTIONS][2] = {
+    [UP] = {0, -1},
+    [RIGHT] = {1, 0},
+    [DOWN] = {0, 1},
+    [LEFT] = {-1, 0},
+};
+static const char * const DIRECTION_STR[NB_DIRECTIONS] = {
+    [UP] = "up",
+    [RIGHT] = "right",
+    [DOWN] = "down",
+    [LEFT] = "left",
+};
+static const int POS_LOOK[NB_DIRECTIONS] = {
+    [UP] = -1,
+    [RIGHT] = -1,
+    [DOWN] = 1,
+    [LEFT] = 1
+};
+static const int DIRECTION_ZONE[NB_DIRECTIONS] = {
+    [UP] = 1,
+    [RIGHT] = 3,
+    [DOWN] = 5,
+    [LEFT] = 7,
+};
+static const struct position ZONE_INDEX[ZONE_SIZE] = {
+    {0, -1},
+    {-1, -1},
+    {-1, 0},
+    {-1, 1},
+    {0, 1},
+    {1, 1},
+    {1, 0},
+    {1, -1},
 };
 
 #endif /* !MACRO_H_ */

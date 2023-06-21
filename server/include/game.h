@@ -23,11 +23,31 @@ enum resource {
     THYSMANE,
 };
 
+enum direction {
+    UP = 0,
+    RIGHT,
+    DOWN,
+    LEFT,
+};
+
+typedef struct egg {
+    int id;
+    int x;
+    int y;
+    struct team *team;
+} egg_t;
+
+struct position {
+    int x;
+    int y;
+};
+
 typedef struct player {
     int x;
     int y;
+    enum direction direction;
     size_t inventory[NB_RESOURCES];
-    size_t level;
+    int level;
     size_t time_units_left;
     time_t last_action;
     struct team *team;

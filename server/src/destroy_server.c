@@ -17,8 +17,16 @@ void destroy_game(struct server *server)
 
 void destroy_server(struct server *server)
 {
-    free(server->teams);
+    struct client_entry *tmp = NULL;
+
+    for (int i = 0; i < server->nb_teams; i++)
+        for (struct client_entry *client = server->teams[i].players.slh_first;
+            client; client = tmp) {
+            tmp = client->next.sle_next;
+            free(client);
+        }
     destroy_clients(server);
+    free(server->teams);
     destroy_game(server);
     close(server->listening_fd);
     close(server->sig_fd);

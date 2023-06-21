@@ -11,7 +11,7 @@ on:
 
 env:
   MIRROR_URL: git@github.com:EpitechPromo2026/B-YEP-400-PAR-4-1-zappy-axel.humeau.git
-  EXECUTABLES: zappy_ai,zappy_server
+  EXECUTABLES: zappy_ai,zappy_server,zappy_gui
 jobs:
   check_program_compilation:
     if: success()
@@ -22,8 +22,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: timeout 2m make zappy_server
-      - run: timeout 2m make zappy_ai
+      - run: timeout 5m make
       - run: make clean
       - run: |
           IFS=','
@@ -75,9 +74,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: timeout 2m make tests_run
+      - run: timeout 5m make tests_run
   push_to_mirror:
-    if: success() && ${{ github.event_name == 'push' }}
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [run_tests, check_coding_style]
     runs-on: ubuntu-latest
     name: push_to_mirror
@@ -92,7 +91,7 @@ jobs:
           ssh_private_key:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
   make_deploy_doxygen:
-    if: success() && ${{ github.event_name == 'push' }}
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [push_to_mirror]
     runs-on: ubuntu-latest
     steps:

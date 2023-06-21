@@ -137,9 +137,9 @@ namespace ZappyGui {
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;
             std::unique_ptr<Ogre::Root> _root;
             std::unique_ptr<Ogre::OverlaySystem, ZappyGui::Nop> _overlaySystem;
-            std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::Viewport, ZappyGui::Nop> _viewport;
             std::shared_ptr<ZappyGui::Camera> _camera;
+            std::shared_ptr<Ogre::SceneManager> _sceneManager;
             std::unique_ptr<Ogre::RTShader::ShaderGenerator, ZappyGui::Nop> _shaderGenerator;
             std::unique_ptr<OgreBites::SGTechniqueResolverListener, ZappyGui::Nop> _resolverListener;
             std::shared_ptr<Ogre::Overlay> _overlay;
