@@ -9,13 +9,42 @@ set(SRCS
     src/Renderer.cpp
     src/GameObject.cpp
     src/Socket.cpp
+    src/Gui.cpp
     src/Camera.cpp
     src/Light.cpp
     src/Tilemap.cpp
     src/Tile.cpp
     src/ResourceLoader.cpp
     src/Client.cpp
+    src/Game.cpp
+    src/Player.cpp
+    src/Utils.cpp
     src/Error.cpp
+    src/commands/msz.cpp
+    src/commands/bct.cpp
+    src/commands/pdi.cpp
+    src/commands/pin.cpp
+    src/commands/plv.cpp
+    src/commands/pnw.cpp
+    src/commands/ppo.cpp
+    src/commands/quit.cpp
+    src/commands/tna.cpp
+    src/commands/pex.cpp
+    src/commands/pbc.cpp
+    src/commands/pic.cpp
+    src/commands/pie.cpp
+    src/commands/pfk.cpp
+    src/commands/pdr.cpp
+    src/commands/pgt.cpp
+    src/commands/enw.cpp
+    src/commands/ebo.cpp
+    src/commands/edi.cpp
+    src/commands/sgt.cpp
+    src/commands/sst.cpp
+    src/commands/seg.cpp
+    src/commands/smg.cpp
+    src/commands/suc.cpp
+    src/commands/sbp.cpp
 )
 set(INCLUDES include)
 

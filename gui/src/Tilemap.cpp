@@ -6,35 +6,48 @@
 */
 
 #include "Tilemap.hpp"
+#include "Client.hpp"
 #include <iostream>
 
 namespace ZappyGui {
-    Tilemap::Tilemap(std::shared_ptr<Ogre::SceneManager> sceneManager, int width, int height): _width{width}, _height{height} {
-        _node = std::shared_ptr<Ogre::SceneNode>(sceneManager->getRootSceneNode()->createChildSceneNode(), ZappyGui::Nop{});
+    Tilemap::Tilemap(std::shared_ptr<Ogre::SceneManager> sceneManager, int width, int height): _width{width}, _height{height}, AGameObject(sceneManager)
+    {
         for (int y = 0; y < _height; y++) {
-            _tilemap.push_back(std::vector<Tile>());
+            _tilemap.emplace_back(std::vector<Tile>());
             for (int x = 0; x < _width; x++)
-                _tilemap[y].push_back(Tile(x, y));
+                _tilemap[y].emplace_back(Tile(x, y));
         }
     }
 
-    void Tilemap::setTileSize(ZappyGui::Real width, ZappyGui::Real height) {
+    void Tilemap::setTileSize(ZappyGui::Real width, ZappyGui::Real height, ZappyGui::Real depth) {
         ZappyGui::Vector3 origin = _node->getPosition();
         ZappyGui::Vector3 position;
-        _tileWidth = width;
-        _tileHeight = height;
+        _tileSize.x = width;
+        _tileSize.y = height;
+        _tileSize.z = depth;
 
         for (int y = 0; y < _height; y++) {
             for (int x = 0; x < _width; x++) {
-                position = ZappyGui::Vector3(origin.x + _tileWidth * x, origin.y, origin.z - _tileHeight * y);
+                position = ZappyGui::Vector3(origin.x + _tileSize.x * x, origin.y, origin.z - _tileSize.z * y);
                 try {
-                    ZappyGui::GameObject obj = _tilemap[y][x].getGameobject();
-                    obj.setPosition(position.x, position.y, position.z);
+                    _tilemap[y][x].getGameobject().setPosition(position.x, position.y, position.z);
                 } catch (const ZappyGui::TileNoGameobjectBoundError& e) {
                     std::cerr << e.what() << std::endl;
                 }
             }
         }
+    }
+
+    void Tilemap::placeGameObjectOnTile(ZappyGui::Tile &tile, ZappyGui::GameObject &obj) {
+        ZappyGui::Vector3 finalPosition;
+        finalPosition.x = getPosition().x + tile.getPosition().data[0] * _tileSize.x;
+        finalPosition.y = getPosition().y + _tileSize.y;
+        finalPosition.z = getPosition().z - tile.getPosition().data[1] * _tileSize.z;
+        obj.setPosition(finalPosition.x, finalPosition.y, finalPosition.z);
+    }
+
+    void Tilemap::update(SafeQueue<std::string> &requests) {
+        Network::Client::queueRequest(requests, "mct", {});
     }
 
     std::vector<Tile> &Tilemap::operator[](std::size_t index) {
