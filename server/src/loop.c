@@ -57,7 +57,7 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
             FD_CLR(client->fd, readfds);
             FD_CLR(client->fd, writefds);
             SLIST_REMOVE(&server->clients, client, client_entry, next);
-            destroy_client(client);
+            destroy_client(client, server);
             return loop_through_clients(server, readfds, writefds);
         }
     }

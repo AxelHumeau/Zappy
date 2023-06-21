@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "server.h"
 #include "macro.h"
+#include "gui/events.h"
 
 void accept_client(struct server *server)
 {
@@ -78,11 +79,12 @@ int handle_client(struct client_entry *client,
     return EXIT_SUCCESS;
 }
 
-void destroy_client(struct client_entry *client)
+void destroy_client(struct client_entry *client, struct server *server)
 {
     if (client->is_role_defined && !client->is_gui)
         client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
+        broadcast_to_guis(server, &notify_death, client->id);
         free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
@@ -99,7 +101,7 @@ void destroy_clients(struct server *server)
 
     for (struct client_entry *client = server->clients.slh_first; client;) {
         tmp = client->next.sle_next;
-        destroy_client(client);
+        destroy_client(client, server);
         client = tmp;
     }
 }

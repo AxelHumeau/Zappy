@@ -33,7 +33,9 @@ int handle_gui(struct client_entry *client, struct server *server, char *line)
         add_to_buffer(&client->buf_to_send, "suc\n", 4);
         return EXIT_SUCCESS;
     }
-    if (command_func(command, server, client) == EXIT_FAILURE)
+    if (command_func(command, server, client) == EXIT_FAILURE) {
+        printf("command[0] : %s\n", command[0]);
         add_to_buffer(&client->buf_to_send, "sbp\n", 4);
+    }
     return EXIT_SUCCESS;
 }
