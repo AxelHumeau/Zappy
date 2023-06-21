@@ -11,14 +11,13 @@ int broadcast_to_guis(struct server *server, event_func_t *function, ...)
 {
     va_list ap;
     va_list copy;
-    int result = 0;
     struct client_entry *client;
 
     va_start(ap, function);
     SLIST_FOREACH(client, &server->clients, next) {
         va_copy(copy, ap);
-        result = function(client, &copy);
-        if (client->is_gui && result) {
+        if (client->is_role_defined && client->is_gui
+            && function(client, &copy)) {
             va_end(ap);
             va_end(copy);
             return EXIT_FAILURE;
