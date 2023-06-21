@@ -12,11 +12,14 @@
     #define OK "ok\n"
     #define WELCOME "WELCOME\n"
     #define GRAPHIC "GRAPHIC"
+    #define ELEVATION "Elevation underway\n"
     #define DEAD "dead\n"
     #define NB_DIRECTIONS 4
     #define NB_COMMAND_PLAYER 12
     #define MAX_COMMAND_SIZE 10
+    #define NB_LEVEL 7
     #define ZONE_SIZE 8
+    #define INCANTATION "Incantation"
     #define ABS(x) (((x) < 0 ? (-x) : (x)))
     #include "server.h"
 
@@ -31,6 +34,13 @@ static const int MAX_PORT_NUMBER = 65535;
 static const int REFILL_TIME = 20;
 static const int FOOD_TIME = 126;
 static const long FOOD_PLAYER = 10;
+
+static const int TIMER_CLASSIC = 7;
+static const int TIMER_FAST = 1;
+static const int NO_TIMER = 0;
+static const int TIMER_FORK = 42;
+static const int TIMER_INCANTATION = 300;
+
 static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,

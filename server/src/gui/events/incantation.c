@@ -35,11 +35,9 @@ int notify_start_of_incantation(struct client_entry *client, va_list *args)
     int player_id = va_arg(*args, int);
     player_t *player = va_arg(*args, player_t *);
     int nb_additional_players = va_arg(*args, int);
-    int *additional_player_ids = malloc(sizeof(int[nb_additional_players]));
+    int *additional_player_ids = va_arg(*args, int *);
     char *result = NULL;
 
-    for (int i = 0; i < nb_additional_players; i++)
-        additional_player_ids[i] = va_arg(*args, int);
     result = construct_start_incantation_str(player, player_id,
         additional_player_ids, nb_additional_players);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
