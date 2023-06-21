@@ -43,20 +43,13 @@ static const int TIMER_FORK = 42;
 static const int TIMER_INCANTATION = 300;
 
 static const double DENSITY[NB_RESOURCES] = {
-    [FOOD] 3.0,
-    [LINEMATE] 3.0,
-    [DERAUMERE] 3.0,
-    [SIBUR] 3.0,
-    [MENDIANE] 3.0,
-    [PHIRAS] 3.0,
-    [THYSMANE] 3.0,
-    // [FOOD] = 0.5,
-    // [LINEMATE] = 0.3,
-    // [DERAUMERE] = 0.15,
-    // [SIBUR] = 0.1,
-    // [MENDIANE] = 0.1,
-    // [PHIRAS] = 0.08,
-    // [THYSMANE] = 0.05,
+    [FOOD] = 0.5,
+    [LINEMATE] = 0.3,
+    [DERAUMERE] = 0.15,
+    [SIBUR] = 0.1,
+    [MENDIANE] = 0.1,
+    [PHIRAS] = 0.08,
+    [THYSMANE] = 0.05,
 };
 static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [FOOD] = "food",
