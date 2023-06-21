@@ -60,3 +60,6 @@ vgcore*
 *.gcdo
 *.gcno
 .coverage
+
+#docker_mouli
+.bash_history
