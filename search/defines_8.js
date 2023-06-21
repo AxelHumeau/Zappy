@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zone_5fsize_1148',['ZONE_SIZE',['../macro_8h.html#a9038fefbff7f02c8a6e70fdae195cc83',1,'macro.h']]]
+  ['ok_1171',['OK',['../macro_8h.html#aba51915c87d64af47fb1cc59348961c9',1,'macro.h']]]
 ];
