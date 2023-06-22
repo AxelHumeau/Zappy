@@ -32,7 +32,7 @@ for file in ./tests/functional/bad_arguments/* ; do
 done
 
 printf "\e[1;32m---- %d/%d tests valided ----\e[0m\n" $nb_valid $total
-if [ failed -eq 1 ]
+if [ $failed -eq 1 ]
 then
     exit 1
 fi

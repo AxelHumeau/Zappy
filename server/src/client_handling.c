@@ -73,12 +73,10 @@ int handle_client(struct client_entry *client,
     return EXIT_SUCCESS;
 }
 
-void destroy_client(struct client_entry *client, struct server *server)
+void destroy_client(struct client_entry *client)
 {
-    if (client->is_role_defined && !client->is_gui)
-        client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
-        broadcast_to_guis(server, &notify_death, client->id);
+        client->player_info->team->nb_slots_left++;
         free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
@@ -95,7 +93,7 @@ void destroy_clients(struct server *server)
 
     for (struct client_entry *client = server->clients.slh_first; client;) {
         tmp = client->next.sle_next;
-        destroy_client(client, server);
+        destroy_client(client);
         client = tmp;
     }
 }
