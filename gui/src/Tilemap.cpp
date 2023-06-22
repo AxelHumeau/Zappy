@@ -28,7 +28,7 @@ namespace ZappyGui {
 
         for (int y = 0; y < _height; y++) {
             for (int x = 0; x < _width; x++) {
-                position = ZappyGui::Vector3(origin.x + _tileSize.x * x, origin.y, origin.z + _tileSize.z * y);
+                position = ZappyGui::Vector3(origin.x - _tileSize.x * x, origin.y, origin.z - _tileSize.z * y);
                 try {
                     _tilemap[y][x].getGameobject().setPosition(position.x, position.y, position.z);
                 } catch (const ZappyGui::TileNoGameobjectBoundError& e) {
@@ -42,9 +42,9 @@ namespace ZappyGui {
         ZappyGui::Vector3 position;
 
         ZappyGui::Tile &tile = _tilemap[y][x];
-        position.x = getPosition().x + tile.getPosition().data[0] * getTileSize().x;
+        position.x = getPosition().x - tile.getPosition().data[0] * getTileSize().x;
         position.y = getPosition().y + getTileSize().y / 2;
-        position.z = getPosition().z + tile.getPosition().data[1] * getTileSize().z;
+        position.z = getPosition().z - tile.getPosition().data[1] * getTileSize().z;
         return position;
     }
 

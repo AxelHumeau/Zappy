@@ -10,7 +10,6 @@
 namespace ZappyGui {
 
     Player::Player(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName, std::size_t id): GameObject(sceneManager, meshName), _id{id} {
-        setFacing(3);
         _inventory[ResourceType::Food] = 0;
         _inventory[ResourceType::Linemate] = 0;
         _inventory[ResourceType::Deraumere] = 0;
@@ -44,20 +43,24 @@ namespace ZappyGui {
     void Player::setFacing(size_t orientation) {
         switch (orientation) {
         case 1:
+            std::cout << "NORTH" << std::endl;
             _orientation = Orientation::North;
-            // setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
+            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
             break;
         case 2:
-            // setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
+            std::cout << "EAST" << std::endl;
             _orientation = Orientation::East;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(270),Vector3(0, 1, 0)));
             break;
         case 3:
-            // setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
+            std::cout << "SOUTH" << std::endl;
             _orientation = Orientation::South;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
             break;
         case 4:
-            // setOrientation(Ogre::Quaternion(Ogre::Degree(-90),Vector3(0, 1, 0)));
+            std::cout << "WEST" << std::endl;
             _orientation = Orientation::West;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
             break;
         }
     }

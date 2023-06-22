@@ -26,6 +26,9 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
         team.back().setPosition(finalPosition.x, finalPosition.y, finalPosition.z);
         team.back()._moveTarget = finalPosition;
         team.back().setFacing(values[3]);
+        team.back()._targetFacing = team.back().getOrientation().getYaw().valueDegrees();
+        std::cout << "Player starting " << team.back()._orientation << std::endl;
+        // team.back()._targetFacing = team.back().getOrientation().getYaw().valueDegrees();
         team.back().setLevel(values[4]);
     } catch (ZappyGui::TeamUndifinedError const &e) {
         return;

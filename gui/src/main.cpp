@@ -102,7 +102,7 @@ void server(Network::Client &client, bool &isClosed, SafeQueue<std::string> &rec
 
 int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
-    ZappyGui::Gui gui(receive, requests, 0.25f);
+    ZappyGui::Gui gui(receive, requests, 0.15f);
     gui.initialize();
     gui.run();
     return 0;

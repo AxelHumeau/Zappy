@@ -30,46 +30,76 @@ void ZappyGui::ppo(ZappyGui::Gui &gui, std::vector<std::string> args) {
         }
 
         Real newTargetAngle = player._targetFacing;
-        if (player.getFacing() == Orientation::North && values[3] == Orientation::West)
-            newTargetAngle -= 90;
-        if (player.getFacing() == Orientation::North && values[3] == Orientation::East)
-            newTargetAngle += 90;
 
-        if (player.getFacing() == Orientation::East && values[3] == Orientation::North)
-            newTargetAngle -= 90;
-        if (player.getFacing() == Orientation::East && values[3] == Orientation::South)
-            newTargetAngle += 90;
+        if (Orientation(player._orientation) == values[3])
+            return;
 
-        if (player.getFacing() == Orientation::South && values[3] == Orientation::East)
-            newTargetAngle -= 90;
-        if (player.getFacing() == Orientation::South && values[3] == Orientation::West)
-            newTargetAngle += 90;
+        // if (player._orientation == Orientation::North && values[3] == Orientation::East)
+        //     newTargetAngle = 270;
+        // if (player._orientation == Orientation::North && values[3] == Orientation::West)
+        //     newTargetAngle = 90;
 
-        if (player.getFacing() == Orientation::West && values[3] == Orientation::South)
-            newTargetAngle -= 90;
-        if (player.getFacing() == Orientation::West && values[3] == Orientation::North)
-            newTargetAngle += 90;
+        // if (player._orientation == Orientation::East && values[3] == Orientation::South)
+        //     newTargetAngle = 180;
+        // if (player._orientation == Orientation::East && values[3] == Orientation::North)
+        //     newTargetAngle = 0;
 
-        if (newTargetAngle == 360) {
+        // if (player._orientation == Orientation::South && values[3] == Orientation::West)
+        //     newTargetAngle = 90;
+        // if (player._orientation == Orientation::South && values[3] == Orientation::East)
+        //     newTargetAngle = 270;
+
+        // if (player._orientation == Orientation::West && values[3] == Orientation::North)
+        //     newTargetAngle = 0;
+        // if (player._orientation == Orientation::West && values[3] == Orientation::South)
+        //     newTargetAngle = 180;
+
+        if (player._orientation == Orientation::North && values[3] == Orientation::West)
+            newTargetAngle = 90;
+        if (player._orientation == Orientation::North && values[3] == Orientation::East)
+            newTargetAngle = -90;
+
+        if (player._orientation == Orientation::West && values[3] == Orientation::South)
+            newTargetAngle = 180;
+        if (player._orientation == Orientation::West && values[3] == Orientation::North)
             newTargetAngle = 0;
-            player.setOrientation(Ogre::Quaternion(Ogre::Degree(player.getOrientation().getYaw().valueDegrees() - 360), Vector3(0, 1, 0)));
-        }
 
+        if (player._orientation == Orientation::South && values[3] == Orientation::East)
+            newTargetAngle = -90;
+        if (player._orientation == Orientation::South && values[3] == Orientation::West)
+            newTargetAngle = 90;
 
-        // std::cout << player.getOrientation().getYaw().valueDegrees() << " => " << newTargetAngle << std::endl;
+        if (player._orientation == Orientation::East && values[3] == Orientation::North)
+            newTargetAngle = 0;
+        if (player._orientation == Orientation::East && values[3] == Orientation::South)
+            newTargetAngle = -180;
 
+        // if (values[3] == Orientation::North)
+        //     newTargetAngle = 0.0f;
+        // if (values[3] == Orientation::East)
+        //     newTargetAngle = 270.0f;
+        // if (values[3] == Orientation::South)
+        //     newTargetAngle = 180.0f;
+        // if (values[3] == Orientation::West)
+        //     newTargetAngle = 90.0f;
+
+        // if (newTargetAngle == -360 || newTargetAngle == 360) {
+        //     if (newTargetAngle == 360)
+        //         player.setOrientation(Ogre::Quaternion(Ogre::Degree(player.getOrientation().getYaw().valueDegrees() - 360), Vector3(0, 1, 0)));
+        //     if (newTargetAngle == -360)
+        //         player.setOrientation(Ogre::Quaternion(Ogre::Degree(player.getOrientation().getYaw().valueDegrees() + 360), Vector3(0, 1, 0)));
+        //     newTargetAngle = 0;
+        //     player._startingAngle = 0;
+        // }
+
+        std::cout << player.getOrientation().getYaw().valueDegrees() << " => " << newTargetAngle << std::endl;
         if (player._targetFacing != newTargetAngle) {
-            std::cout << "Targeted facing: " << player._targetFacing << std::endl;
             player._targetFacing = newTargetAngle;
-            // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
-            player.setFacing(values[3]);
-            // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
-            // player.setFacing(values[3]);
-            // player._targetFacing  = newTargetAngle;
-            // player._actionType = ActionType::ROTATE;
-            // player._timeForAction = 7.0f / static_cast<float>(gui.getTimeUnit()) * 0.95f;
-            // player._startingAngle = player.getOrientation().getYaw().valueDegrees();
-            // player._actionTimer = 0.0f;
+            player._orientation = Orientation(values[3]);
+            player._actionType = ActionType::ROTATE;
+            player._timeForAction = 7.0f / static_cast<float>(gui.getTimeUnit()) * 0.95f;
+            player._startingAngle = player.getOrientation().getYaw().valueDegrees();
+            player._actionTimer = 0.0f;
         }
     } catch (ZappyGui::PlayerUndifinedError const &e) {
         return;

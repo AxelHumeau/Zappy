@@ -50,11 +50,11 @@ namespace ZappyGui {
             Real _timeForAction;
             Real _actionTimer;
             ActionType _actionType;
+            Orientation _orientation;
         private:
             std::size_t _id;
             Vector2i _mapPosition;
             size_t _level;
-            Orientation _orientation;
             std::unordered_map<ResourceType, std::size_t> _inventory;
     };
 }

@@ -46,7 +46,7 @@ void ZappyGui::Gui::initialize() {
     cam->setNearClipDistance(0.05);
     cam->setAutoAspectRatio(true);
     cam->setPosition(0, 0, 0);
-    cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+    cam->lookAt(Ogre::Vector3(0, 0, 1), Ogre::Node::TS_PARENT);
     _renderer->registerCamera(cam);
 
     _lights.emplace_back(_renderer->getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
@@ -69,7 +69,7 @@ void ZappyGui::Gui::initialize() {
         return;
     float tileSize = 2.0f;
     std::shared_ptr<ZappyGui::Tilemap> tilemap = std::make_shared<ZappyGui::Tilemap>(_renderer->getSceneManager(), _mapWidth, _mapHeight);
-    tilemap->setPosition(-(_mapHeight * tileSize) / 2.0f, -(tileSize) * 2.0f, -(_mapHeight * tileSize));
+    tilemap->setPosition((_mapWidth * tileSize) / 2, -(tileSize * 2) * 2, _mapWidth * tileSize + (_mapWidth * tileSize) / 4);
     ZappyGui::Vector2i size = tilemap->getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
@@ -102,10 +102,10 @@ void ZappyGui::Gui::run() {
             for (ZappyGui::Player &player : iterator->second) {
                 // std::cout << player._actionType << std::endl;
                 // Move
+                player._actionTimer += deltaTime / player._timeForAction;
                 if (player._actionType == ActionType::MOVE) {
                     if (player.getPosition() == player._moveTarget)
                         continue;
-                    player._actionTimer += deltaTime / player._timeForAction;
                     Vector3 newPos = player.getPosition();
                     newPos = lerp(player._startingPoint, player._moveTarget, player._actionTimer);
                     player.setPosition(newPos.x, newPos.y, newPos.z);
@@ -116,7 +116,9 @@ void ZappyGui::Gui::run() {
                     }
                 }
 
-                player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
+                // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
+
+
                 // Real ori = player.getOrientation().getYaw().valueDegrees();
                 // std::cout << ori << std::endl;
                 // if ((ori >= 359 && ori <= 361) || (ori <= -359 && ori >= -361)) {
@@ -125,18 +127,19 @@ void ZappyGui::Gui::run() {
                 //     player.setOrientation(Ogre::Quaternion(Ogre::Degree(0), Vector3(0, 1, 0)));
                 // }
 
-                // if (player.getOrientation().getYaw().valueDegrees() == player._targetFacing)
-                //     continue;
-                // player._actionTimer += deltaTime / player._timeForAction;
-                // Real newAngle = player.getOrientation().getYaw().valueDegrees();
-                // newAngle = lerpReal(player._startingAngle, player._targetFacing, player._actionTimer);
-                // player.setOrientation(Ogre::Quaternion(Ogre::Degree(newAngle), Vector3(0, 1, 0)));
-                // // std::cout << player.getOrientation().getYaw().valueDegrees() << std::endl;
-                // if (player.getOrientation().getYaw().valueDegrees() - player._startingAngle >= player._targetFacing - player._startingAngle || player._actionTimer >= 1.0f) {
-                //     player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
-                //     player._actionTimer = 0.0f;
-                //     player._actionType = ActionType::IDLE;
-                // }
+                // std::cout << player.getOrientation().getYaw().valueDegrees() << std::endl;
+                // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player.getOrientation().getYaw().valueDegrees() - 0.1f), Vector3(0, 1, 0)));
+                if (player._actionType == ActionType::ROTATE) {
+                    if (player.getOrientation().getYaw().valueDegrees() == player._targetFacing)
+                        continue;
+                    Real newAngle = lerpReal(player._startingAngle, player._targetFacing, player._actionTimer);
+                    player.setOrientation(Ogre::Quaternion(Ogre::Degree(newAngle), Vector3(0, 1, 0)));
+                    if (player._actionTimer >= 1.0f) {
+                        player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
+                        player._actionTimer = 0.0f;
+                        player._actionType = ActionType::IDLE;
+                    }
+                }
             }
         }
 
