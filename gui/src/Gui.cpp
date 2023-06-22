@@ -6,6 +6,7 @@
 */
 
 #include "Gui.hpp"
+#include "Particles/Particle.hpp"
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
@@ -83,7 +84,9 @@ void ZappyGui::Gui::initialize() {
 void ZappyGui::Gui::run() {
     float deltaTime = _renderer->getDeltaTime();
     std::string command;
+    Particle particle(_renderer->getSceneManager(), "OneDirection");
 
+    particle.setPosition(0.0f, 5.0f, 0.0f);
     while (!_renderer->isDone())
     {
         _renderer->updateDeltaTime();

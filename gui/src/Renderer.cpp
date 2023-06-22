@@ -51,6 +51,9 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
     }
     _sceneManager->setSkyBox(true, "MaterialHamsterSky");
 
+    // auto &partSystemManager = Ogre::ParticleSystemManager::getSingleton();
+    // partSystemManager.createTemplate("PurpleFontaine", "PurpleFontaine");
+
     _lastTime = std::chrono::steady_clock::now();
     _deltaTime = 0.0;
 }

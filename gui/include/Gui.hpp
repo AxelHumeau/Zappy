@@ -18,8 +18,6 @@
     #include "Client.hpp"
 
 namespace ZappyGui {
-
-
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);
