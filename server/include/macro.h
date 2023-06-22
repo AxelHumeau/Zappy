@@ -88,7 +88,8 @@ static const int POS_LOOK[NB_DIRECTIONS] = {
     [LEFT] = 1
 };
 
-/// @brief MACRO DIRECTION_ZONE associated to DIRECTION to a DIRECTION_INDEX to the UP
+/// @brief MACRO DIRECTION_ZONE associated to DIRECTION to a
+///        DIRECTION_INDEX to the UP
 static const int DIRECTION_ZONE[NB_DIRECTIONS] = {
     [UP] = 1,
     [RIGHT] = 3,
@@ -96,7 +97,8 @@ static const int DIRECTION_ZONE[NB_DIRECTIONS] = {
     [LEFT] = 7,
 };
 
-/// @brief MACRO ZONE_INDEX associated to position for the zone around the player
+/// @brief MACRO ZONE_INDEX associated to position for the zone
+///        around the player
 static const struct position ZONE_INDEX[ZONE_SIZE] = {
     {0, -1},
     {-1, -1},
