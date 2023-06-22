@@ -28,7 +28,7 @@ int notify_resource_collecting(struct client_entry *client, va_list *args)
     int resource_nb = va_arg(*args, int);
     char *result = NULL;
 
-    asprintf(&result, "pgr %d %d\n", player_id, resource_nb);
+    asprintf(&result, "pgt %d %d\n", player_id, resource_nb);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
     return EXIT_SUCCESS;

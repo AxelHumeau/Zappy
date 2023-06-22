@@ -17,7 +17,7 @@ def loop_client(dict_args):
     s = connexion_server(dict_args["port"], dict_args["machine"])
     communication = Communication(s)
     connexion_team(s, dict_args)
-    bot = AI(communication)
+    bot = AI(communication, dict_args["name"])
     bot.run()
 
 

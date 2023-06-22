@@ -15,6 +15,9 @@ class Queue:
     def __repr__(self):
         return str(self.queue)
 
+    def clear(self):
+        self.queue.clear()
+
     def push(self, elem):
         """ push element
 

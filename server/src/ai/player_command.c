@@ -28,38 +28,15 @@ static void clean_player_command(struct client_entry *client)
     memmove(&client->command[0], &client->command[1], size);
 }
 
-static void check_incantation(struct client_entry *client,
-    struct server *server, char *line)
-{
-    struct client_entry **list_players = NULL;
-    int *list_ids = NULL;
-    int size = 0;
-
-    if (!strncmp(line, INCANTATION, strlen(INCANTATION)) && !client->ritual) {
-        list_players = condition_ritual(client, server);
-        if ((line + strlen(INCANTATION))[0] == '\0' && list_players != NULL) {
-            size = list_ids_size(list_players);
-            printf("SIZE %d\n", size);
-            list_ids = get_list_ids(list_players, size);
-            broadcast_to_guis(server, &notify_start_of_incantation,
-                client->id, &client->player_info, size, list_ids);
-            send_ritual_message(client, list_players, true);
-        } else
-            add_to_buffer(&client->buf_to_send, KO, strlen(KO));
-        client->ritual = true;
-    }
-    free(list_players);
-}
-
 static void time_command(struct client_entry *client,
     struct server *server, char *line, command_t command)
 {
     check_incantation(client, server, line);
+    check_fork(client, server, line);
     if (client->timer == -1)
         client->timer = command.cooldown;
     else if (client->timer <= 0) {
         (command.function) (line + strlen(command.command), client, server);
-        display_player(server);
         clean_player_command(client);
         client->timer = -1;
     }

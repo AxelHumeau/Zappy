@@ -11,10 +11,10 @@
 void debug_map_broadcast(struct client_entry *client,
     struct client_entry *player, struct position zone[])
 {
-    struct position sender = {client->player_info.x, client->player_info.y};
-    struct position target = {player->player_info.x, player->player_info.y};
+    struct position sender = {client->player_info->x, client->player_info->y};
+    struct position target = {player->player_info->x, player->player_info->y};
     int list[10][10] = {{0}};
-    int count = DIRECTION_ZONE[player->player_info.direction];
+    int count = DIRECTION_ZONE[player->player_info->direction];
 
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++)

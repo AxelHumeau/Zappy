@@ -15,8 +15,8 @@ void send_new_player_str(struct client_entry *client, int player_id,
 {
     char *result = NULL;
 
-    asprintf(&result, "pnw %d %d %d %d %d\n", player_id, player->x, player->y,
-        player->direction, player->level);
+    asprintf(&result, "pnw %d %d %d %d %d %s\n", player_id, player->x,
+        player->y, player->direction, player->level, player->team->name);
     add_to_buffer(&client->buf_to_send, result, strlen(result));
     free(result);
 }

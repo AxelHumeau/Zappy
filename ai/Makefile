@@ -22,7 +22,9 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 tests_run: func_tests
 

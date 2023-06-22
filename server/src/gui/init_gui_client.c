@@ -20,7 +20,8 @@ int init_gui_client(struct server *server, struct client_entry *client)
     SLIST_FOREACH(entry, &server->clients, next) {
         if (entry->is_gui)
             continue;
-        send_new_player_str(client, entry->id, &entry->player_info);
+        if (entry->is_role_defined)
+            send_new_player_str(client, entry->id, entry->player_info);
     }
     return EXIT_SUCCESS;
 }

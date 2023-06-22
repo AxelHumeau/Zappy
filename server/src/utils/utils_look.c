@@ -14,7 +14,7 @@ char *add_tiles_elem_string(struct server *server, struct client_entry *client,
 
     SLIST_FOREACH(player, &server->clients, next) {
         if (is_player(player, client) &&
-            player->player_info.y == pos.y && player->player_info.x == pos.x)
+            player->player_info->y == pos.y && player->player_info->x == pos.x)
             look_info = concat_info_string(look_info, "player", true);
     }
     for (int i = 0; i < NB_RESOURCES; i++) {
