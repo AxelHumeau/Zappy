@@ -70,5 +70,7 @@ int get_server_params(char **params, int nb_params, struct server *server)
     for (i = 0; i < server->nb_teams; i++)
         server->teams[i].nb_slots_left = server->max_players_per_team;
     init_timer(server);
+    LIST_INIT(&server->list_eggs);
+    server->id_egg = 0;
     return EXIT_SUCCESS;
 }

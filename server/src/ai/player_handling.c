@@ -16,10 +16,8 @@ static void set_info_player(struct client_entry *entry, struct server *server,
 {
     player_t *info = malloc(sizeof(player_t));
 
-    info->x = rand() % server->width;
-    info->y = rand() % server->height;
-    memset(info->inventory, 0,
-        sizeof(info->inventory));
+    set_position_player(server, info);
+    memset(info->inventory, 0, sizeof(info->inventory));
     info->inventory[FOOD] = 10;
     info->level = 1;
     info->time_units_left = 10;

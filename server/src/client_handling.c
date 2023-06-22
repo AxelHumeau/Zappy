@@ -17,22 +17,16 @@
 
 void accept_client(struct server *server)
 {
-    int fd = 0;
     struct client_entry *entry = NULL;
     static int count = 0;
+    int fd = accept(server->listening_fd, NULL, NULL);
 
-    fd = accept(server->listening_fd, NULL, NULL);
     if (fd < 0)
         return;
     entry = malloc(sizeof(struct client_entry));
     entry->fd = fd;
     entry->id = count++;
-    entry->is_gui = false;
-    entry->is_role_defined = false;
-    entry->timer = -1;
-    entry->food_time = 0;
-    entry->is_dead = false;
-    entry->ritual = false;
+    init_entry(entry);
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
@@ -79,12 +73,10 @@ int handle_client(struct client_entry *client,
     return EXIT_SUCCESS;
 }
 
-void destroy_client(struct client_entry *client, struct server *server)
+void destroy_client(struct client_entry *client)
 {
-    if (client->is_role_defined && !client->is_gui)
-        client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
-        broadcast_to_guis(server, &notify_death, client->id);
+        client->player_info->team->nb_slots_left++;
         free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
@@ -101,7 +93,7 @@ void destroy_clients(struct server *server)
 
     for (struct client_entry *client = server->clients.slh_first; client;) {
         tmp = client->next.sle_next;
-        destroy_client(client, server);
+        destroy_client(client);
         client = tmp;
     }
 }
