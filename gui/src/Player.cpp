@@ -37,30 +37,42 @@ namespace ZappyGui {
         _mapPosition.data[0] = x;
         _mapPosition.data[1] = y;
         ZappyGui::Tile &tile = (*tilemap)[_mapPosition.data[1]][_mapPosition.data[0]];
-        // tilemap->placeGameObjectOnTile(tile, *this);
+    }
+
+    void Player::setFacingAndPosition(size_t orientation) {
+        switch (orientation) {
+        case 1:
+            _facing = Orientation::North;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
+            break;
+        case 2:
+            _facing = Orientation::East;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(270),Vector3(0, 1, 0)));
+            break;
+        case 3:
+            _facing = Orientation::South;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
+            break;
+        case 4:
+            _facing = Orientation::West;
+            setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
+            break;
+        }
     }
 
     void Player::setFacing(size_t orientation) {
         switch (orientation) {
         case 1:
-            std::cout << "NORTH" << std::endl;
-            _orientation = Orientation::North;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
+            _facing = Orientation::North;
             break;
         case 2:
-            std::cout << "EAST" << std::endl;
-            _orientation = Orientation::East;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(270),Vector3(0, 1, 0)));
+            _facing = Orientation::East;
             break;
         case 3:
-            std::cout << "SOUTH" << std::endl;
-            _orientation = Orientation::South;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
+            _facing = Orientation::South;
             break;
         case 4:
-            std::cout << "WEST" << std::endl;
-            _orientation = Orientation::West;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
+            _facing = Orientation::West;
             break;
         }
     }

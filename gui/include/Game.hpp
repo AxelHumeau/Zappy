@@ -56,9 +56,13 @@ namespace ZappyGui {
             Player &getPlayer(size_t playerId);
             void removePlayer(size_t playerId);
             void update(SafeQueue<std::string> &requests, float deltaTime);
+            void updatePlayers(float deltaTime);
 
             std::map<std::string, std::list<ZappyGui::Player>> _teams;
         private:
+
+            void _updatePlayerPosition(Player &player );
+            void _updatePlayerRotation(Player &player );
     };
 }
 

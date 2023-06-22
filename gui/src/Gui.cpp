@@ -97,51 +97,7 @@ void ZappyGui::Gui::run() {
         } else
             _waitedServerUpdateDelay += deltaTime;
 
-        std::map<std::string, std::vector<ZappyGui::Player>>::iterator team;
-        for (auto iterator = _game._teams.begin(); iterator != _game._teams.end(); iterator++) {
-            for (ZappyGui::Player &player : iterator->second) {
-                // std::cout << player._actionType << std::endl;
-                // Move
-                player._actionTimer += deltaTime / player._timeForAction;
-                if (player._actionType == ActionType::MOVE) {
-                    if (player.getPosition() == player._moveTarget)
-                        continue;
-                    Vector3 newPos = player.getPosition();
-                    newPos = lerp(player._startingPoint, player._moveTarget, player._actionTimer);
-                    player.setPosition(newPos.x, newPos.y, newPos.z);
-                    if (player.getPosition().distance(player._startingPoint) >= player._startingPoint.distance(player._moveTarget) || player._actionTimer >= 1.0f) {
-                        player.setPosition(player._moveTarget.x, player._moveTarget.y, player._moveTarget.z);
-                        player._actionTimer = 0.0f;
-                        player._actionType = ActionType::IDLE;
-                    }
-                }
-
-                // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
-
-
-                // Real ori = player.getOrientation().getYaw().valueDegrees();
-                // std::cout << ori << std::endl;
-                // if ((ori >= 359 && ori <= 361) || (ori <= -359 && ori >= -361)) {
-                //     std::cout << "Reset" << std::endl;
-                //     player._targetFacing = static_cast<int>(player._targetFacing) % 360;
-                //     player.setOrientation(Ogre::Quaternion(Ogre::Degree(0), Vector3(0, 1, 0)));
-                // }
-
-                // std::cout << player.getOrientation().getYaw().valueDegrees() << std::endl;
-                // player.setOrientation(Ogre::Quaternion(Ogre::Degree(player.getOrientation().getYaw().valueDegrees() - 0.1f), Vector3(0, 1, 0)));
-                if (player._actionType == ActionType::ROTATE) {
-                    if (player.getOrientation().getYaw().valueDegrees() == player._targetFacing)
-                        continue;
-                    Real newAngle = lerpReal(player._startingAngle, player._targetFacing, player._actionTimer);
-                    player.setOrientation(Ogre::Quaternion(Ogre::Degree(newAngle), Vector3(0, 1, 0)));
-                    if (player._actionTimer >= 1.0f) {
-                        player.setOrientation(Ogre::Quaternion(Ogre::Degree(player._targetFacing), Vector3(0, 1, 0)));
-                        player._actionTimer = 0.0f;
-                        player._actionType = ActionType::IDLE;
-                    }
-                }
-            }
-        }
+        _game.updatePlayers(deltaTime);
 
         while (_receive.tryPop(command))
             processCommand(command);

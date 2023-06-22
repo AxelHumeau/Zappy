@@ -63,6 +63,9 @@ namespace ZappyGui {
             std::vector<std::size_t> _ImplconvertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex, std::size_t endIndex);
     };
 
+    void updatePlayerPosition(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
+    void updatePlayerRotation(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
+
     void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
     void msz(ZappyGui::Gui &gui, std::vector<std::string> args);
     void bct(ZappyGui::Gui &gui, std::vector<std::string> args);

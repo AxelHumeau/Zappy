@@ -36,25 +36,24 @@ namespace ZappyGui {
 
             void setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y);
             void setLevel(size_t level) { _level = level; }
+            void setFacingAndPosition(size_t orientation);
             void setFacing(size_t orientation);
             std::size_t getInventoryAmount(const ResourceType &resourceType);
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
-            Orientation getFacing() const { return _orientation; }
+            Orientation getFacing() const { return _facing; }
 
-            Vector3 _startingPoint;
-            Real _startingAngle;
-
-            Vector3 _moveTarget;
-            Real _targetFacing;
-
-            Real _timeForAction;
-            Real _actionTimer;
-            ActionType _actionType;
-            Orientation _orientation;
+            Vector3 startMovePosition;
+            Vector3 targetMovePosition;
+            Real startRotateAngle;
+            Real targetRotateAngle;
+            Real actionTimeDuration;
+            Real actionElapsedTime;
+            ActionType actionType;
         private:
             std::size_t _id;
             Vector2i _mapPosition;
             size_t _level;
+            Orientation _facing;
             std::unordered_map<ResourceType, std::size_t> _inventory;
     };
 }
