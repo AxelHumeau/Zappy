@@ -35,7 +35,8 @@ namespace ZappyGui {
     }
 
     void Player::setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y) {
-        _mapPosition.data[0] = x; _mapPosition.data[1] = y;
+        _mapPosition.data[0] = x;
+        _mapPosition.data[1] = y;
         ZappyGui::Tile &tile = (*tilemap)[_mapPosition.data[1]][_mapPosition.data[0]];
         // tilemap->placeGameObjectOnTile(tile, *this);
     }

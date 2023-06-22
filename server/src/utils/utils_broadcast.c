@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "macro.h"
 
-void debug_map_broadcast(struct server *, struct client_entry *client,
+void debug_map_broadcast(struct client_entry *client,
     struct client_entry *player, struct position zone[])
 {
     struct position sender = {client->player_info.x, client->player_info.y};

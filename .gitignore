@@ -55,3 +55,8 @@ coding-style-reports.log
 # Valgrind
 vgcore*
 
+# Coverage files
+*.gcda
+*.gcdo
+*.gcno
+.coverage

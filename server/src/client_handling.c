@@ -31,6 +31,7 @@ void accept_client(struct server *server)
     entry->timer = -1;
     entry->food_time = 0;
     entry->is_dead = false;
+    entry->ritual = false;
     init_buffer(&entry->buf_to_send);
     init_buffer(&entry->buf_to_recv);
     add_to_buffer(&entry->buf_to_send, WELCOME, strlen(WELCOME));
@@ -43,8 +44,9 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
-        printf("%s\n", DIRECTION_STR[client->player_info.direction]);
-        printf("%d - %d\n", client->player_info.x, client->player_info.y);
+        // printf("id : %d\n", client->id);
+        // printf("%s\n", DIRECTION_STR[client->player_info.direction]);
+        // printf("%d - %d\n", client->player_info.x, client->player_info.y);
         if (client->is_gui)
             handle_gui(client, server, line);
         else

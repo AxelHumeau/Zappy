@@ -13,7 +13,7 @@ int send_team_names(char **, struct server *server, struct client_entry *client)
 {
     char *result = NULL;
 
-    for (size_t i = 0; i < server->nb_teams; i++) {
+    for (int i = 0; i < server->nb_teams; i++) {
         asprintf(&result, "tna %s\n", server->teams[i].name);
         add_to_buffer(&client->buf_to_send, result, strlen(result));
         free(result);

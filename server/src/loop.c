@@ -66,10 +66,15 @@ static void loop_through_clients(struct server *server, fd_set *readfds,
 static void timer_command(struct server *server)
 {
     long nb = 0;
+    struct client_entry *player = NULL;
 
     read(server->timerfd, &nb, sizeof(long));
     server->timestamp++;
     server->resources_time++;
+    SLIST_FOREACH(player, &server->clients, next) {
+        if (player->timer != -1)
+            player->timer--;
+    }
     if (server->resources_time % REFILL_TIME == 0) {
         server->multiplier_resource = server->nb_players / PORTION_REFILL + 1;
         refill_resources(server);

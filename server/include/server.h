@@ -29,6 +29,7 @@ struct client_entry {
     player_t player_info;
     int timer;
     long food_time;
+    bool ritual;
     SLIST_ENTRY(client_entry) next;
 };
 
@@ -43,10 +44,10 @@ struct server {
     int port;
     int freq;
     struct team *teams;
-    size_t nb_teams;
+    int nb_teams;
     struct tile **maps;
-    size_t ref_resource[NB_RESOURCES];
-    size_t map_resource[NB_RESOURCES];
+    int ref_resource[NB_RESOURCES];
+    int map_resource[NB_RESOURCES];
     size_t multiplier_resource;
     int max_players_per_team;
     int nb_players;
@@ -84,8 +85,25 @@ int find_power_of_base(int nb, int base);
 int is_object(char *object);
 
 // Utils_broadcast.c
-void debug_map_broadcast(struct server *server, struct client_entry *client,
+void debug_map_broadcast(struct client_entry *client,
     struct client_entry *player, struct position zone[]);
+
+// Utils_look.c
+char *add_tiles_elem_string(struct server *server, struct client_entry *client,
+    struct position pos, char *look_info);
+
+// Utils_player.c
+bool is_player(struct client_entry *player, struct client_entry *client);
+void display_player(struct server *server);
+bool same_pos(struct client_entry *player, struct client_entry *client);
+int list_ids_size(struct client_entry **list_players);
+int *get_list_ids(struct client_entry **list_players, int size);
+
+// Utils_incantation.c
+struct client_entry **condition_ritual(struct client_entry *client,
+    struct server *server);
+void send_ritual_message(struct client_entry *client,
+    struct client_entry **list, bool is_elevate);
 
 // Str_to_array.c
 char **str_to_array(char *str, char *separator);

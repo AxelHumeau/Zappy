@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     srand(time(NULL));
     if (argc == 2 && !strcmp(argv[1], "-h"))
         return display_help();
-    if (argc < 13 || get_server_params(argv, argc, &server) != EXIT_SUCCESS)
+    if (argc < 11 || get_server_params(argv, argc, &server) != EXIT_SUCCESS)
         return EXIT_ERROR;
     if (setup_server(&server) != EXIT_SUCCESS)
         return EXIT_ERROR;

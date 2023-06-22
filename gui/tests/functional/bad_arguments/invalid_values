@@ -1,0 +1,4 @@
+-p 1000 -n name1 -h bouffax
+-p 0 -n name1 -h 127.0.0.1
+-p -9 -n name1 -h 127.0.0.1
+-p 52525 -n name1 -h 127.0.0.1

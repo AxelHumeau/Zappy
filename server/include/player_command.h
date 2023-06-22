@@ -30,18 +30,18 @@ void set(char *, struct client_entry *, struct server *);
 void incantation(char *, struct client_entry *, struct server *);
 
 static command_t player_command_list[NB_COMMAND_PLAYER] = {
-    {"Forward", forward, 7},
-    {"Right", right, 7},
-    {"Left", left, 7},
-    {"Look", look, 7},
-    {"Inventory", inventory, 1},
-    {"Broadcast", broadcast, 7},
-    {"Connect_nbr", connect_nbr, 0},
-    {"Fork", fork_cmd, 42},
-    {"Eject", eject, 7},
-    {"Take", take, 7},
-    {"Set", set, 7},
-    {"Incantation", incantation, 300},
+    {"Forward", forward, TIMER_CLASSIC},
+    {"Right", right, TIMER_CLASSIC},
+    {"Left", left, TIMER_CLASSIC},
+    {"Look", look, TIMER_CLASSIC},
+    {"Inventory", inventory, TIMER_FAST},
+    {"Broadcast", broadcast, TIMER_CLASSIC},
+    {"Connect_nbr", connect_nbr, NO_TIMER},
+    {"Fork", fork_cmd, TIMER_FORK},
+    {"Eject", eject, TIMER_CLASSIC},
+    {"Take", take, TIMER_CLASSIC},
+    {"Set", set, TIMER_CLASSIC},
+    {"Incantation", incantation, TIMER_INCANTATION},
 };
 
 #endif /* !PLAYER_COMMAND_H_ */
