@@ -71,15 +71,17 @@ struct team {
     struct clients players;
 };
 
+// Destroy_server.c
 int setup_server(struct server *server);
 void destroy_server(struct server *server);
+void destroy_player(struct client_entry *client, struct server *server);
 
 int loop(struct server *server);
 
 void accept_client(struct server *server);
 int handle_client(struct client_entry *client,
     struct server *server, fd_set *read_fds);
-void destroy_client(struct client_entry *client, struct server *server);
+void destroy_client(struct client_entry *client);
 void destroy_clients(struct server *server);
 
 // Utils.c
@@ -105,6 +107,9 @@ void display_player(struct server *server);
 bool same_pos(struct client_entry *player, struct client_entry *client);
 void init_entry(struct client_entry *entry);
 void set_position_player(struct server *server, player_t *info);
+
+// Utils_end_game.c
+bool end_game(struct server *server);
 
 // Utils_list.c
 int list_ids_size(struct client_entry **list_players);

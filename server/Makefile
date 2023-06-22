@@ -19,6 +19,7 @@ SRC =			main.c							\
 				utils/utils_broadcast.c			\
 				utils/utils_look.c				\
 				utils/utils_player.c			\
+				utils/utils_end_game.c			\
 				utils/utils_incantation.c		\
 				utils/utils_list.c				\
 				utils/str_to_array.c			\
@@ -86,9 +87,14 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 debug: CPPFLAGS += -ggdb
+# debug: CC = clang
+# debug: CFLAGS = -fsanitize=address
+# debug: LDFLAGS = -fsanitize=address
 debug: fclean $(NAME)
 
 tests_run: func_tests

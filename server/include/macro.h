@@ -27,6 +27,8 @@
 enum resource;
 struct position;
 
+static const int MAX_LEVEL = 2;
+static const int NB_PLAYER_LEVEL_MAX = 6;
 static const int EXIT_FAIL = -1;
 static const int PORTION_REFILL = 5;
 static const int EXIT_ERROR = 84;
