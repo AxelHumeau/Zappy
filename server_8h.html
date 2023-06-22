@@ -103,14 +103,16 @@ Functions</h2></td></tr>
 <tr class="separator:a3249d697ef87d91aea94e35b0c35cedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35f350dac1c6e01375df1ec66b450a09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a35f350dac1c6e01375df1ec66b450a09">destroy_server</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:a35f350dac1c6e01375df1ec66b450a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f6a993b6cee9e3bfe0ad205837b9201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a7f6a993b6cee9e3bfe0ad205837b9201">destroy_player</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="separator:a7f6a993b6cee9e3bfe0ad205837b9201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefe08a38f0a08a0e27b60a9d2b86c4a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aefe08a38f0a08a0e27b60a9d2b86c4a0">loop</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:aefe08a38f0a08a0e27b60a9d2b86c4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa444da033cf02035c57afe6d50a21c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aa444da033cf02035c57afe6d50a21c21">accept_client</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:aa444da033cf02035c57afe6d50a21c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafc09403c29989f1628cff71e2ef2677"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aafc09403c29989f1628cff71e2ef2677">handle_client</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, fd_set *read_fds)</td></tr>
 <tr class="separator:aafc09403c29989f1628cff71e2ef2677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a275da6193e4d37203550466bae99a975"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a275da6193e4d37203550466bae99a975">destroy_client</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
-<tr class="separator:a275da6193e4d37203550466bae99a975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ad0ec90fffa948adbc11ebadedf641"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ae1ad0ec90fffa948adbc11ebadedf641">destroy_client</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
+<tr class="separator:ae1ad0ec90fffa948adbc11ebadedf641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a401094a20ff409b433aadee692409fd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a401094a20ff409b433aadee692409fd3">destroy_clients</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:a401094a20ff409b433aadee692409fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef8e877dcb55b17489eedb0cae8a1c3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aef8e877dcb55b17489eedb0cae8a1c3e">display_help</a> (void)</td></tr>
@@ -137,6 +139,8 @@ Functions</h2></td></tr>
 <tr class="separator:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93725c7eecce6429da8d495719d5bdaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a93725c7eecce6429da8d495719d5bdaa">set_position_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, <a class="el" href="game_8h.html#a9df65ef34efcf40007091fa0e679ea0c">player_t</a> *info)</td></tr>
 <tr class="separator:a93725c7eecce6429da8d495719d5bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fb9147d9c78d0ae05b63643e4411d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ac1fb9147d9c78d0ae05b63643e4411d7">end_game</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="separator:ac1fb9147d9c78d0ae05b63643e4411d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a573e27cdcb07f2387b98ff15f787dbb9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a573e27cdcb07f2387b98ff15f787dbb9">list_ids_size</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> **list_players)</td></tr>
 <tr class="separator:a573e27cdcb07f2387b98ff15f787dbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc4278c875d996d9c7d774b0df5ab993"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#acc4278c875d996d9c7d774b0df5ab993">get_list_ids</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> **list_players, int size)</td></tr>
@@ -397,8 +401,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a275da6193e4d37203550466bae99a975"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a275da6193e4d37203550466bae99a975">&#9670;&nbsp;</a></span>destroy_client()</h2>
+<a id="ae1ad0ec90fffa948adbc11ebadedf641"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ad0ec90fffa948adbc11ebadedf641">&#9670;&nbsp;</a></span>destroy_client()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -407,18 +411,8 @@ Functions</h2></td></tr>
           <td class="memname">void destroy_client </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -437,6 +431,34 @@ Functions</h2></td></tr>
           <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
           <td class="paramname"><em>server</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f6a993b6cee9e3bfe0ad205837b9201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f6a993b6cee9e3bfe0ad205837b9201">&#9670;&nbsp;</a></span>destroy_player()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void destroy_player </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -505,6 +527,24 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void display_player </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1fb9147d9c78d0ae05b63643e4411d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1fb9147d9c78d0ae05b63643e4411d7">&#9670;&nbsp;</a></span>end_game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool end_game </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
           <td class="paramname"><em>server</em></td><td>)</td>

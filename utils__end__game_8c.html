@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Zappy: server/src/destroy_server.c File Reference</title>
+<title>Zappy: server/src/utils/utils_end_game.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,64 +61,33 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li><li class="navelem"><a class="el" href="dir_08dc77f694786b07780ebbca062c7ec3.html">utils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">destroy_server.c File Reference</div>  </div>
+<div class="title">utils_end_game.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="server_8h_source.html">server.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="macro_8h_source.html">macro.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="events_8h_source.html">gui/events.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7f6a993b6cee9e3bfe0ad205837b9201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="destroy__server_8c.html#a7f6a993b6cee9e3bfe0ad205837b9201">destroy_player</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
-<tr class="separator:a7f6a993b6cee9e3bfe0ad205837b9201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35f350dac1c6e01375df1ec66b450a09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="destroy__server_8c.html#a35f350dac1c6e01375df1ec66b450a09">destroy_server</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
-<tr class="separator:a35f350dac1c6e01375df1ec66b450a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fb9147d9c78d0ae05b63643e4411d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__end__game_8c.html#ac1fb9147d9c78d0ae05b63643e4411d7">end_game</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="separator:ac1fb9147d9c78d0ae05b63643e4411d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7f6a993b6cee9e3bfe0ad205837b9201"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f6a993b6cee9e3bfe0ad205837b9201">&#9670;&nbsp;</a></span>destroy_player()</h2>
+<a id="ac1fb9147d9c78d0ae05b63643e4411d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1fb9147d9c78d0ae05b63643e4411d7">&#9670;&nbsp;</a></span>end_game()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_player </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a35f350dac1c6e01375df1ec66b450a09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f350dac1c6e01375df1ec66b450a09">&#9670;&nbsp;</a></span>destroy_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void destroy_server </td>
+          <td class="memname">bool end_game </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structserver.html">server</a> *&#160;</td>
           <td class="paramname"><em>server</em></td><td>)</td>
