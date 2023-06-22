@@ -92,9 +92,6 @@ re:
 	$(MAKE) all
 
 debug: CPPFLAGS += -ggdb
-# debug: CC = clang
-# debug: CFLAGS = -fsanitize=address
-# debug: LDFLAGS = -fsanitize=address
 debug: fclean $(NAME)
 
 tests_run: func_tests
