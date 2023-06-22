@@ -5,6 +5,7 @@
 ** Gui
 */
 
+#include <OGRE/OgreRay.h>
 #include "Gui.hpp"
 #include <sstream>
 #include <iostream>
@@ -39,10 +40,15 @@ _receive{receive}, _requests{requests}, _minDelayServerUpdates{minDelayServerUpd
     _commands.emplace("suc", suc);
     _commands.emplace("sbp", sbp);
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+    _tilePanels.reset(new std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>);
+    _renderer->setTilePanels(_tilePanels);
+    _playerPanels.reset(new std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>);
+    _renderer->setPlayerPanels(_playerPanels);
 }
 
 void ZappyGui::Gui::initialize()
 {
+
     std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(_renderer->getSceneManager(), "myCam");
     cam->setNearClipDistance(0.05);
     cam->setAutoAspectRatio(true);
@@ -56,34 +62,6 @@ void ZappyGui::Gui::initialize()
     _lights.back().setDirection(0, -1, -1);
 
     _renderer->setSkyBoxVisibility(false);
-
-    std::shared_ptr<ZappyGui::Panel> ol(new ZappyGui::Panel(_renderer->getOverlay(), "testPanel", true));
-    ol->panelSetPosition(0, 0);
-    ol->panelSetDimensions(300, 110);
-    ol->panelSetMaterial("RedTransparent");
-    ol->addTextArea("test", 150, 10, "defaultFont");
-    ol->textSetAlignment("test", Ogre::TextAreaOverlayElement::Center);
-    ol->textSetText("test", "Hello, World!\nYO");
-    ol->textSetCharacterHeight("test", 50);
-    ol->textSetColorBottom("test", Ogre::ColourValue(0.3, 0.5, 0.3));
-    ol->textSetColorTop("test", Ogre::ColourValue(0.5, 0.7, 0.5));
-    ol->addCloseButton(ZappyGui::Rect{10, 10, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
-
-    _renderer->getPanels().push({"testPanel", std::move(ol)});
-
-    std::shared_ptr<ZappyGui::Panel> ol2(new ZappyGui::Panel(_renderer->getOverlay(), "testPanel2", true));
-    ol2->panelSetPosition(0, 0);
-    ol2->panelSetDimensions(300, 110);
-    ol2->panelSetMaterial("RedTransparent");
-    ol2->addTextArea("test2", 150, 10, "defaultFont");
-    ol2->textSetAlignment("test2", Ogre::TextAreaOverlayElement::Center);
-    ol2->textSetText("test2", "Hello, World!\nHI");
-    ol2->textSetCharacterHeight("test2", 50);
-    ol2->textSetColorBottom("test2", Ogre::ColourValue(0.3, 0.5, 0.3));
-    ol2->textSetColorTop("test2", Ogre::ColourValue(0.5, 0.0, 0.1));
-    ol2->addCloseButton(ZappyGui::Rect{10, 10, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
-
-    _renderer->getPanels().push({"testPanel2", std::move(ol2)});
 
     std::string command;
     while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
@@ -112,6 +90,8 @@ void ZappyGui::Gui::initialize()
     _renderer->setSkyBoxVisibility(true);
     tilemap->setTileSize(2.0f, 2.0f, 2.0f);
     setTilemap(tilemap);
+    _sceneQuery.reset(_renderer->getSceneManager()->createRayQuery(Ogre::Ray(), Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK));
+    _sceneQuery->setSortByDistance(true);
 }
 
 void ZappyGui::Gui::run()
@@ -136,6 +116,8 @@ void ZappyGui::Gui::run()
 
         _renderer->event();
         _renderer->processInputs();
+        _checkMouseClick();
+        _updatePanels();
         _renderer->renderOneFrame();
     }
 }
@@ -189,4 +171,176 @@ std::vector<std::size_t> ZappyGui::Gui::_ImplconvertArgsToSize_t(std::vector<std
 void ZappyGui::Gui::setDone(bool done)
 {
     _renderer->setDone(done);
+}
+
+void ZappyGui::Gui::_checkMouseClick()
+{
+    ZappyGui::Vector2 pos;
+
+    if (_renderer->mouseClicksEmpty())
+        return;
+
+    pos = _renderer->popMouseClicks();
+    Ogre::Ray ray = _renderer->getCamera()->getCamera()->getCameraToViewportRay(pos.x, pos.y);
+    _sceneQuery->setRay(ray);
+    Ogre::RaySceneQueryResult res = _sceneQuery->execute();
+    if (res.size() == 0)
+        return;
+
+    std::string entityName = "";
+    std::unique_ptr<Tile, Nop> tile = nullptr;
+    std::unique_ptr<Player, Nop> player = nullptr;
+
+    for (Ogre::RaySceneQueryResult::iterator it = res.begin(); it != res.end(); it++)
+    {
+        entityName = it->movable->getName();
+        tile = _getTileByName(entityName);
+        if (tile != nullptr)
+            break;
+        player = _getPlayerByName(entityName);
+        if (player != nullptr)
+            break;
+    }
+
+    if (tile != nullptr)
+        _createTilePanel(std::move(tile), pos);
+    if (player != nullptr)
+        _createPlayerPanel(std::move(player), pos);
+}
+
+void ZappyGui::Gui::_updatePanels()
+{
+    VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> &panels = _renderer->getPanels();
+
+    for (auto &tile : (*_tilePanels.get()))
+    {
+        if (panels.find(tile.first) == panels.end())
+            _tilePanels->erase(tile.first);
+        else
+        {
+            panels[tile.first]->textSetText(tile.first + "_foodNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Food)));
+            panels[tile.first]->textSetText(tile.first + "_linemateNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Linemate)));
+            panels[tile.first]->textSetText(tile.first + "_deraumereNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Deraumere)));
+            panels[tile.first]->textSetText(tile.first + "_siburNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Sibur)));
+            panels[tile.first]->textSetText(tile.first + "_mendianeNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Mendiane)));
+            panels[tile.first]->textSetText(tile.first + "_phirasNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Phiras)));
+            panels[tile.first]->textSetText(tile.first + "_thystameNb", std::to_string(tile.second->getResourceAmount(ZappyGui::ResourceType::Thystame)));
+        }
+    }
+}
+
+void ZappyGui::Gui::_createDefaultTextArea(std::shared_ptr<ZappyGui::Panel> p, std::string name, ZappyGui::Vector2i pos, std::string text)
+{
+    p->addTextArea(name, pos.data[0], pos.data[1], "defaultFont");
+    p->textSetText(name, text);
+    p->textSetCharacterHeight(name, 30);
+    p->textSetColorBottom(name, Ogre::ColourValue(0.3, 0.5, 0.3));
+    p->textSetColorTop(name, Ogre::ColourValue(0.5, 0.7, 0.5));
+}
+
+std::unique_ptr<ZappyGui::Tile, ZappyGui::Nop> ZappyGui::Gui::_getTileByName(std::string name)
+{
+    std::unique_ptr<ZappyGui::Tile, Nop> tile = nullptr;
+    ZappyGui::Vector2i size = _tilemap->getSize();
+
+    for (int y = 0; y < size.data[1]; y++)
+    {
+        for (int x = 0; x < size.data[0]; x++)
+        {
+            if ((*_tilemap.get())[y][x].getGameobject().getEntityName() == name)
+            {
+                tile.reset(&(*_tilemap.get())[y][x]);
+                return std::move(tile);
+            }
+        }
+    }
+    return std::move(tile);
+}
+
+void ZappyGui::Gui::_createTilePanel(std::unique_ptr<Tile, Nop> tile, ZappyGui::Vector2 pos)
+{
+    static std::size_t idTile;
+
+    idTile++;
+    std::string name = "Overlay_Tile_" + std::to_string(idTile);
+    std::shared_ptr<ZappyGui::Panel> p(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
+    p->panelSetPosition((pos.x * 1920) - 200, (pos.y * 1080) - 10);
+    p->panelSetDimensions(400, 200);
+    p->panelSetMaterial("RedTransparent");
+
+    p->addTextArea(name + "_title", 200, 15, "defaultFont");
+    p->textSetAlignment(name + "_title", Ogre::TextAreaOverlayElement::Center);
+    p->textSetText(name + "_title", "Tile " + std::to_string(tile->getPosition().data[0]) + " " + std::to_string(tile->getPosition().data[1]));
+    p->textSetCharacterHeight(name + "_title", 50);
+    p->textSetColorBottom(name + "_title", Ogre::ColourValue(0.3, 0.5, 0.3));
+    p->textSetColorTop(name + "_title", Ogre::ColourValue(0.5, 0.7, 0.5));
+
+    _createDefaultTextArea(p, name + "_food", ZappyGui::Vector2i(20, 70), "Food");
+    _createDefaultTextArea(p, name + "_foodNb", ZappyGui::Vector2i(170, 70), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Food)));
+
+    _createDefaultTextArea(p, name + "_linemate", ZappyGui::Vector2i(20, 100), "Linemate");
+    _createDefaultTextArea(p, name + "_linemateNb", ZappyGui::Vector2i(170, 100), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Linemate)));
+
+    _createDefaultTextArea(p, name + "_deraumere", ZappyGui::Vector2i(20, 130), "Deraumere");
+    _createDefaultTextArea(p, name + "_deraumereNb", ZappyGui::Vector2i(170, 130), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Deraumere)));
+
+    _createDefaultTextArea(p, name + "_sibur", ZappyGui::Vector2i(20, 160), "Sibur");
+    _createDefaultTextArea(p, name + "_siburNb", ZappyGui::Vector2i(170, 160), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Sibur)));
+
+    _createDefaultTextArea(p, name + "_mendiane", ZappyGui::Vector2i(220, 70), "Mendiane");
+    _createDefaultTextArea(p, name + "_mendianeNb", ZappyGui::Vector2i(360, 70), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Mendiane)));
+
+    _createDefaultTextArea(p, name + "_phiras", ZappyGui::Vector2i(220, 100), "Phiras");
+    _createDefaultTextArea(p, name + "_phirasNb", ZappyGui::Vector2i(360, 100), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Phiras)));
+
+    _createDefaultTextArea(p, name + "_thystame", ZappyGui::Vector2i(220, 130), "Thystame");
+    _createDefaultTextArea(p, name + "_thystameNb", ZappyGui::Vector2i(360, 130), std::to_string(tile->getResourceAmount(ZappyGui::ResourceType::Thystame)));
+
+    p->addCloseButton(ZappyGui::Rect{20, 15, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
+
+    _tilePanels->insert({name, std::move(tile)});
+    _renderer->getPanels().push({name, std::move(p)});
+}
+
+std::unique_ptr<ZappyGui::Player, ZappyGui::Nop> ZappyGui::Gui::_getPlayerByName(std::string name)
+{
+    std::unique_ptr<ZappyGui::Player, Nop> player = nullptr;
+    std::map<std::string, std::list<ZappyGui::Player>> &teams = _game.getTeams();
+
+    for (auto &t : teams)
+    {
+        for (auto p = t.second.begin(); p != t.second.end(); p++)
+        {
+            if (p->getEntityName() == name)
+            {
+                player.reset(&(*p));
+                return std::move(player);
+            }
+        }
+    }
+    return std::move(player);
+}
+
+void ZappyGui::Gui::_createPlayerPanel(std::unique_ptr<Player, Nop> player, ZappyGui::Vector2 pos)
+{
+    static std::size_t idPlayer;
+
+    idPlayer++;
+    std::string name = "Overlay_Player_" + std::to_string(idPlayer);
+    std::shared_ptr<ZappyGui::Panel> p(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
+    p->panelSetPosition((pos.x * 1920) - 200, (pos.y * 1080) - 10);
+    p->panelSetDimensions(400, 200);
+    p->panelSetMaterial("RedTransparent");
+
+    p->addTextArea(name + "_title", 200, 15, "defaultFont");
+    p->textSetAlignment(name + "_title", Ogre::TextAreaOverlayElement::Center);
+    p->textSetText(name + "_title", "Player " + std::to_string(player->getId()));
+    p->textSetCharacterHeight(name + "_title", 50);
+    p->textSetColorBottom(name + "_title", Ogre::ColourValue(0.3, 0.5, 0.3));
+    p->textSetColorTop(name + "_title", Ogre::ColourValue(0.5, 0.7, 0.5));
+
+    p->addCloseButton(ZappyGui::Rect{20, 15, 24, 24}, "PanelCloseButton_default", "PanelCloseButton_hover", "PanelCloseButton_click");
+
+    _playerPanels->insert({name, std::move(player)});
+    _renderer->getPanels().push({name, std::move(p)});
 }

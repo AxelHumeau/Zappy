@@ -46,6 +46,14 @@ namespace ZappyGui {
             void sendRequest(std::string command, std::vector<std::string> args) { Network::Client::queueRequest(_requests, command, args); }
 
         private:
+            void _checkMouseClick();
+            void _updatePanels();
+            void _createDefaultTextArea(std::shared_ptr<ZappyGui::Panel> p, std::string name, ZappyGui::Vector2i pos, std::string text);
+            std::unique_ptr<ZappyGui::Tile, Nop> _getTileByName(std::string name);
+            void _createTilePanel(std::unique_ptr<Tile, Nop> tile, ZappyGui::Vector2 pos);
+            std::unique_ptr<ZappyGui::Player, ZappyGui::Nop> _getPlayerByName(std::string name);
+            void _createPlayerPanel(std::unique_ptr<Player, Nop> player, ZappyGui::Vector2 pos);
+
             SafeQueue<std::string> &_receive;
             SafeQueue<std::string> &_requests;
             float _minDelayServerUpdates;
@@ -57,6 +65,9 @@ namespace ZappyGui {
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
             std::size_t _timeUnit;
+            std::unique_ptr<Ogre::RaySceneQuery, Nop> _sceneQuery;
+            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> _tilePanels;
+            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> _playerPanels;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 

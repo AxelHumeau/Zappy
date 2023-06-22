@@ -155,6 +155,10 @@ namespace ZappyGui {
         public:
             GameObject(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName);
             ~GameObject() { _sceneManager->destroyEntity(_entity->getName()); }
+
+            /// @brief Getter for the entity name.
+            /// @return The name of the entity.
+            std::string getEntityName() const { return _entity->getName(); }
         private:
             std::shared_ptr<Ogre::Entity> _entity;
     };

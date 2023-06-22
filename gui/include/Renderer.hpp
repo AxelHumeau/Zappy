@@ -20,10 +20,13 @@
     #include <SDL2/SDL_image.h>
     #include <SDL2/SDL_syswm.h>
     #include <chrono>
+    #include <queue>
     #include "Utils.hpp"
     #include "Camera.hpp"
     #include "Panel.hpp"
     #include "VectorMap.hpp"
+    #include "Tile.hpp"
+    #include "Player.hpp"
 
 namespace ZappyGui {
 
@@ -97,6 +100,14 @@ namespace ZappyGui {
             /// @brief Handles the events for the mouse.
             void mouseEvent();
 
+            bool mouseClicksEmpty();
+            ZappyGui::Vector2 popMouseClicks();
+
+            std::shared_ptr<ZappyGui::Camera> getCamera();
+
+            void setTilePanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> tilePanels);
+            void setPlayerPanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> playerPanels);
+
         private:
             /// @brief Loads all resources in the file in parameter in ogre
             /// @param resourceFile File containing the resources to load
@@ -131,7 +142,6 @@ namespace ZappyGui {
             /// @brief Handles the mouse event when the left button is neither clicked, holded nor released.
             void _mouseEventUpdate();
 
-            VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::map<SDL_KeyCode, bool> _inputs;
             std::unique_ptr<SDL_Window, ZappyGui::Nop> _sdlWindow;
             std::unique_ptr<Ogre::RenderWindow, ZappyGui::Nop> _window;
@@ -153,9 +163,12 @@ namespace ZappyGui {
             ZappyGui::Mouse _curMouse;
             ZappyGui::Mouse _prevMouse;
             std::string _dragPanelName;
-
             int _mDragPosX;
             int _mDragPosY;
+            std::queue<ZappyGui::Vector2> _mouseClicks;
+            VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
+            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, ZappyGui::Nop>>> _tilePanels;
+            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, ZappyGui::Nop>>> _playerPanels;
     };
 
 }

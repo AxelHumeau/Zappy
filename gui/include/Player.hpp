@@ -31,9 +31,11 @@ namespace ZappyGui {
             void setFacing(size_t orientation);
             std::size_t getInventoryAmount(const ResourceType &resourceType);
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
+            void setTeam(std::string team) { _team = team; };
 
         private:
             std::size_t _id;
+            std::string _team;
             ZappyGui::Vector2i _mapPosition;
             size_t _level;
             Orientation _orientation;

@@ -407,7 +407,15 @@ void ZappyGui::Renderer::_mouseEventOnRelease()
             }
         }
         if (name != "")
+        {
             _panels.erase(name);
+            if (_tilePanels != nullptr && _tilePanels->find(name) != _tilePanels->end())
+                _tilePanels->erase(name);
+            if (_playerPanels != nullptr && _playerPanels->find(name) != _playerPanels->end())
+                _playerPanels->erase(name);
+        }
+        if (name == "" && _dragPanelName == "")
+            _mouseClicks.push(ZappyGui::Vector2{static_cast<float>(_curMouse.x) / _width, static_cast<float>(_curMouse.y) / _height});
         _dragPanelName = "";
     }
 }
@@ -441,4 +449,32 @@ void ZappyGui::Renderer::mouseEvent()
         if (_panels.at(i).second->closeButton != nullptr)
             _panels.at(i).second->closeButton->update();
     }
+}
+
+bool ZappyGui::Renderer::mouseClicksEmpty()
+{
+    return _mouseClicks.empty();
+}
+
+ZappyGui::Vector2 ZappyGui::Renderer::popMouseClicks()
+{
+    ZappyGui::Vector2 ret = _mouseClicks.front();
+
+    _mouseClicks.pop();
+    return ret;
+}
+
+std::shared_ptr<ZappyGui::Camera> ZappyGui::Renderer::getCamera()
+{
+    return _camera;
+}
+
+void ZappyGui::Renderer::setTilePanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> tilePanels)
+{
+    _tilePanels = tilePanels;
+}
+
+void ZappyGui::Renderer::setPlayerPanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> playerPanels)
+{
+    _playerPanels = playerPanels;
 }

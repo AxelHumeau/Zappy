@@ -22,6 +22,7 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
         team.back().setMapPosition(gui.getTilemap(), values[1], values[2]);
         team.back().setFacing(values[3]);
         team.back().setLevel(values[4]);
+        team.back().setTeam(args[5]);
     } catch (ZappyGui::TeamUndifinedError const &e) {
         return;
     }
