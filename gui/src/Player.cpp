@@ -20,6 +20,20 @@ namespace ZappyGui {
         _inventory[ResourceType::Thystame] = 0;
     }
 
+    Real facingToAngle(const size_t orientation) {
+        switch (orientation) {
+        case 1:
+            return 0;
+        case 2:
+            return 90;
+        case 3:
+            return 180;
+        case 4:
+            return 270;
+        }
+        return 0;
+    }
+
     void Player::setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y) {
         _mapPosition.data[0] = x; _mapPosition.data[1] = y;
         ZappyGui::Tile &tile = (*tilemap)[_mapPosition.data[1]][_mapPosition.data[0]];
@@ -30,18 +44,18 @@ namespace ZappyGui {
         switch (orientation) {
         case 1:
             _orientation = Orientation::North;
-            setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
+            // setOrientation(Ogre::Quaternion(Ogre::Degree(0),Vector3(0, 1, 0)));
             break;
         case 2:
-            setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
+            // setOrientation(Ogre::Quaternion(Ogre::Degree(90),Vector3(0, 1, 0)));
             _orientation = Orientation::East;
             break;
         case 3:
-            setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
+            // setOrientation(Ogre::Quaternion(Ogre::Degree(180),Vector3(0, 1, 0)));
             _orientation = Orientation::South;
             break;
         case 4:
-            setOrientation(Ogre::Quaternion(Ogre::Degree(-90),Vector3(0, 1, 0)));
+            // setOrientation(Ogre::Quaternion(Ogre::Degree(-90),Vector3(0, 1, 0)));
             _orientation = Orientation::West;
             break;
         }
