@@ -2,8 +2,8 @@
 particle_system OneDirection
 {
     material        MaterialHamster
-    particle_width  2
-    particle_height 2
+    particle_width  1
+    particle_height 1
     cull_each       false
     quota           10000
     billboard_type  oriented_self
@@ -13,13 +13,13 @@ particle_system OneDirection
     {
         angle           0
         emission_rate   75
-        time_to_live    5
-        direction       1 0 0
-        velocity_min    50
-        velocity_max    50
+        time_to_live    2
+        direction       0 0 0
+        velocity_min    30
+        velocity_max    30
         colour_range_start  0 0 0
         colour_range_end    1 1 1
-        duration 0.1
+        duration 0.5
     }
 
     // Gravity.

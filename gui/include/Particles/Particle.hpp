@@ -13,6 +13,7 @@ namespace ZappyGui {
     public:
         Particle(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &particle);
         ~Particle() {_sceneManager->destroyParticleSystem(particleSystem.get());};
+        Ogre::ParticleSystem &getParticleSystem() {return *particleSystem;}
 
     private:
         std::unique_ptr<Ogre::ParticleSystem, Nop> particleSystem;

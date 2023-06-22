@@ -6,7 +6,7 @@
 */
 
 #include "Gui.hpp"
-#include "Particles/Particle.hpp"
+#include "Particles/BroadcastParticle.hpp"
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
@@ -40,6 +40,12 @@ _receive{receive}, _requests{requests}, _minDelayServerUpdates{minDelayServerUpd
     _commands.emplace("suc", suc);
     _commands.emplace("sbp", sbp);
     _renderer = std::make_unique<ZappyGui::Renderer>(std::string("Zappy"), 1920, 1080, "./gui/config/resources");
+}
+
+ZappyGui::Gui::~Gui()
+{
+    // for (auto& thread: particlesThreads)
+    //     thread.join();
 }
 
 void ZappyGui::Gui::initialize() {
@@ -84,9 +90,8 @@ void ZappyGui::Gui::initialize() {
 void ZappyGui::Gui::run() {
     float deltaTime = _renderer->getDeltaTime();
     std::string command;
-    Particle particle(_renderer->getSceneManager(), "OneDirection");
+    BroadcastParticle particle(_renderer->getSceneManager(), {0, 5, 0});
 
-    particle.setPosition(0.0f, 5.0f, 0.0f);
     while (!_renderer->isDone())
     {
         _renderer->updateDeltaTime();

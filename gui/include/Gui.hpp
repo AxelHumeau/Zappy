@@ -21,7 +21,7 @@ namespace ZappyGui {
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);
-            ~Gui() = default;
+            ~Gui();
             void initialize();
             void run();
             void processCommand(std::string command);
