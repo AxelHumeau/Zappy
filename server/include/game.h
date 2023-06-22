@@ -13,6 +13,7 @@ struct team;
 
 #define NB_RESOURCES 7
 
+/// @brief Enum ressource on the map
 enum resource {
     FOOD,
     LINEMATE,
@@ -23,6 +24,7 @@ enum resource {
     THYSMANE,
 };
 
+/// @brief Enum direction for the game
 enum direction {
     UP = 0,
     RIGHT,
@@ -30,6 +32,7 @@ enum direction {
     LEFT,
 };
 
+/// @brief structure egg
 typedef struct egg {
     int id;
     int x;
@@ -38,11 +41,13 @@ typedef struct egg {
     LIST_ENTRY(egg) next;
 } egg_t;
 
+/// @brief structure position
 struct position {
     int x;
     int y;
 };
 
+/// @brief structure player
 typedef struct player {
     int x;
     int y;
@@ -54,6 +59,7 @@ typedef struct player {
     struct team *team;
 } player_t;
 
+/// @brief structure tile
 struct tile {
     size_t resources[NB_RESOURCES];
     int x;

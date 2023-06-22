@@ -10,12 +10,14 @@
 
     #include "macro.h"
 
+/// @brief Elevation struct
 typedef struct elevation {
     int level;
     int nb_players;
     size_t resource[NB_RESOURCES];
 } elevation_t;
 
+/// @brief ELEVATION struct condition
 static const elevation_t elevation_ritual[NB_LEVEL] = {
     {1, 1, {0, 1, 0, 0, 0, 0, 0}},
     {2, 2, {0, 1, 1, 1, 0, 0, 0}},

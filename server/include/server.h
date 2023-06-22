@@ -64,9 +64,9 @@ struct server {
     int timerfd;
 };
 
+/// @brief Team struct
 struct team {
     char *name;
-    /// @brief pointer to the max number of players in the server struct
     int nb_slots_left;
     struct clients players;
 };

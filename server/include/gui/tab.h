@@ -11,6 +11,9 @@
 
 #define NB_GUI_COMMANDS (sizeof(GUI_COMMANDS) / sizeof(*GUI_COMMANDS))
 
+/// @brief gui_command Struct
+/// @brief function gui_command_t
+/// @param 
 typedef struct gui_command_pair {
     char *name;
     gui_command_t *command;

@@ -42,6 +42,7 @@ static const int NO_TIMER = 0;
 static const int TIMER_FORK = 42;
 static const int TIMER_INCANTATION = 300;
 
+/// @brief MACRO Densitry associated enum RESOURCES to a VALUE
 static const double DENSITY[NB_RESOURCES] = {
     [FOOD] = 0.5,
     [LINEMATE] = 0.3,
@@ -51,6 +52,8 @@ static const double DENSITY[NB_RESOURCES] = {
     [PHIRAS] = 0.08,
     [THYSMANE] = 0.05,
 };
+
+/// @brief MACRO RESSOURCE_STR associated enum RESOURCES to its STRING
 static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [FOOD] = "food",
     [LINEMATE] = "linemate",
@@ -60,30 +63,40 @@ static const char * const RESSOURCE_STR[NB_RESOURCES] = {
     [PHIRAS] = "phiras",
     [THYSMANE] = "thysmane",
 };
+
+/// @brief MACRO DIRECTION associated enum DIRECTION to VECTOR
 static const int DIRECTION[NB_DIRECTIONS][2] = {
     [UP] = {0, -1},
     [RIGHT] = {1, 0},
     [DOWN] = {0, 1},
     [LEFT] = {-1, 0},
 };
+
+/// @brief MACRO DIRECTION associated enum DIRECTION to its STRING
 static const char * const DIRECTION_STR[NB_DIRECTIONS] = {
     [UP] = "up",
     [RIGHT] = "right",
     [DOWN] = "down",
     [LEFT] = "left",
 };
+
+/// @brief MACRO POS_LOOK associated enum DIRECTION to a VALUE for the LOOK
 static const int POS_LOOK[NB_DIRECTIONS] = {
     [UP] = -1,
     [RIGHT] = -1,
     [DOWN] = 1,
     [LEFT] = 1
 };
+
+/// @brief MACRO DIRECTION_ZONE associated to DIRECTION to a DIRECTION_INDEX to the UP
 static const int DIRECTION_ZONE[NB_DIRECTIONS] = {
     [UP] = 1,
     [RIGHT] = 3,
     [DOWN] = 5,
     [LEFT] = 7,
 };
+
+/// @brief MACRO ZONE_INDEX associated to position for the zone around the player
 static const struct position ZONE_INDEX[ZONE_SIZE] = {
     {0, -1},
     {-1, -1},
