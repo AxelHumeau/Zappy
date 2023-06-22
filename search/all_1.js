@@ -1,7 +1,7 @@
 var searchData=
 [
   ['abs_5',['ABS',['../macro_8h.html#a996f7be338ccb40d1a2a5abc1ad61759',1,'macro.h']]],
-  ['accept_5fclient_6',['accept_client',['../server_8h.html#aa444da033cf02035c57afe6d50a21c21',1,'accept_client(struct server *server):&#160;client_handling.c'],['../client__handling_8c.html#aa444da033cf02035c57afe6d50a21c21',1,'accept_client(struct server *server):&#160;client_handling.c']]],
+  ['accept_5fclient_6',['accept_client',['../client__handling_8c.html#aa444da033cf02035c57afe6d50a21c21',1,'accept_client(struct server *server):&#160;client_handling.c'],['../server_8h.html#aa444da033cf02035c57afe6d50a21c21',1,'accept_client(struct server *server):&#160;client_handling.c']]],
   ['act_5finventory_7',['act_inventory',['../classai_1_1AI.html#ae4cdaf8b7c7bf82077f5d1dfb18d172b',1,'ai::AI']]],
   ['act_5flook_8',['act_look',['../classai_1_1AI.html#a925c535fc0abfef6b914954b006ef891',1,'ai::AI']]],
   ['action_9',['action',['../classcommunication_1_1action.html',1,'communication']]],
@@ -14,5 +14,6 @@ var searchData=
   ['agameobject_16',['AGameObject',['../classZappyGui_1_1AGameObject.html#a3b8ba54b65920886f10ab4a1eba39ba2',1,'ZappyGui::AGameObject::AGameObject()'],['../classZappyGui_1_1AGameObject.html',1,'ZappyGui::AGameObject']]],
   ['ai_17',['ai',['../namespaceai.html',1,'']]],
   ['ai_18',['AI',['../classai_1_1AI.html',1,'ai']]],
-  ['ai_2epy_19',['ai.py',['../ai_8py.html',1,'']]]
+  ['ai_2epy_19',['ai.py',['../ai_8py.html',1,'']]],
+  ['ask_5fhelp_20',['ask_help',['../classai_1_1AI.html#a89c84cfbc0ac67a33476ce47cd8e3ab4',1,'ai.AI.ask_help()'],['../classai_1_1AI.html#a2bd5b8be981a8eb48daab1c3d8670db9',1,'ai.AI.ask_help()']]]
 ];

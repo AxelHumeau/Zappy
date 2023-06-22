@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['clients_1033',['clients',['../structserver.html#a22e796db6663decdd26a4d48345bfe3c',1,'server']]],
-  ['command_1034',['command',['../structgui__command__pair.html#a3ef3742f420606154e388049240fd568',1,'gui_command_pair::command()'],['../structcommand__s.html#a2fc6b3598d2c6cce57fd34224f622fe1',1,'command_s::command()'],['../structclient__entry.html#a89b77ebfe8c0a0311668484c871b0352',1,'client_entry::command()']]],
-  ['communication_1035',['communication',['../classai_1_1AI.html#a5f354f0f23c114e0a5bdf667807e1bc2',1,'ai.AI.communication()'],['../classcommunication_1_1Communication.html#abbd9b49997b9f8f0d032acbec1668b21',1,'communication.Communication.communication()']]],
-  ['connectnbr_1036',['CONNECTNBR',['../classcommunication_1_1action.html#aa955be47117243e78ec24caeb259bbfe',1,'communication::action']]],
-  ['cooldown_1037',['cooldown',['../structcommand__s.html#a5626d70fd4a95272bffb9b2acd452149',1,'command_s']]],
-  ['count_5fcommand_1038',['count_command',['../structclient__entry.html#ae137123af0bf5c5553f1b219eed88e41',1,'client_entry']]],
-  ['current_5flevel_1039',['current_level',['../classcommunication_1_1Communication.html#a310e9860f1937296f9bd405ed319540a',1,'communication::Communication']]]
+  ['broadcast_1050',['BROADCAST',['../classcommunication_1_1action.html#a5e1dbdbca7d33d1beab34759ce718029',1,'communication::action']]],
+  ['buf_5fto_5frecv_1051',['buf_to_recv',['../structclient__entry.html#a5028426a38daa6580f923e4e8e21e536',1,'client_entry']]],
+  ['buf_5fto_5fsend_1052',['buf_to_send',['../structclient__entry.html#a5f4295954c50f6811fa8e4ec4e501d2d',1,'client_entry']]],
+  ['buffer_1053',['buffer',['../structbuffer.html#ab3d6a8f586a40cbf5cb3a2c8a00776ee',1,'buffer']]],
+  ['buffer_5fsize_1054',['buffer_size',['../structbuffer.html#ac67200aa252a76c3b752dc74fc9f8e7b',1,'buffer']]]
 ];

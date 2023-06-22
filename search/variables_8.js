@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['last_5faction_1065',['last_action',['../structplayer.html#a85c47f2dec6fb168ddc7e1f9f9ec4af8',1,'player']]],
-  ['laying_5fegg_1066',['laying_egg',['../structclient__entry.html#ab4f00dfd53831ad62e4f8aebc7989055',1,'client_entry']]],
-  ['left_1067',['LEFT',['../classcommunication_1_1action.html#a03a5e72006d3306c924af6dba264139c',1,'communication::action']]],
-  ['level_1068',['level',['../structelevation.html#ac1155850acd953302c6fcedbf9aae5e5',1,'elevation::level()'],['../structplayer.html#a9b6e01bd4eaa3f7a03330320a231be6e',1,'player::level()']]],
-  ['list_5feggs_1069',['list_eggs',['../structserver.html#a63d156f64530ef44a3881e18f3ab1a15',1,'server']]],
-  ['listening_5ffd_1070',['listening_fd',['../structserver.html#a8a9f019f7bb3f574dbe37376f8b239e7',1,'server']]],
-  ['look_1071',['LOOK',['../classcommunication_1_1action.html#a1aef27eb06ee87eb4fb5325fbf2484b4',1,'communication::action']]],
-  ['look_5finfo_1072',['look_info',['../classcommunication_1_1Communication.html#a272a9738a49ce97d8086e374057aa045',1,'communication::Communication']]],
-  ['lookaround_1073',['lookaround',['../classai_1_1AI.html#a95280fc137de6f498d5ba367ff3fd7b3',1,'ai.AI.lookaround()'],['../classai_1_1AI.html#a2367c25834471900edd18cf91ee8961a',1,'ai.AI.lookaround()']]],
-  ['lvl_1074',['lvl',['../classai_1_1AI.html#ad053ab3b606c3f97d7284ac8d36c8e76',1,'ai.AI.lvl()'],['../classai_1_1AI.html#a6af4e091e26097d5066edc3424693b50',1,'ai.AI.lvl()']]]
+  ['id_1081',['id',['../structegg.html#a7aaa0ff4d23171ee70fbd441d761bb08',1,'egg::id()'],['../structclient__entry.html#a6529daec1c2fd5dbc01ea0e8669a026b',1,'client_entry::id()']]],
+  ['id_5fegg_1082',['id_egg',['../structserver.html#afeb04cbc145912222c14c47cb3b11e1e',1,'server']]],
+  ['incantation_1083',['INCANTATION',['../classcommunication_1_1action.html#a84d07d49038ff37fa5f68d25f5bcb8c1',1,'communication::action']]],
+  ['inventory_1084',['inventory',['../classai_1_1AI.html#a9e4c227707be568a753957c60946f919',1,'ai.AI.inventory()'],['../classcommunication_1_1Communication.html#a21a26dee1c4dadf8278d0d16939af5fa',1,'communication.Communication.inventory()'],['../structplayer.html#ab3cc967616ac70f2a47243325a47a877',1,'player::inventory()']]],
+  ['inventory_1085',['INVENTORY',['../classcommunication_1_1action.html#a7493174aafc62f86003dfcdc907af3b9',1,'communication::action']]],
+  ['is_5fdead_1086',['is_dead',['../structclient__entry.html#a2bfe2477b3da39efd48a80fcea6074ac',1,'client_entry']]],
+  ['is_5fgui_1087',['is_gui',['../structclient__entry.html#a7c5d27d4800deac44cc8fd5717c57d96',1,'client_entry']]],
+  ['is_5frole_5fdefined_1088',['is_role_defined',['../structclient__entry.html#a25286096a3f399cd66d12c34a1eaa811',1,'client_entry']]]
 ];
