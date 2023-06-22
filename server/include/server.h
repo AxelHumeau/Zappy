@@ -15,6 +15,8 @@
 #include "game.h"
 #include "macro.h"
 
+struct egg;
+
 /// @brief Node of a client linked list
 struct client_entry {
     int id;
@@ -26,14 +28,17 @@ struct client_entry {
     bool is_role_defined;
     bool is_gui;
     bool is_dead;
-    player_t player_info;
+    player_t *player_info;
     int timer;
     long food_time;
+    bool laying_egg;
     bool ritual;
+    struct egg *egg;
     SLIST_ENTRY(client_entry) next;
 };
 
 SLIST_HEAD(clients, client_entry);
+LIST_HEAD(eggs, egg);
 
 /// @brief Server struct
 struct server {
@@ -51,9 +56,11 @@ struct server {
     size_t multiplier_resource;
     int max_players_per_team;
     int nb_players;
+    struct eggs list_eggs;
     struct clients clients;
     long timestamp;
     long resources_time;
+    int id_egg;
     int timerfd;
 };
 
@@ -64,8 +71,10 @@ struct team {
     struct clients players;
 };
 
+// Destroy_server.c
 int setup_server(struct server *server);
 void destroy_server(struct server *server);
+void destroy_player(struct client_entry *client, struct server *server);
 
 int loop(struct server *server);
 
@@ -96,6 +105,13 @@ char *add_tiles_elem_string(struct server *server, struct client_entry *client,
 bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
 bool same_pos(struct client_entry *player, struct client_entry *client);
+void init_entry(struct client_entry *entry);
+void set_position_player(struct server *server, player_t *info);
+
+// Utils_end_game.c
+bool end_game(struct server *server);
+
+// Utils_list.c
 int list_ids_size(struct client_entry **list_players);
 int *get_list_ids(struct client_entry **list_players, int size);
 
@@ -134,3 +150,9 @@ int handle_gui(struct client_entry *client, struct server *server, char *line);
 
 // init_gui_client.c
 int init_gui_client(struct server *server, struct client_entry *client);
+
+// check_instant_command.c
+void check_incantation(struct client_entry *client, struct server *server,
+    char *line);
+void check_fork(struct client_entry *client, struct server *server,
+    char *line);

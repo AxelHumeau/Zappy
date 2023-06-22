@@ -9,17 +9,17 @@
 #include <string.h>
 #include "server.h"
 
-static player_t *get_player(struct team *team, int id, int nb_teams)
+static player_t *get_player(struct server *server, int id)
 {
     struct client_entry *entry;
 
-    if (id < 0 || nb_teams <= 0)
+    if (id < 0)
         return NULL;
-    SLIST_FOREACH(entry, &team->players, next) {
-        if (entry->id == id)
-            return &entry->player_info;
+    SLIST_FOREACH(entry, &server->clients, next) {
+        if (entry->id == id && entry->is_role_defined && !entry->is_gui)
+            return entry->player_info;
     }
-    return get_player(team + 1, id, nb_teams - 1);
+    return NULL;
 }
 
 static int get_id_from_args(char **args)
@@ -43,7 +43,7 @@ int send_player_pos(char **args, struct server *server,
 
     if (id == -1)
         return EXIT_FAILURE;
-    player = get_player(server->teams, id, server->nb_teams);
+    player = get_player(server, id);
     if (player == NULL)
         return EXIT_FAILURE;
     asprintf(&result, "ppo %d %d %d %d\n", id, player->x, player->y,
@@ -62,7 +62,7 @@ int send_player_level(char **args, struct server *server,
 
     if (id == -1)
         return EXIT_FAILURE;
-    player = get_player(server->teams, id, server->nb_teams);
+    player = get_player(server, id);
     if (player == NULL)
         return EXIT_FAILURE;
     asprintf(&result, "plv %d %d\n", id, player->level);
@@ -80,7 +80,7 @@ int send_player_inventory(char **args, struct server *server,
 
     if (id == -1)
         return EXIT_FAILURE;
-    player = get_player(server->teams, id, server->nb_teams);
+    player = get_player(server, id);
     if (player == NULL)
         return EXIT_FAILURE;
     asprintf(&result, "pin %d %d %d %ld %ld %ld %ld %ld %ld %ld\n",
