@@ -154,7 +154,7 @@ class Communication:
             else:
                 # print("req =", self.request.front)
                 # print("res =", resp)
-                self.current_level = int(resp[15])
+                self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
                 return True
@@ -190,14 +190,22 @@ class Communication:
         if (len(self.response) != 0 and
                 self.response.front().find("message") != -1):
             self.get_message()
+        if ((len(self.request) == 0 or self.request.front() != ["Incantation"] and len(self.response) != 0)):
+            if (len(self.response) != 0 and self.response.front().find("Elevation underway") != -1):
+                self.response.pop()
+                self.elevation = True
+                return action.INCANTATION
+            if len(self.response) != 0 and self.response.front().find("Current level") != -1:
+                self.current_level = int(self.response.front().split(':')[1].strip())
+                self.response.pop()
+                self.elevation = False
+                return action.INCANTATION
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
             return action.NOTHING
-        # if (len(self.r)and len(self.response) != 0 and self.response.front().find("Elevation underway") != -1):
-        #     self.response.pop()
-        #     return action.INCANTATION
-        # print(self.response, self.request)
+        if self.request.front() != ["Look"]:
+            print(self.response, self.request)
         if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
             self.pop_information()

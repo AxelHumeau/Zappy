@@ -13,17 +13,20 @@ class priority(Enum):
 
 class AI:
     prio = priority.RESSOURCES
+    ask_help = 0
     mapsize = (1, 1)
     message = []
     path = []
     lookaround = 0
+    player_answer = 0
+    want_to_elevate = False
     need_player = False
     start_elevation = False
     food = 10
     target = -1
-    nb_players_on_me = 1
-    nb_players_at_same_level = 1
+    nb_players_on_me_team = 0
     lvl = 1
+    following = False
     elevation = {
         1: {
                 "nb_players": 1,
@@ -58,7 +61,7 @@ class AI:
                 "deraumere": 1,
                 "sibur": 2,
                 "phiras": 1,
-                "mandiane": 0,
+                "mendiane": 0,
                 "thystame": 0
             },
         5: {
@@ -161,14 +164,27 @@ class AI:
             self.communication.request.push(cmd)
 
     def act_look(self):
-        self.nb_players_on_me = self.communication.look_info[0]['player']
-        if (self.need_player == True):
+        if (self.need_player == True and self.following != True):
+            print("send here")
             self.communication.writebuffer += "Broadcast " + str(self.team) + " here\n"
             self.communication.request.push(["Broadcast", str(self.team) + " here\n"])
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.ask_help += 1
+            if self.ask_help >= 5 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
+                self.need_player = False
+                self.ask_help = 0
+                self.nb_players_on_me_team = 0
             if self.prio != priority.FOOD:
                 return
+            if self.prio == priority.FOOD:
+                self.need_player = False
+                self.ask_help = 0
+        if self.following == True and self.prio != priority.FOOD:
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
+            return
+        print("search = ", self.prio)
         path = self.get_best_path(self.get_target(self.communication.look_info))
         #print("path", path)
         #print("nb_players_on_me", self.nb_players_on_me)
@@ -195,13 +211,14 @@ class AI:
 
     def act_inventory(self):
         self.fill_inventory(self.communication.inventory)
-        #print(self.communication.inventory)
+        print(self.communication.inventory)
         commands.try_elevation(self, self.communication.request)
         #print(self.need_player)
-        #print(self.food)
-        if self.food <= 6:
+        #print("food =", self.food)
+        if self.food < 6:
             self.prio = priority.FOOD
         else: self.prio = priority.RESSOURCES
+        print("prio = ", self.prio )
 
     def incantation(self):
         print("INCANTATION")
@@ -209,7 +226,13 @@ class AI:
             self.lvl = self.communication.current_level
             self.start_elevation = False
             self.need_player = False
+            self.following = False
+            self.nb_players_on_me_team = 0
             print("lvl:", self.lvl)
+        else:
+            self.start_elevation = True
+        if self.want_to_elevate == True:
+            self.want_to_elevate = False
 
     def broadcast(self):
         print("broadcast")
@@ -224,6 +247,8 @@ class AI:
         print("Left")
 
     def Set(self):
+        self.communication.writebuffer += "Inventory\n"
+        self.communication.request.push(["Inventory"])
         print("set")
 
     def Take(self):
@@ -234,6 +259,8 @@ class AI:
     def failed(self):
         if (self.start_elevation == True):
             self.start_elevation = False
+            self.nb_players_on_me_team = 0
+        self.communication.elevation = False
         print("Failed")
 
     dic_function = {
@@ -249,12 +276,58 @@ class AI:
         action.SET: Set
     }
 
+    def send_here(self):
+        print("here")
+        if self.following == True:
+            command = self.communication.message.front()[0]
+            if command in [1, 2, 8]:
+                self.communication.writebuffer += "Forward\n"
+                self.add_to_request_queue([["Forward"]])
+            elif command in [3, 4]:
+                self.communication.writebuffer += "Left\n"
+                self.add_to_request_queue([["Left"]])
+            elif command in [6, 7]:
+                self.communication.writebuffer += "Right\n"
+                self.add_to_request_queue([["Right"]])
+            elif command == 8:
+                self.communication.writebuffer += "Right\nRight\n"
+                self.add_to_request_queue([["Right"], ["Right"]])
+
+    def send_need(self):
+        print("my lvl = ", self.lvl, " requested = ", self.communication.message.front()[1].split(' ')[2])
+        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]):
+            # self.communication.request.clear()
+            # self.communication.writebuffer = ""
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " come\n"
+            self.add_to_request_queue([["Broadcast", str(self.team) + " come"]])
+            self.following = True
+
+    def send_stop(self):
+        print("stop")
+        if self.following == True and self.communication.message.front()[0] != 0:
+            self.following = False
+
+    def send_comming(self):
+        print("comming")
+        if self.want_to_elevate == True:
+            if self.communication.message.front()[0] == 0:
+                self.nb_players_on_me_team += 1
+
+
+    dic_message = {
+        "here": send_here,
+        "need": send_need,
+        "stop": send_stop,
+        "come": send_comming
+    }
+
     def handling_message(self):
-        if self.communication.messagelen != len(self.communication.message):
-            self.communication.messagelen = len(self.communication.message)
-            if self.communication.message.front()[1].find(str(self.team)) != -1:
-                if self.lvl == int(self.communication.message.front()[1].split(' ')[1]):
-                    print("same team")
+        if len(self.communication.message) != 0:
+            for msg in range(len(self.communication.message)):
+                if self.communication.message.front()[1].find(str(self.team)) != -1:
+                    self.dic_message[self.communication.message.front()[1].split(' ')[1]](self)
+            self.communication.message.pop()
+
 
     def run(self):
         while True:
@@ -269,6 +342,7 @@ class AI:
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
+                print("following =", self.following)
                 if handling == action.DEAD:
                     return
                 #print(handling)
