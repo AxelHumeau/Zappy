@@ -5,7 +5,7 @@ particle_system OneDirection
     particle_width  1
     particle_height 1
     cull_each       false
-    quota           10000
+    quota           1
     billboard_type  oriented_self
 
     // Area emitter.
@@ -19,7 +19,7 @@ particle_system OneDirection
         velocity_max    30
         colour_range_start  0 0 0
         colour_range_end    1 1 1
-        duration 0.5
+        duration 0.1
     }
 
     // Gravity.

@@ -16,6 +16,7 @@
     #include "SafeQueue.hpp"
     #include "Game.hpp"
     #include "Client.hpp"
+#include "TimerPtr.hpp"
 
 namespace ZappyGui {
     class Gui {
@@ -55,6 +56,8 @@ namespace ZappyGui {
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
             std::size_t _timeUnit;
+
+
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 

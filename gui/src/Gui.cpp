@@ -90,12 +90,14 @@ void ZappyGui::Gui::initialize() {
 void ZappyGui::Gui::run() {
     float deltaTime = _renderer->getDeltaTime();
     std::string command;
-    BroadcastParticle particle(_renderer->getSceneManager(), {0, 5, 0});
+    TimerPtr<BroadcastParticle> particlePtr(std::chrono::milliseconds(1000), _renderer->getSceneManager(), Vector3({0, 5, 0}));
 
     while (!_renderer->isDone())
     {
         _renderer->updateDeltaTime();
         deltaTime = _renderer->getDeltaTime();
+
+        particlePtr.updateTimer();
 
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
             _game.update(_requests);
