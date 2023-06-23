@@ -20,8 +20,8 @@ static void destroy_eggs(struct server *server)
 {
     struct egg *tmp = NULL;
 
-    for (struct egg *egg = server->list_eggs.lh_first; egg;) {
-        tmp = egg->next.le_next;
+    for (struct egg *egg = server->list_eggs.slh_first; egg;) {
+        tmp = egg->next.sle_next;
         free(egg);
         egg = tmp;
     }

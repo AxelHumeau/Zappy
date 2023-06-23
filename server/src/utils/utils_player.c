@@ -21,21 +21,23 @@ void init_entry(struct client_entry *entry)
     entry->egg = NULL;
 }
 
-void set_position_player(struct server *server, player_t *info)
+void set_position_player(struct server *server, player_t *info,
+    struct team *team)
 {
-    struct egg *egg = NULL;
+    struct egg *egg_entity = NULL;
 
-    if (!LIST_EMPTY(&server->list_eggs)) {
-        egg = LIST_FIRST(&server->list_eggs);
-        LIST_REMOVE(server->list_eggs.lh_first, next);
-        info->x = egg->x;
-        info->y = egg->y;
-        broadcast_to_guis(server, &notify_egg_connection, egg->id);
-        free(egg);
-    } else {
-        info->x = rand() % server->width;
-        info->y = rand() % server->height;
+    SLIST_FOREACH(egg_entity, &server->list_eggs, next) {
+        if (egg_entity->team == team) {
+            info->x = egg_entity->x;
+            info->y = egg_entity->y;
+            broadcast_to_guis(server, &notify_egg_connection, egg_entity->id);
+            SLIST_REMOVE(&server->list_eggs, egg_entity, egg, next);
+            free(egg_entity);
+            return;
+        }
     }
+    info->x = rand() % server->width;
+    info->y = rand() % server->height;
 }
 
 bool is_player(struct client_entry *player, struct client_entry *client)

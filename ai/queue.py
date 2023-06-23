@@ -12,6 +12,10 @@ class Queue:
         """
         return len(self.queue)
 
+    def __iter__(self):
+        for i in self.queue:
+            yield i
+
     def __repr__(self):
         return str(self.queue)
 

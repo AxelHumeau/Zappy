@@ -38,7 +38,7 @@ struct client_entry {
 };
 
 SLIST_HEAD(clients, client_entry);
-LIST_HEAD(eggs, egg);
+SLIST_HEAD(eggs, egg);
 
 /// @brief Server struct
 struct server {
@@ -106,7 +106,8 @@ bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
 bool same_pos(struct client_entry *player, struct client_entry *client);
 void init_entry(struct client_entry *entry);
-void set_position_player(struct server *server, player_t *info);
+void set_position_player(struct server *server, player_t *info,
+    struct team *team);
 
 // Utils_end_game.c
 bool end_game(struct server *server);

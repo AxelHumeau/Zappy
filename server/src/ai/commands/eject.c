@@ -46,14 +46,14 @@ static void destroy_eggs(struct client_entry *client, struct server *server)
     struct position pos = {client->player_info->x, client->player_info->y};
     struct egg *tmp = NULL;
 
-    for (struct egg *egg = server->list_eggs.lh_first; egg;) {
-        tmp = egg->next.le_next;
-        if (egg->x == pos.x && egg->y == pos.y) {
-            LIST_REMOVE(egg, next);
-            broadcast_to_guis(server, &notify_egg_death, egg->id);
-            free(egg);
+    for (struct egg *egg_entity = server->list_eggs.slh_first; egg_entity;) {
+        tmp = egg_entity->next.sle_next;
+        if (egg_entity->x == pos.x && egg_entity->y == pos.y) {
+            SLIST_REMOVE(&server->list_eggs, egg_entity, egg, next);
+            broadcast_to_guis(server, &notify_egg_death, egg_entity->id);
+            free(egg_entity);
         }
-        egg = tmp;
+        egg_entity = tmp;
     }
 }
 
