@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classZappyGui_1_1Game-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ZappyGui::Game Class Reference</div>  </div>
@@ -82,17 +83,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a998a19d48a14126d821e14792b6620d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a998a19d48a14126d821e14792b6620d4">~Game</a> ()=default</td></tr>
 <tr class="separator:a998a19d48a14126d821e14792b6620d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7ff0b882d198410b9276c72a303e545"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#ad7ff0b882d198410b9276c72a303e545">getNbTeams</a> () const</td></tr>
+<tr class="memdesc:ad7ff0b882d198410b9276c72a303e545"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the number of teams  <a href="classZappyGui_1_1Game.html#ad7ff0b882d198410b9276c72a303e545">More...</a><br /></td></tr>
 <tr class="separator:ad7ff0b882d198410b9276c72a303e545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74dd4bb1cb1ed5dc851f2b399c53c292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a74dd4bb1cb1ed5dc851f2b399c53c292">addTeam</a> (std::string teamName)</td></tr>
+<tr class="memdesc:a74dd4bb1cb1ed5dc851f2b399c53c292"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a team with the name gived in parameters  <a href="classZappyGui_1_1Game.html#a74dd4bb1cb1ed5dc851f2b399c53c292">More...</a><br /></td></tr>
 <tr class="separator:a74dd4bb1cb1ed5dc851f2b399c53c292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09bc7f255d9a712460c5130841641f57"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classZappyGui_1_1Player.html">ZappyGui::Player</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a09bc7f255d9a712460c5130841641f57">getTeam</a> (std::string teamName)</td></tr>
+<tr class="memdesc:a09bc7f255d9a712460c5130841641f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">get a team by its name  <a href="classZappyGui_1_1Game.html#a09bc7f255d9a712460c5130841641f57">More...</a><br /></td></tr>
 <tr class="separator:a09bc7f255d9a712460c5130841641f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a804df805847dc180adef0f9b2342d019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classZappyGui_1_1Player.html">Player</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a804df805847dc180adef0f9b2342d019">getPlayer</a> (size_t playerId)</td></tr>
+<tr class="memdesc:a804df805847dc180adef0f9b2342d019"><td class="mdescLeft">&#160;</td><td class="mdescRight">get a player by its id  <a href="classZappyGui_1_1Game.html#a804df805847dc180adef0f9b2342d019">More...</a><br /></td></tr>
 <tr class="separator:a804df805847dc180adef0f9b2342d019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11c3b50f02ac2497fdbcdb54f539f908"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a11c3b50f02ac2497fdbcdb54f539f908">removePlayer</a> (size_t playerId)</td></tr>
+<tr class="memdesc:a11c3b50f02ac2497fdbcdb54f539f908"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove a player by its id or throw <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html" title="PlayerUndefinedError Class Error Error thrown when trying to get a player that does not exist.">PlayerUndefinedError</a> if the player does not exist  <a href="classZappyGui_1_1Game.html#a11c3b50f02ac2497fdbcdb54f539f908">More...</a><br /></td></tr>
 <tr class="separator:a11c3b50f02ac2497fdbcdb54f539f908"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7d90533c75c2e976bc26c27e4fb47f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#af7d90533c75c2e976bc26c27e4fb47f1">update</a> (<a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests)</td></tr>
-<tr class="separator:af7d90533c75c2e976bc26c27e4fb47f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83f6dbadedb181098d2a971844d30ee9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#a83f6dbadedb181098d2a971844d30ee9">update</a> (<a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests, float deltaTime)</td></tr>
+<tr class="memdesc:a83f6dbadedb181098d2a971844d30ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">send to the server all the request required for sync update  <a href="classZappyGui_1_1Game.html#a83f6dbadedb181098d2a971844d30ee9">More...</a><br /></td></tr>
+<tr class="separator:a83f6dbadedb181098d2a971844d30ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6238d692d8a8cd9d4357a6c2f66a04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#adb6238d692d8a8cd9d4357a6c2f66a04">updatePlayers</a> (float deltaTime)</td></tr>
+<tr class="memdesc:adb6238d692d8a8cd9d4357a6c2f66a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates player position and rotation based on the delta time  <a href="classZappyGui_1_1Game.html#adb6238d692d8a8cd9d4357a6c2f66a04">More...</a><br /></td></tr>
+<tr class="separator:adb6238d692d8a8cd9d4357a6c2f66a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac59f8d86c6a837dfcf1a3e9569ff98f5"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::list&lt; <a class="el" href="classZappyGui_1_1Player.html">ZappyGui::Player</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Game.html#ac59f8d86c6a837dfcf1a3e9569ff98f5">_teams</a></td></tr>
+<tr class="separator:ac59f8d86c6a837dfcf1a3e9569ff98f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a15bcc06cbc03e214fc9089baaa6faae5"></a>
@@ -162,6 +177,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>add a team with the name gived in parameters </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">teamName</td><td>name of the team </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ad7ff0b882d198410b9276c72a303e545"></a>
@@ -187,6 +210,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>get the number of teams </p>
+<dl class="section return"><dt>Returns</dt><dd>a size_t of the number of teams </dd></dl>
+
 </div>
 </div>
 <a id="a804df805847dc180adef0f9b2342d019"></a>
@@ -204,6 +230,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>get a player by its id </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">playerId</td><td>id of the player to get </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a reference to the player or <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html" title="PlayerUndefinedError Class Error Error thrown when trying to get a player that does not exist.">PlayerUndefinedError</a> if the player does not exist </dd></dl>
 
 </div>
 </div>
@@ -223,6 +258,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>get a team by its name </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">teamName</td><td>the name of the team to retrieve </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>remove the team or trow <a class="el" href="classZappyGui_1_1TeamUndefinedError.html" title="TeamUndefinedError Class Error Error thrown when trying to get a team that does not exist.">TeamUndefinedError</a> if the team does not exit </dd></dl>
+
 </div>
 </div>
 <a id="a11c3b50f02ac2497fdbcdb54f539f908"></a>
@@ -241,10 +285,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>remove a player by its id or throw <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html" title="PlayerUndefinedError Class Error Error thrown when trying to get a player that does not exist.">PlayerUndefinedError</a> if the player does not exist </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">playerId</td><td>the id of the player to delete </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="af7d90533c75c2e976bc26c27e4fb47f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7d90533c75c2e976bc26c27e4fb47f1">&#9670;&nbsp;</a></span>update()</h2>
+<a id="a83f6dbadedb181098d2a971844d30ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83f6dbadedb181098d2a971844d30ee9">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,8 +305,68 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void ZappyGui::Game::update </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>requests</em></td><td>)</td>
+          <td class="paramname"><em>requests</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>deltaTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>send to the server all the request required for sync update </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td>Safequeue containing all the requests to send </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>time elapsed from the last frame </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adb6238d692d8a8cd9d4357a6c2f66a04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb6238d692d8a8cd9d4357a6c2f66a04">&#9670;&nbsp;</a></span>updatePlayers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZappyGui::Game::updatePlayers </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>deltaTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates player position and rotation based on the delta time </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deltaTime</td><td>time elapsed from the last frame </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac59f8d86c6a837dfcf1a3e9569ff98f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac59f8d86c6a837dfcf1a3e9569ff98f5">&#9670;&nbsp;</a></span>_teams</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, std::list&lt;<a class="el" href="classZappyGui_1_1Player.html">ZappyGui::Player</a>&gt; &gt; ZappyGui::Game::_teams</td>
         </tr>
       </table>
 </div><div class="memdoc">

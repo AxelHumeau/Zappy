@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classZappyGui_1_1Player-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ZappyGui::Player Class Reference</div>  </div>
@@ -98,12 +99,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9be74cb2b2b8ca76c6fa32015b247ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37e743d1716e46d2d12175c4db601267"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a37e743d1716e46d2d12175c4db601267">setLevel</a> (size_t level)</td></tr>
 <tr class="separator:a37e743d1716e46d2d12175c4db601267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9c99076162286e10361e60d736b3f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a3e9c99076162286e10361e60d736b3f0">setFacingAndPosition</a> (size_t orientation)</td></tr>
+<tr class="separator:a3e9c99076162286e10361e60d736b3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91f13475c984ce73121b0433bb75f41c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a91f13475c984ce73121b0433bb75f41c">setFacing</a> (size_t orientation)</td></tr>
 <tr class="separator:a91f13475c984ce73121b0433bb75f41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa074bc713c615e544423d6c9420bf214"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#aa074bc713c615e544423d6c9420bf214">getInventoryAmount</a> (const <a class="el" href="namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9">ResourceType</a> &amp;resourceType)</td></tr>
 <tr class="separator:aa074bc713c615e544423d6c9420bf214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74b2d8cf46c104298d50c8a3ea1b7b0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a74b2d8cf46c104298d50c8a3ea1b7b0b">setInventoryAmount</a> (const <a class="el" href="namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9">ResourceType</a> &amp;resourceType, std::size_t amount)</td></tr>
 <tr class="separator:a74b2d8cf46c104298d50c8a3ea1b7b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75fe40d73029d055895f8b428120a2a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077">Orientation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a75fe40d73029d055895f8b428120a2a8">getFacing</a> () const</td></tr>
+<tr class="separator:a75fe40d73029d055895f8b428120a2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classZappyGui_1_1GameObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classZappyGui_1_1GameObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classZappyGui_1_1GameObject.html">ZappyGui::GameObject</a></td></tr>
 <tr class="memitem:aa95646913b297e97d6e2cdddfb936d00 inherit pub_methods_classZappyGui_1_1GameObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1GameObject.html#aa95646913b297e97d6e2cdddfb936d00">GameObject</a> (std::shared_ptr&lt; Ogre::SceneManager &gt; sceneManager, const std::string &amp;meshName)</td></tr>
 <tr class="separator:aa95646913b297e97d6e2cdddfb936d00 inherit pub_methods_classZappyGui_1_1GameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +152,23 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_classZappyGui_1_1IGameObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classZappyGui_1_1IGameObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classZappyGui_1_1IGameObject.html">ZappyGui::IGameObject</a></td></tr>
 <tr class="memitem:acfcb0711443ab2b5a063e54e09d8db39 inherit pub_methods_classZappyGui_1_1IGameObject"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1IGameObject.html#acfcb0711443ab2b5a063e54e09d8db39">~IGameObject</a> ()=default</td></tr>
 <tr class="separator:acfcb0711443ab2b5a063e54e09d8db39 inherit pub_methods_classZappyGui_1_1IGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a9f40d8ba83da7c5c5cf44c00824b6917"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a9f40d8ba83da7c5c5cf44c00824b6917">startMovePosition</a></td></tr>
+<tr class="separator:a9f40d8ba83da7c5c5cf44c00824b6917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29cd788207f323969929f604c7d083ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a29cd788207f323969929f604c7d083ad">targetMovePosition</a></td></tr>
+<tr class="separator:a29cd788207f323969929f604c7d083ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1ea0f4da2b2d7e24f9f4474effdb505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#ab1ea0f4da2b2d7e24f9f4474effdb505">startRotateAngle</a></td></tr>
+<tr class="separator:ab1ea0f4da2b2d7e24f9f4474effdb505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4faf965104c105bd66dac916c84ea52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#ad4faf965104c105bd66dac916c84ea52">targetRotateAngle</a></td></tr>
+<tr class="separator:ad4faf965104c105bd66dac916c84ea52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389a3110b3683447bf820e954055b132"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a389a3110b3683447bf820e954055b132">actionTimeDuration</a></td></tr>
+<tr class="separator:a389a3110b3683447bf820e954055b132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fbb9e2d41c0aae3be64b6b030cd0a72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#a7fbb9e2d41c0aae3be64b6b030cd0a72">actionElapsedTime</a></td></tr>
+<tr class="separator:a7fbb9e2d41c0aae3be64b6b030cd0a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae073aabb9cb2521ce7ce2d534bf995ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001">ActionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Player.html#ae073aabb9cb2521ce7ce2d534bf995ce">actionType</a></td></tr>
+<tr class="separator:ae073aabb9cb2521ce7ce2d534bf995ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -217,6 +239,31 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a75fe40d73029d055895f8b428120a2a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fe40d73029d055895f8b428120a2a8">&#9670;&nbsp;</a></span>getFacing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077">Orientation</a> ZappyGui::Player::getFacing </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a36b9a265aa9ed2312e29dd7070af3cce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a36b9a265aa9ed2312e29dd7070af3cce">&#9670;&nbsp;</a></span>getId()</h2>
 
@@ -268,6 +315,24 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void ZappyGui::Player::setFacing </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>orientation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e9c99076162286e10361e60d736b3f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9c99076162286e10361e60d736b3f0">&#9670;&nbsp;</a></span>setFacingAndPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZappyGui::Player::setFacingAndPosition </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>orientation</em></td><td>)</td>
@@ -360,6 +425,105 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7fbb9e2d41c0aae3be64b6b030cd0a72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fbb9e2d41c0aae3be64b6b030cd0a72">&#9670;&nbsp;</a></span>actionElapsedTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a> ZappyGui::Player::actionElapsedTime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a389a3110b3683447bf820e954055b132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389a3110b3683447bf820e954055b132">&#9670;&nbsp;</a></span>actionTimeDuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a> ZappyGui::Player::actionTimeDuration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae073aabb9cb2521ce7ce2d534bf995ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae073aabb9cb2521ce7ce2d534bf995ce">&#9670;&nbsp;</a></span>actionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001">ActionType</a> ZappyGui::Player::actionType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f40d8ba83da7c5c5cf44c00824b6917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f40d8ba83da7c5c5cf44c00824b6917">&#9670;&nbsp;</a></span>startMovePosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a> ZappyGui::Player::startMovePosition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1ea0f4da2b2d7e24f9f4474effdb505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ea0f4da2b2d7e24f9f4474effdb505">&#9670;&nbsp;</a></span>startRotateAngle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a> ZappyGui::Player::startRotateAngle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29cd788207f323969929f604c7d083ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29cd788207f323969929f604c7d083ad">&#9670;&nbsp;</a></span>targetMovePosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a> ZappyGui::Player::targetMovePosition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4faf965104c105bd66dac916c84ea52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4faf965104c105bd66dac916c84ea52">&#9670;&nbsp;</a></span>targetRotateAngle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#aa8d8ea0babeefc58a8cd108c24fc5aa5">Real</a> ZappyGui::Player::targetRotateAngle</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -189,6 +189,9 @@ $(function() {
 <li>getDirection()
 : <a class="el" href="classZappyGui_1_1Camera.html#aea276299b5dfe5a3686285fbac27a967">ZappyGui::Camera</a>
 </li>
+<li>getFacing()
+: <a class="el" href="classZappyGui_1_1Player.html#a75fe40d73029d055895f8b428120a2a8">ZappyGui::Player</a>
+</li>
 <li>getGame()
 : <a class="el" href="classZappyGui_1_1Gui.html#a716d5138dc0b7913fdaa9455cede886d">ZappyGui::Gui</a>
 </li>
@@ -218,6 +221,9 @@ $(function() {
 : <a class="el" href="classZappyGui_1_1AGameObject.html#a186f67685c049d30b4089efffd27d670">ZappyGui::AGameObject</a>
 , <a class="el" href="classZappyGui_1_1IGameObject.html#aa8eeee93e4f57811f15b463da7fe5330">ZappyGui::IGameObject</a>
 , <a class="el" href="classZappyGui_1_1Tile.html#a783ff8ec858b08f7f95f3d68e85e8f42">ZappyGui::Tile</a>
+</li>
+<li>getPositionOnTile()
+: <a class="el" href="classZappyGui_1_1Tilemap.html#af8a0bfbec70990eda0cfc21dc43b3de0">ZappyGui::Tilemap</a>
 </li>
 <li>getRenderer()
 : <a class="el" href="classZappyGui_1_1Gui.html#a3b091434fbd67e5db4532e3925e7d74d">ZappyGui::Gui</a>
@@ -332,14 +338,11 @@ $(function() {
 <li>parse_information_look()
 : <a class="el" href="classcommunication_1_1Communication.html#a0f8cb9cb7f9fa2f04609fc1c7f24f79b">communication.Communication</a>
 </li>
-<li>placeGameObjectOnTile()
-: <a class="el" href="classZappyGui_1_1Tilemap.html#a46579a7b4d31b544df9a5b1e228dab72">ZappyGui::Tilemap</a>
-</li>
 <li>Player()
 : <a class="el" href="classZappyGui_1_1Player.html#a390e68fef1ff577dc653af4c6a06ef93">ZappyGui::Player</a>
 </li>
-<li>PlayerUndifinedError()
-: <a class="el" href="classZappyGui_1_1PlayerUndifinedError.html#aac81377365c7e1498d2c891a0ceb8c05">ZappyGui::PlayerUndifinedError</a>
+<li>PlayerUndefinedError()
+: <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html#a8fa8ed051317ea08cfab00e6f60cd309">ZappyGui::PlayerUndefinedError</a>
 </li>
 <li>pop()
 : <a class="el" href="classISafeQueue.html#a4ddfdb2e9de6a08ce51444015cf9d853">ISafeQueue&lt; T &gt;</a>
@@ -459,6 +462,9 @@ $(function() {
 <li>setFacing()
 : <a class="el" href="classZappyGui_1_1Player.html#a91f13475c984ce73121b0433bb75f41c">ZappyGui::Player</a>
 </li>
+<li>setFacingAndPosition()
+: <a class="el" href="classZappyGui_1_1Player.html#a3e9c99076162286e10361e60d736b3f0">ZappyGui::Player</a>
+</li>
 <li>setInventoryAmount()
 : <a class="el" href="classZappyGui_1_1Player.html#a74b2d8cf46c104298d50c8a3ea1b7b0b">ZappyGui::Player</a>
 </li>
@@ -528,8 +534,8 @@ $(function() {
 <li>Take()
 : <a class="el" href="classai_1_1AI.html#ae959029930d5900f950d278b8aeda2ba">ai.AI</a>
 </li>
-<li>TeamUndifinedError()
-: <a class="el" href="classZappyGui_1_1TeamUndifinedError.html#a4b14512d5e1bb768feae7db433d7e788">ZappyGui::TeamUndifinedError</a>
+<li>TeamUndefinedError()
+: <a class="el" href="classZappyGui_1_1TeamUndefinedError.html#ad148dba7cb654fbe6766daa9c286b567">ZappyGui::TeamUndefinedError</a>
 </li>
 <li>Tile()
 : <a class="el" href="classZappyGui_1_1Tile.html#a1cf495d21617ddad9e8d36c089924ed7">ZappyGui::Tile</a>
@@ -552,15 +558,18 @@ $(function() {
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
-<li>UndifinedResourceTypeError()
-: <a class="el" href="classZappyGui_1_1UndifinedResourceTypeError.html#afef6c767541324a79e3afab98af72e70">ZappyGui::UndifinedResourceTypeError</a>
+<li>UndefinedResourceTypeError()
+: <a class="el" href="classZappyGui_1_1UndefinedResourceTypeError.html#a2b38e9922d8347d8d79319054a1a8902">ZappyGui::UndefinedResourceTypeError</a>
 </li>
 <li>update()
-: <a class="el" href="classZappyGui_1_1Game.html#af7d90533c75c2e976bc26c27e4fb47f1">ZappyGui::Game</a>
+: <a class="el" href="classZappyGui_1_1Game.html#a83f6dbadedb181098d2a971844d30ee9">ZappyGui::Game</a>
 , <a class="el" href="classZappyGui_1_1Tilemap.html#a88ac7a055c8fa320f206ea8ede443618">ZappyGui::Tilemap</a>
 </li>
 <li>updateDeltaTime()
 : <a class="el" href="classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7">ZappyGui::Renderer</a>
+</li>
+<li>updatePlayers()
+: <a class="el" href="classZappyGui_1_1Game.html#adb6238d692d8a8cd9d4357a6c2f66a04">ZappyGui::Game</a>
 </li>
 </ul>
 
@@ -571,11 +580,11 @@ $(function() {
 , <a class="el" href="classZappyGui_1_1IndexOutOfBoundsError.html#a6995f95ffec26b76dd7ffce15fbd7f6f">ZappyGui::IndexOutOfBoundsError</a>
 , <a class="el" href="classZappyGui_1_1InvalidResourceError.html#ac7cac629e8c85381dd2622e30fa4ea56">ZappyGui::InvalidResourceError</a>
 , <a class="el" href="classZappyGui_1_1NotImplementedError.html#ab791878891ae916974765d03f0bb4eed">ZappyGui::NotImplementedError</a>
-, <a class="el" href="classZappyGui_1_1PlayerUndifinedError.html#ad8e43c0d7439c5f296f3fd64c207d523">ZappyGui::PlayerUndifinedError</a>
+, <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html#a053fe2be0c1a69f7e8c735c37740e722">ZappyGui::PlayerUndefinedError</a>
 , <a class="el" href="classZappyGui_1_1ResourceFileNotFoundError.html#a7e321f4d7b9fb205cb4c38252ec1efaa">ZappyGui::ResourceFileNotFoundError</a>
-, <a class="el" href="classZappyGui_1_1TeamUndifinedError.html#ac208b32a9230d17ea32c112b9015125f">ZappyGui::TeamUndifinedError</a>
+, <a class="el" href="classZappyGui_1_1TeamUndefinedError.html#ac318c119523a12512bfa8e6387c88df2">ZappyGui::TeamUndefinedError</a>
 , <a class="el" href="classZappyGui_1_1TileNoGameobjectBoundError.html#a40637414c7f8105da08a67c810d32ae9">ZappyGui::TileNoGameobjectBoundError</a>
-, <a class="el" href="classZappyGui_1_1UndifinedResourceTypeError.html#aaf6da4ce798d3f027fb29d9d0a69c8d8">ZappyGui::UndifinedResourceTypeError</a>
+, <a class="el" href="classZappyGui_1_1UndefinedResourceTypeError.html#a0682eb350e9e749cbcb68c3aa749119a">ZappyGui::UndefinedResourceTypeError</a>
 </li>
 </ul>
 
@@ -617,8 +626,8 @@ $(function() {
 <li>~Player()
 : <a class="el" href="classZappyGui_1_1Player.html#a4386454297fb39bac1e75ef1aacbc88f">ZappyGui::Player</a>
 </li>
-<li>~PlayerUndifinedError()
-: <a class="el" href="classZappyGui_1_1PlayerUndifinedError.html#afaa35e83d6a47ac4496ee96e075f4bda">ZappyGui::PlayerUndifinedError</a>
+<li>~PlayerUndefinedError()
+: <a class="el" href="classZappyGui_1_1PlayerUndefinedError.html#a8b54dba23ebb4ccb4819f6059d49e671">ZappyGui::PlayerUndefinedError</a>
 </li>
 <li>~Renderer()
 : <a class="el" href="classZappyGui_1_1Renderer.html#ab3d41c90f0f9136ff9f3f0065b407b89">ZappyGui::Renderer</a>
@@ -635,8 +644,8 @@ $(function() {
 <li>~Socket()
 : <a class="el" href="classNetwork_1_1Socket.html#af1fb35802f22c2883c0d1f22a099a1a9">Network::Socket</a>
 </li>
-<li>~TeamUndifinedError()
-: <a class="el" href="classZappyGui_1_1TeamUndifinedError.html#a53f5ef4a63a3324e0aa3b5186bc73e06">ZappyGui::TeamUndifinedError</a>
+<li>~TeamUndefinedError()
+: <a class="el" href="classZappyGui_1_1TeamUndefinedError.html#acb56dc0383e5b5141c65e4bc10e31448">ZappyGui::TeamUndefinedError</a>
 </li>
 <li>~Tile()
 : <a class="el" href="classZappyGui_1_1Tile.html#a3a5ddb0a9f59ec8772ed37e2c1cbebf7">ZappyGui::Tile</a>
@@ -647,8 +656,8 @@ $(function() {
 <li>~TileNoGameobjectBoundError()
 : <a class="el" href="classZappyGui_1_1TileNoGameobjectBoundError.html#a2166af97ea13e427153198ee3e886e30">ZappyGui::TileNoGameobjectBoundError</a>
 </li>
-<li>~UndifinedResourceTypeError()
-: <a class="el" href="classZappyGui_1_1UndifinedResourceTypeError.html#aa6f031356b83849b5fe1d27d15b86061">ZappyGui::UndifinedResourceTypeError</a>
+<li>~UndefinedResourceTypeError()
+: <a class="el" href="classZappyGui_1_1UndefinedResourceTypeError.html#ada244b8cc899abc1535c509764b4d43a">ZappyGui::UndefinedResourceTypeError</a>
 </li>
 </ul>
 </div><!-- contents -->

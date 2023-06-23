@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['up_1210',['UP',['../game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aba595d8bca8bc5e67c37c0a9d89becfa',1,'game.h']]]
+  ['thysmane_1249',['THYSMANE',['../game_8h.html#ab00e7685de21356f97a42d26fe8e9817a3723a926389a41fd088b1028dd720796',1,'game.h']]],
+  ['thystame_1250',['Thystame',['../namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9ad6450dc563c8705fb7caa30275b81546',1,'ZappyGui']]]
 ];

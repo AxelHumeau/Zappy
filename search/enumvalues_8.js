@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['sibur_1205',['Sibur',['../namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9a8ad0b0e0b3c1f44f11c5eb14407496f3',1,'ZappyGui']]],
-  ['sibur_1206',['SIBUR',['../game_8h.html#ab00e7685de21356f97a42d26fe8e9817a38d54bcfbd316bc737fa680e796e60d5',1,'game.h']]],
-  ['south_1207',['South',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077a051d0e6a98806363370c6058943c5f4f',1,'ZappyGui']]]
+  ['right_1244',['RIGHT',['../game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38',1,'game.h']]],
+  ['rotate_1245',['ROTATE',['../namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001acf22e9c696ec39f466ab95d0fceea6ca',1,'ZappyGui']]]
 ];

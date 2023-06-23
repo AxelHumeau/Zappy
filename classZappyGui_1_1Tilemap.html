@@ -100,8 +100,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab47abcfb71c5b3ae691b688910cdcf90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#acac056057a96108ecc393da044c469b0">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#ab47abcfb71c5b3ae691b688910cdcf90">getSize</a> ()</td></tr>
 <tr class="memdesc:ab47abcfb71c5b3ae691b688910cdcf90"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the size of the tilemap  <a href="classZappyGui_1_1Tilemap.html#ab47abcfb71c5b3ae691b688910cdcf90">More...</a><br /></td></tr>
 <tr class="separator:ab47abcfb71c5b3ae691b688910cdcf90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46579a7b4d31b544df9a5b1e228dab72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#a46579a7b4d31b544df9a5b1e228dab72">placeGameObjectOnTile</a> (<a class="el" href="classZappyGui_1_1Tile.html">ZappyGui::Tile</a> &amp;<a class="el" href="structtile.html">tile</a>, <a class="el" href="classZappyGui_1_1GameObject.html">ZappyGui::GameObject</a> &amp;obj)</td></tr>
-<tr class="separator:a46579a7b4d31b544df9a5b1e228dab72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a0bfbec70990eda0cfc21dc43b3de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#af8a0bfbec70990eda0cfc21dc43b3de0">getPositionOnTile</a> (std::size_t x, std::size_t y)</td></tr>
+<tr class="separator:af8a0bfbec70990eda0cfc21dc43b3de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f910ade6959f6a24e96838923f1fee8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#a0f910ade6959f6a24e96838923f1fee8">lookAt</a> (const Ogre::Vector3 &amp;targetPoint, Ogre::Node::TransformSpace relativeTo, const Ogre::Vector3 &amp;localDirectionVector=Ogre::VectorBase&lt; 3, Ogre::Real &gt;::NEGATIVE_UNIT_Z)</td></tr>
 <tr class="memdesc:a0f910ade6959f6a24e96838923f1fee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not implemented !  <a href="classZappyGui_1_1Tilemap.html#a0f910ade6959f6a24e96838923f1fee8">More...</a><br /></td></tr>
 <tr class="separator:a0f910ade6959f6a24e96838923f1fee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,6 +215,34 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="af8a0bfbec70990eda0cfc21dc43b3de0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8a0bfbec70990eda0cfc21dc43b3de0">&#9670;&nbsp;</a></span>getPositionOnTile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">ZappyGui::Vector3</a> ZappyGui::Tilemap::getPositionOnTile </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab47abcfb71c5b3ae691b688910cdcf90"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab47abcfb71c5b3ae691b688910cdcf90">&#9670;&nbsp;</a></span>getSize()</h2>
 
@@ -342,34 +370,6 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>row of the tilemap at index | throw an <a class="el" href="classZappyGui_1_1IndexOutOfBoundsError.html" title="IndexOutOfBoundsError Class Error Error thrown when trying to acces an element out of bounds.">IndexOutOfBoundsError</a> if the index is out of bounds </dd></dl>
-
-</div>
-</div>
-<a id="a46579a7b4d31b544df9a5b1e228dab72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46579a7b4d31b544df9a5b1e228dab72">&#9670;&nbsp;</a></span>placeGameObjectOnTile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ZappyGui::Tilemap::placeGameObjectOnTile </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classZappyGui_1_1Tile.html">ZappyGui::Tile</a> &amp;&#160;</td>
-          <td class="paramname"><em>tile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classZappyGui_1_1GameObject.html">ZappyGui::GameObject</a> &amp;&#160;</td>
-          <td class="paramname"><em>obj</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orientation_1187',['Orientation',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077',1,'ZappyGui']]]
+  ['direction_1224',['direction',['../game_8h.html#a99f26e6ee9fcd62f75203b5402df8098',1,'game.h']]]
 ];
