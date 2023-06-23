@@ -16,6 +16,9 @@ namespace ZappyGui {
     typedef Ogre::Vector2 Vector2;
     typedef Ogre::Vector2i Vector2i;
 
+    Vector3 lerp(Vector3 &start, Vector3 &end, Real Time);
+    Real lerpReal(Real &start, Real &end, Real Time);
+
     enum ResourceType {
         Food,
         Linemate,
