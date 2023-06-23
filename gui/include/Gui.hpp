@@ -67,7 +67,7 @@ namespace ZappyGui {
             std::size_t _timeUnit;
             std::unique_ptr<Ogre::RaySceneQuery, Nop> _sceneQuery;
             std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> _tilePanels;
-            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> _playerPanels;
+            std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 

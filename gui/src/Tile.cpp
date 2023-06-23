@@ -30,13 +30,13 @@ namespace ZappyGui {
 
     std::size_t Tile::getResourceAmount(const ZappyGui::ResourceType &resourceType) {
         if (_resources.find(resourceType) == _resources.end())
-            throw UndifinedResourceTypeError();
+            throw UndefinedResourceTypeError();
         return _resources[resourceType];
     }
 
     void Tile::setResourceAmount(const ZappyGui::ResourceType &resourceType, std::size_t amount) {
         if (_resources.find(resourceType) == _resources.end())
-            throw UndifinedResourceTypeError();
+            throw UndefinedResourceTypeError();
         _resources[resourceType] = amount;
     }
 }

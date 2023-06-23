@@ -474,7 +474,7 @@ void ZappyGui::Renderer::setTilePanels(std::shared_ptr<std::map<std::string, std
     _tilePanels = tilePanels;
 }
 
-void ZappyGui::Renderer::setPlayerPanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> playerPanels)
+void ZappyGui::Renderer::setPlayerPanels(std::shared_ptr<std::map<std::string, std::size_t>> playerPanels)
 {
     _playerPanels = playerPanels;
 }

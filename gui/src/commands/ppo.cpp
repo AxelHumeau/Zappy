@@ -19,7 +19,7 @@ void ZappyGui::ppo(ZappyGui::Gui &gui, std::vector<std::string> args) {
         Player &player = gui.getGame().getPlayer(values[0]);
         player.setMapPosition(gui.getTilemap(), values[1], values[2]);
         player.setFacing(values[3]);
-    } catch (ZappyGui::PlayerUndifinedError const &e) {
+    } catch (ZappyGui::PlayerUndefinedError const &e) {
         return;
     }
 }

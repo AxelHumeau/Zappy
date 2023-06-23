@@ -33,6 +33,10 @@ namespace ZappyGui {
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
             void setTeam(std::string team) { _team = team; };
 
+            std::string getTeam() const { return _team; };
+            std::size_t getLevel() const { return _level; };
+            ZappyGui::Vector2i getMapPosition() const { return _mapPosition; };
+
         private:
             std::size_t _id;
             std::string _team;

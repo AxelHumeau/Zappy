@@ -17,7 +17,7 @@ void ZappyGui::pdi(ZappyGui::Gui &gui, std::vector<std::string> args) {
         return;
     try {
         gui.getGame().removePlayer(values[0]);
-    } catch (ZappyGui::PlayerUndifinedError const &e) {
+    } catch (ZappyGui::PlayerUndefinedError const &e) {
         return;
     }
 }

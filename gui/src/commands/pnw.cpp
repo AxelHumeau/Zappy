@@ -23,7 +23,7 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
         team.back().setFacing(values[3]);
         team.back().setLevel(values[4]);
         team.back().setTeam(args[5]);
-    } catch (ZappyGui::TeamUndifinedError const &e) {
+    } catch (ZappyGui::TeamUndefinedError const &e) {
         return;
     }
 }

@@ -106,7 +106,7 @@ namespace ZappyGui {
             std::shared_ptr<ZappyGui::Camera> getCamera();
 
             void setTilePanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> tilePanels);
-            void setPlayerPanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, Nop>>> playerPanels);
+            void setPlayerPanels(std::shared_ptr<std::map<std::string, std::size_t>> playerPanels);
 
         private:
             /// @brief Loads all resources in the file in parameter in ogre
@@ -168,7 +168,7 @@ namespace ZappyGui {
             std::queue<ZappyGui::Vector2> _mouseClicks;
             VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, ZappyGui::Nop>>> _tilePanels;
-            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Player, ZappyGui::Nop>>> _playerPanels;
+            std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
     };
 
 }

@@ -19,13 +19,13 @@ namespace ZappyGui {
 
     /**
      * @brief
-     * TeamUndifinedError Class Error
+     * TeamUndefinedError Class Error
      * Error thrown when trying to get a team that does not exist.
      */
-    class TeamUndifinedError : public std::exception {
+    class TeamUndefinedError : public std::exception {
         public:
-            TeamUndifinedError(std::string teamName);
-            ~TeamUndifinedError() = default;
+            TeamUndefinedError(std::string teamName);
+            ~TeamUndefinedError() = default;
             const char *what() const noexcept override;
         private:
             std::string message;
@@ -33,13 +33,13 @@ namespace ZappyGui {
 
     /**
      * @brief
-     * PlayerUndifinedError Class Error
+     * PlayerUndefinedError Class Error
      * Error thrown when trying to get a player that does not exist.
      */
-    class PlayerUndifinedError : public std::exception {
+    class PlayerUndefinedError : public std::exception {
         public:
-            PlayerUndifinedError(std::size_t playerId);
-            ~PlayerUndifinedError() = default;
+            PlayerUndefinedError(std::size_t playerId);
+            ~PlayerUndefinedError() = default;
             const char *what() const noexcept override;
         private:
             std::string message;
