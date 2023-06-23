@@ -334,6 +334,7 @@ class AI:
             self.communication.network()
             handling = self.communication.clean_information()
             if handling == action.DEAD:
+                print ("DEAD")
                 return
             self.handling_message()
             if (handling == action.NOTHING):
@@ -344,6 +345,7 @@ class AI:
                     break
                 print("following =", self.following)
                 if handling == action.DEAD:
+                    print ("DEAD 2")
                     return
                 #print(handling)
                 self.dic_function[handling](self)

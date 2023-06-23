@@ -16,7 +16,7 @@ static void set_info_player(struct client_entry *entry, struct server *server,
 {
     player_t *info = malloc(sizeof(player_t));
 
-    set_position_player(server, info);
+    set_position_player(server, info, team);
     memset(info->inventory, 0, sizeof(info->inventory));
     info->inventory[FOOD] = 10;
     info->level = 1;
