@@ -28,6 +28,7 @@ void ZappyGui::pnw(ZappyGui::Gui &gui, std::vector<std::string> args) {
         team.back().setFacingAndPosition(values[3]);
         team.back().targetRotateAngle = team.back().getOrientation().getYaw().valueDegrees();
         team.back().setLevel(values[4]);
+        team.back().setTeam(args[5]);
     } catch (ZappyGui::TeamUndefinedError const &e) {
         return;
     }
