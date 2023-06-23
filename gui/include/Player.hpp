@@ -34,7 +34,7 @@ namespace ZappyGui {
 
             size_t getId() const { return _id; }
 
-            void setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y);
+            void setMapPosition(size_t x, size_t y);
             void setLevel(size_t level) { _level = level; }
             void setFacingAndPosition(size_t orientation);
             void setFacing(size_t orientation);
