@@ -19,6 +19,14 @@ namespace ZappyGui {
         West = 4
     };
 
+    Real facingToAngle(const size_t orientation);
+
+    enum ActionType {
+        IDLE,
+        MOVE,
+        ROTATE
+    };
+
     class Player : public GameObject {
         public:
             Player(std::shared_ptr<Ogre::SceneManager> sceneManager, const std::string &meshName, std::size_t id);
@@ -28,15 +36,24 @@ namespace ZappyGui {
 
             void setMapPosition(std::shared_ptr<ZappyGui::Tilemap> tilemap, size_t x, size_t y);
             void setLevel(size_t level) { _level = level; }
+            void setFacingAndPosition(size_t orientation);
             void setFacing(size_t orientation);
             std::size_t getInventoryAmount(const ResourceType &resourceType);
             void setInventoryAmount(const ResourceType &resourceType, std::size_t amount);
+            Orientation getFacing() const { return _facing; }
 
+            Vector3 startMovePosition;
+            Vector3 targetMovePosition;
+            Real startRotateAngle;
+            Real targetRotateAngle;
+            Real actionTimeDuration;
+            Real actionElapsedTime;
+            ActionType actionType;
         private:
             std::size_t _id;
-            ZappyGui::Vector2i _mapPosition;
+            Vector2i _mapPosition;
             size_t _level;
-            Orientation _orientation;
+            Orientation _facing;
             std::unordered_map<ResourceType, std::size_t> _inventory;
     };
 }

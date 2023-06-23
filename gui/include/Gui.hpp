@@ -33,6 +33,8 @@ namespace ZappyGui {
             /// @param endIndex index to end in the args vector (0 by default for entire args vector)
             /// @return return an vector of size_t with the converted values or an empty one in case of error
             std::vector<std::size_t> convertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex = 0, std::size_t endIndex = static_cast<std::size_t>(-1));
+            /// @brief set the state to done and end the run loop
+            /// @param done new state
             void setDone(bool done);
 
             ZappyGui::Renderer &getRenderer() const { return *_renderer.get(); }
@@ -62,6 +64,9 @@ namespace ZappyGui {
 
             std::vector<std::size_t> _ImplconvertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex, std::size_t endIndex);
     };
+
+    void updatePlayerPosition(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
+    void updatePlayerRotation(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
 
     void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
     void msz(ZappyGui::Gui &gui, std::vector<std::string> args);

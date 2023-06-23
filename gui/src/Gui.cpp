@@ -46,7 +46,7 @@ void ZappyGui::Gui::initialize() {
     cam->setNearClipDistance(0.05);
     cam->setAutoAspectRatio(true);
     cam->setPosition(0, 0, 0);
-    cam->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+    cam->lookAt(Ogre::Vector3(0, 0, 1), Ogre::Node::TS_PARENT);
     _renderer->registerCamera(cam);
 
     _lights.emplace_back(_renderer->getSceneManager(), "light", Ogre::Light::LT_DIRECTIONAL);
@@ -67,8 +67,9 @@ void ZappyGui::Gui::initialize() {
     }
     if (_renderer->isDone())
         return;
+    float tileSize = 2.0f;
     std::shared_ptr<ZappyGui::Tilemap> tilemap = std::make_shared<ZappyGui::Tilemap>(_renderer->getSceneManager(), _mapWidth, _mapHeight);
-    tilemap->setPosition(0.0f, 0.0f, -10.0f);
+    tilemap->setPosition((_mapWidth * tileSize) / 2, -(tileSize * 2) * 2, _mapWidth * tileSize + (_mapWidth * tileSize) / 4);
     ZappyGui::Vector2i size = tilemap->getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
@@ -76,7 +77,7 @@ void ZappyGui::Gui::initialize() {
             (*tilemap)[y][x].bindGameObject(obj_ptr);
         }
     }
-    tilemap->setTileSize(2.0f, 2.0f, 2.0f);
+    tilemap->setTileSize(tileSize, tileSize, tileSize);
     setTilemap(tilemap);
 }
 
@@ -90,11 +91,13 @@ void ZappyGui::Gui::run() {
         deltaTime = _renderer->getDeltaTime();
 
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
-            _game.update(_requests);
+            _game.update(_requests, deltaTime);
             _tilemap->update(_requests);
             _waitedServerUpdateDelay = 0.0f;
         } else
             _waitedServerUpdateDelay += deltaTime;
+
+        _game.updatePlayers(deltaTime);
 
         while (_receive.tryPop(command))
             processCommand(command);

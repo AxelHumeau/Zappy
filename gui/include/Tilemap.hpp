@@ -29,7 +29,7 @@ namespace ZappyGui {
             /// @return a Vector2i containing the width and the height of tilemap
             Vector2i getSize() { return Vector2i(_width, _height); }
 
-            void placeGameObjectOnTile(ZappyGui::Tile &tile, ZappyGui::GameObject &obj);
+            Vector3 getPositionOnTile(std::size_t x, std::size_t y);
 
             /// @brief Not implemented !
             /// @return throw an NotImplementedError
