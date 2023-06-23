@@ -25,14 +25,14 @@ struct server *server, elevation_t ritual, struct client_entry **list_players)
 {
     int index = 1;
     struct client_entry *player = NULL;
-    player_t entry;
+    player_t *entry = NULL;
     bool put_player;
 
     for (int id = 1; index != ritual.nb_players; id++) {
         SLIST_FOREACH(player, &server->clients, next) {
             entry = player->player_info;
             put_player = is_player(player, client) && same_pos(player, client)
-                && id == player->id && entry.level == ritual.level;
+                && id == player->id && entry->level == ritual.level;
             put_player_ritual(list_players, player, put_player, &index);
         }
     }
@@ -63,7 +63,7 @@ static struct client_entry **enough_player(struct client_entry *client,
 
     SLIST_FOREACH(player, &server->clients, next) {
         if (is_player(player, client) && same_pos(player, client) &&
-            player->player_info.level == ritual.level)
+            player->player_info->level == ritual.level)
             count++;
     }
     return ritual_player(client, server, count, ritual);
@@ -72,7 +72,7 @@ static struct client_entry **enough_player(struct client_entry *client,
 struct client_entry **condition_ritual(struct client_entry *client,
     struct server *server)
 {
-    struct position pos = {client->player_info.x, client->player_info.y};
+    struct position pos = {client->player_info->x, client->player_info->y};
     elevation_t ritual;
     size_t map_resources[NB_RESOURCES];
     size_t size = sizeof(size_t[NB_RESOURCES]);
@@ -80,7 +80,7 @@ struct client_entry **condition_ritual(struct client_entry *client,
 
     memcpy(&map_resources, server->maps[pos.y][pos.x].resources, size);
     for (int i = 0; i < NB_LEVEL; i++) {
-        if (client->player_info.level == elevation_ritual[i].level)
+        if (client->player_info->level == elevation_ritual[i].level)
             ritual = elevation_ritual[i];
     }
     for (int i = 1; i < NB_RESOURCES; i++) {

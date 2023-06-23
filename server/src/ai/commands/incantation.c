@@ -33,11 +33,11 @@ void send_ritual_message(struct client_entry *client,
 static void remove_resources_map(struct client_entry *client,
     struct server *server)
 {
-    struct position pos = {client->player_info.x, client->player_info.y};
+    struct position pos = {client->player_info->x, client->player_info->y};
     elevation_t ritual;
 
     for (int i = 0; i < NB_LEVEL; i++) {
-        if (client->player_info.level == elevation_ritual[i].level)
+        if (client->player_info->level == elevation_ritual[i].level)
             ritual = elevation_ritual[i];
     }
     for (int i = 0; i < NB_RESOURCES; i++)
@@ -51,8 +51,8 @@ static void do_elevation(struct client_entry *client, struct server *server,
 
     remove_resources_map(client, server);
     for (int i = 0; list_players[i] != NULL; i++) {
-        list_players[i]->player_info.level++;
-        asprintf(&message, "Current level: %d\n", client->player_info.level);
+        list_players[i]->player_info->level++;
+        asprintf(&message, "Current level: %d\n", client->player_info->level);
         add_to_buffer(&list_players[i]->buf_to_send, message, strlen(message));
         free(message);
     }
@@ -67,7 +67,7 @@ void incantation(char *cmd, struct client_entry *client,
     if (cmd[0] == '\0' && list_players != NULL) {
         do_elevation(client, server, list_players);
         broadcast_to_guis(server, &notify_end_of_incantation,
-            &client->player_info, 1);
+            client->player_info, 1);
     } else
         send_ritual_message(client, list_players, false);
     client->ritual = false;
