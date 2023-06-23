@@ -343,23 +343,22 @@ std::shared_ptr<Ogre::Overlay> ZappyGui::Renderer::getOverlay()
 
 void ZappyGui::Renderer::_mouseEventOnClick()
 {
-    if (!_prevMouse.lbIsPressed && _curMouse.lbIsPressed)
+    if (_prevMouse.lbIsPressed || !_curMouse.lbIsPressed)
+        return;
+    for (std::size_t i = 0; i < _panels.size(); i++)
     {
-        for (std::size_t i = 0; i < _panels.size(); i++)
+        if (_panels.at(i).second->getRect().isInRect(_curMouse.x, _curMouse.y) && _panels.at(i).second->isDraggable)
         {
-            if (_panels.at(i).second->getRect().isInRect(_curMouse.x, _curMouse.y) && _panels.at(i).second->isDraggable)
+            if (_panels.at(i).second->closeButton != nullptr &&
+                _panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
             {
-                if (_panels.at(i).second->closeButton != nullptr &&
-                    _panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
-                {
-                    _panels.at(i).second->closeButton->isClick = true;
-                    _panels.at(i).second->closeButton->isHover = false;
-                    break;
-                }
-                SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
-                _dragPanelName = _panels.at(i).first;
+                _panels.at(i).second->closeButton->isClick = true;
+                _panels.at(i).second->closeButton->isHover = false;
                 break;
             }
+            SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
+            _dragPanelName = _panels.at(i).first;
+            break;
         }
     }
 }
@@ -370,70 +369,67 @@ void ZappyGui::Renderer::_mouseEventHold()
     int y = 0;
     ZappyGui::Rect rect;
 
-    if (_prevMouse.lbIsPressed && _curMouse.lbIsPressed && _dragPanelName != "")
-    {
-        SDL_GetMouseState(&x, &y);
-        x -= _mDragPosX;
-        y -= _mDragPosY;
-        SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
-        if (_panels.find(_dragPanelName) == _panels.end())
-            return;
-        rect = _panels[_dragPanelName]->getRect();
-        _panels[_dragPanelName]->panelSetPosition(rect.left + x, rect.top + y);
-        if (rect.left + x < 0)
-            _panels[_dragPanelName]->panelSetPosition(0, rect.top);
-        if (rect.left + x + rect.width > _width)
-            _panels[_dragPanelName]->panelSetPosition(_width - rect.width, rect.top);
-        if (rect.top + y < 0)
-            _panels[_dragPanelName]->panelSetPosition(rect.left, 0);
-        if (rect.top + y + rect.height > _height)
-            _panels[_dragPanelName]->panelSetPosition(rect.left, _height - rect.height);
-    }
+    if (!_prevMouse.lbIsPressed || !_curMouse.lbIsPressed || _dragPanelName == "")
+        return;
+    SDL_GetMouseState(&x, &y);
+    x -= _mDragPosX;
+    y -= _mDragPosY;
+    SDL_GetMouseState(&_mDragPosX, &_mDragPosY);
+    if (_panels.find(_dragPanelName) == _panels.end())
+        return;
+    rect = _panels[_dragPanelName]->getRect();
+    _panels[_dragPanelName]->panelSetPosition(rect.left + x, rect.top + y);
+    if (rect.left + x < 0)
+        _panels[_dragPanelName]->panelSetPosition(0, rect.top);
+    if (rect.left + x + rect.width > _width)
+        _panels[_dragPanelName]->panelSetPosition(_width - rect.width, rect.top);
+    if (rect.top + y < 0)
+        _panels[_dragPanelName]->panelSetPosition(rect.left, 0);
+    if (rect.top + y + rect.height > _height)
+        _panels[_dragPanelName]->panelSetPosition(rect.left, _height - rect.height);
 }
 
 void ZappyGui::Renderer::_mouseEventOnRelease()
 {
     std::string name = "";
 
-    if (_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
+    if (!_prevMouse.lbIsPressed || _curMouse.lbIsPressed)
+        return;
+    for (std::size_t i = 0; i < _panels.size(); i++)
     {
-        for (std::size_t i = 0; i < _panels.size(); i++)
+        if (_panels.at(i).second->closeButton != nullptr && _panels.at(i).second->closeButton->isClick)
         {
-            if (_panels.at(i).second->closeButton != nullptr && _panels.at(i).second->closeButton->isClick)
-            {
-                if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
-                    name = _panels.at(i).first;
-                _panels.at(i).second->closeButton->isClick = false;
-            }
+            if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top))
+                name = _panels.at(i).first;
+            _panels.at(i).second->closeButton->isClick = false;
         }
-        if (name != "")
-        {
-            _panels.erase(name);
-            if (_tilePanels != nullptr && _tilePanels->find(name) != _tilePanels->end())
-                _tilePanels->erase(name);
-            if (_playerPanels != nullptr && _playerPanels->find(name) != _playerPanels->end())
-                _playerPanels->erase(name);
-        }
-        if (name == "" && _dragPanelName == "")
-            _mouseClicks.push(ZappyGui::Vector2{static_cast<float>(_curMouse.x) / _width, static_cast<float>(_curMouse.y) / _height});
-        _dragPanelName = "";
     }
+    if (name != "")
+    {
+        _panels.erase(name);
+        if (_tilePanels != nullptr && _tilePanels->find(name) != _tilePanels->end())
+            _tilePanels->erase(name);
+        if (_playerPanels != nullptr && _playerPanels->find(name) != _playerPanels->end())
+            _playerPanels->erase(name);
+    }
+    if (name == "" && _dragPanelName == "")
+        _mouseClicks.push(ZappyGui::Vector2{static_cast<float>(_curMouse.x) / _width, static_cast<float>(_curMouse.y) / _height});
+    _dragPanelName = "";
 }
 
 void ZappyGui::Renderer::_mouseEventUpdate()
 {
-    if (!_prevMouse.lbIsPressed && !_curMouse.lbIsPressed)
+    if (_prevMouse.lbIsPressed || _curMouse.lbIsPressed)
+        return;
+    for (std::size_t i = 0; i < _panels.size(); i++)
     {
-        for (std::size_t i = 0; i < _panels.size(); i++)
-        {
-            if (_panels.at(i).second->closeButton == nullptr)
-                continue;
-            if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top)
-                && !_panels.at(i).second->closeButton->isClick)
-                _panels.at(i).second->closeButton->isHover = true;
-            else
-                _panels.at(i).second->closeButton->isHover = false;
-        }
+        if (_panels.at(i).second->closeButton == nullptr)
+            continue;
+        if (_panels.at(i).second->closeButton->rect.isInRect(_curMouse.x - _panels.at(i).second->getRect().left, _curMouse.y - _panels.at(i).second->getRect().top)
+            && !_panels.at(i).second->closeButton->isClick)
+            _panels.at(i).second->closeButton->isHover = true;
+        else
+            _panels.at(i).second->closeButton->isHover = false;
     }
 }
 
