@@ -118,23 +118,24 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">void</span> removePlayer(<span class="keywordtype">size_t</span> playerId);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">void</span> update(<a class="code" href="classSafeQueue.html">SafeQueue&lt;std::string&gt;</a> &amp;requests, <span class="keywordtype">float</span> deltaTime);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordtype">void</span> updatePlayers(<span class="keywordtype">float</span> deltaTime);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classZappyGui_1_1Game.html#ac59f8d86c6a837dfcf1a3e9569ff98f5">   78</a></span>&#160;            std::map&lt;std::string, std::list&lt;ZappyGui::Player&gt;&gt; <a class="code" href="classZappyGui_1_1Game.html#ac59f8d86c6a837dfcf1a3e9569ff98f5">_teams</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">void</span> _updatePlayerPosition(<a class="code" href="classZappyGui_1_1Player.html">Player</a> &amp;<a class="code" href="structplayer.html">player</a> );</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordtype">void</span> _updatePlayerRotation(<a class="code" href="classZappyGui_1_1Player.html">Player</a> &amp;<a class="code" href="structplayer.html">player</a> );</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    };</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classZappyGui_1_1Game.html#a12f91e8c43fdf64344ecb3f47adb1230">   77</a></span>&#160;            std::map&lt;std::string, std::list&lt;ZappyGui::Player&gt;&gt; &amp;<a class="code" href="classZappyGui_1_1Game.html#a12f91e8c43fdf64344ecb3f47adb1230">getTeams</a>() { <span class="keywordflow">return</span> _teams; };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">void</span> _updatePlayerPosition(<a class="code" href="classZappyGui_1_1Player.html">Player</a> &amp;<a class="code" href="structplayer.html">player</a> );</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordtype">void</span> _updatePlayerRotation(<a class="code" href="classZappyGui_1_1Player.html">Player</a> &amp;<a class="code" href="structplayer.html">player</a> );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            std::map&lt;std::string, std::list&lt;ZappyGui::Player&gt;&gt; _teams;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    };</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aClient_8hpp_html"><div class="ttname"><a href="Client_8hpp.html">Client.hpp</a></div></div>
 <div class="ttc" id="aPlayer_8hpp_html"><div class="ttname"><a href="Player_8hpp.html">Player.hpp</a></div></div>
 <div class="ttc" id="aSafeQueue_8hpp_html"><div class="ttname"><a href="SafeQueue_8hpp.html">SafeQueue.hpp</a></div></div>
 <div class="ttc" id="aclassSafeQueue_html"><div class="ttname"><a href="classSafeQueue.html">SafeQueue&lt; std::string &gt;</a></div></div>
 <div class="ttc" id="aclassZappyGui_1_1Game_html"><div class="ttname"><a href="classZappyGui_1_1Game.html">ZappyGui::Game</a></div><div class="ttdef"><b>Definition:</b> Game.hpp:48</div></div>
+<div class="ttc" id="aclassZappyGui_1_1Game_html_a12f91e8c43fdf64344ecb3f47adb1230"><div class="ttname"><a href="classZappyGui_1_1Game.html#a12f91e8c43fdf64344ecb3f47adb1230">ZappyGui::Game::getTeams</a></div><div class="ttdeci">std::map&lt; std::string, std::list&lt; ZappyGui::Player &gt; &gt; &amp; getTeams()</div><div class="ttdef"><b>Definition:</b> Game.hpp:77</div></div>
 <div class="ttc" id="aclassZappyGui_1_1Game_html_a15bcc06cbc03e214fc9089baaa6faae5"><div class="ttname"><a href="classZappyGui_1_1Game.html#a15bcc06cbc03e214fc9089baaa6faae5">ZappyGui::Game::Game</a></div><div class="ttdeci">Game()=default</div></div>
 <div class="ttc" id="aclassZappyGui_1_1Game_html_a998a19d48a14126d821e14792b6620d4"><div class="ttname"><a href="classZappyGui_1_1Game.html#a998a19d48a14126d821e14792b6620d4">ZappyGui::Game::~Game</a></div><div class="ttdeci">~Game()=default</div></div>
-<div class="ttc" id="aclassZappyGui_1_1Game_html_ac59f8d86c6a837dfcf1a3e9569ff98f5"><div class="ttname"><a href="classZappyGui_1_1Game.html#ac59f8d86c6a837dfcf1a3e9569ff98f5">ZappyGui::Game::_teams</a></div><div class="ttdeci">std::map&lt; std::string, std::list&lt; ZappyGui::Player &gt; &gt; _teams</div><div class="ttdef"><b>Definition:</b> Game.hpp:78</div></div>
 <div class="ttc" id="aclassZappyGui_1_1Game_html_ad7ff0b882d198410b9276c72a303e545"><div class="ttname"><a href="classZappyGui_1_1Game.html#ad7ff0b882d198410b9276c72a303e545">ZappyGui::Game::getNbTeams</a></div><div class="ttdeci">std::size_t getNbTeams() const</div><div class="ttdoc">get the number of teams</div><div class="ttdef"><b>Definition:</b> Game.hpp:55</div></div>
 <div class="ttc" id="aclassZappyGui_1_1PlayerUndefinedError_html"><div class="ttname"><a href="classZappyGui_1_1PlayerUndefinedError.html">ZappyGui::PlayerUndefinedError</a></div><div class="ttdoc">PlayerUndefinedError Class Error Error thrown when trying to get a player that does not exist.</div><div class="ttdef"><b>Definition:</b> Game.hpp:39</div></div>
 <div class="ttc" id="aclassZappyGui_1_1PlayerUndefinedError_html_a8b54dba23ebb4ccb4819f6059d49e671"><div class="ttname"><a href="classZappyGui_1_1PlayerUndefinedError.html#a8b54dba23ebb4ccb4819f6059d49e671">ZappyGui::PlayerUndefinedError::~PlayerUndefinedError</a></div><div class="ttdeci">~PlayerUndefinedError()=default</div></div>

@@ -79,8 +79,8 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a2ac7b2180bc417011cf67f0f3c8d3079">init_entry</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *entry)</td></tr>
 <tr class="separator:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93725c7eecce6429da8d495719d5bdaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a93725c7eecce6429da8d495719d5bdaa">set_position_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, <a class="el" href="game_8h.html#a9df65ef34efcf40007091fa0e679ea0c">player_t</a> *info)</td></tr>
-<tr class="separator:a93725c7eecce6429da8d495719d5bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbda0e354e20c44ef4ba35e7ae3d23e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#afbda0e354e20c44ef4ba35e7ae3d23e4">set_position_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, <a class="el" href="game_8h.html#a9df65ef34efcf40007091fa0e679ea0c">player_t</a> *info, struct <a class="el" href="structteam.html">team</a> *<a class="el" href="structteam.html">team</a>)</td></tr>
+<tr class="separator:afbda0e354e20c44ef4ba35e7ae3d23e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a25c3a3df97f310df1bf1ed140eb7d01c">is_player</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *<a class="el" href="structplayer.html">player</a>, struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
 <tr class="separator:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e3c1d0c82f173ce03652a42031337e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a1e3c1d0c82f173ce03652a42031337e9">same_pos</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *entry, struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
@@ -181,8 +181,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a93725c7eecce6429da8d495719d5bdaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93725c7eecce6429da8d495719d5bdaa">&#9670;&nbsp;</a></span>set_position_player()</h2>
+<a id="afbda0e354e20c44ef4ba35e7ae3d23e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbda0e354e20c44ef4ba35e7ae3d23e4">&#9670;&nbsp;</a></span>set_position_player()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +197,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="game_8h.html#a9df65ef34efcf40007091fa0e679ea0c">player_t</a> *&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
+          <td class="paramname"><em>info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structteam.html">team</a> *&#160;</td>
+          <td class="paramname"><em>team</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
