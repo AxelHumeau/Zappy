@@ -24,7 +24,7 @@ void ZappyGui::pin(ZappyGui::Gui &gui, std::vector<std::string> args) {
         player.setInventoryAmount(ZappyGui::ResourceType::Mendiane, values[7]);
         player.setInventoryAmount(ZappyGui::ResourceType::Phiras, values[8]);
         player.setInventoryAmount(ZappyGui::ResourceType::Thystame, values[9]);
-    } catch (ZappyGui::PlayerUndifinedError const &e) {
+    } catch (ZappyGui::PlayerUndefinedError const &e) {
         return;
     }
 }

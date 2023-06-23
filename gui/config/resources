@@ -5,3 +5,5 @@
 ./gui/assets/Washy.zip Zip Assets
 ./gui/assets/Particles.zip Zip Assets
 ./gui/assets/RTShaderLib FileSystem General
+./gui/assets/ FileSystem Assets
+./gui/assets/PanelCloseButton.zip Zip Assets

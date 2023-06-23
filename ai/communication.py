@@ -147,13 +147,13 @@ class Communication:
             return False
         resp = self.response.front()
         if self.elevation == True:
-            if   resp[0] == "ko":
+            if resp[0] == "ko":
                 self.elevation = False
                 self.pop_information()
                 return False
-            else:
+            elif "Current level" in resp:
                 # print("req =", self.request.front)
-                # print("res =", resp)
+                print("-------------- res = ", resp + "---------------")
                 self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
@@ -185,7 +185,9 @@ class Communication:
         Returns:
             boolean: True/False
         """
-        if (len(self.response) != 0 and self.response.front() == 'dead'):
+        if ("dead" in self.response):
+            print ("------------- INVENTORY BEFORE DEAD : -----------------")
+            print (self.inventory)
             return action.DEAD
         if (len(self.response) != 0 and
                 self.response.front().find("message") != -1):
@@ -199,12 +201,13 @@ class Communication:
                 self.current_level = int(self.response.front().split(':')[1].strip())
                 self.response.pop()
                 self.elevation = False
+                print("recev incantation")
                 return action.INCANTATION
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
             return action.NOTHING
-        if self.request.front() != ["Look"]:
+        if (len(self.request) != 0 and self.request.front() != ["Look"]):
             print(self.response, self.request)
         if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]

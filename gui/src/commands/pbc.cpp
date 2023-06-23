@@ -10,7 +10,7 @@
 void ZappyGui::pbc(ZappyGui::Gui &gui, std::vector<std::string> args) {
     std::vector<std::size_t> values;
 
-    if (args.size() != 2)
+    if (args.size() < 2)
         return;
     values = gui.convertArgsToSize_t(args, 0, 0);
     if (values.size() != 1)

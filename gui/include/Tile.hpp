@@ -40,7 +40,7 @@ namespace ZappyGui {
             ZappyGui::GameObject &getGameobject();
             /// @brief get the amount of the given resourceType
             /// @param resourceType to get the amount
-            /// @return the amount of the given resourceType or throw an TileUndifinedResourceTypeError
+            /// @return the amount of the given resourceType or throw an TileUndefinedResourceTypeError
             std::size_t getResourceAmount(const ResourceType &resourceType);
             void setResourceAmount(const ResourceType &resourceType, std::size_t amount);
 

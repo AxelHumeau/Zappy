@@ -25,6 +25,7 @@ void accept_client(struct server *server)
         return;
     entry = malloc(sizeof(struct client_entry));
     entry->fd = fd;
+    printf("ID CLIENT %d spawned\n", count);
     entry->id = count++;
     init_entry(entry);
     init_buffer(&entry->buf_to_send);

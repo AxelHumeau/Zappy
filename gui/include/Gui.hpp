@@ -24,7 +24,7 @@ namespace ZappyGui {
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);
-            ~Gui();
+            ~Gui() = default;
             void initialize();
             void run();
             void processCommand(std::string command);
@@ -34,6 +34,8 @@ namespace ZappyGui {
             /// @param endIndex index to end in the args vector (0 by default for entire args vector)
             /// @return return an vector of size_t with the converted values or an empty one in case of error
             std::vector<std::size_t> convertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex = 0, std::size_t endIndex = static_cast<std::size_t>(-1));
+            /// @brief set the state to done and end the run loop
+            /// @param done new state
             void setDone(bool done);
 
             ZappyGui::Renderer &getRenderer() const { return *_renderer.get(); }
@@ -50,6 +52,14 @@ namespace ZappyGui {
             void addBroadcastParticle(Vector3 position);
 
         private:
+            void _checkMouseClick();
+            void _updatePanels();
+            void _createDefaultTextArea(std::shared_ptr<ZappyGui::Panel> p, std::string name, ZappyGui::Vector2i pos, std::string text);
+            std::unique_ptr<ZappyGui::Tile, Nop> _getTileByName(std::string name);
+            void _createTilePanel(std::unique_ptr<Tile, Nop> tile, ZappyGui::Vector2 pos);
+            std::unique_ptr<ZappyGui::Player, ZappyGui::Nop> _getPlayerByName(std::string name);
+            void _createPlayerPanel(std::unique_ptr<Player, Nop> player, ZappyGui::Vector2 pos);
+
             SafeQueue<std::string> &_receive;
             SafeQueue<std::string> &_requests;
             float _minDelayServerUpdates;
@@ -62,11 +72,17 @@ namespace ZappyGui {
             size_t _mapHeight = 0;
             std::size_t _timeUnit;
             std::list<TimerPtr<BroadcastParticle>> _broadcastParticles;
+            std::unique_ptr<Ogre::RaySceneQuery, Nop> _sceneQuery;
+            std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> _tilePanels;
+            std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 
             std::vector<std::size_t> _ImplconvertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex, std::size_t endIndex);
     };
+
+    void updatePlayerPosition(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
+    void updatePlayerRotation(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
 
     void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
     void msz(ZappyGui::Gui &gui, std::vector<std::string> args);

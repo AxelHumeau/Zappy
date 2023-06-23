@@ -87,11 +87,9 @@ void broadcast(char *cmd, struct client_entry *client, struct server *server)
         return;
     }
     args = str_to_array(cmd, "\t ");
-    for (int i = 0; i < server->nb_teams; i++) {
-        SLIST_FOREACH(player, &server->clients, next) {
-            if (is_player(player, client))
-                find_closest_zone(client, player, server, args);
-        }
+    SLIST_FOREACH(player, &server->clients, next) {
+        if (is_player(player, client))
+            find_closest_zone(client, player, server, args);
     }
     broadcast_to_guis(server, &notify_broadcast,
         client->id, cmd + 1);
