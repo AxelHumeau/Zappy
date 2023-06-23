@@ -108,6 +108,8 @@ namespace ZappyGui {
             void setTilePanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> tilePanels);
             void setPlayerPanels(std::shared_ptr<std::map<std::string, std::size_t>> playerPanels);
 
+            ZappyGui::Vector2i getDimensions() { return ZappyGui::Vector2i(_width, _height); };
+
         private:
             /// @brief Loads all resources in the file in parameter in ogre
             /// @param resourceFile File containing the resources to load

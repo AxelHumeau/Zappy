@@ -290,11 +290,13 @@ std::unique_ptr<ZappyGui::Tile, ZappyGui::Nop> ZappyGui::Gui::_getTileByName(std
 void ZappyGui::Gui::_createTilePanel(std::unique_ptr<Tile, Nop> tile, ZappyGui::Vector2 pos)
 {
     static std::size_t idTile;
+    std::string name;
+    std::shared_ptr<ZappyGui::Panel> p;
 
     idTile++;
-    std::string name = "Overlay_Tile_" + std::to_string(idTile);
-    std::shared_ptr<ZappyGui::Panel> p(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
-    p->panelSetPosition((pos.x * 1920) - 200, (pos.y * 1080) - 10);
+    name = "Overlay_Tile_" + std::to_string(idTile);
+    p.reset(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
+    p->panelSetPosition((pos.x * _renderer->getDimensions().data[0]) - 200, (pos.y * _renderer->getDimensions().data[1]) - 10);
     p->panelSetDimensions(400, 200);
     p->panelSetMaterial("TilePanelMaterial");
 
@@ -354,11 +356,15 @@ std::unique_ptr<ZappyGui::Player, ZappyGui::Nop> ZappyGui::Gui::_getPlayerByName
 void ZappyGui::Gui::_createPlayerPanel(std::unique_ptr<Player, Nop> player, ZappyGui::Vector2 pos)
 {
     static std::size_t idPlayer;
+    std::string name;
+    std::string strPos;
+    std::shared_ptr<ZappyGui::Panel> p;
 
     idPlayer++;
-    std::string name = "Overlay_Player_" + std::to_string(idPlayer);
-    std::shared_ptr<ZappyGui::Panel> p(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
-    p->panelSetPosition((pos.x * 1920) - 200, (pos.y * 1080) - 10);
+    name = "Overlay_Player_" + std::to_string(idPlayer);
+    p.reset(new ZappyGui::Panel(_renderer->getOverlay(), name, true));
+
+    p->panelSetPosition((pos.x * _renderer->getDimensions().data[0]) - 200, (pos.y * _renderer->getDimensions().data[1]) - 10);
     p->panelSetDimensions(400, 300);
     p->panelSetMaterial("PlayerPanelMaterial");
 
@@ -375,7 +381,7 @@ void ZappyGui::Gui::_createPlayerPanel(std::unique_ptr<Player, Nop> player, Zapp
     _createDefaultTextArea(p, name + "_level", ZappyGui::Vector2i(100, 105), "Level");
     _createDefaultTextArea(p, name + "_levelNb", ZappyGui::Vector2i(225, 105), std::to_string(player->getLevel()));
 
-    std::string strPos = std::to_string(player->getMapPosition().data[0]) + " " + std::to_string(player->getMapPosition().data[1]);
+    strPos = std::to_string(player->getMapPosition().data[0]) + " " + std::to_string(player->getMapPosition().data[1]);
     _createDefaultTextArea(p, name + "_pos", ZappyGui::Vector2i(100, 135), "Position");
     _createDefaultTextArea(p, name + "_posNb", ZappyGui::Vector2i(225, 135), strPos);
 
