@@ -16,4 +16,6 @@ void ZappyGui::pbc(ZappyGui::Gui &gui, std::vector<std::string> args) {
     if (values.size() != 1)
         return;
     std::cout << "- (" << values[0] << ") shouted \"" << args[1] << "\"" << std::endl;
+    auto pos = gui.getGame().getPlayer(values[0]).getPosition();
+    gui.addBroadcastParticle(pos);
 }

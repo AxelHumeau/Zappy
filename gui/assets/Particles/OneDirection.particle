@@ -13,7 +13,7 @@ particle_system OneDirection
     {
         angle           0
         emission_rate   75
-        time_to_live    2
+        time_to_live    5
         direction       0 0 0
         velocity_min    30
         velocity_max    30

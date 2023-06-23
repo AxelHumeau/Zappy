@@ -6,7 +6,6 @@
 */
 
 #include "Gui.hpp"
-#include "Particles/BroadcastParticle.hpp"
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
@@ -90,14 +89,14 @@ void ZappyGui::Gui::initialize() {
 void ZappyGui::Gui::run() {
     float deltaTime = _renderer->getDeltaTime();
     std::string command;
-    TimerPtr<BroadcastParticle> particlePtr(std::chrono::milliseconds(1000), _renderer->getSceneManager(), Vector3({0, 5, 0}));
 
     while (!_renderer->isDone())
     {
         _renderer->updateDeltaTime();
         deltaTime = _renderer->getDeltaTime();
 
-        particlePtr.updateTimer();
+        for (auto &broadParticle: _broadcastParticles)
+            broadParticle.updateTimer();
 
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
             _game.update(_requests);
@@ -160,4 +159,11 @@ std::vector<std::size_t> ZappyGui::Gui::_ImplconvertArgsToSize_t(std::vector<std
 
 void ZappyGui::Gui::setDone(bool done) {
     _renderer->setDone(done);
+}
+
+void ZappyGui::Gui::addBroadcastParticle(Vector3 position)
+{
+    _broadcastParticles.remove_if([](auto& particlePtr){ return particlePtr == nullptr; });
+    _broadcastParticles.emplace_back(std::chrono::milliseconds(100000 / _timeUnit),
+        _renderer->getSceneManager(), position, _timeUnit);
 }

@@ -19,7 +19,6 @@
     #include "Camera.hpp"
 
 namespace ZappyGui {
-
     /// @brief Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs
     class Renderer {
         public:

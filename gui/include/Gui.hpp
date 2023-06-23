@@ -9,6 +9,7 @@
     #define GUI_HPP_
     #include <functional>
     #include <utility>
+    #include <list>
     #include "Renderer.hpp"
     #include "Camera.hpp"
     #include "Light.hpp"
@@ -16,7 +17,8 @@
     #include "SafeQueue.hpp"
     #include "Game.hpp"
     #include "Client.hpp"
-#include "TimerPtr.hpp"
+    #include "TimerPtr.hpp"
+    #include "Particles/BroadcastParticle.hpp"
 
 namespace ZappyGui {
     class Gui {
@@ -43,6 +45,9 @@ namespace ZappyGui {
             ZappyGui::Game &getGame() { return _game; }
             std::size_t getTimeUnit() { return _timeUnit; }
             void sendRequest(std::string command, std::vector<std::string> args) { Network::Client::queueRequest(_requests, command, args); }
+            /// @brief add a new broadcast particle effect at a given position
+            /// @param position the center of the particle effect
+            void addBroadcastParticle(Vector3 position);
 
         private:
             SafeQueue<std::string> &_receive;
@@ -56,8 +61,7 @@ namespace ZappyGui {
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
             std::size_t _timeUnit;
-
-
+            std::list<TimerPtr<BroadcastParticle>> _broadcastParticles;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 

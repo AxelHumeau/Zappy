@@ -14,7 +14,7 @@
 namespace ZappyGui {
     class BroadcastParticle {
     public:
-        BroadcastParticle(std::shared_ptr<Ogre::SceneManager> sceneManager, Vector3 origin);
+        BroadcastParticle(std::shared_ptr<Ogre::SceneManager> sceneManager, Vector3 origin, size_t frequency);
         ~BroadcastParticle() = default;
 
     private:
