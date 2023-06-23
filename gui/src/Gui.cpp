@@ -67,17 +67,17 @@ void ZappyGui::Gui::initialize() {
     }
     if (_renderer->isDone())
         return;
-    float tileSize = 2.0f;
+    float tileSize = 6.0f;
     std::shared_ptr<ZappyGui::Tilemap> tilemap = std::make_shared<ZappyGui::Tilemap>(_renderer->getSceneManager(), _mapWidth, _mapHeight);
     tilemap->setPosition((_mapWidth * tileSize) / 2, -(tileSize * 2) * 2, _mapWidth * tileSize + (_mapWidth * tileSize) / 4);
     ZappyGui::Vector2i size = tilemap->getSize();
     for (int y = 0; y < size.data[1]; y++) {
         for (int x = 0; x < size.data[0]; x++) {
-            std::shared_ptr<ZappyGui::GameObject> obj_ptr = std::make_shared<ZappyGui::GameObject>(_renderer->getSceneManager(), "hamster.mesh");
+            std::shared_ptr<ZappyGui::GameObject> obj_ptr = std::make_shared<ZappyGui::GameObject>(_renderer->getSceneManager(), "FloorTile.mesh");
             (*tilemap)[y][x].bindGameObject(obj_ptr);
         }
     }
-    tilemap->setTileSize(tileSize, tileSize, tileSize);
+    tilemap->setTileSize(tileSize, 4.0f, tileSize);
     setTilemap(tilemap);
 }
 
