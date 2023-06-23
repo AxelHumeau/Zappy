@@ -179,6 +179,9 @@ void ZappyGui::Renderer::_checkKeydown(SDL_Event &event)
         case SDLK_RIGHT:
             _inputs[SDLK_RIGHT] = true;
             break;
+        case SDLK_ESCAPE:
+            _done = true;
+            break;
         default:
             break;
     }
