@@ -37,12 +37,27 @@ namespace ZappyGui {
             /// @param done new state
             void setDone(bool done);
 
+            /// @brief get the renderer
+            /// @return the a reference to renderer
             ZappyGui::Renderer &getRenderer() const { return *_renderer.get(); }
+            /// @brief set the size of the map
+            /// @param width width of the map
+            /// @param height height of the map
             void setMapSize(size_t width, size_t height) { _mapWidth = width; _mapHeight = height; }
+            /// @brief set the general time unit of the game
+            /// @param timeUnit time unit to set
             void setTimeUnit(std::size_t timeUnit) { _timeUnit = timeUnit; }
+            /// @brief get the size of the map
+            /// @return a pair containing the map width and the map height
             std::pair<size_t, size_t> getMapSize() const { return std::pair<size_t, size_t>(_mapWidth, _mapHeight); }
+            /// @brief set the tilemap
+            /// @param tilemap tilemap to set
             void setTilemap(std::shared_ptr<ZappyGui::Tilemap> tilemap) { _tilemap = tilemap; }
+            /// @brief get the tilemap
+            /// @return the tilemap
             std::shared_ptr<ZappyGui::Tilemap> getTilemap() { return _tilemap; }
+            /// @brief 
+            /// @return 
             ZappyGui::Game &getGame() { return _game; }
             std::size_t getTimeUnit() { return _timeUnit; }
             void sendRequest(std::string command, std::vector<std::string> args) { Network::Client::queueRequest(_requests, command, args); }
