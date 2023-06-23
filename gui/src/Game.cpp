@@ -12,13 +12,13 @@
 
 namespace ZappyGui {
 
-    TeamUndifinedError::TeamUndifinedError(std::string teamName)
-    : message("Undifined team: \"" + teamName + "\"") {}
-    char const *TeamUndifinedError::what() const noexcept { return message.c_str(); }
+    TeamUndefinedError::TeamUndefinedError(std::string teamName)
+    : message("Undefined team: \"" + teamName + "\"") {}
+    char const *TeamUndefinedError::what() const noexcept { return message.c_str(); }
 
-    PlayerUndifinedError::PlayerUndifinedError(std::size_t playerId)
-    : message("Undifined player: \"" + std::to_string(playerId) + "\"") {}
-    char const *PlayerUndifinedError::what() const noexcept { return message.c_str(); }
+    PlayerUndefinedError::PlayerUndefinedError(std::size_t playerId)
+    : message("Undefined player: \"" + std::to_string(playerId) + "\"") {}
+    char const *PlayerUndefinedError::what() const noexcept { return message.c_str(); }
 
     void Game::addTeam(std::string teamName) {
         if (_teams.find(teamName) == _teams.end())
@@ -27,7 +27,7 @@ namespace ZappyGui {
 
     std::list<ZappyGui::Player> &Game::getTeam(std::string teamName) {
         if (_teams.find(teamName) == _teams.end())
-            throw TeamUndifinedError(teamName);
+            throw TeamUndefinedError(teamName);
         return _teams[teamName];
     }
 
@@ -40,13 +40,13 @@ namespace ZappyGui {
             }
             iterator++;
         }
-        throw PlayerUndifinedError(playerId);
+        throw PlayerUndefinedError(playerId);
     }
 
     void Game::removePlayer(size_t playerId) {
         for (auto iterator = _teams.begin(); iterator != _teams.end(); iterator++)
             iterator->second.remove_if([playerId](ZappyGui::Player &player){ return player.getId() == playerId; });
-        throw PlayerUndifinedError(playerId);
+        throw PlayerUndefinedError(playerId);
     }
 
     void Game::update(SafeQueue<std::string> &requests, float deltaTime) {

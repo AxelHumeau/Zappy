@@ -79,12 +79,12 @@ namespace ZappyGui {
 
     std::size_t Player::getInventoryAmount(const ResourceType &resourceType) {
         if (_inventory.find(resourceType) == _inventory.end())
-            throw UndifinedResourceTypeError();
+            throw UndefinedResourceTypeError();
         return _inventory[resourceType];
     }
     void Player::setInventoryAmount(const ResourceType &resourceType, std::size_t amount) {
         if (_inventory.find(resourceType) == _inventory.end())
-            throw UndifinedResourceTypeError();
+            throw UndefinedResourceTypeError();
         _inventory[resourceType] = amount;
     }
 }

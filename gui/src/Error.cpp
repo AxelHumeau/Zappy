@@ -16,8 +16,8 @@ namespace ZappyGui {
     IndexOutOfBoundsError::~IndexOutOfBoundsError() {}
     char const *IndexOutOfBoundsError::what() const noexcept { return message.c_str(); }
 
-    UndifinedResourceTypeError::UndifinedResourceTypeError()
-    : message("Undifined resource type") {}
-    char const *UndifinedResourceTypeError::what() const noexcept { return message.c_str(); }
+    UndefinedResourceTypeError::UndefinedResourceTypeError()
+    : message("Undefined resource type") {}
+    char const *UndefinedResourceTypeError::what() const noexcept { return message.c_str(); }
 }
 

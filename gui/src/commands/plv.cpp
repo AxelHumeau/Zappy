@@ -18,7 +18,7 @@ void ZappyGui::plv(ZappyGui::Gui &gui, std::vector<std::string> args) {
     try {
         ZappyGui::Player &player = gui.getGame().getPlayer(values[0]);
         player.setLevel(values[1]);
-    } catch (ZappyGui::PlayerUndifinedError const &e) {
+    } catch (ZappyGui::PlayerUndefinedError const &e) {
         return;
     }
 }
