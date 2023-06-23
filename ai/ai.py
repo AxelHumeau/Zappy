@@ -162,14 +162,16 @@ class AI:
     def add_to_request_queue(self, commande):
         for cmd in commande:
             self.communication.request.push(cmd)
+            self.communication.count += 1
 
     def act_look(self):
         if (self.need_player == True and self.following != True):
             print("send here")
-            self.communication.writebuffer += "Broadcast " + str(self.team) + " here\n"
-            self.communication.request.push(["Broadcast", str(self.team) + " here\n"])
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " here " + str(self.lvl) + "\n"
+            self.communication.request.push(["Broadcast", str(self.team) + " here " + str(self.lvl) + "\n"])
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.communication.count += 2
             self.ask_help += 1
             if self.ask_help >= 5 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
                 self.need_player = False
@@ -183,19 +185,21 @@ class AI:
         if self.following == True and self.prio != priority.FOOD:
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.communication.count += 1
             return
         print("search = ", self.prio)
         path = self.get_best_path(self.get_target(self.communication.look_info))
-        #print("path", path)
-        #print("nb_players_on_me", self.nb_players_on_me)
+        print("path", path)
+        # print("nb_players_on_me", self.nb_players_on_me)
         #if len(path) != 0:
-            # print(self.communication.look_info)
+        print(self.communication.look_info)
         if len(path) == 0 and self.lookaround == 3:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
             self.add_to_request_queue([["Right"], ["Forward"]])
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.communication.count += 1
             return
         if len(path) == 0:
             self.lookaround += 1
@@ -249,12 +253,14 @@ class AI:
     def Set(self):
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
         print("set")
 
     def Take(self):
         print("Take")
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
 
     def failed(self):
         if (self.start_elevation == True):
@@ -278,8 +284,12 @@ class AI:
 
     def send_here(self):
         print("here")
+        print(self.communication.message.front())
         if self.following == True:
             command = self.communication.message.front()[0]
+            message = self.communication.message.front()[1].split(" ")[-1].strip()
+            if (int(message) != self.lvl):
+                return
             if command in [1, 2, 8]:
                 self.communication.writebuffer += "Forward\n"
                 self.add_to_request_queue([["Forward"]])
@@ -289,7 +299,7 @@ class AI:
             elif command in [6, 7]:
                 self.communication.writebuffer += "Right\n"
                 self.add_to_request_queue([["Right"]])
-            elif command == 8:
+            elif command == 5:
                 self.communication.writebuffer += "Right\nRight\n"
                 self.add_to_request_queue([["Right"], ["Right"]])
 
@@ -337,9 +347,10 @@ class AI:
                 print ("DEAD")
                 return
             self.handling_message()
-            if (handling == action.NOTHING):
+            if (handling == action.NOTHING or handling == action.BROADCAST):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
+                self.communication.count += 1
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break

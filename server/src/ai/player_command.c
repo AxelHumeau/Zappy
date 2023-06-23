@@ -36,6 +36,9 @@ static void time_command(struct client_entry *client,
     if (client->timer == -1)
         client->timer = command.cooldown;
     else if (client->timer <= 0) {
+        printf("----------------------\n");
+        printf("CLIENT (%d) - exec : [%s]\n", client->id, line);
+        printf("----------------------\n");
         (command.function) (line + strlen(command.command), client, server);
         clean_player_command(client);
         client->timer = -1;
