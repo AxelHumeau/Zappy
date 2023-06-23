@@ -105,6 +105,9 @@ void ZappyGui::Gui::run()
         _renderer->updateDeltaTime();
         deltaTime = _renderer->getDeltaTime();
 
+        for (auto &broadParticle: _broadcastParticles)
+            broadParticle.updateTimer();
+
         if (_waitedServerUpdateDelay >= _minDelayServerUpdates) {
             _game.update(_requests, deltaTime);
             _tilemap->update(_requests);
@@ -174,6 +177,13 @@ std::vector<std::size_t> ZappyGui::Gui::_ImplconvertArgsToSize_t(std::vector<std
 void ZappyGui::Gui::setDone(bool done)
 {
     _renderer->setDone(done);
+}
+
+void ZappyGui::Gui::addBroadcastParticle(Vector3 position)
+{
+    _broadcastParticles.remove_if([](auto& particlePtr){ return particlePtr == nullptr; });
+    _broadcastParticles.emplace_back(std::chrono::milliseconds(100000 / _timeUnit),
+        _renderer->getSceneManager(), position, _timeUnit);
 }
 
 void ZappyGui::Gui::_checkMouseClick()

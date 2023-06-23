@@ -21,6 +21,8 @@ set(SRCS
     src/Player.cpp
     src/Utils.cpp
     src/Error.cpp
+    src/Particles/Particle.cpp
+    src/Particles/BroadcastParticle.cpp
     src/commands/msz.cpp
     src/commands/bct.cpp
     src/commands/pdi.cpp

@@ -9,6 +9,7 @@
     #define GUI_HPP_
     #include <functional>
     #include <utility>
+    #include <list>
     #include "Renderer.hpp"
     #include "Camera.hpp"
     #include "Light.hpp"
@@ -16,10 +17,10 @@
     #include "SafeQueue.hpp"
     #include "Game.hpp"
     #include "Client.hpp"
+    #include "TimerPtr.hpp"
+    #include "Particles/BroadcastParticle.hpp"
 
 namespace ZappyGui {
-
-
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);
@@ -46,6 +47,9 @@ namespace ZappyGui {
             ZappyGui::Game &getGame() { return _game; }
             std::size_t getTimeUnit() { return _timeUnit; }
             void sendRequest(std::string command, std::vector<std::string> args) { Network::Client::queueRequest(_requests, command, args); }
+            /// @brief add a new broadcast particle effect at a given position
+            /// @param position the center of the particle effect
+            void addBroadcastParticle(Vector3 position);
 
         private:
             void _checkMouseClick();
@@ -67,6 +71,7 @@ namespace ZappyGui {
             size_t _mapWidth = 0;
             size_t _mapHeight = 0;
             std::size_t _timeUnit;
+            std::list<TimerPtr<BroadcastParticle>> _broadcastParticles;
             std::unique_ptr<Ogre::RaySceneQuery, Nop> _sceneQuery;
             std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> _tilePanels;
             std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
