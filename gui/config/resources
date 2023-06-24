@@ -1,9 +1,8 @@
 ./gui/assets/hamster.zip Zip Assets
-./gui/assets/hamsterSky.zip Zip Assets
+./gui/assets/Sky.zip Zip Assets
 ./gui/assets/Mathias.zip Zip Assets
 ./gui/assets/Crystal.zip Zip Assets
 ./gui/assets/Washy.zip Zip Assets
-./gui/assets/Particles.zip Zip Assets
 ./gui/assets/RTShaderLib FileSystem General
 ./gui/assets/ FileSystem Assets
 ./gui/assets/PanelCloseButton.zip Zip Assets
