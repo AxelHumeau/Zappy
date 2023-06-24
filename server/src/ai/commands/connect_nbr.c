@@ -17,7 +17,6 @@ void connect_nbr(char *cmd, struct client_entry *client,
     if (cmd[0] == '\0') {
         asprintf(&slots_left, "%d\n",
             client->player_info->team->nb_slots_left);
-        printf("slot left : %s", slots_left);
         add_to_buffer(&client->buf_to_send, slots_left, strlen(slots_left));
         free(slots_left);
     } else
