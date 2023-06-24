@@ -25,7 +25,6 @@ void accept_client(struct server *server)
         return;
     entry = malloc(sizeof(struct client_entry));
     entry->fd = fd;
-    printf("ID CLIENT %d spawned\n", count);
     entry->id = count++;
     init_entry(entry);
     init_buffer(&entry->buf_to_send);
@@ -59,17 +58,14 @@ int handle_client(struct client_entry *client,
         return EXIT_FAIL;
     if (client->is_role_defined && !client->is_gui &&
         client->player_info->inventory[FOOD] == 0) {
-            printf("CLIENT (%d) dead by food\n", client->id);
             client->is_dead = true;
             add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
     }
     if (!FD_ISSET(client->fd, read_fds))
         return EXIT_SUCCESS;
     read_char = read(client->fd, buffer, MAX_SIZE_BUFFER);
-    if (read_char <= 0) {
-        printf("CLIENT (%d) is dead by we don't know why mf\n", client->id);
+    if (read_char <= 0)
         return EXIT_FAIL;
-    }
     add_to_buffer(&client->buf_to_recv, buffer, read_char);
     if (!client->is_role_defined)
         return put_client_team(server, client);

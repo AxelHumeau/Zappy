@@ -14,7 +14,7 @@ void handle_player_command(struct client_entry *client, char *line)
 {
     if (!strcmp(line, "\0"))
         return;
-    if (client->count_command != 10)
+    if (client->count_command != MAX_COMMAND_SIZE)
         client->command[client->count_command++] = strdup(line);
 }
 
@@ -36,9 +36,6 @@ static void time_command(struct client_entry *client,
     if (client->timer == -1)
         client->timer = command.cooldown;
     else if (client->timer <= 0) {
-        printf("----------------------\n");
-        printf("CLIENT (%d) - exec : [%s]\n", client->id, line);
-        printf("----------------------\n");
         (command.function) (line + strlen(command.command), client, server);
         clean_player_command(client);
         client->timer = -1;
