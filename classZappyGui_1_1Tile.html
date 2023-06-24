@@ -77,8 +77,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1cf495d21617ddad9e8d36c089924ed7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#a1cf495d21617ddad9e8d36c089924ed7">Tile</a> (int x, int y)</td></tr>
-<tr class="separator:a1cf495d21617ddad9e8d36c089924ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e09939c5811c33199b37f16f2cc881"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#ae5e09939c5811c33199b37f16f2cc881">Tile</a> (std::shared_ptr&lt; Ogre::SceneManager &gt; sceneManager, int x, int y)</td></tr>
+<tr class="separator:ae5e09939c5811c33199b37f16f2cc881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a5ddb0a9f59ec8772ed37e2c1cbebf7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#a3a5ddb0a9f59ec8772ed37e2c1cbebf7">~Tile</a> ()</td></tr>
 <tr class="separator:a3a5ddb0a9f59ec8772ed37e2c1cbebf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a783ff8ec858b08f7f95f3d68e85e8f42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#acac056057a96108ecc393da044c469b0">ZappyGui::Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#a783ff8ec858b08f7f95f3d68e85e8f42">getPosition</a> () const</td></tr>
@@ -94,11 +94,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a424a481469edccec96960ee4a56ef4a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the amount of the given resourceType  <a href="classZappyGui_1_1Tile.html#a424a481469edccec96960ee4a56ef4a7">More...</a><br /></td></tr>
 <tr class="separator:a424a481469edccec96960ee4a56ef4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc6555be7fe9f5c67298d4dd8fafa587"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#afc6555be7fe9f5c67298d4dd8fafa587">setResourceAmount</a> (const <a class="el" href="namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9">ResourceType</a> &amp;resourceType, std::size_t amount)</td></tr>
+<tr class="memdesc:afc6555be7fe9f5c67298d4dd8fafa587"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the amount of the given resourceType of the tile and update the visualization  <a href="classZappyGui_1_1Tile.html#afc6555be7fe9f5c67298d4dd8fafa587">More...</a><br /></td></tr>
 <tr class="separator:afc6555be7fe9f5c67298d4dd8fafa587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03dfa458f940c9026e3018ad9f8c6e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#ad03dfa458f940c9026e3018ad9f8c6e6">setTileSize</a> (<a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">ZappyGui::Vector3</a> tileSize)</td></tr>
+<tr class="memdesc:ad03dfa458f940c9026e3018ad9f8c6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the size of the tile (spacing between all the tiles)  <a href="classZappyGui_1_1Tile.html#ad03dfa458f940c9026e3018ad9f8c6e6">More...</a><br /></td></tr>
+<tr class="separator:ad03dfa458f940c9026e3018ad9f8c6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ac0c8c3d85b09ee1241c98bf3daa68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tile.html#a19ac0c8c3d85b09ee1241c98bf3daa68">setTilemapOrigin</a> (<a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">ZappyGui::Vector3</a> tilemapOrigin)</td></tr>
+<tr class="memdesc:a19ac0c8c3d85b09ee1241c98bf3daa68"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the position of the tilemap saved by the tile to be placed correctly  <a href="classZappyGui_1_1Tile.html#a19ac0c8c3d85b09ee1241c98bf3daa68">More...</a><br /></td></tr>
+<tr class="separator:a19ac0c8c3d85b09ee1241c98bf3daa68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1cf495d21617ddad9e8d36c089924ed7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cf495d21617ddad9e8d36c089924ed7">&#9670;&nbsp;</a></span>Tile()</h2>
+<a id="ae5e09939c5811c33199b37f16f2cc881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e09939c5811c33199b37f16f2cc881">&#9670;&nbsp;</a></span>Tile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -106,6 +113,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">ZappyGui::Tile::Tile </td>
           <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; Ogre::SceneManager &gt;&#160;</td>
+          <td class="paramname"><em>sceneManager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
@@ -285,6 +298,83 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>set the amount of the given resourceType of the tile and update the visualization </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resourceType</td><td>name of the resource </td></tr>
+    <tr><td class="paramname">amount</td><td>amount of the resource </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a19ac0c8c3d85b09ee1241c98bf3daa68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19ac0c8c3d85b09ee1241c98bf3daa68">&#9670;&nbsp;</a></span>setTilemapOrigin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZappyGui::Tile::setTilemapOrigin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">ZappyGui::Vector3</a>&#160;</td>
+          <td class="paramname"><em>tilemapOrigin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set the position of the tilemap saved by the tile to be placed correctly </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tilemapOrigin</td><td>position of the tilemap </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad03dfa458f940c9026e3018ad9f8c6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03dfa458f940c9026e3018ad9f8c6e6">&#9670;&nbsp;</a></span>setTileSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZappyGui::Tile::setTileSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">ZappyGui::Vector3</a>&#160;</td>
+          <td class="paramname"><em>tileSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set the size of the tile (spacing between all the tiles) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tileSize</td><td>Vector3 of the size </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
