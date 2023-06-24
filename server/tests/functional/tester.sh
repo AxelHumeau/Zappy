@@ -104,6 +104,33 @@ for file in ./tests/functional/gui_tests/*; do
     fi
 done
 
+for file in ./tests/functional/ai_tests/*; do
+    ((total++))
+    printf "\e[1;33mStart testing %s ...\e[0m\n" $file
+    ((port++))
+    launch_server $port &
+    pid_server=$!
+    launch_client $port $file &
+    wait $pid_server
+    exit_code=$?
+    if [ ! $exit_code -eq 0 ]
+    then
+        printf "\e[1;31m---- %s test fail: Program didn't launched or crashed (exit code %d) ----\e[0m\n" $file $exit_code
+        failed=1
+    fi
+    tail -n +4 out.tmp > out2.tmp
+    cat out2.tmp > out.tmp
+    name=$(basename "$file")
+    if !(cmp -s out.tmp ./tests/functional/ai_tests_expected/$name); then
+        echo -e "$file: \033[1;31mERROR!\033[0m Output differs"
+        diff out.tmp ./tests/functional/ai_tests_expected/$name
+        failed=1
+    else
+        echo -e "$file: \033[1;32mOK\033[0m"
+        ((nb_valid++))
+    fi
+done
+
 printf "\e[1;32m---- %d/%d tests valided ----\e[0m\n" $nb_valid $total
 if [ $failed -eq 1 ]
 then
