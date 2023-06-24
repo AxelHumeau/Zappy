@@ -65,6 +65,7 @@ void ZappyGui::ppo(ZappyGui::Gui &gui, std::vector<std::string> args) {
         return;
     try {
         Player &player = gui.getGame().getPlayer(values[0]);
+        player.setMapPosition(values[1], values[2]);
         updatePlayerPosition(player, gui, values);
         updatePlayerRotation(player, gui, values);
     } catch (ZappyGui::PlayerUndefinedError const &e) {

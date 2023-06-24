@@ -55,6 +55,8 @@ namespace ZappyGui {
         for (auto iterator = _teams.begin(); iterator != _teams.end(); iterator++) {
             for (ZappyGui::Player &player : iterator->second) {
                 Network::Client::queueRequest(requests, "ppo", { std::to_string(player.getId()) });
+                Network::Client::queueRequest(requests, "pin", { std::to_string(player.getId()) });
+                Network::Client::queueRequest(requests, "plv", { std::to_string(player.getId()) });
             }
         }
     }

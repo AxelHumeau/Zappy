@@ -10,6 +10,7 @@ set(SRCS
     src/GameObject.cpp
     src/Socket.cpp
     src/Gui.cpp
+    src/Panel.cpp
     src/Camera.cpp
     src/Light.cpp
     src/Tilemap.cpp
@@ -20,6 +21,8 @@ set(SRCS
     src/Player.cpp
     src/Utils.cpp
     src/Error.cpp
+    src/Particles/Particle.cpp
+    src/Particles/BroadcastParticle.cpp
     src/commands/msz.cpp
     src/commands/bct.cpp
     src/commands/pdi.cpp

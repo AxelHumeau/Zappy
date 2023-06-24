@@ -74,8 +74,7 @@ namespace ZappyGui {
             /// @brief updates player position and rotation based on the delta time
             /// @param deltaTime time elapsed from the last frame
             void updatePlayers(float deltaTime);
-
-            std::map<std::string, std::list<ZappyGui::Player>> _teams;
+            std::map<std::string, std::list<ZappyGui::Player>> &getTeams() { return _teams; };
         private:
             /// @brief Update the player position smoothly
             /// @param player the player to update
@@ -83,6 +82,8 @@ namespace ZappyGui {
             /// @brief Update the player rotation smoothly
             /// @param player the player to update
             void _updatePlayerRotation(Player &player );
+
+            std::map<std::string, std::list<ZappyGui::Player>> _teams;
     };
 }
 
