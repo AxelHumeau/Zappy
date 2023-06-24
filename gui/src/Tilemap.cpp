@@ -14,8 +14,10 @@ namespace ZappyGui {
     {
         for (int y = 0; y < _height; y++) {
             _tilemap.emplace_back(std::vector<Tile>());
-            for (int x = 0; x < _width; x++)
-                _tilemap[y].emplace_back(Tile(x, y));
+            for (int x = 0; x < _width; x++) {
+                _tilemap[y].emplace_back(Tile(sceneManager, x, y));
+                _tilemap[y].back().setTilemapOrigin(_node->getPosition());
+            }
         }
     }
 
@@ -31,6 +33,8 @@ namespace ZappyGui {
                 position = ZappyGui::Vector3(origin.x - _tileSize.x * x, origin.y, origin.z - _tileSize.z * y);
                 try {
                     _tilemap[y][x].getGameobject().setPosition(position.x, position.y, position.z);
+                    _tilemap[y][x].setTileSize(_tileSize);
+                    _tilemap[y][x].setTilemapOrigin(origin);
                 } catch (const ZappyGui::TileNoGameobjectBoundError& e) {
                     std::cerr << e.what() << std::endl;
                 }

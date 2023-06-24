@@ -17,6 +17,7 @@
 #include <thread>
 #include "SafeQueue.hpp"
 #include "Gui.hpp"
+#include <time.h>
 
 void createScene(ZappyGui::Renderer &renderer, SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
 {
@@ -116,6 +117,7 @@ int main(int argc, char *argv[])
     SafeQueue<std::string> receive;
     SafeQueue<std::string> requests;
 
+    srand(time(NULL));
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
