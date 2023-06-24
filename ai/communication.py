@@ -92,6 +92,8 @@ class Communication:
         """
         self.inventory.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
+        if info == 'ok':
+            return self.pop_information()
         for square in info.split(","):
             dict_info = {}
             elem = square.strip().split(" ")

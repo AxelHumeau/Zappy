@@ -16,9 +16,8 @@ def try_elevation(ai, request_queue: Queue):
         return 0
     if ai.nb_players_on_me_team + 1 < ai.elevation[ai.lvl]["nb_players"]:
         if ai.need_player == False and ai.following == False:
-            ai.communication.writebuffer += "Broadcast " + str(ai.team) + " need " + str(ai.lvl) + "\n"
-            request_queue.push(["Broadcast", str(ai.team) + " need " + str(ai.lvl)])
-            ai.communication.count += 1
+            ai.communication.writebuffer += "Broadcast " + str(ai.team) + " need " + str(ai.lvl) + " " + str(ai.id) + "\n"
+            request_queue.push(["Broadcast", str(ai.team) + " need " + str(ai.lvl) + " " + str(ai.id)])
             ai.need_player = True
         return 0
     else:
@@ -26,10 +25,10 @@ def try_elevation(ai, request_queue: Queue):
     if (ai.food < 5):
         ai.communication.count -= len(request_queue)
         request_queue.clear()
-        ai.communication.writebuffer = ""
-    # if (ai.need_player == True):
-    #         ai.communication.writebuffer += "Broadcast " + str(ai.team) + " stop\n"
-    #         request_queue.push(["Broadcast", str(ai.team) + " stop"])
+        ai.communication.writebuffer = " "
+    if (ai.need_player == True):
+        ai.communication.writebuffer += "Broadcast " + str(ai.team) + " stop " + str(ai.lvl) + " " + str(ai.id) + "\n"
+        request_queue.push(["Broadcast", str(ai.team) + " stop " + str(ai.lvl) + " " + str(ai.id)])
     for item in ai.elevation[ai.lvl].items():
         if (item[0] == "nb_players"):
             continue
