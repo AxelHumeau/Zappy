@@ -87,9 +87,8 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean
+re: all
 
 debug: CPPFLAGS += -ggdb
 debug: fclean $(NAME)
