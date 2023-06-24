@@ -8,6 +8,7 @@
 #ifndef UTILS_HPP_
     #define UTILS_HPP_
     #include "Ogre.h"
+    #include <unordered_map>
 
 namespace ZappyGui {
 
@@ -27,6 +28,16 @@ namespace ZappyGui {
         Mendiane,
         Phiras,
         Thystame
+    };
+
+    static const std::unordered_map<ResourceType, std::string> ResourceMeshes {
+        { ResourceType::Food, "Pods.mesh" },
+        { ResourceType::Linemate, "GreenCrystal.mesh" },
+        { ResourceType::Deraumere, "BlueCrystal.mesh" },
+        { ResourceType::Sibur, "PurpleCrystal.mesh" },
+        { ResourceType::Mendiane, "YellowCrystal.mesh" },
+        { ResourceType::Phiras, "OrangeCrystal.mesh" },
+        { ResourceType::Thystame, "RedCrystal.mesh" },
     };
 
     std::ostream &operator<< (std::ostream &os, ZappyGui::ResourceType type);
