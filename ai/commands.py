@@ -18,13 +18,15 @@ def try_elevation(ai, request_queue: Queue):
         if ai.need_player == False and ai.following == False:
             ai.communication.writebuffer += "Broadcast " + str(ai.team) + " need " + str(ai.lvl) + "\n"
             request_queue.push(["Broadcast", str(ai.team) + " need " + str(ai.lvl)])
+            ai.communication.count += 1
             ai.need_player = True
         return 0
     else:
         ai.start_elevation = True
     if (ai.food < 5):
+        ai.communication.count -= len(request_queue)
         request_queue.clear()
-        ai.communication.writebuffer = " "
+        ai.communication.writebuffer = ""
     # if (ai.need_player == True):
     #         ai.communication.writebuffer += "Broadcast " + str(ai.team) + " stop\n"
     #         request_queue.push(["Broadcast", str(ai.team) + " stop"])
@@ -34,8 +36,11 @@ def try_elevation(ai, request_queue: Queue):
         for i in range(item[1]):
             request_queue.push(["Set", item[0]])
             ai.communication.writebuffer += "Set " + item[0] + "\n"
+            ai.communication.count += 1
     request_queue.push(["Incantation"])
     ai.communication.writebuffer += "Incantation\n"
+    ai.communication.count += 1
+
     # request_queue.push(["Inventory"])
     # ai.communication.writebuffer += "Inventory\n"
     return 1

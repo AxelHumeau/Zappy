@@ -69,6 +69,7 @@ class Communication:
                 if elem.isnumeric():
                     self.request.pop()
                     self.response.pop()
+                    self.count -= 1
                     return False
                 if elem != "":
                     try:
@@ -80,6 +81,7 @@ class Communication:
             self.look_info.append(dict_info)
         self.request.pop()
         self.response.pop()
+        self.count -= 1
         return True
 
     def parse_information_inventory(self):
@@ -88,9 +90,6 @@ class Communication:
         Returns:
             boolean: True
         """
-        print("--------------------------")
-        print("RESET INVENTORY")
-        print("--------------------------")
         self.inventory.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
         for square in info.split(","):
@@ -100,12 +99,6 @@ class Communication:
                 break
             dict_info[elem[0]] = int(elem[1])
             self.inventory.append(dict_info)
-        print("----------------------------------")
-        print("REQUEST : ")
-        print(self.request)
-        print("REPONSE : ")
-        print(self.response)
-        print("----------------------------------")
         return self.pop_information()
 
     def pop_response(self):
@@ -126,7 +119,6 @@ class Communication:
             boolean: pop_information()
         """
         if (self.response.front()[0] == "ko"):
-            # Algo to retake a object
             print("Failed take object")
         return self.pop_information()
 
@@ -138,6 +130,7 @@ class Communication:
         """
         self.request.pop()
         self.response.pop()
+        self.count -= 1
         return True
 
     def get_message(self):
@@ -146,11 +139,6 @@ class Communication:
         message_info = (int(info[0].split(" ")[1]), info[1].strip())
         self.message.push(message_info)
         self.response.pop()
-        print("------------------------")
-        print("AFTER GETTING A MESSAGE")
-        print(self.response)
-        print(self.request)
-        print("------------------------")
 
     def get_elevation_response(self):
         """Get the elevation response from the command Incantation
@@ -167,8 +155,6 @@ class Communication:
                 self.pop_information()
                 return False
             elif "Current level" in resp:
-                # print("req =", self.request.front)
-                print("-------------- res = ", resp + "---------------")
                 self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
@@ -201,8 +187,6 @@ class Communication:
             boolean: True/False
         """
         if ("dead" in self.response):
-            print ("------------- INVENTORY BEFORE DEAD : -----------------")
-            print (self.inventory)
             return action.DEAD
         while (len(self.response) != 0 and self.response.front().find("message") != -1):
             self.get_message()
@@ -215,15 +199,14 @@ class Communication:
                 self.current_level = int(self.response.front().split(':')[1].strip())
                 self.response.pop()
                 self.elevation = False
-                print("recev incantation")
                 return action.INCANTATION
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
             return action.NOTHING
-        print(self.response, self.request)
         if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
+            print("POOOOPPP")
             self.pop_information()
             return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
@@ -231,28 +214,19 @@ class Communication:
             self.response.pop()
             if len(self.request) != 0:
                 self.request.pop()
+                self.count -= 1
             return action.FAILED
         if len(self.request) != 0:
-            # print(self.response, self.request)
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
             return self.dict_function[oldrq][1]
         return action.WAITING
 
     def network(self):
-        read, write, error = select.select([self.s], [self.s], [])
-        # print(self.writebuffer)
-        commands = ""
-        commands = self.writebuffer
-        commands = commands.split("\n")
-        # print(self.count)
-        command = '\n'.join(commands[:self.count])
-        # print(command)
-        self.writebuffer = '\n'.join(commands[self.count:])
-        print(len(self.writebuffer))
-        print(command)
-        # print("req =", '\n'.join(self.request))
-        self.s.send((command).encode())
+        read, write, _ = select.select([self.s], [self.s], [])
+        if write and len(self.writebuffer) != 0:
+            self.s.send((self.writebuffer).encode())
+            self.writebuffer = ""
         if read:
             self.readbuffer += self.s.recv(1024).decode()
         tmp = []
@@ -263,5 +237,3 @@ class Communication:
             pos = self.readbuffer.find('\n')
         for elem in tmp:
             self.response.push(elem)
-            if "message" not in elem:
-                self.count -= 1

@@ -153,7 +153,7 @@ class AI:
         return paths[indexbest]
 
     # run the A
-    def convert_list_to_string(self, lst):
+    def                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     convert_list_to_string(self, lst):
         result = ''
         for inner_list in lst:
             result += ' '.join(inner_list) + '\n'
@@ -173,7 +173,7 @@ class AI:
             self.communication.request.push(["Inventory"])
             self.communication.count += 2
             self.ask_help += 1
-            if self.ask_help >= 5 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
+            if self.ask_help >= 7 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
                 self.need_player = False
                 self.ask_help = 0
                 self.nb_players_on_me_team = 0
@@ -255,6 +255,10 @@ class AI:
         self.communication.request.push(["Inventory"])
         self.communication.count += 1
         print("set")
+        print("******************* AFTER SET *******************")
+        print(self.communication.request)
+        print(self.communication.response)
+        print("******************* AFTER SET *******************")
 
     def Take(self):
         print("Take")
@@ -344,7 +348,6 @@ class AI:
             self.communication.network()
             handling = self.communication.clean_information()
             if handling == action.DEAD:
-                print ("DEAD")
                 return
             self.handling_message()
             if (handling == action.NOTHING or handling == action.BROADCAST):
@@ -356,7 +359,6 @@ class AI:
                     break
                 print("following =", self.following)
                 if handling == action.DEAD:
-                    print ("DEAD 2")
                     return
                 #print(handling)
                 self.dic_function[handling](self)
