@@ -18,7 +18,8 @@ def loop_client(dict_args):
     communication = Communication(s)
     connexion_team(s, dict_args)
     bot = AI(communication, dict_args["name"])
-    bot.run()
+    if bot.run() == "forked":
+        loop_client(dict_args)
 
 
 if __name__ == "__main__":

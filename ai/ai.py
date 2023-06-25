@@ -1,8 +1,7 @@
 from enum import Enum
 from communication import action
 import uuid
-
-
+import os
 import sys
 import commands
 
@@ -234,6 +233,12 @@ class AI:
     def Left(self):
         print("Left")
 
+    def Fork(self):
+        print("fork")
+        pid = os.fork()
+        if pid == 0:
+            return "forked"
+
     def Set(self):
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
@@ -270,7 +275,8 @@ class AI:
         action.INCANTATION: incantation,
         action.BROADCAST: broadcast,
         action.FAILED: failed,
-        action.SET: Set
+        action.SET: Set,
+        action.FORK: Fork
     }
 
     def send_here(self):
@@ -395,7 +401,8 @@ class AI:
                 if handling == action.DEAD:
                     return
                 #print(handling)
-                self.dic_function[handling](self)
+                if self.dic_function[handling](self) == "forked":
+                    return "forked"
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
 
