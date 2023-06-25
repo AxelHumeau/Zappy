@@ -348,6 +348,7 @@ void ZappyGui::Renderer::_mouseEventOnClick()
 {
     if (_prevMouse.lbIsPressed || !_curMouse.lbIsPressed)
         return;
+    _mouseEvent = MouseEvent::Click;
     for (std::size_t i = 0; i < _panels.size(); i++)
     {
         if (_panels.at(i).second->getRect().isInRect(_curMouse.x, _curMouse.y) && _panels.at(i).second->isDraggable)
@@ -372,7 +373,10 @@ void ZappyGui::Renderer::_mouseEventHold()
     int y = 0;
     ZappyGui::Rect rect;
 
-    if (!_prevMouse.lbIsPressed || !_curMouse.lbIsPressed || _dragPanelName == "")
+    if (!_prevMouse.lbIsPressed || !_curMouse.lbIsPressed)
+        return;
+    _mouseEvent = MouseEvent::Hold;
+    if (_dragPanelName == "")
         return;
     SDL_GetMouseState(&x, &y);
     x -= _mDragPosX;
@@ -398,6 +402,7 @@ void ZappyGui::Renderer::_mouseEventOnRelease()
 
     if (!_prevMouse.lbIsPressed || _curMouse.lbIsPressed)
         return;
+    _mouseEvent = MouseEvent::Release;
     for (std::size_t i = 0; i < _panels.size(); i++)
     {
         if (_panels.at(i).second->closeButton != nullptr && _panels.at(i).second->closeButton->isClick)
@@ -424,6 +429,7 @@ void ZappyGui::Renderer::_mouseEventUpdate()
 {
     if (_prevMouse.lbIsPressed || _curMouse.lbIsPressed)
         return;
+    _mouseEvent = MouseEvent::NoEvent;
     for (std::size_t i = 0; i < _panels.size(); i++)
     {
         if (_panels.at(i).second->closeButton == nullptr)

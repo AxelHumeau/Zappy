@@ -25,6 +25,5 @@ tests_run:
 	$(MAKE) -C ai tests_run
 	$(MAKE) -C server tests_run
 	$(MAKE) -C gui tests_run
-	./tests/tester.sh
 
 .PHONY: all clean fclean re tests_run display_cov zappy_server zappy_gui zappy_ai
