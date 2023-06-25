@@ -14,7 +14,7 @@ for file in ./tests/functional/bad_arguments/* ; do
         then
             printf "checking command: ../zappy_gui %s\n" "$line"
         fi
-        timeout 10s ../zappy_gui $line > /dev/null 2>&1
+        timeout 10s ../zappy_gui $line > /dev/null
         if [ ! $? -eq 84 ]
         then
             validity=1
@@ -24,10 +24,10 @@ for file in ./tests/functional/bad_arguments/* ; do
     if [ $validity -eq 0 ]
     then
         ((nb_valid++))
+        echo -e "$file: \033[1;32mOK\033[0m"
     else
         printf "\e[1;31m---- %s test fail: Program launched but shouldn't or crashed ----\e[0m\n"
         failed=1
-        break
     fi
 done
 
@@ -36,4 +36,3 @@ if [ $failed -eq 1 ]
 then
     exit 1
 fi
-

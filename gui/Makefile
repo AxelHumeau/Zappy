@@ -26,9 +26,8 @@ fclean: clean
 	rm -f ../$(NAME)
 	if [ -d "$(BUILD)" ]; then rm -rf $(BUILD); fi
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean
+re: all
 
 tests_run: func_tests
 

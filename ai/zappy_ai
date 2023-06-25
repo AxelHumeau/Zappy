@@ -23,11 +23,11 @@ def loop_client(dict_args):
 
 if __name__ == "__main__":
     dict_argument = {}
-    error_handling.error_handler(sys.argv[1:], dict_argument)
-    loop_client(dict_argument)
-    print("qUIT\n")
-    # try:
-    # except Exception as error:
-    #     print(error, file=sys.stderr)
-    #     sys.exit(84)
+    try:
+        error_handling.error_handler(sys.argv[1:], dict_argument)
+        loop_client(dict_argument)
+        print("qUIT\n")
+    except Exception as error:
+        print(error, file=sys.stderr)
+        sys.exit(84)
     # sys.exit(0)
