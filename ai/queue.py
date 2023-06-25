@@ -20,6 +20,8 @@ class Queue:
         return str(self.queue)
 
     def clear(self):
+        """ clear the queue
+        """
         self.queue.clear()
 
     def push(self, elem):
