@@ -1,30 +1,171 @@
 from enum import Enum
 from communication import action
+import uuid
 
 
 import sys
 import commands
 
 class priority(Enum):
+    """
+    A class representing a priority as enum
+    ...
+
+    Attributes
+    ----------
+
+    FOOD: int
+        targeting food
+    RESSOURCES: int
+        targeting resources
+    PLAYER: int
+        targeting player
+    """
     FOOD = 1
     RESSOURCES = 2
     PLAYER = 3
 
-
 class AI:
+    """
+        A Class representing a AI
+        ...
+
+        Attributes
+        ----------
+
+        id: uuid
+            ai unique id
+        prio: priority(Enum)
+            priority of the ai
+        ask_help: int
+            number of times the ai asked for help
+        mapsize: tuple
+            size of the map (x,y)
+        path: list
+            path to the target
+        lookaround: int
+            number of times the ai has rotated on it self
+        want_to_elevate: bool
+            true if the ai want to elevate
+        need_player: bool
+            true if the ai need player to elevate
+        start_elevation: bool
+            true if the elevation started
+        food: int
+            nuber of food of the ai
+        target: int
+            number of possible target or -1 if no target is found
+        nb_players_on_me_team: int
+            team's player on me
+        notmove: bool
+            true if as to stop moving until the elevation start
+        answerer: list
+            list of players that have answer to the help resquest
+        requester: str
+            player that request the ai help
+        lvl: int
+            current lv of the player
+        following: bool
+            true if trying to follow a ai
+        elevation: dictionary
+            elevation dictionary with the level and the item needed for elevate at this level
+        inventory: dictionary
+            dictionary with the inventory
+        communication: Communication
+            class representing the communication with the server
+        team: string
+            name of the team
+        dic_function: dictionary
+            dictionary with the function associate to the 
+        dic_message: dictionary
+            dictionary with the fonction associate
+
+    Methods
+    -------
+    get_target(vision):
+        select the item to target in the vision given
+
+    get_best_path(objs):
+        selct the best path bettewen all objects
+
+    add_to_request_queue(commande):
+        add several commands to the request queue
+
+    act_look():
+        logic when a look is received
+
+    act_inventory():
+        logic when a inventory is received
+
+    incantation():
+        logic when a incantation is received
+
+    broadcast():
+        logic when a broadcast is received
+
+    Forward():
+        logic when a Forward is received
+
+    Right()
+        logic when a Right is received
+
+    Left()
+        logic when a Left is received
+
+    Set()
+        logic when a Set is received
+
+    Take()
+        logic when a Take is received
+
+    failed()
+        logic when a Fail is reiceived
+
+    send_here()
+        logic when a message with here is received
+
+    send_need()
+        logic when a message with need is received
+
+    send_stop()
+        logic when a message with stop is received
+
+    send_comming()
+        logic when a message with come is received
+
+    handling_message()
+        handling when a message is received and lunch the associated function
+
+    elevation_multiple()
+        logic when mates are needed to elevation
+
+    join_mate()
+        logic when the bot try to join a mate for elevation
+
+    run()
+        loop with the communication ai/server and all the bot logic
+
+    fill_inventory(inventory)
+        fill the inventory with the given inventory
+
+    convert_list_to_string(lst):
+        convert a list into a simple string
+    """
+    id = uuid.uuid4()
     prio = priority.RESSOURCES
     ask_help = 0
     mapsize = (1, 1)
-    message = []
     path = []
     lookaround = 0
-    player_answer = 0
     want_to_elevate = False
     need_player = False
     start_elevation = False
     food = 10
     target = -1
     nb_players_on_me_team = 0
+    notmove = False
+    answerer = []
+    requester = ""
     lvl = 1
     following = False
     elevation = {
@@ -103,10 +244,28 @@ class AI:
     # init
 
     def __init__(self, communication, team):
+        """
+        Constructs the attributes for the ai
+        Parameters
+        ----------
+            communication: Communication
+                Communication class
+            team: str
+                team name
+        """
         self.communication = communication
         self.team = team
 
     def get_target(self, vision):
+        """ target in the vision
+        Parameters
+        --------
+        vision: list
+            List of vision content
+        Returns
+        --------
+        list: contaning the targets position name and nbr of it
+        """
         itemtoget = []
         pos = []
         if (self.prio == priority.RESSOURCES):
@@ -124,6 +283,14 @@ class AI:
         return pos
 
     def get_best_path(self, objs):
+        """ selct the best path bettewen all objects
+        Parameters
+        ----------
+        objs : list
+            objects to search for best path
+        Returns
+            list: contaning the best path
+        """
         paths = []
         pathscores = []
         bestscore = 0
@@ -154,48 +321,46 @@ class AI:
 
     # run the A
     def convert_list_to_string(self, lst):
+        """ convert a list of strings to a single string
+        Parameters:
+        -----------
+        lst : list
+            the list of string to convert to a single string one
+        Returns:
+        str: contaning all the strings in lst
+        """
         result = ''
         for inner_list in lst:
             result += ' '.join(inner_list) + '\n'
         return result
 
     def add_to_request_queue(self, commande):
+        """ push in resquest queue the commande
+        Parameters:
+        ----------
+        commande: lst
+            commande to push in the request queue
+        """
         for cmd in commande:
             self.communication.request.push(cmd)
+            self.communication.count += 1
 
     def act_look(self):
-        if (self.need_player == True and self.following != True):
-            print("send here")
-            self.communication.writebuffer += "Broadcast " + str(self.team) + " here\n"
-            self.communication.request.push(["Broadcast", str(self.team) + " here\n"])
-            self.communication.writebuffer += "Inventory\n"
-            self.communication.request.push(["Inventory"])
-            self.ask_help += 1
-            if self.ask_help >= 5 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
-                self.need_player = False
-                self.ask_help = 0
-                self.nb_players_on_me_team = 0
-            if self.prio != priority.FOOD:
-                return
-            if self.prio == priority.FOOD:
-                self.need_player = False
-                self.ask_help = 0
-        if self.following == True and self.prio != priority.FOOD:
-            self.communication.writebuffer += "Inventory\n"
-            self.communication.request.push(["Inventory"])
-            return
+        """ logic when a look is received
+        """
         print("search = ", self.prio)
         path = self.get_best_path(self.get_target(self.communication.look_info))
-        #print("path", path)
-        #print("nb_players_on_me", self.nb_players_on_me)
+        print("path", path)
+        # print("nb_players_on_me", self.nb_players_on_me)
         #if len(path) != 0:
-            # print(self.communication.look_info)
+        print(self.communication.look_info)
         if len(path) == 0 and self.lookaround == 3:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
             self.add_to_request_queue([["Right"], ["Forward"]])
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.communication.count += 1
             return
         if len(path) == 0:
             self.lookaround += 1
@@ -210,6 +375,8 @@ class AI:
         # print(self.communication.request)
 
     def act_inventory(self):
+        """ logic when a inventory is received
+        """
         self.fill_inventory(self.communication.inventory)
         print(self.communication.inventory)
         commands.try_elevation(self, self.communication.request)
@@ -221,13 +388,20 @@ class AI:
         print("prio = ", self.prio )
 
     def incantation(self):
+        """ logic when a incantation is received
+        """
         print("INCANTATION")
+        print(self.communication.request)
+        print(self.communication.response)
+        print("---------------------------------------------------------------")
         if (self.lvl != self.communication.current_level):
             self.lvl = self.communication.current_level
             self.start_elevation = False
             self.need_player = False
             self.following = False
             self.nb_players_on_me_team = 0
+            self.answerer = []
+            self.notmove = False
             print("lvl:", self.lvl)
         else:
             self.start_elevation = True
@@ -235,31 +409,50 @@ class AI:
             self.want_to_elevate = False
 
     def broadcast(self):
+        """ logic when a broadcast is received
+        """
         print("broadcast")
 
     def Forward(self):
+        """ logic when a Forward is received
+        """
         print("forward")
 
     def Right(self):
+        """ logic when a Right is received
+        """
         print("Right")
 
     def Left(self):
+        """ logic when a Left is received
+        """
         print("Left")
 
     def Set(self):
+        """ logic when a Set is received
+        """
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
         print("set")
 
     def Take(self):
+        """ logic when a Take is received
+        """
         print("Take")
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
 
     def failed(self):
+        """ logic when a Failed is received
+        """
         if (self.start_elevation == True):
             self.start_elevation = False
             self.nb_players_on_me_team = 0
+            self.answerer = []
+            self.notmove = False
+            self.communication.request.clear()
         self.communication.elevation = False
         print("Failed")
 
@@ -277,9 +470,14 @@ class AI:
     }
 
     def send_here(self):
-        print("here")
-        if self.following == True:
+        """ logic when a message with here is received
+        """
+        if self.following == True and self.prio != priority.FOOD and self.requester == self.communication.message.front()[1].split(' ')[-1]:
+            print("here")
             command = self.communication.message.front()[0]
+            message = self.communication.message.front()[1].split(" ")[-2].strip()
+            if (int(message) != self.lvl):
+                return
             if command in [1, 2, 8]:
                 self.communication.writebuffer += "Forward\n"
                 self.add_to_request_queue([["Forward"]])
@@ -289,30 +487,48 @@ class AI:
             elif command in [6, 7]:
                 self.communication.writebuffer += "Right\n"
                 self.add_to_request_queue([["Right"]])
-            elif command == 8:
+            elif command == 5:
                 self.communication.writebuffer += "Right\nRight\n"
                 self.add_to_request_queue([["Right"], ["Right"]])
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " come " + str(self.id) + "\n"
+            self.add_to_request_queue([["Broadcast", str(self.team) + " come " + str(self.id)]])
 
     def send_need(self):
+        """ logic when a message with need is received
+        """
         print("my lvl = ", self.lvl, " requested = ", self.communication.message.front()[1].split(' ')[2])
-        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]):
+        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]) and self.start_elevation == False and self.need_player == False:
             # self.communication.request.clear()
             # self.communication.writebuffer = ""
-            self.communication.writebuffer += "Broadcast " + str(self.team) + " come\n"
-            self.add_to_request_queue([["Broadcast", str(self.team) + " come"]])
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " come " + str(self.id) + "\n"
+            self.add_to_request_queue([["Broadcast", str(self.team) + " come " + str(self.id)]])
             self.following = True
+            self.requester = self.communication.message.front()[1].split(' ')[-1]
 
     def send_stop(self):
-        print("stop")
-        if self.following == True and self.communication.message.front()[0] != 0:
-            self.following = False
+        """ logic when a message whith stop is received
+        """
+        if (self.communication.message.front()[1].find(self.team) != -1 and self.communication.message.front()[1].split(' ')[-1] == self.requester):
+            print("stop")
+            if self.following == True and self.communication.message.front()[0] != 0:
+                self.communication.writebuffer = ""
+                self.communication.request.clear()
+                self.following = False
+                self.requester = ""
+            if self.following == True and self.communication.message.front()[0] == 0:
+                self.notmove = True
+
 
     def send_comming(self):
-        print("comming")
+        """logic when a message with come is received
+        """
         if self.want_to_elevate == True:
+            print("comming")
+            if self.communication.message.front()[1].split(' ')[-1] not in self.answerer:
+                self.answerer.append(self.communication.message.front()[1].split(' ')[-1])
             if self.communication.message.front()[0] == 0:
                 self.nb_players_on_me_team += 1
-
+                commands.try_elevation(self, self.communication.request)
 
     dic_message = {
         "here": send_here,
@@ -322,14 +538,55 @@ class AI:
     }
 
     def handling_message(self):
+        """  logic when mates are needed to elevation
+        """
         if len(self.communication.message) != 0:
             for msg in range(len(self.communication.message)):
                 if self.communication.message.front()[1].find(str(self.team)) != -1:
                     self.dic_message[self.communication.message.front()[1].split(' ')[1]](self)
             self.communication.message.pop()
 
+    def elevation_multiple(self):
+        """  logic when mates are needed to elevation
+        """
+        if (self.following != True):
+            print("send here")
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " here " + str(self.lvl) +  " " + str(self.id) + "\n"
+            self.communication.request.push(["Broadcast", str(self.team) + " here " + str(self.lvl) + " " + str(self.id) + "\n"])
+            self.communication.count += 1
+            self.ask_help += 1
+        if self.ask_help >= 2 and self.nb_players_on_me_team + 1 < self.elevation[self.lvl]["nb_players"]:
+            self.need_player = False
+            self.ask_help = 0
+            self.nb_players_on_me_team = 0
+            self.answerer = []
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
+        if self.prio == priority.FOOD:
+            self.communication.writebuffer += "Look\n"
+            self.communication.request.push(["Look"])
+            self.need_player = False
+            self.ask_help = 0
+            return
+
+    def join_mate(self):
+        """ logic when the bot try to join a mate for elevation
+        """
+        if self.notmove == True:
+            return
+        if self.following == True and self.prio == priority.FOOD:
+            self.communication.writebuffer += "Look\n"
+            self.communication.request.push(["Look"])
+            self.communication.count += 1
+        if self.following == True and self.prio != priority.FOOD:
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
+            self.communication.count += 1
+            return
 
     def run(self):
+        """ loop with the communication ai/server and all the bot logic
+        """
         while True:
             self.communication.network()
             handling = self.communication.clean_information()
@@ -337,9 +594,14 @@ class AI:
                 print ("DEAD")
                 return
             self.handling_message()
-            if (handling == action.NOTHING):
+            if (handling == action.NOTHING and self.following == True):
+                self.join_mate()
+            if (handling == action.NOTHING and self.need_player == True):
+                self.elevation_multiple()
+            if (handling == action.NOTHING and self.following == False and self.need_player == False and self.notmove == False):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
+                self.communication.count += 1
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
@@ -353,6 +615,8 @@ class AI:
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
 
     def fill_inventory(self, inventory):
+        """ convert a list into a simple string
+        """
         for item in inventory:
             key = list(item.keys())[0]
             value = item[key]
@@ -362,6 +626,14 @@ class AI:
                 self.food = value
 
 def generate_instructions(path):
+    """ generate the instruction path for a item
+    Parameters
+    ----------
+    path : list
+    Returns
+    -------
+    list : list of instructions
+    """
     instructions = []
     for i in range(1, len(path)):
         current = path[i - 1]
@@ -379,6 +651,15 @@ def generate_instructions(path):
     return instructions
 
 def is_part_of_sequence(number):
+    """ checks if a given number is part of a sequence
+    Parameters:
+    ----------
+    number : int
+        The number to check.
+    Returns:
+    -------
+    bool: True if the number is part of the sequence, False otherwise.
+    """
     for n in range(1, number + 1):
         term = n**2 + n
         if term == number:
@@ -386,6 +667,17 @@ def is_part_of_sequence(number):
     return False
 
 def get_path(posobj, lvl):
+    """ generates a path to move from a given position to a target position based on a level
+    Parameters:
+    ----------
+    posobj : int
+        The starting position.
+    lvl : int
+        The level of the target.
+    Returns:
+    --------
+    list: The path as a list of positions
+    """
     line, sens = get_objline(posobj, lvl)
     path = []
     while posobj != line:
@@ -395,6 +687,15 @@ def get_path(posobj, lvl):
     return path[::-1]
 
 def add_sequence_terms_to_list(number):
+    """ generates a list of terms in the sequence up to a given number
+    Parameters:
+    -----------
+    number : int
+        The upper limit of the sequence
+    Returns:
+    --------
+    list: The list of sequence terms
+    """
     sequence_list = [0]
     for n in range(1, number + 1):
         term = n**2 + n
@@ -404,6 +705,16 @@ def add_sequence_terms_to_list(number):
     return sequence_list[::-1]
 
 def get_objline(posobj, lvl):
+    """ determines the line in which a given position is located based on a level
+    Parameters:
+    ----------
+    posobj : int
+        The position to determine the line for
+    lvl : int
+        The level of the player
+    Returns:
+    tuple: The line position and the direction (-1, 0, or 1).
+    """
     n = 0
     while n <= lvl:
         term = n**2 + n
