@@ -55,7 +55,7 @@ _camRotationSpeed(1.5708), _camMovementSpeed(15), _width(width), _height(height)
         _resolverListener.reset(new OgreBites::SGTechniqueResolverListener(_shaderGenerator.get()));
         Ogre::MaterialManager::getSingleton().addListener(_resolverListener.get());
     }
-    _sceneManager->setSkyBox(true, "MaterialHamsterSky");
+    _sceneManager->setSkyBox(true, "MaterialSky");
 
     _lastTime = std::chrono::steady_clock::now();
     _deltaTime = 0.0;
@@ -321,7 +321,7 @@ const float &ZappyGui::Renderer::getDeltaTime() const
 
 void ZappyGui::Renderer::setSkyBoxVisibility(bool visible)
 {
-    _sceneManager->setSkyBox(visible, "MaterialHamsterSky");
+    _sceneManager->setSkyBox(visible, "MaterialSky");
 }
 
 void ZappyGui::Renderer::loadFont(std::string name, std::string group, std::string fontFile, std::string size, std::string resolution)

@@ -24,8 +24,6 @@ void add_to_buffer(buffer_t *buffer, char *str, size_t len)
 
 int write_buffer(buffer_t *buffer, int fd)
 {
-    if (!strcmp(buffer->buffer, DEAD))
-        printf("DEEEEEEEEEEAD IS SEND\n");
     if (write(fd, buffer->buffer, buffer->buffer_size) == -1)
         return EXIT_FAIL;
     buffer->buffer_size = 0;

@@ -1,12 +1,12 @@
 // A sparkly purple fountain.
 particle_system OneDirection
 {
-    material        MaterialHamster
+    material        BroadcastParticleMaterial
     particle_width  1
     particle_height 1
     cull_each       false
     quota           1
-    billboard_type  oriented_self
+    billboard_type  perpendicular_self
 
     // Area emitter.
     emitter Point
