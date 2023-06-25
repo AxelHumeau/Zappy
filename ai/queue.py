@@ -3,7 +3,6 @@ class Queue:
     def __init__(self):
         """ Initialization of a queue """
         self.queue = []
-        list
 
     def __len__(self):
         """ length of the queue
@@ -12,9 +11,6 @@ class Queue:
             int: size of the queue
         """
         return len(self.queue)
-
-    def __getitem__(self, i):
-        return self.queue[i]
 
     def __iter__(self):
         for i in self.queue:
