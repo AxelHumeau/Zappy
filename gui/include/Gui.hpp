@@ -23,6 +23,7 @@
 
 namespace ZappyGui {
 
+    /// @brief This class manages all the graphics of the game.
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);

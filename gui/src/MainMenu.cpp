@@ -41,7 +41,7 @@ void ZappyGui::MainMenu::_createBackground(std::shared_ptr<Ogre::Overlay> overla
     _bg->panelSetMaterial("BackgroundMaterial", "Assets");
 }
 
-void ZappyGui::MainMenu::_createLaunch(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, int index)
+void ZappyGui::MainMenu::_createLaunch(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, std::size_t index)
 {
     _launch.reset(new ZappyGui::Button(overlay, "Launch_" + std::to_string(index), "MenuButtonDefault", endInitialization));
     _launch->panelSetDimensions(500, 200);
@@ -56,7 +56,7 @@ void ZappyGui::MainMenu::_createLaunch(std::shared_ptr<Ogre::Overlay> overlay, i
     _launch->textSetColorTop("Launch_" + std::to_string(index) + "_text", Ogre::ColourValue(0.8, 0.8, 0.8));
 }
 
-void ZappyGui::MainMenu::_createQuit(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, int index)
+void ZappyGui::MainMenu::_createQuit(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, std::size_t index)
 {
     _quit.reset(new ZappyGui::Button(overlay, "Quit_" + std::to_string(index), "MenuButtonDefault", closeWindow));
     _quit->panelSetDimensions(500, 200);
