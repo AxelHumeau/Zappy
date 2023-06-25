@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+launch_server(){
+    timeout -s SIGINT --preserve-status 2s ../zappy_server -x 30 -y 30 -n name1 name2 -c 5 -f 80 -p $1 > /dev/null
+    exit $?
+}
+
+launch_client(){
+    timeout 5s netcat 127.0.0.1 $1 > /dev/null
+    exit 0
+}
+
+launch_server $1 &
+pid_server=$!
+launch_client $1 &
+wait $pid_server
+exit $?

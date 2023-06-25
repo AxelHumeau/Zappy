@@ -65,11 +65,9 @@ int is_graphic_client(struct client_entry *entry, char *line)
     return EXIT_FAIL;
 }
 
-int put_client_team(struct server *server, struct client_entry *entry)
+int put_client_team(struct server *server, struct client_entry *entry,
+    char *line)
 {
-    char *line = NULL;
-
-    line = get_line_in_buffer(&entry->buf_to_recv);
     if (is_graphic_client(entry, line) == EXIT_SUCCESS) {
         entry->is_gui = true;
         init_gui_client(server, entry);
