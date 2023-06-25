@@ -149,36 +149,124 @@ namespace ZappyGui {
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 
+            /// @brief Implementation of the function convertArgsToSize_t
+            /// @param args strings to convert in size_t
+            /// @param startIndex start index in the string vector
+            /// @param endIndex end index in the string vector
+            /// @return a vector of size_t containing the converted strings
             std::vector<std::size_t> _ImplconvertArgsToSize_t(std::vector<std::string> args, std::size_t startIndex, std::size_t endIndex);
     };
 
+    /// @brief Update the position of the player smoothly between two positions
+    /// @param player reference to the player to move
+    /// @param gui reference to the gui to access the tilemap and get the time unit
+    /// @param values args of the ppo command converted to size_t
     void updatePlayerPosition(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
+    /// @brief Update the rotation of the player smoothly between two angle
+    /// @param player reference to the player to rotate
+    /// @param gui reference to the gui to access the time unit
+    /// @param values args of the ppo command converted to size_t
     void updatePlayerRotation(ZappyGui::Player &player, ZappyGui::Gui &gui, std::vector<std::size_t> values);
 
+    /// @brief Handling quit command. Quit the gui when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void quit(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling msz command. set the map size when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void msz(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling bct command. set the resources on a tile when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void bct(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling tna command. set the resources on a tile when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void tna(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pnw command. instantiate the new player that joined the game when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pnw(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pdi command. destroy the player that is dead when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pdi(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling ppo command. update a player position when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void ppo(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling plv command. update a player level when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void plv(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pin command. update a player inventory when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pin(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pex command. a player expulse another when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pex(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pbc command. a player has send a broadcast when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pbc(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pic command. a player has started an incantation when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pic(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pie command. end of an incantation when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pie(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pfk command. a player is laying an egg when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pfk(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pdr command. a player dropped a resource when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pdr(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling pgt command. a player collected a resource when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void pgt(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling enw command. an egg was laid by a player when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void enw(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling enw command. a player joined by an egg when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void ebo(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling edi command. an egg died when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void edi(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling sgt command. set the time unit requested when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void sgt(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling sst command. set the time unit to the new time unit requested when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void sst(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling seg command. end of the game when recieved
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void seg(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling smg command. a message has been received from the server
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void smg(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling suc command. the command send was unknown
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void suc(ZappyGui::Gui &gui, std::vector<std::string> args);
+    /// @brief Handling sbp command. bad parameters sended to the server
+    /// @param gui reference to the gui
+    /// @param args args of the command recived
     void sbp(ZappyGui::Gui &gui, std::vector<std::string> args);
 }
 

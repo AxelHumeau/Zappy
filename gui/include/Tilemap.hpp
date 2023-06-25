@@ -29,6 +29,10 @@ namespace ZappyGui {
             /// @return a Vector2i containing the width and the height of tilemap
             Vector2i getSize() { return Vector2i(_width, _height); }
 
+            /// @brief get the world position on the top of the tile in x y
+            /// @param x x position
+            /// @param y y position
+            /// @return a Vector3 of the position on the top of the x y tile
             Vector3 getPositionOnTile(std::size_t x, std::size_t y);
 
             /// @brief Not implemented !
@@ -50,6 +54,8 @@ namespace ZappyGui {
             /// @brief Not implemented !
             /// @return throw an NotImplementedError
             void setRotation(const Ogre::Radian &roll, const Ogre::Radian &pitch, const Ogre::Radian &yaw) { throw NotImplementedError(); }
+            /// @brief send the request to update the tilemap to the server
+            /// @param requests requests SafeQueue to add the requests
             void update(SafeQueue<std::string> &requests);
 
             /// @brief operator[] overload to access the _tilemap
