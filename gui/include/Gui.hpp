@@ -19,8 +19,10 @@
     #include "Client.hpp"
     #include "TimerPtr.hpp"
     #include "Particles/BroadcastParticle.hpp"
+    #include "Button.hpp"
 
 namespace ZappyGui {
+
     class Gui {
         public:
             Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates);
@@ -51,6 +53,10 @@ namespace ZappyGui {
             /// @param position the center of the particle effect
             void addBroadcastParticle(Vector3 position);
 
+            /// @brief Sets the value for the end of the initialization loop
+            /// @param value Boolean use to set endInitialization. True to quit the loop, false otherwise.
+            void setEndInitialization(bool value) { _endInitialization = value; };
+
         private:
             void _checkMouseClick();
             void _updatePanels();
@@ -75,6 +81,7 @@ namespace ZappyGui {
             std::unique_ptr<Ogre::RaySceneQuery, Nop> _sceneQuery;
             std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> _tilePanels;
             std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
+            bool _endInitialization = false;
 
             std::unordered_map<std::string, std::function<void (Gui &, std::vector<std::string>)>>_commands;
 

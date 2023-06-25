@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
+#include "MainMenu.hpp"
 
 ZappyGui::Gui::Gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, float minDelayServerUpdates):
 _receive{receive}, _requests{requests}, _minDelayServerUpdates{minDelayServerUpdates} {
@@ -48,6 +49,7 @@ _receive{receive}, _requests{requests}, _minDelayServerUpdates{minDelayServerUpd
 
 void ZappyGui::Gui::initialize()
 {
+    ZappyGui::MainMenu mainMenu(_renderer->getOverlay(), _renderer->getDimensions().data[0], _renderer->getDimensions().data[1]);
 
     std::shared_ptr<ZappyGui::Camera> cam = std::make_shared<ZappyGui::Camera>(_renderer->getSceneManager(), "myCam");
     cam->setNearClipDistance(0.05);
@@ -64,15 +66,16 @@ void ZappyGui::Gui::initialize()
     _renderer->setSkyBoxVisibility(false);
 
     std::string command;
-    while (!_renderer->isDone() && _mapWidth == 0 && _mapHeight == 0)
+    while (!_renderer->isDone() && !_endInitialization)
     {
         _renderer->updateDeltaTime();
 
-        if (_receive.tryPop(command))
+        if (_mapWidth == 0 && _mapHeight == 0 && _receive.tryPop(command))
             processCommand(command);
 
         _renderer->event();
         _renderer->mouseEvent();
+        mainMenu.update(*this, _renderer->getMousePosition().data[0], _renderer->getMousePosition().data[1], _renderer->getMouseEvent());
         _renderer->renderOneFrame();
     }
     if (_renderer->isDone())

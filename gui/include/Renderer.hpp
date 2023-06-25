@@ -36,6 +36,13 @@ namespace ZappyGui {
         int y;
     };
 
+    enum MouseEvent {
+        NoEvent,
+        Click,
+        Hold,
+        Release,
+    };
+
     /// @brief Encapsulation of ogre rendering system using a sdl2 window, manages it and its inputs
     class Renderer {
         public:
@@ -110,6 +117,9 @@ namespace ZappyGui {
 
             ZappyGui::Vector2i getDimensions() { return ZappyGui::Vector2i(_width, _height); };
 
+            ZappyGui::Vector2i getMousePosition() { return ZappyGui::Vector2i(_curMouse.x, _curMouse.y); };
+            ZappyGui::MouseEvent &getMouseEvent() { return _mouseEvent; };
+
         private:
             /// @brief Loads all resources in the file in parameter in ogre
             /// @param resourceFile File containing the resources to load
@@ -171,6 +181,7 @@ namespace ZappyGui {
             VectorMap<std::string, std::shared_ptr<ZappyGui::Panel>> _panels;
             std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, ZappyGui::Nop>>> _tilePanels;
             std::shared_ptr<std::map<std::string, std::size_t>> _playerPanels;
+            MouseEvent _mouseEvent = MouseEvent::NoEvent;
     };
 
 }
