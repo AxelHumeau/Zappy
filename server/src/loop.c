@@ -14,6 +14,7 @@
 #include <time.h>
 #include <string.h>
 #include "macro.h"
+#include "gui/events.h"
 
 static bool have_to_stop(struct server *server)
 {
@@ -48,16 +49,17 @@ static int set_fds(struct server *server, fd_set *read_fds, fd_set *write_fds)
 static void loop_through_clients(struct server *server, fd_set *readfds,
     fd_set *writefds)
 {
-    struct client_entry *client;
+    struct client_entry *client = NULL;
 
     SLIST_FOREACH(client, &server->clients, next) {
-        if (FD_ISSET(client->fd, writefds))
-            write_buffer(&client->buf_to_send, client->fd);
-        if (handle_client(client, server, readfds) != EXIT_SUCCESS) {
+        if ((FD_ISSET(client->fd, writefds) &&
+        write_buffer(&client->buf_to_send, client->fd) != EXIT_SUCCESS) ||
+        handle_client(client, server, readfds) != EXIT_SUCCESS) {
             FD_CLR(client->fd, readfds);
             FD_CLR(client->fd, writefds);
             SLIST_REMOVE(&server->clients, client, client_entry, next);
-            destroy_client(client, server);
+            destroy_player(client, server);
+            destroy_client(client);
             return loop_through_clients(server, readfds, writefds);
         }
     }
@@ -92,7 +94,8 @@ int loop(struct server *server)
         &readfds, &writefds, NULL, NULL) >= 0) {
         if (FD_ISSET(server->timerfd, &readfds))
             timer_command(server);
-        if (FD_ISSET(server->sig_fd, &readfds) && have_to_stop(server))
+        if ((FD_ISSET(server->sig_fd, &readfds) && have_to_stop(server)) ||
+                end_game(server))
             break;
         if (FD_ISSET(server->listening_fd, &readfds))
             accept_client(server);

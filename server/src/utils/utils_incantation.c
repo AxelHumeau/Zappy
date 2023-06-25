@@ -15,7 +15,6 @@ static void put_player_ritual(struct client_entry **list_players,
 {
     if (put_player) {
         list_players[(*index)] = player;
-        printf("PLACE\n");
         (*index)++;
     }
 }

@@ -35,7 +35,7 @@ static void time_command(struct client_entry *client,
     check_fork(client, server, line);
     if (client->timer == -1)
         client->timer = command.cooldown;
-    else if (client->timer <= 0) {
+    if (client->timer <= 0) {
         (command.function) (line + strlen(command.command), client, server);
         clean_player_command(client);
         client->timer = -1;

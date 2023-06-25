@@ -16,16 +16,23 @@
 #include "server.h"
 #include "macro.h"
 
-int setup_server(struct server *server)
+static void setup_signals(struct server *server)
 {
     sigset_t mask;
-    struct sockaddr_in ad;
 
-    SLIST_INIT(&server->clients);
     sigemptyset(&mask);
     sigaddset(&mask, SIGINT);
     sigprocmask(SIG_BLOCK, &mask, NULL);
     server->sig_fd = signalfd(-1, &mask, O_CLOEXEC);
+    signal(SIGPIPE, SIG_IGN);
+}
+
+int setup_server(struct server *server)
+{
+    struct sockaddr_in ad;
+
+    SLIST_INIT(&server->clients);
+    setup_signals(server);
     server->listening_fd = socket(AF_INET, SOCK_STREAM, 0);
     ad.sin_family = AF_INET;
     ad.sin_port = htons(server->port);

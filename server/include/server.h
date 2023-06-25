@@ -38,7 +38,7 @@ struct client_entry {
 };
 
 SLIST_HEAD(clients, client_entry);
-LIST_HEAD(eggs, egg);
+SLIST_HEAD(eggs, egg);
 
 /// @brief Server struct
 struct server {
@@ -71,15 +71,17 @@ struct team {
     struct clients players;
 };
 
+// Destroy_server.c
 int setup_server(struct server *server);
 void destroy_server(struct server *server);
+void destroy_player(struct client_entry *client, struct server *server);
 
 int loop(struct server *server);
 
 void accept_client(struct server *server);
 int handle_client(struct client_entry *client,
     struct server *server, fd_set *read_fds);
-void destroy_client(struct client_entry *client, struct server *server);
+void destroy_client(struct client_entry *client);
 void destroy_clients(struct server *server);
 
 // Utils.c
@@ -104,7 +106,11 @@ bool is_player(struct client_entry *player, struct client_entry *client);
 void display_player(struct server *server);
 bool same_pos(struct client_entry *player, struct client_entry *client);
 void init_entry(struct client_entry *entry);
-void set_position_player(struct server *server, player_t *info);
+void set_position_player(struct server *server, player_t *info,
+    struct team *team);
+
+// Utils_end_game.c
+bool end_game(struct server *server);
 
 // Utils_list.c
 int list_ids_size(struct client_entry **list_players);
@@ -128,7 +134,8 @@ void refill_resources(struct server *server);
 void set_resource_map(struct server *server);
 
 // player_handling.c
-int put_client_team(struct server *server, struct client_entry *entry);
+int put_client_team(struct server *server, struct client_entry *entry,
+    char *line);
 void handle_player_timer(struct server *server);
 
 // command_handling.c

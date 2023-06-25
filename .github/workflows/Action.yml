@@ -74,7 +74,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: timeout 5m make tests_run
+      - run: timeout 15m make tests_run
   push_to_mirror:
     if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [run_tests, check_coding_style]

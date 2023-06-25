@@ -1,0 +1,39 @@
+// A sparkly purple fountain.
+particle_system OneDirection
+{
+    material        BroadcastParticleMaterial
+    particle_width  1
+    particle_height 1
+    cull_each       false
+    quota           1
+    billboard_type  perpendicular_self
+
+    // Area emitter.
+    emitter Point
+    {
+        angle           0
+        emission_rate   75
+        time_to_live    5
+        direction       0 0 0
+        velocity_min    30
+        velocity_max    30
+        colour_range_start  0 0 0
+        colour_range_end    1 1 1
+        duration 0.1
+    }
+
+    // Gravity.
+    affector LinearForce
+    {
+        force_vector      0 0 0
+        force_application add
+    }
+
+    // Fader.
+    affector ColourFader
+    {
+        red -0.25
+        green -0.25
+        blue -0.25
+    }
+}

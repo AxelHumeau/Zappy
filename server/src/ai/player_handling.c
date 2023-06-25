@@ -16,7 +16,7 @@ static void set_info_player(struct client_entry *entry, struct server *server,
 {
     player_t *info = malloc(sizeof(player_t));
 
-    set_position_player(server, info);
+    set_position_player(server, info, team);
     memset(info->inventory, 0, sizeof(info->inventory));
     info->inventory[FOOD] = 10;
     info->level = 1;
@@ -65,11 +65,9 @@ int is_graphic_client(struct client_entry *entry, char *line)
     return EXIT_FAIL;
 }
 
-int put_client_team(struct server *server, struct client_entry *entry)
+int put_client_team(struct server *server, struct client_entry *entry,
+    char *line)
 {
-    char *line = NULL;
-
-    line = get_line_in_buffer(&entry->buf_to_recv);
     if (is_graphic_client(entry, line) == EXIT_SUCCESS) {
         entry->is_gui = true;
         init_gui_client(server, entry);

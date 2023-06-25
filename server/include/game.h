@@ -38,7 +38,7 @@ typedef struct egg {
     int x;
     int y;
     struct team *team;
-    LIST_ENTRY(egg) next;
+    SLIST_ENTRY(egg) next;
 } egg_t;
 
 /// @brief structure position

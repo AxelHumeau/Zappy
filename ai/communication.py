@@ -40,7 +40,8 @@ class Communication:
         self.response = Queue()
         self.look_info = []
         self.inventory = []
-        self.message = []
+        self.message = Queue()
+        self.messagelen = 0
         self.elevation = False
         self.current_level = 1
         self.nbr_conect = 1
@@ -132,8 +133,8 @@ class Communication:
     def get_message(self):
         """ Get a message (from the command Broadcast 'Message') """
         info = self.response.front().split(",")
-        message_info = {int(info[0].split(" ")[1]): info[1].strip()}
-        self.message.append(message_info)
+        message_info = (int(info[0].split(" ")[1]), info[1].strip())
+        self.message.push(message_info)
         self.response.pop()
 
     def get_elevation_response(self):
@@ -142,25 +143,27 @@ class Communication:
         Returns:
             boolean: True if the elevation is successful, False otherwise
         """
+        if len(self.response) == 0:
+            return False
         resp = self.response.front()
         if self.elevation == True:
-            if resp != None and resp[0] == "ko":
+            if resp[0] == "ko":
                 self.elevation = False
                 self.pop_information()
                 return False
-            else:
-                print("req =", self.request.front)
-                print("res =", resp)
-                self.current_level = int(resp[15])
+            elif "Current level" in resp:
+                # print("req =", self.request.front)
+                print("-------------- res = ", resp + "---------------")
+                self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
                 return True
         else:
-            if resp != None and resp == "ko":
+            if  resp == "ko":
                 self.elevation = False
                 self.pop_information()
                 return False
-            if resp != None and resp == "Elevation underway":
+            if  resp == "Elevation underway":
                 self.elevation = True
                 self.response.pop()
                 return True
@@ -182,28 +185,45 @@ class Communication:
         Returns:
             boolean: True/False
         """
-        if (len(self.response) != 0 and self.response.front() == 'dead'):
+        if ("dead" in self.response):
+            print ("------------- INVENTORY BEFORE DEAD : -----------------")
+            print (self.inventory)
             return action.DEAD
+        if (len(self.response) != 0 and
+                self.response.front().find("message") != -1):
+            self.get_message()
+        if ((len(self.request) == 0 or self.request.front() != ["Incantation"] and len(self.response) != 0)):
+            if (len(self.response) != 0 and self.response.front().find("Elevation underway") != -1):
+                self.response.pop()
+                self.elevation = True
+                return action.INCANTATION
+            if len(self.response) != 0 and self.response.front().find("Current level") != -1:
+                self.current_level = int(self.response.front().split(':')[1].strip())
+                self.response.pop()
+                self.elevation = False
+                print("recev incantation")
+                return action.INCANTATION
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
             return action.NOTHING
-        if (len(self.response) != 0 and
-                self.response.front().find("message") != -1):
-            self.get_message()
+        if (len(self.request) != 0 and self.request.front() != ["Look"]):
+            print(self.response, self.request)
         if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
             self.pop_information()
             return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
-            print(self.response, self.request)
-            self.pop_information()
+            #print(self.response, self.request)
+            self.response.pop()
+            if len(self.request) != 0:
+                self.request.pop()
             return action.FAILED
         if len(self.request) != 0:
+            # print(self.response, self.request)
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
             return self.dict_function[oldrq][1]
-        print(self.response, self.request)
         return action.WAITING
 
     def network(self):

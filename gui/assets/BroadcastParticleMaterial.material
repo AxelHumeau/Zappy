@@ -1,0 +1,21 @@
+material BroadcastParticleMaterial
+{
+	technique
+	{
+		two_sided true
+
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+			cull_hardware none
+
+			texture_unit
+			{
+				texture Broadcast.png
+				alpha_op_ex source1 alpha src_manual src_current src_manual
+    			alpha_blend src_alpha one_minus_src_alpha
+			}
+		}
+	}
+}

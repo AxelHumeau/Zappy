@@ -48,6 +48,7 @@ dist
 run.sh
 vgcore*
 gui/config/ogre.log
+*.tmp
 
 # Coding style report
 coding-style-reports.log
@@ -63,3 +64,6 @@ vgcore*
 
 #docker_mouli
 .bash_history
+
+#binary zappy server
+zappy_binary

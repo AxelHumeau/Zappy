@@ -39,6 +39,11 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
+        if (!client->is_role_defined) {
+            put_client_team(server, client, line);
+            line = get_line_in_buffer(&client->buf_to_recv);
+            continue;
+        }
         if (client->is_gui)
             handle_gui(client, server, line);
         else
@@ -67,18 +72,14 @@ int handle_client(struct client_entry *client,
     if (read_char <= 0)
         return EXIT_FAIL;
     add_to_buffer(&client->buf_to_recv, buffer, read_char);
-    if (!client->is_role_defined)
-        return put_client_team(server, client);
     handle_lines(client, server);
     return EXIT_SUCCESS;
 }
 
-void destroy_client(struct client_entry *client, struct server *server)
+void destroy_client(struct client_entry *client)
 {
-    if (client->is_role_defined && !client->is_gui)
-        client->player_info->team->nb_slots_left++;
     if (client->is_role_defined && !client->is_gui) {
-        broadcast_to_guis(server, &notify_death, client->id);
+        client->player_info->team->nb_slots_left++;
         free(client->player_info);
         for (int i = 0; i < client->count_command; i++)
             free(client->command[i]);
@@ -95,7 +96,7 @@ void destroy_clients(struct server *server)
 
     for (struct client_entry *client = server->clients.slh_first; client;) {
         tmp = client->next.sle_next;
-        destroy_client(client, server);
+        destroy_client(client);
         client = tmp;
     }
 }
