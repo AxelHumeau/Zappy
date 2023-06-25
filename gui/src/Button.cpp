@@ -51,7 +51,10 @@ bool ZappyGui::Button::update(Gui &gui, int x, int y, MouseEvent &event)
 
 void ZappyGui::Button::setMaterials(std::string defaultMat, std::string hoverMat, std::string clickMat)
 {
-    _defaultMat = defaultMat;
-    _hoverMat = hoverMat;
-    _clickMat = clickMat;
+    if (defaultMat != "")
+        _defaultMat = defaultMat;
+    if (hoverMat != "")
+        _hoverMat = hoverMat;
+    if (clickMat != "")
+        _clickMat = clickMat;
 };
