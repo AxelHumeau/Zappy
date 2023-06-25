@@ -92,6 +92,7 @@ for file in ./tests/functional/gui_tests/*; do
     sed -n '/pin/!p' out.tmp > out2.tmp
     sed -n '/ppo/!p' out2.tmp > out.tmp
     sed -n '/pnw/!p' out.tmp > out2.tmp
+    sed -n '/pdi/!p' out2.tmp > out.tmp
     cat out2.tmp > out.tmp
     name=$(basename "$file")
     if !(cmp -s out.tmp ./tests/functional/gui_tests_expected/$name); then
