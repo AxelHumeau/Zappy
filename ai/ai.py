@@ -617,7 +617,7 @@ class AI:
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
                 self.communication.count += 1
-            while (handling != action.NOTHING):
+            while (handling != action.NOTHING and handling != None):
                 if handling == action.WAITING:
                     break
                 print("following =", self.following)

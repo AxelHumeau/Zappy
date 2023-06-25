@@ -181,9 +181,10 @@ class Communication:
                 self.pop_information()
                 self.elevation = False
                 return True
-            else:
-                self.response.insert(0, "ko")
-                return True
+            # else:
+            #     print("insert ko")
+            #     self.response.queue.insert(0, "ko")
+            #     return True
         else:
             if  resp == "ko":
                 self.elevation = False
