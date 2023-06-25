@@ -48,9 +48,9 @@ void exec_player_command(struct client_entry *client,
     char *cmd = NULL;
 
     for (int i = 0; i < NB_COMMAND_PLAYER; i++) {
-        cmd = player_command_list[i].command;
+        cmd = PLAYER_COMMAND_LIST[i].command;
         if (!strncmp(cmd, line, strlen(cmd))) {
-            time_command(client, server, line, player_command_list[i]);
+            time_command(client, server, line, PLAYER_COMMAND_LIST[i]);
             return;
         }
     }

@@ -10,6 +10,11 @@
 
     #include "macro.h"
 
+/// @brief command_t structure
+/// @brief function server/ai
+/// @param string the argument of the command
+/// @param client_entry pointer of the client
+/// @param server pointer to the server
 typedef struct command_s {
     char *command;
     void (*function) (char *, struct client_entry *, struct server *);
@@ -29,7 +34,8 @@ void take(char *, struct client_entry *, struct server *);
 void set(char *, struct client_entry *, struct server *);
 void incantation(char *, struct client_entry *, struct server *);
 
-static command_t player_command_list[NB_COMMAND_PLAYER] = {
+/// @brief PLAYER_COMMAND_LIST array
+static command_t PLAYER_COMMAND_LIST[NB_COMMAND_PLAYER] = {
     {"Forward", forward, TIMER_CLASSIC},
     {"Right", right, TIMER_CLASSIC},
     {"Left", left, TIMER_CLASSIC},
