@@ -30,6 +30,7 @@ class AI:
     requester = ""
     lvl = 1
     following = False
+    number_of_time_without_mate = 0
     elevation = {
         1: {
                 "nb_players": 1,
@@ -345,12 +346,19 @@ class AI:
             self.communication.message.pop()
 
     def elevation_multiple(self):
+            print("answerer: ", self.answerer)
             if (self.following != True):
                 print("send here")
                 self.communication.writebuffer += "Broadcast " + str(self.team) + " here " + str(self.lvl) +  " " + str(self.id) + "\n"
                 self.communication.request.push(["Broadcast", str(self.team) + " here " + str(self.lvl) + " " + str(self.id) + "\n"])
                 self.communication.count += 1
                 self.ask_help += 1
+            if self.ask_help >= 2 and len(self.answerer) + 1 < self.elevation[self.lvl]["nb_players"]:
+                self.number_of_time_without_mate += 1
+                if self.number_of_time_without_mate >= 10:
+                    self.number_of_time_without_mate = 0
+                    self.communication.writebuffer += "Fork\n"
+                    self.communication.request.push(["Fork"])
             if self.ask_help >= 2 and self.nb_players_on_me_team + 1 < self.elevation[self.lvl]["nb_players"]:
                 self.need_player = False
                 self.ask_help = 0
