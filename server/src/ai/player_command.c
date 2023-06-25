@@ -33,12 +33,12 @@ static void time_command(struct client_entry *client,
 {
     check_incantation(client, server, line);
     check_fork(client, server, line);
-    if (client->timer == -1)
+    if (client->timer == -5)
         client->timer = command.cooldown;
-    if (client->timer <= 0) {
+    else if (client->timer <= 0) {
         (command.function) (line + strlen(command.command), client, server);
         clean_player_command(client);
-        client->timer = -1;
+        client->timer = -5;
     }
 }
 
