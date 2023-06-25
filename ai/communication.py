@@ -163,6 +163,7 @@ class Communication:
         Returns:
             boolean: True if the elevation is successful, False otherwise
         """
+        print("SIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUuuuuu")
         if len(self.response) == 0:
             return False
         resp = self.response.front()
@@ -253,7 +254,11 @@ class Communication:
             self.s.send((self.writebuffer).encode())
             self.writebuffer = ""
         if read:
-            self.readbuffer += self.s.recv(1024).decode()
+            data = self.s.recv(1024)
+            if len(data) == 0:
+                return "closed"
+            self.readbuffer += data.decode()
+            print("actual buffer:", self.readbuffer)
         tmp = []
         pos = self.readbuffer.find('\n')
         while (pos != -1):

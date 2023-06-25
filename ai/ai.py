@@ -1,8 +1,7 @@
 from enum import Enum
 from communication import action
 import uuid
-
-
+import os
 import sys
 import commands
 
@@ -168,6 +167,7 @@ class AI:
     requester = ""
     lvl = 1
     following = False
+    number_of_time_without_mate = 0
     elevation = {
         1: {
                 "nb_players": 1,
@@ -428,6 +428,12 @@ class AI:
         """
         print("Left")
 
+    def Fork(self):
+        print("fork")
+        pid = os.fork()
+        if pid == 0:
+            return "forked"
+
     def Set(self):
         """ logic when a Set is received
         """
@@ -466,7 +472,8 @@ class AI:
         action.INCANTATION: incantation,
         action.BROADCAST: broadcast,
         action.FAILED: failed,
-        action.SET: Set
+        action.SET: Set,
+        action.FORK: Fork
     }
 
     def send_here(self):
@@ -549,12 +556,19 @@ class AI:
     def elevation_multiple(self):
         """  logic when mates are needed to elevation
         """
+        print("answerer: ", self.answerer)
         if (self.following != True):
             print("send here")
             self.communication.writebuffer += "Broadcast " + str(self.team) + " here " + str(self.lvl) +  " " + str(self.id) + "\n"
             self.communication.request.push(["Broadcast", str(self.team) + " here " + str(self.lvl) + " " + str(self.id) + "\n"])
             self.communication.count += 1
             self.ask_help += 1
+        if self.ask_help >= 2 and len(self.answerer) + 1 < self.elevation[self.lvl]["nb_players"]:
+            self.number_of_time_without_mate += 1
+            if self.number_of_time_without_mate >= 10:
+                self.number_of_time_without_mate = 0
+                self.communication.writebuffer += "Fork\n"
+                self.communication.request.push(["Fork"])
         if self.ask_help >= 2 and self.nb_players_on_me_team + 1 < self.elevation[self.lvl]["nb_players"]:
             self.need_player = False
             self.ask_help = 0
@@ -588,7 +602,8 @@ class AI:
         """ loop with the communication ai/server and all the bot logic
         """
         while True:
-            self.communication.network()
+            if self.communication.network() == "closed":
+                return
             handling = self.communication.clean_information()
             if handling == action.DEAD:
                 print ("DEAD")
@@ -610,7 +625,8 @@ class AI:
                     print ("DEAD 2")
                     return
                 #print(handling)
-                self.dic_function[handling](self)
+                if self.dic_function[handling](self) == "forked":
+                    return "forked"
                 handling = self.communication.clean_information()
                 # method corresponding to the handling (LOOK, INVENTORY, FORWARD...)
 
