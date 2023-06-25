@@ -381,7 +381,8 @@ class AI:
 
     def run(self):
         while True:
-            self.communication.network()
+            if self.communication.network() == "closed":
+                return
             handling = self.communication.clean_information()
             if handling == action.DEAD:
                 return

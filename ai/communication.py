@@ -230,7 +230,10 @@ class Communication:
             self.s.send((self.writebuffer).encode())
             self.writebuffer = ""
         if read:
-            self.readbuffer += self.s.recv(1024).decode()
+            data = self.s.recv(1024)
+            if len(data) == 0:
+                return "closed"
+            self.readbuffer += data.decode()
         tmp = []
         pos = self.readbuffer.find('\n')
         while (pos != -1):
