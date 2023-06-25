@@ -52,9 +52,10 @@ for file in ./tests/functional/connexion_deconnexion/* ; do
 done
 
 pid_server=0
+pid_client=0
 
 launch_server(){
-    timeout -s SIGINT --preserve-status 2s ../zappy_server -x 10 -y 10 -n name1 name2 -c 5 -f 80 -p $1 > /dev/null
+    timeout -s SIGINT --preserve-status 10s ../zappy_server -x 10 -y 10 -n name1 name2 -c 5 -f 80 -p $1 > /dev/null
     exit $?
 }
 
@@ -64,7 +65,7 @@ launch_client(){
 }
 
 launch_player_client(){
-    timeout 2s netcat 127.0.0.1 $1 > /dev/null << EOF
+    timeout 7s netcat 127.0.0.1 $1 > /dev/null << EOF
 name1
 EOF
     exit 0
@@ -78,8 +79,9 @@ for file in ./tests/functional/gui_tests/*; do
     pid_server=$!
     launch_player_client $port &
     launch_player_client $port &
-    sleep 1
+    sleep 5
     launch_client $port $file &
+    pid_client=$!
     wait $pid_server
     exit_code=$?
     if [ ! $exit_code -eq 0 ]
@@ -87,13 +89,14 @@ for file in ./tests/functional/gui_tests/*; do
         printf "\e[1;31m---- %s test fail: Program didn't launched or crashed (exit code %d) ----\e[0m\n" $file $exit_code
         failed=1
     fi
+    wait $pid_client
+    cat out.tmp > $(basename "$file").tmp
     tail -n +106 out.tmp > out2.tmp
     sed -n '/bct/!p' out2.tmp > out.tmp
     sed -n '/pin/!p' out.tmp > out2.tmp
     sed -n '/ppo/!p' out2.tmp > out.tmp
     sed -n '/pnw/!p' out.tmp > out2.tmp
     sed -n '/pdi/!p' out2.tmp > out.tmp
-    cat out2.tmp > out.tmp
     name=$(basename "$file")
     if !(cmp -s out.tmp ./tests/functional/gui_tests_expected/$name); then
         echo -e "$file: \033[1;31mERROR!\033[0m Output differs"
