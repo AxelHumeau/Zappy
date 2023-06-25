@@ -48,6 +48,7 @@ class Communication:
         self.readbuffer = ""
         self.writebuffer = ""
         self.s = socket
+        self.count = 0
 
     # def connect_number(self):
     #     info = self.response.front()
@@ -68,6 +69,7 @@ class Communication:
                 if elem.isnumeric():
                     self.request.pop()
                     self.response.pop()
+                    self.count -= 1
                     return False
                 if elem != "":
                     try:
@@ -79,6 +81,7 @@ class Communication:
             self.look_info.append(dict_info)
         self.request.pop()
         self.response.pop()
+        self.count -= 1
         return True
 
     def parse_information_inventory(self):
@@ -89,6 +92,8 @@ class Communication:
         """
         self.inventory.clear()
         info = self.response.front().translate({ord(i): None for i in '[]'})
+        if info == 'ok':
+            return self.pop_information()
         for square in info.split(","):
             dict_info = {}
             elem = square.strip().split(" ")
@@ -116,7 +121,6 @@ class Communication:
             boolean: pop_information()
         """
         if (self.response.front()[0] == "ko"):
-            # Algo to retake a object
             print("Failed take object")
         return self.pop_information()
 
@@ -128,6 +132,7 @@ class Communication:
         """
         self.request.pop()
         self.response.pop()
+        self.count -= 1
         return True
 
     def get_message(self):
@@ -152,8 +157,6 @@ class Communication:
                 self.pop_information()
                 return False
             elif "Current level" in resp:
-                # print("req =", self.request.front)
-                print("-------------- res = ", resp + "---------------")
                 self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
@@ -186,11 +189,8 @@ class Communication:
             boolean: True/False
         """
         if ("dead" in self.response):
-            print ("------------- INVENTORY BEFORE DEAD : -----------------")
-            print (self.inventory)
             return action.DEAD
-        if (len(self.response) != 0 and
-                self.response.front().find("message") != -1):
+        while (len(self.response) != 0 and self.response.front().find("message") != -1):
             self.get_message()
         if ((len(self.request) == 0 or self.request.front() != ["Incantation"] and len(self.response) != 0)):
             if (len(self.response) != 0 and self.response.front().find("Elevation underway") != -1):
@@ -201,16 +201,14 @@ class Communication:
                 self.current_level = int(self.response.front().split(':')[1].strip())
                 self.response.pop()
                 self.elevation = False
-                print("recev incantation")
                 return action.INCANTATION
         if (len(self.response) == 0 and len(self.request) != 0):
             return action.WAITING
         if (len(self.request) == 0 and len(self.response) == 0):
             return action.NOTHING
-        if (len(self.request) != 0 and self.request.front() != ["Look"]):
-            print(self.response, self.request)
         if (len(self.request) != 0 and self.request.front()[0] in Communication.communication):
             oldrq = self.request.front()[0]
+            print("POOOOPPP")
             self.pop_information()
             return self.communication[oldrq][1]
         elif (len(self.response) != 0 and self.response.front() == "ko"):
@@ -218,16 +216,16 @@ class Communication:
             self.response.pop()
             if len(self.request) != 0:
                 self.request.pop()
+                self.count -= 1
             return action.FAILED
         if len(self.request) != 0:
-            # print(self.response, self.request)
             oldrq = self.request.front()[0]
             self.dict_function[self.request.front()[0]][0](self)
             return self.dict_function[oldrq][1]
         return action.WAITING
 
     def network(self):
-        read, write, error = select.select([self.s], [self.s], [])
+        read, write, _ = select.select([self.s], [self.s], [])
         if write and len(self.writebuffer) != 0:
             self.s.send((self.writebuffer).encode())
             self.writebuffer = ""

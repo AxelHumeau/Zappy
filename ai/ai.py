@@ -1,5 +1,6 @@
 from enum import Enum
 from communication import action
+import uuid
 
 
 import sys
@@ -10,8 +11,8 @@ class priority(Enum):
     RESSOURCES = 2
     PLAYER = 3
 
-
 class AI:
+    id = uuid.uuid4()
     prio = priority.RESSOURCES
     ask_help = 0
     mapsize = (1, 1)
@@ -25,6 +26,9 @@ class AI:
     food = 10
     target = -1
     nb_players_on_me_team = 0
+    notmove = False
+    answerer = []
+    requester = ""
     lvl = 1
     following = False
     elevation = {
@@ -153,7 +157,7 @@ class AI:
         return paths[indexbest]
 
     # run the A
-    def convert_list_to_string(self, lst):
+    def                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     convert_list_to_string(self, lst):
         result = ''
         for inner_list in lst:
             result += ' '.join(inner_list) + '\n'
@@ -162,40 +166,22 @@ class AI:
     def add_to_request_queue(self, commande):
         for cmd in commande:
             self.communication.request.push(cmd)
+            self.communication.count += 1
 
     def act_look(self):
-        if (self.need_player == True and self.following != True):
-            print("send here")
-            self.communication.writebuffer += "Broadcast " + str(self.team) + " here\n"
-            self.communication.request.push(["Broadcast", str(self.team) + " here\n"])
-            self.communication.writebuffer += "Inventory\n"
-            self.communication.request.push(["Inventory"])
-            self.ask_help += 1
-            if self.ask_help >= 5 and self.nb_players_on_me_team  + 1 < self.elevation[self.lvl]["nb_players"]:
-                self.need_player = False
-                self.ask_help = 0
-                self.nb_players_on_me_team = 0
-            if self.prio != priority.FOOD:
-                return
-            if self.prio == priority.FOOD:
-                self.need_player = False
-                self.ask_help = 0
-        if self.following == True and self.prio != priority.FOOD:
-            self.communication.writebuffer += "Inventory\n"
-            self.communication.request.push(["Inventory"])
-            return
         print("search = ", self.prio)
         path = self.get_best_path(self.get_target(self.communication.look_info))
-        #print("path", path)
-        #print("nb_players_on_me", self.nb_players_on_me)
+        print("path", path)
+        # print("nb_players_on_me", self.nb_players_on_me)
         #if len(path) != 0:
-            # print(self.communication.look_info)
+        print(self.communication.look_info)
         if len(path) == 0 and self.lookaround == 3:
             self.lookaround = 0
             self.communication.writebuffer += "Right\nForward\n"
             self.add_to_request_queue([["Right"], ["Forward"]])
             self.communication.writebuffer += "Inventory\n"
             self.communication.request.push(["Inventory"])
+            self.communication.count += 1
             return
         if len(path) == 0:
             self.lookaround += 1
@@ -228,6 +214,8 @@ class AI:
             self.need_player = False
             self.following = False
             self.nb_players_on_me_team = 0
+            self.answerer = []
+            self.notmove = False
             print("lvl:", self.lvl)
         else:
             self.start_elevation = True
@@ -249,17 +237,26 @@ class AI:
     def Set(self):
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
         print("set")
+        print("******************* AFTER SET *******************")
+        print(self.communication.request)
+        print(self.communication.response)
+        print("******************* AFTER SET *******************")
 
     def Take(self):
         print("Take")
         self.communication.writebuffer += "Inventory\n"
         self.communication.request.push(["Inventory"])
+        self.communication.count += 1
 
     def failed(self):
         if (self.start_elevation == True):
             self.start_elevation = False
             self.nb_players_on_me_team = 0
+            self.answerer = []
+            self.notmove = False
+            self.communication.request.clear()
         self.communication.elevation = False
         print("Failed")
 
@@ -277,9 +274,12 @@ class AI:
     }
 
     def send_here(self):
-        print("here")
-        if self.following == True:
+        if self.following == True and self.prio != priority.FOOD and self.requester == self.communication.message.front()[1].split(' ')[-1]:
+            print("here")
             command = self.communication.message.front()[0]
+            message = self.communication.message.front()[1].split(" ")[-2].strip()
+            if (int(message) != self.lvl):
+                return
             if command in [1, 2, 8]:
                 self.communication.writebuffer += "Forward\n"
                 self.add_to_request_queue([["Forward"]])
@@ -289,30 +289,41 @@ class AI:
             elif command in [6, 7]:
                 self.communication.writebuffer += "Right\n"
                 self.add_to_request_queue([["Right"]])
-            elif command == 8:
+            elif command == 5:
                 self.communication.writebuffer += "Right\nRight\n"
                 self.add_to_request_queue([["Right"], ["Right"]])
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " come " + str(self.id) + "\n"
+            self.add_to_request_queue([["Broadcast", str(self.team) + " come " + str(self.id)]])
 
     def send_need(self):
         print("my lvl = ", self.lvl, " requested = ", self.communication.message.front()[1].split(' ')[2])
-        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]):
+        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]) and self.start_elevation == False:
             # self.communication.request.clear()
             # self.communication.writebuffer = ""
-            self.communication.writebuffer += "Broadcast " + str(self.team) + " come\n"
-            self.add_to_request_queue([["Broadcast", str(self.team) + " come"]])
+            self.communication.writebuffer += "Broadcast " + str(self.team) + " come " + str(self.id) + "\n"
+            self.add_to_request_queue([["Broadcast", str(self.team) + " come " + str(self.id)]])
             self.following = True
+            self.requester = self.communication.message.front()[1].split(' ')[-1]
 
     def send_stop(self):
-        print("stop")
-        if self.following == True and self.communication.message.front()[0] != 0:
-            self.following = False
+        if (self.communication.message.front()[1].find(self.team) != -1 and self.communication.message.front()[1].split(' ')[-1] == self.requester):
+            print("stop")
+            if self.following == True and self.communication.message.front()[0] != 0:
+                self.communication.writebuffer = ""
+                self.communication.request.clear()
+                self.following = False
+                self.requester = ""
+            if self.following == True and self.communication.message.front()[0] == 0:
+                self.notmove = True
+
 
     def send_comming(self):
-        print("comming")
         if self.want_to_elevate == True:
-            if self.communication.message.front()[0] == 0:
+            print("comming")
+            if self.communication.message.front()[0] == 0 and self.communication.message.front()[1].split(' ')[-1] not in self.answerer:
+                self.answerer.append(self.communication.message.front()[1].split(' ')[-1])
                 self.nb_players_on_me_team += 1
-
+                commands.try_elevation(self, self.communication.request)
 
     dic_message = {
         "here": send_here,
@@ -328,24 +339,60 @@ class AI:
                     self.dic_message[self.communication.message.front()[1].split(' ')[1]](self)
             self.communication.message.pop()
 
+    def elevation_multiple(self):
+            if (self.following != True):
+                print("send here")
+                self.communication.writebuffer += "Broadcast " + str(self.team) + " here " + str(self.lvl) +  " " + str(self.id) + "\n"
+                self.communication.request.push(["Broadcast", str(self.team) + " here " + str(self.lvl) + " " + str(self.id) + "\n"])
+                self.communication.count += 1
+                self.ask_help += 1
+            if self.ask_help >= 2 and self.nb_players_on_me_team + 1 < self.elevation[self.lvl]["nb_players"]:
+                self.need_player = False
+                self.ask_help = 0
+                self.nb_players_on_me_team = 0
+                self.answerer = []
+                self.communication.writebuffer += "Inventory\n"
+                self.communication.request.push(["Inventory"])
+            if self.prio == priority.FOOD:
+                self.communication.writebuffer += "Look\n"
+                self.communication.request.push(["Look"])
+                self.need_player = False
+                self.ask_help = 0
+                return
+
+    def join_mate(self):
+        if self.notmove == True:
+            return
+        if self.following == True and self.prio == priority.FOOD:
+            self.communication.writebuffer += "Look\n"
+            self.communication.request.push(["Look"])
+            self.communication.count += 1
+        if self.following == True and self.prio != priority.FOOD:
+            self.communication.writebuffer += "Inventory\n"
+            self.communication.request.push(["Inventory"])
+            self.communication.count += 1
+            return
 
     def run(self):
         while True:
             self.communication.network()
             handling = self.communication.clean_information()
             if handling == action.DEAD:
-                print ("DEAD")
                 return
             self.handling_message()
-            if (handling == action.NOTHING):
+            if (handling == action.NOTHING and self.following == True):
+                self.join_mate()
+            if (handling == action.NOTHING and self.need_player == True):
+                self.elevation_multiple()
+            if (handling == action.NOTHING and self.following == False and self.need_player == False and self.notmove == False):
                 self.communication.writebuffer += "Look\n"
                 self.communication.request.push(["Look"])
+                self.communication.count += 1
             while (handling != action.NOTHING):
                 if handling == action.WAITING:
                     break
                 print("following =", self.following)
                 if handling == action.DEAD:
-                    print ("DEAD 2")
                     return
                 #print(handling)
                 self.dic_function[handling](self)
