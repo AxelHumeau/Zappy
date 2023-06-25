@@ -13,7 +13,7 @@ void init_entry(struct client_entry *entry)
 {
     entry->is_gui = false;
     entry->is_role_defined = false;
-    entry->timer = -1;
+    entry->timer = -5;
     entry->food_time = 0;
     entry->is_dead = false;
     entry->ritual = false;

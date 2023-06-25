@@ -63,6 +63,7 @@ int handle_client(struct client_entry *client,
         return EXIT_FAIL;
     if (client->is_role_defined && !client->is_gui &&
         client->player_info->inventory[FOOD] == 0) {
+            printf("Client (%d) is dead\n", client->id);
             client->is_dead = true;
             add_to_buffer(&client->buf_to_send, DEAD, strlen(DEAD));
     }
