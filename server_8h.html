@@ -159,8 +159,8 @@ Functions</h2></td></tr>
 <tr class="separator:acdbfaf9e8ea9ffd5f310ec4c989a7a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1d45467fc1a5eec9e32a6c92fa42d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#ac1d45467fc1a5eec9e32a6c92fa42d7a">set_resource_map</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:ac1d45467fc1a5eec9e32a6c92fa42d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2cf51c326c1ccca4c5c90249c480d74"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#aa2cf51c326c1ccca4c5c90249c480d74">put_client_team</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, struct <a class="el" href="structclient__entry.html">client_entry</a> *entry)</td></tr>
-<tr class="separator:aa2cf51c326c1ccca4c5c90249c480d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b6b2b8e11e2bff4d28d4749d29fad23"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a8b6b2b8e11e2bff4d28d4749d29fad23">put_client_team</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, struct <a class="el" href="structclient__entry.html">client_entry</a> *entry, char *line)</td></tr>
+<tr class="separator:a8b6b2b8e11e2bff4d28d4749d29fad23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a928dd434eb54c29715b1206bba252bb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a928dd434eb54c29715b1206bba252bb5">handle_player_timer</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
 <tr class="separator:a928dd434eb54c29715b1206bba252bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61503fdb5058e7a74fe6e23b9572b204"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8h.html#a61503fdb5058e7a74fe6e23b9572b204">exec_command</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, char *line)</td></tr>
@@ -957,8 +957,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa2cf51c326c1ccca4c5c90249c480d74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2cf51c326c1ccca4c5c90249c480d74">&#9670;&nbsp;</a></span>put_client_team()</h2>
+<a id="a8b6b2b8e11e2bff4d28d4749d29fad23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b6b2b8e11e2bff4d28d4749d29fad23">&#9670;&nbsp;</a></span>put_client_team()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -973,7 +973,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
-          <td class="paramname"><em>entry</em>&#160;</td>
+          <td class="paramname"><em>entry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
