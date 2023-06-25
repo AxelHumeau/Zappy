@@ -25,7 +25,6 @@ void accept_client(struct server *server)
         return;
     entry = malloc(sizeof(struct client_entry));
     entry->fd = fd;
-    printf("ID CLIENT %d spawned\n", count);
     entry->id = count++;
     init_entry(entry);
     init_buffer(&entry->buf_to_send);
@@ -40,6 +39,11 @@ static void handle_lines(struct client_entry *client, struct server *server)
 
     line = get_line_in_buffer(&client->buf_to_recv);
     while (line != NULL) {
+        if (!client->is_role_defined) {
+            put_client_team(server, client, line);
+            line = get_line_in_buffer(&client->buf_to_recv);
+            continue;
+        }
         if (client->is_gui)
             handle_gui(client, server, line);
         else
@@ -68,8 +72,6 @@ int handle_client(struct client_entry *client,
     if (read_char <= 0)
         return EXIT_FAIL;
     add_to_buffer(&client->buf_to_recv, buffer, read_char);
-    if (!client->is_role_defined)
-        return put_client_team(server, client);
     handle_lines(client, server);
     return EXIT_SUCCESS;
 }

@@ -20,7 +20,6 @@ void check_fork(struct client_entry *client, struct server *server,
             client->egg->y = client->player_info->y;
             client->egg->team = client->player_info->team;
             client->player_info->team->nb_slots_left++;
-            add_to_buffer(&client->buf_to_send, OK, strlen(OK));
             broadcast_to_guis(server, &notify_egg_laying, client->id);
         } else
             add_to_buffer(&client->buf_to_send, KO, strlen(KO));
@@ -43,6 +42,7 @@ void check_incantation(struct client_entry *client, struct server *server,
             broadcast_to_guis(server, &notify_start_of_incantation,
                 client->id, client->player_info, size, list_ids);
             send_ritual_message(client, list_players, true);
+            free(list_ids);
         } else
             add_to_buffer(&client->buf_to_send, KO, strlen(KO));
         client->ritual = true;
