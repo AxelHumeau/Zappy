@@ -78,14 +78,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a2ac7b2180bc417011cf67f0f3c8d3079">init_entry</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *entry)</td></tr>
+<tr class="memdesc:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init information about a entry with basic value.  <a href="utils__player_8c.html#a2ac7b2180bc417011cf67f0f3c8d3079">More...</a><br /></td></tr>
 <tr class="separator:a2ac7b2180bc417011cf67f0f3c8d3079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbda0e354e20c44ef4ba35e7ae3d23e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#afbda0e354e20c44ef4ba35e7ae3d23e4">set_position_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, <a class="el" href="game_8h.html#a9df65ef34efcf40007091fa0e679ea0c">player_t</a> *info, struct <a class="el" href="structteam.html">team</a> *<a class="el" href="structteam.html">team</a>)</td></tr>
+<tr class="memdesc:afbda0e354e20c44ef4ba35e7ae3d23e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position player object.  <a href="utils__player_8c.html#afbda0e354e20c44ef4ba35e7ae3d23e4">More...</a><br /></td></tr>
 <tr class="separator:afbda0e354e20c44ef4ba35e7ae3d23e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a25c3a3df97f310df1bf1ed140eb7d01c">is_player</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *<a class="el" href="structplayer.html">player</a>, struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
+<tr class="memdesc:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a <a class="el" href="structclient__entry.html" title="Node of a client linked list.">client_entry</a> is a player.  <a href="utils__player_8c.html#a25c3a3df97f310df1bf1ed140eb7d01c">More...</a><br /></td></tr>
 <tr class="separator:a25c3a3df97f310df1bf1ed140eb7d01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e3c1d0c82f173ce03652a42031337e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a1e3c1d0c82f173ce03652a42031337e9">same_pos</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *entry, struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
+<tr class="memdesc:a1e3c1d0c82f173ce03652a42031337e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if two player in the same position.  <a href="utils__player_8c.html#a1e3c1d0c82f173ce03652a42031337e9">More...</a><br /></td></tr>
 <tr class="separator:a1e3c1d0c82f173ce03652a42031337e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ae40da77746f5c6ed2a4c6d6633f899"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__player_8c.html#a9ae40da77746f5c6ed2a4c6d6633f899">display_player</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="memdesc:a9ae40da77746f5c6ed2a4c6d6633f899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utils to display the player on the map.  <a href="utils__player_8c.html#a9ae40da77746f5c6ed2a4c6d6633f899">More...</a><br /></td></tr>
 <tr class="separator:a9ae40da77746f5c6ed2a4c6d6633f899"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -105,6 +110,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Utils to display the player on the map. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2ac7b2180bc417011cf67f0f3c8d3079"></a>
@@ -122,6 +135,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Init information about a entry with basic value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -151,6 +172,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Check if a <a class="el" href="structclient__entry.html" title="Node of a client linked list.">client_entry</a> is a player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td></td></tr>
+    <tr><td class="paramname">client</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
 </div>
 </div>
 <a id="a1e3c1d0c82f173ce03652a42031337e9"></a>
@@ -163,7 +196,7 @@ Functions</h2></td></tr>
           <td class="memname">bool same_pos </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structclient__entry.html">client_entry</a> *&#160;</td>
-          <td class="paramname"><em>entry</em>, </td>
+          <td class="paramname"><em>player</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -178,6 +211,18 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Check if two player in the same position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td></td></tr>
+    <tr><td class="paramname">client</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -212,6 +257,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the position player object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+    <tr><td class="paramname">info</td><td></td></tr>
+    <tr><td class="paramname">team</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

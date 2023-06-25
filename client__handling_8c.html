@@ -84,12 +84,16 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aa444da033cf02035c57afe6d50a21c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__handling_8c.html#aa444da033cf02035c57afe6d50a21c21">accept_client</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="memdesc:aa444da033cf02035c57afe6d50a21c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accept client and set informations.  <a href="client__handling_8c.html#aa444da033cf02035c57afe6d50a21c21">More...</a><br /></td></tr>
 <tr class="separator:aa444da033cf02035c57afe6d50a21c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafc09403c29989f1628cff71e2ef2677"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__handling_8c.html#aafc09403c29989f1628cff71e2ef2677">handle_client</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client, struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>, fd_set *read_fds)</td></tr>
+<tr class="memdesc:aafc09403c29989f1628cff71e2ef2677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle client function (alive, read ok...)  <a href="client__handling_8c.html#aafc09403c29989f1628cff71e2ef2677">More...</a><br /></td></tr>
 <tr class="separator:aafc09403c29989f1628cff71e2ef2677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ad0ec90fffa948adbc11ebadedf641"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__handling_8c.html#ae1ad0ec90fffa948adbc11ebadedf641">destroy_client</a> (struct <a class="el" href="structclient__entry.html">client_entry</a> *client)</td></tr>
+<tr class="memdesc:ae1ad0ec90fffa948adbc11ebadedf641"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroy client and free all information  <a href="client__handling_8c.html#ae1ad0ec90fffa948adbc11ebadedf641">More...</a><br /></td></tr>
 <tr class="separator:ae1ad0ec90fffa948adbc11ebadedf641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a401094a20ff409b433aadee692409fd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__handling_8c.html#a401094a20ff409b433aadee692409fd3">destroy_clients</a> (struct <a class="el" href="structserver.html">server</a> *<a class="el" href="structserver.html">server</a>)</td></tr>
+<tr class="memdesc:a401094a20ff409b433aadee692409fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that loop on all the clients and destroy it.  <a href="client__handling_8c.html#a401094a20ff409b433aadee692409fd3">More...</a><br /></td></tr>
 <tr class="separator:a401094a20ff409b433aadee692409fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -109,6 +113,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Accept client and set informations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae1ad0ec90fffa948adbc11ebadedf641"></a>
@@ -127,6 +139,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>destroy client and free all information </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a401094a20ff409b433aadee692409fd3"></a>
@@ -144,6 +164,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Function that loop on all the clients and destroy it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -178,6 +206,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handle client function (alive, read ok...) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td></td></tr>
+    <tr><td class="paramname">server</td><td></td></tr>
+    <tr><td class="paramname">read_fds</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
