@@ -101,6 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab47abcfb71c5b3ae691b688910cdcf90"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the size of the tilemap  <a href="classZappyGui_1_1Tilemap.html#ab47abcfb71c5b3ae691b688910cdcf90">More...</a><br /></td></tr>
 <tr class="separator:ab47abcfb71c5b3ae691b688910cdcf90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8a0bfbec70990eda0cfc21dc43b3de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceZappyGui.html#a6ec8d6873cecf2e9aa3446fc1c5efb6f">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#af8a0bfbec70990eda0cfc21dc43b3de0">getPositionOnTile</a> (std::size_t x, std::size_t y)</td></tr>
+<tr class="memdesc:af8a0bfbec70990eda0cfc21dc43b3de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the world position on the top of the tile in x y  <a href="classZappyGui_1_1Tilemap.html#af8a0bfbec70990eda0cfc21dc43b3de0">More...</a><br /></td></tr>
 <tr class="separator:af8a0bfbec70990eda0cfc21dc43b3de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f910ade6959f6a24e96838923f1fee8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#a0f910ade6959f6a24e96838923f1fee8">lookAt</a> (const Ogre::Vector3 &amp;targetPoint, Ogre::Node::TransformSpace relativeTo, const Ogre::Vector3 &amp;localDirectionVector=Ogre::VectorBase&lt; 3, Ogre::Real &gt;::NEGATIVE_UNIT_Z)</td></tr>
 <tr class="memdesc:a0f910ade6959f6a24e96838923f1fee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not implemented !  <a href="classZappyGui_1_1Tilemap.html#a0f910ade6959f6a24e96838923f1fee8">More...</a><br /></td></tr>
@@ -112,6 +113,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab68f4def264a7a3b1db859200b9b7358"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not implemented !  <a href="classZappyGui_1_1Tilemap.html#ab68f4def264a7a3b1db859200b9b7358">More...</a><br /></td></tr>
 <tr class="separator:ab68f4def264a7a3b1db859200b9b7358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88ac7a055c8fa320f206ea8ede443618"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#a88ac7a055c8fa320f206ea8ede443618">update</a> (<a class="el" href="classSafeQueue.html">SafeQueue</a>&lt; std::string &gt; &amp;requests)</td></tr>
+<tr class="memdesc:a88ac7a055c8fa320f206ea8ede443618"><td class="mdescLeft">&#160;</td><td class="mdescRight">send the request to update the tilemap to the server  <a href="classZappyGui_1_1Tilemap.html#a88ac7a055c8fa320f206ea8ede443618">More...</a><br /></td></tr>
 <tr class="separator:a88ac7a055c8fa320f206ea8ede443618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacacdbfe2d6bc19fd520a1b1fe1b1d0e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classZappyGui_1_1Tile.html">Tile</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZappyGui_1_1Tilemap.html#aacacdbfe2d6bc19fd520a1b1fe1b1d0e">operator[]</a> (std::size_t index)</td></tr>
 <tr class="memdesc:aacacdbfe2d6bc19fd520a1b1fe1b1d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator[] overload to access the _tilemap  <a href="classZappyGui_1_1Tilemap.html#aacacdbfe2d6bc19fd520a1b1fe1b1d0e">More...</a><br /></td></tr>
@@ -240,6 +242,16 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>get the world position on the top of the tile in x y </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x position </td></tr>
+    <tr><td class="paramname">y</td><td>y position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a Vector3 of the position on the top of the x y tile </dd></dl>
 
 </div>
 </div>
@@ -537,6 +549,14 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>send the request to update the tilemap to the server </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td>requests <a class="el" href="classSafeQueue.html" title="A queue class that is thread safe.">SafeQueue</a> to add the requests </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
