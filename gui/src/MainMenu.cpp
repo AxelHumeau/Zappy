@@ -44,11 +44,11 @@ void ZappyGui::MainMenu::_createBackground(std::shared_ptr<Ogre::Overlay> overla
 void ZappyGui::MainMenu::_createLaunch(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, std::size_t index)
 {
     _launch.reset(new ZappyGui::Button(overlay, "Launch_" + std::to_string(index), "MenuButtonDefault", endInitialization));
-    _launch->panelSetDimensions(500, 200);
+    _launch->panelSetDimensions(500, 150);
     _launch->panelSetPosition(width / 2 - 250, height / 2 - 200);
     _launch->setMaterials("MenuButtonDefault", "MenuButtonHover", "MenuButtonClick");
 
-    _launch->addTextArea("Launch_" + std::to_string(index) + "_text", 250, 100, "defaultFont");
+    _launch->addTextArea("Launch_" + std::to_string(index) + "_text", 250, 55, "defaultFont");
     _launch->textSetAlignment("Launch_" + std::to_string(index) + "_text", Ogre::TextAreaOverlayElement::Center);
     _launch->textSetText("Launch_" + std::to_string(index) + "_text", "Launch");
     _launch->textSetCharacterHeight("Launch_" + std::to_string(index) + "_text", 50);
@@ -59,11 +59,11 @@ void ZappyGui::MainMenu::_createLaunch(std::shared_ptr<Ogre::Overlay> overlay, i
 void ZappyGui::MainMenu::_createQuit(std::shared_ptr<Ogre::Overlay> overlay, int width, int height, std::size_t index)
 {
     _quit.reset(new ZappyGui::Button(overlay, "Quit_" + std::to_string(index), "MenuButtonDefault", closeWindow));
-    _quit->panelSetDimensions(500, 200);
+    _quit->panelSetDimensions(500, 150);
     _quit->panelSetPosition(width / 2 - 250, height / 2 + 200);
     _quit->setMaterials("MenuButtonDefault", "MenuButtonHover", "MenuButtonClick");
 
-    _quit->addTextArea("Quit_" + std::to_string(index) + "_text", 250, 100, "defaultFont");
+    _quit->addTextArea("Quit_" + std::to_string(index) + "_text", 250, 55, "defaultFont");
     _quit->textSetAlignment("Quit_" + std::to_string(index) + "_text", Ogre::TextAreaOverlayElement::Center);
     _quit->textSetText("Quit_" + std::to_string(index) + "_text", "Quit");
     _quit->textSetCharacterHeight("Quit_" + std::to_string(index) + "_text", 50);

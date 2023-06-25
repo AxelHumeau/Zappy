@@ -107,17 +107,36 @@ namespace ZappyGui {
             /// @brief Handles the events for the mouse.
             void mouseEvent();
 
+            /// @brief Checks if the size of the mouse clicks queue is null.
+            /// @return Boolean, true if it is empty, false otherwise.
             bool mouseClicksEmpty();
+
+            /// @brief Pops the mouse click from the queue
+            /// @return Vector2 of the mouse click position relative to the screen. The value is between 0 and 1.
             ZappyGui::Vector2 popMouseClicks();
 
+            /// @brief Getter for the camera.
+            /// @return Shared pointer to the camera.
             std::shared_ptr<ZappyGui::Camera> getCamera();
 
+            /// @brief Sets the tile panels. Use to delete the deleted panels outside of the renderer.
+            /// @param tilePanels Shared pointer to the tile panels map.
             void setTilePanels(std::shared_ptr<std::map<std::string, std::unique_ptr<ZappyGui::Tile, Nop>>> tilePanels);
+
+            /// @brief Sets the player panels. Use to delete the deleted panels outside of the renderer.
+            /// @param playerPanels Shared pointer to the player panels map.
             void setPlayerPanels(std::shared_ptr<std::map<std::string, std::size_t>> playerPanels);
 
+            /// @brief Getter for the window dimentions.
+            /// @return Vector2i of the window dimentions.
             ZappyGui::Vector2i getDimensions() { return ZappyGui::Vector2i(_width, _height); };
 
+            /// @brief Getter for the current mouse position.
+            /// @return Vector2i of the current mouse position.
             ZappyGui::Vector2i getMousePosition() { return ZappyGui::Vector2i(_curMouse.x, _curMouse.y); };
+
+            /// @brief Getter for the mouse event, which is the state of the left click.
+            /// @return MouseEvent of the current mouse state.
             ZappyGui::MouseEvent &getMouseEvent() { return _mouseEvent; };
 
         private:
