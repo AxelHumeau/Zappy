@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['food_1395',['FOOD',['../game_8h.html#ab00e7685de21356f97a42d26fe8e9817abaad2be1abe0cffbc3a0bbf032a604c4',1,'game.h']]],
-  ['food_1396',['Food',['../namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9a71a6e8a91addc7c5e7199b7aa21dd658',1,'ZappyGui']]]
+  ['east_1433',['East',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077ab3fdf86cfae4dae63699f73dc59a578d',1,'ZappyGui']]]
 ];

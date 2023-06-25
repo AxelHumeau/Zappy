@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['right_1407',['RIGHT',['../game_8h.html#a99f26e6ee9fcd62f75203b5402df8098aec8379af7490bb9eaaf579cf17876f38',1,'game.h']]],
-  ['rotate_1408',['ROTATE',['../namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001acf22e9c696ec39f466ab95d0fceea6ca',1,'ZappyGui']]]
+  ['noevent_1444',['NoEvent',['../namespaceZappyGui.html#a47d9868d8d82d00a285cc828d8a611a3ad0616aa514f7b0c7e81c7cfe49edb71e',1,'ZappyGui']]],
+  ['north_1445',['North',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077a85c0d519fb7066e39ae14fb0fd8bb786',1,'ZappyGui']]]
 ];

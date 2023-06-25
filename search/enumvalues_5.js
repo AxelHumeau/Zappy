@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['mendiane_1401',['Mendiane',['../namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9a3a15c2ad4b23c072a07bcc7563d662fe',1,'ZappyGui']]],
-  ['mendiane_1402',['MENDIANE',['../game_8h.html#ab00e7685de21356f97a42d26fe8e9817a52a4fda632b2e9f5d1472ba2190218f9',1,'game.h']]],
-  ['move_1403',['MOVE',['../namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001a7c1e45ac82bcbd61c492e946fc25e14d',1,'ZappyGui']]]
+  ['idle_1437',['IDLE',['../namespaceZappyGui.html#a5564903a8ad191587ff50194e3372001a3e544549713d4f3ad7695860a9183c4e',1,'ZappyGui']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['resource_1389',['resource',['../game_8h.html#ab00e7685de21356f97a42d26fe8e9817',1,'game.h']]],
-  ['resourcetype_1390',['ResourceType',['../namespaceZappyGui.html#ab0f3c575f51eed58a025f726359d7de9',1,'ZappyGui']]]
+  ['orientation_1426',['Orientation',['../namespaceZappyGui.html#a47c9d520a51b15e9cd6dfbad2c01c077',1,'ZappyGui']]]
 ];
