@@ -54,19 +54,12 @@ done
 pid_server=0
 
 launch_server(){
-    timeout -s SIGINT --preserve-status 2s ../zappy_server -x 10 -y 10 -n name1 name2 -c 5 -f 80 -p $1 > /dev/null
+    timeout -s SIGINT --preserve-status 5s ../zappy_server -x 10 -y 10 -n name1 name2 -c 5 -f 80 -p $1 > /dev/null
     exit $?
 }
 
 launch_client(){
     timeout 2s netcat 127.0.0.1 $1 < $2 > out.tmp
-    exit 0
-}
-
-launch_player_client(){
-    timeout 2s netcat 127.0.0.1 $1 > /dev/null << EOF
-name1
-EOF
     exit 0
 }
 
@@ -76,9 +69,6 @@ for file in ./tests/functional/gui_tests/*; do
     ((port++))
     launch_server $port &
     pid_server=$!
-    launch_player_client $port &
-    launch_player_client $port &
-    sleep 1
     launch_client $port $file &
     wait $pid_server
     exit_code=$?
@@ -92,7 +82,6 @@ for file in ./tests/functional/gui_tests/*; do
     sed -n '/pin/!p' out.tmp > out2.tmp
     sed -n '/ppo/!p' out2.tmp > out.tmp
     sed -n '/pnw/!p' out.tmp > out2.tmp
-    sed -n '/pdi/!p' out2.tmp > out.tmp
     cat out2.tmp > out.tmp
     name=$(basename "$file")
     if !(cmp -s out.tmp ./tests/functional/gui_tests_expected/$name); then
