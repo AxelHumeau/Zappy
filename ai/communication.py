@@ -176,11 +176,13 @@ class Communication:
                 self.pop_information()
                 return False
             elif "Current level" in resp:
-                # print("req =", self.request.front)
                 print("-------------- res = ", resp + "---------------")
                 self.current_level = int(resp.split(':')[1].strip())
                 self.pop_information()
                 self.elevation = False
+                return True
+            else:
+                self.response.insert(0, "ko")
                 return True
         else:
             if  resp == "ko":
