@@ -22,6 +22,7 @@ var searchData=
   ['ai_30',['ai',['../namespaceai.html',1,'']]],
   ['ai_31',['AI',['../classai_1_1AI.html',1,'ai']]],
   ['ai_2epy_32',['ai.py',['../ai_8py.html',1,'']]],
-  ['ask_5fhelp_33',['ask_help',['../classai_1_1AI.html#a89c84cfbc0ac67a33476ce47cd8e3ab4',1,'ai.AI.ask_help()'],['../classai_1_1AI.html#a2bd5b8be981a8eb48daab1c3d8670db9',1,'ai.AI.ask_help()']]],
-  ['at_34',['at',['../classVectorMap.html#af26701c0a09f113738cad4c7a3b720f9',1,'VectorMap']]]
+  ['answerer_33',['answerer',['../classai_1_1AI.html#aae8156d32d9061cf06b3a562433403f2',1,'ai.AI.answerer()'],['../classai_1_1AI.html#a837fce44c6eee68c870add2cca53bc25',1,'ai.AI.answerer()']]],
+  ['ask_5fhelp_34',['ask_help',['../classai_1_1AI.html#a89c84cfbc0ac67a33476ce47cd8e3ab4',1,'ai.AI.ask_help()'],['../classai_1_1AI.html#a2bd5b8be981a8eb48daab1c3d8670db9',1,'ai.AI.ask_help()']]],
+  ['at_35',['at',['../classVectorMap.html#af26701c0a09f113738cad4c7a3b720f9',1,'VectorMap']]]
 ];

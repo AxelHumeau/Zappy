@@ -1,10 +1,22 @@
 var searchData=
 [
-  ['undefinedresourcetypeerror_1222',['UndefinedResourceTypeError',['../classZappyGui_1_1UndefinedResourceTypeError.html#a2b38e9922d8347d8d79319054a1a8902',1,'ZappyGui::UndefinedResourceTypeError']]],
-  ['update_1223',['update',['../classZappyGui_1_1Button.html#aac844e1cdcbb85843173216a8f54aadb',1,'ZappyGui::Button::update()'],['../classZappyGui_1_1Game.html#a83f6dbadedb181098d2a971844d30ee9',1,'ZappyGui::Game::update()'],['../classZappyGui_1_1MainMenu.html#ae41cedef69e03e2680275a2bfd1841a1',1,'ZappyGui::MainMenu::update()'],['../classZappyGui_1_1ClosePanel.html#abb5e1a409c4dbdcfdf69459a571d2f53',1,'ZappyGui::ClosePanel::update()'],['../classZappyGui_1_1Tilemap.html#a88ac7a055c8fa320f206ea8ede443618',1,'ZappyGui::Tilemap::update()']]],
-  ['updatedeltatime_1224',['updateDeltaTime',['../classZappyGui_1_1Renderer.html#a783faa28df2f6ef8c3a1a0490ebb24a7',1,'ZappyGui::Renderer']]],
-  ['updateplayerposition_1225',['updatePlayerPosition',['../namespaceZappyGui.html#a3771d1b3311a43fbc8634ae352191314',1,'ZappyGui']]],
-  ['updateplayerrotation_1226',['updatePlayerRotation',['../namespaceZappyGui.html#a3d78f8cb1c1462f15d46de9fc6e74ec7',1,'ZappyGui']]],
-  ['updateplayers_1227',['updatePlayers',['../classZappyGui_1_1Game.html#adb6238d692d8a8cd9d4357a6c2f66a04',1,'ZappyGui::Game']]],
-  ['updatetimer_1228',['updateTimer',['../classTimerPtr.html#ad9e9337eacc1d8e4e8b7b99bfa5b8dbd',1,'TimerPtr']]]
+  ['take_1209',['Take',['../classai_1_1AI.html#ae959029930d5900f950d278b8aeda2ba',1,'ai::AI']]],
+  ['take_1210',['take',['../take_8c.html#a16639a97a281f2bf35be2afb2ecee5c2',1,'take(char *cmd, struct client_entry *client, struct server *server):&#160;take.c'],['../player__command_8h.html#a5e0b6a7852e7d5c7c2ded856f5e2d906',1,'take(char *, struct client_entry *, struct server *):&#160;take.c']]],
+  ['teamundefinederror_1211',['TeamUndefinedError',['../classZappyGui_1_1TeamUndefinedError.html#ad148dba7cb654fbe6766daa9c286b567',1,'ZappyGui::TeamUndefinedError']]],
+  ['textsetalignment_1212',['textSetAlignment',['../classZappyGui_1_1Panel.html#a493667729d4f1a643c1a2d46c523e164',1,'ZappyGui::Panel']]],
+  ['textsetcharacterheight_1213',['textSetCharacterHeight',['../classZappyGui_1_1Panel.html#a3b4f718040a6858e3c9bfc61c3bc82e9',1,'ZappyGui::Panel']]],
+  ['textsetcolorbottom_1214',['textSetColorBottom',['../classZappyGui_1_1Panel.html#a8938908e455f60f7adb1ead75a11489c',1,'ZappyGui::Panel']]],
+  ['textsetcolortop_1215',['textSetColorTop',['../classZappyGui_1_1Panel.html#a155949a01723be7d1e492cc3e1c1b7b4',1,'ZappyGui::Panel']]],
+  ['textsetfont_1216',['textSetFont',['../classZappyGui_1_1Panel.html#a0148d01bfd7524990700f3d4221049be',1,'ZappyGui::Panel']]],
+  ['textsetmetricsmode_1217',['textSetMetricsMode',['../classZappyGui_1_1Panel.html#a3867a4d2e380b1119813351f6c89639e',1,'ZappyGui::Panel']]],
+  ['textsetposition_1218',['textSetPosition',['../classZappyGui_1_1Panel.html#a3e5ca1df36044cb774de6705ad0ae83f',1,'ZappyGui::Panel']]],
+  ['textsettext_1219',['textSetText',['../classZappyGui_1_1Panel.html#afd0ee2b37fe0a0fa571c1fc14b4a4f4a',1,'ZappyGui::Panel']]],
+  ['tile_1220',['Tile',['../classZappyGui_1_1Tile.html#ae5e09939c5811c33199b37f16f2cc881',1,'ZappyGui::Tile']]],
+  ['tilemap_1221',['Tilemap',['../classZappyGui_1_1Tilemap.html#ae2a45fdd8384b26e35ea015bb923a9de',1,'ZappyGui::Tilemap']]],
+  ['tilenogameobjectbounderror_1222',['TileNoGameobjectBoundError',['../classZappyGui_1_1TileNoGameobjectBoundError.html#a16dba7474f98a3bcbde9d9bcb3578b07',1,'ZappyGui::TileNoGameobjectBoundError']]],
+  ['timerptr_1223',['TimerPtr',['../classTimerPtr.html#af6a992eb60fbbd6c240a18638c45d3a6',1,'TimerPtr']]],
+  ['tna_1224',['tna',['../namespaceZappyGui.html#a6e9056792f3f12b76e36ac8b1c7c5a1d',1,'ZappyGui']]],
+  ['translate_1225',['translate',['../classZappyGui_1_1IGameObject.html#aecc1db1afc885b2db31241d04fca9ab9',1,'ZappyGui::IGameObject::translate()'],['../classZappyGui_1_1AGameObject.html#ad052541d5d2cf0ee49103d3026a7e5a8',1,'ZappyGui::AGameObject::translate()']]],
+  ['try_5felevation_1226',['try_elevation',['../namespacecommands.html#ac6ea2d0a31f938a5240fb08f185330a4',1,'commands']]],
+  ['trypop_1227',['tryPop',['../classISafeQueue.html#a6e881ce028a09abc6bc628e0547ff0d8',1,'ISafeQueue::tryPop()'],['../classSafeQueue.html#a00f86f06ee418f783f367f3f45ebfbbe',1,'SafeQueue::tryPop()']]]
 ];

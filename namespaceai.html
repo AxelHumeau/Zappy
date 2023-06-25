@@ -105,7 +105,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<pre class="fragment"> generates a list of terms in the sequence up to a given number
+Parameters:
+-----------
+number : int
+    The upper limit of the sequence
+Returns:
+--------
+list: The list of sequence terms
+</pre> 
 </div>
 </div>
 <a id="a1b40438448bfbbdf22117206b8494e2b"></a>
@@ -123,7 +131,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<pre class="fragment"> generate the instruction path for a item
+Parameters
+----------
+path : list
+Returns
+-------
+list : list of instructions
+</pre> 
 </div>
 </div>
 <a id="a5fcde28d99559b2c8155231b34016a8f"></a>
@@ -151,7 +166,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<pre class="fragment"> determines the line in which a given position is located based on a level
+Parameters:
+----------
+posobj : int
+    The position to determine the line for
+lvl : int
+    The level of the player
+Returns:
+tuple: The line position and the direction (-1, 0, or 1).
+</pre> 
 </div>
 </div>
 <a id="a300140823142185a1d48b3111fea994a"></a>
@@ -179,7 +203,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<pre class="fragment"> generates a path to move from a given position to a target position based on a level
+Parameters:
+----------
+posobj : int
+    The starting position.
+lvl : int
+    The level of the target.
+Returns:
+--------
+list: The path as a list of positions
+</pre> 
 </div>
 </div>
 <a id="a8b8c2b926e47add6b68aea8eade9ab30"></a>
@@ -197,7 +231,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<pre class="fragment"> checks if a given number is part of a sequence
+Parameters:
+----------
+number : int
+    The number to check.
+Returns:
+-------
+bool: True if the number is part of the sequence, False otherwise.
+</pre> 
 </div>
 </div>
 </div><!-- contents -->
