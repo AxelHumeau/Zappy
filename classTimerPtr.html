@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Smart pointer that delete the pointer after a certain time.  
+ <a href="classTimerPtr.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="TimerPtr_8hpp_source.html">TimerPtr.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TimerPtr&lt; T &gt;:</div>
@@ -81,13 +84,26 @@ Inheritance diagram for TimerPtr&lt; T &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af6a992eb60fbbd6c240a18638c45d3a6"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
 <tr class="memitem:af6a992eb60fbbd6c240a18638c45d3a6"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classTimerPtr.html#af6a992eb60fbbd6c240a18638c45d3a6">TimerPtr</a> (std::chrono::milliseconds time, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:af6a992eb60fbbd6c240a18638c45d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contruct the pointer.  <a href="classTimerPtr.html#af6a992eb60fbbd6c240a18638c45d3a6">More...</a><br /></td></tr>
 <tr class="separator:af6a992eb60fbbd6c240a18638c45d3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c518765381b5e4d80195ba94acb279e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimerPtr.html#a7c518765381b5e4d80195ba94acb279e">~TimerPtr</a> ()=default</td></tr>
 <tr class="separator:a7c518765381b5e4d80195ba94acb279e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e9337eacc1d8e4e8b7b99bfa5b8dbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimerPtr.html#ad9e9337eacc1d8e4e8b7b99bfa5b8dbd">updateTimer</a> ()</td></tr>
+<tr class="memdesc:ad9e9337eacc1d8e4e8b7b99bfa5b8dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the internal timer, must be called regularly  <a href="classTimerPtr.html#ad9e9337eacc1d8e4e8b7b99bfa5b8dbd">More...</a><br /></td></tr>
 <tr class="separator:ad9e9337eacc1d8e4e8b7b99bfa5b8dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class TimerPtr&lt; T &gt;</h3>
+
+<p>Smart pointer that delete the pointer after a certain time. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>type of the pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af6a992eb60fbbd6c240a18638c45d3a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6a992eb60fbbd6c240a18638c45d3a6">&#9670;&nbsp;</a></span>TimerPtr()</h2>
 
@@ -125,6 +141,15 @@ template&lt;class... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Contruct the pointer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>time after which the pointer will be deleted </td></tr>
+    <tr><td class="paramname">...args</td><td>arguments to be passed to the constructor of the pointer </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -180,6 +205,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>update the internal timer, must be called regularly </p>
 
 </div>
 </div>
