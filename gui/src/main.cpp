@@ -50,12 +50,17 @@ void server(Network::Client &client, bool &isClosed, SafeQueue<std::string> &rec
     receive.push("quit\n");
 }
 
-int gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests)
+void gui(SafeQueue<std::string> &receive, SafeQueue<std::string> &requests, int &exitCode)
 {
-    ZappyGui::Gui gui(receive, requests, 0.05f);
-    gui.initialize();
-    gui.run();
-    return 0;
+    try {
+        ZappyGui::Gui gui(receive, requests, 0.05f);
+        gui.initialize();
+        gui.run();
+        exitCode = 0;
+    } catch (std::exception const &e) {
+        std::cerr << e.what() << std::endl;
+        exitCode = 84;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -70,14 +75,15 @@ int main(int argc, char *argv[])
     if (getOptions(argc - 1, argv + 1, port, ip) == -1)
         return 84;
     try {
+        int result = 0;
         Network::Client client(ip, port);
         std::thread serverThread(server, std::ref(client), std::ref(isClosed), std::ref(receive), std::ref(requests));
-        std::thread guiThread(gui, std::ref(receive), std::ref(requests));
+        std::thread guiThread(gui, std::ref(receive), std::ref(requests), std::ref(result));
         guiThread.join();
 
         isClosed = true;
         serverThread.join();
-        return 0;
+        return result;
     } catch (Network::Socket::ConnectionException const &e) {
         std::cerr << e.what() << std::endl;
         return 84;
