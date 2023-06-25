@@ -319,8 +319,9 @@ class AI:
     def send_comming(self):
         if self.want_to_elevate == True:
             print("comming")
-            if self.communication.message.front()[0] == 0 and self.communication.message.front()[1].split(' ')[-1] not in self.answerer:
+            if self.communication.message.front()[1].split(' ')[-1] not in self.answerer:
                 self.answerer.append(self.communication.message.front()[1].split(' ')[-1])
+            if self.communication.message.front()[0] == 0:
                 self.nb_players_on_me_team += 1
                 commands.try_elevation(self, self.communication.request)
 

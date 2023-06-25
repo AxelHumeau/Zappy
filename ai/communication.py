@@ -166,12 +166,11 @@ class Communication:
         if len(self.response) == 0:
             return False
         resp = self.response.front()
-        if resp[0] == "ok":
-            printf("SFDGJKNLBJKVHCGHDXCFVGBHMJNHBUGIVYUFCTDYRXCTFVGBHLBKUGYVJTFC")
+        if resp == "ok":
             self.elevation = False
             self.pop_information()
         if self.elevation == True:
-            if resp[0] == "ko":
+            if resp == "ko":
                 self.elevation = False
                 self.pop_information()
                 return False
