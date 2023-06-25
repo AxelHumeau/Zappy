@@ -39,7 +39,6 @@ def try_elevation(ai, request_queue: Queue):
     request_queue.push(["Incantation"])
     ai.communication.writebuffer += "Incantation\n"
     ai.communication.count += 1
-
     # request_queue.push(["Inventory"])
     # ai.communication.writebuffer += "Inventory\n"
     return 1

@@ -208,6 +208,9 @@ class AI:
 
     def incantation(self):
         print("INCANTATION")
+        print(self.communication.request)
+        print(self.communication.response)
+        print("---------------------------------------------------------------")
         if (self.lvl != self.communication.current_level):
             self.lvl = self.communication.current_level
             self.start_elevation = False
@@ -239,10 +242,6 @@ class AI:
         self.communication.request.push(["Inventory"])
         self.communication.count += 1
         print("set")
-        print("******************* AFTER SET *******************")
-        print(self.communication.request)
-        print(self.communication.response)
-        print("******************* AFTER SET *******************")
 
     def Take(self):
         print("Take")
@@ -297,7 +296,7 @@ class AI:
 
     def send_need(self):
         print("my lvl = ", self.lvl, " requested = ", self.communication.message.front()[1].split(' ')[2])
-        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]) and self.start_elevation == False:
+        if int(self.lvl) == int(self.communication.message.front()[1].split(' ')[2]) and self.start_elevation == False and self.need_player == False:
             # self.communication.request.clear()
             # self.communication.writebuffer = ""
             self.communication.writebuffer += "Broadcast " + str(self.team) + " come " + str(self.id) + "\n"
@@ -378,6 +377,7 @@ class AI:
             self.communication.network()
             handling = self.communication.clean_information()
             if handling == action.DEAD:
+                print ("DEAD")
                 return
             self.handling_message()
             if (handling == action.NOTHING and self.following == True):
@@ -393,6 +393,7 @@ class AI:
                     break
                 print("following =", self.following)
                 if handling == action.DEAD:
+                    print ("DEAD 2")
                     return
                 #print(handling)
                 self.dic_function[handling](self)
